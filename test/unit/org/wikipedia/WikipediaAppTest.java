@@ -11,16 +11,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.matchers.JUnitMatchers.hasItem;
 
 public class WikipediaAppTest {
 
     @Test
-    @SuppressWarnings("unchecked")
     public void testPartitionList() {
         assertThat(
                 WikipediaApp.partitionList(Arrays.asList(1, 2, 3, 4, 5), 2),
