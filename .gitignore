@@ -1,0 +1,8 @@
+/.gradle/
+/.idea/
+/bin/
+/build/
+/javadoc/
+/out/
+/checkstyle-josm-wikipedia.xml
+/findbugs-josm-wikipedia.xml
