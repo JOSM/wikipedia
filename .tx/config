@@ -1,0 +1,10 @@
+[main]
+host = https://www.transifex.com
+
+[josm.josm-plugin_wikipedia]
+file_filter = poSrc/<lang>.po
+source_file = build/i18n/josm-plugin_wikipedia.pot
+source_lang = en
+type = PO
+minimum_perc=50
+lang_map = ca@valencia: ca-valencia
