@@ -13,7 +13,11 @@ import org.openstreetmap.josm.plugins.PluginInformation;
 import org.wikipedia.actions.FetchWikidataAction;
 import org.wikipedia.actions.WikipediaAddNamesAction;
 import org.wikipedia.actions.WikipediaCopyTemplate;
-import org.wikipedia.gui.*;
+import org.wikipedia.gui.SophoxDownloadReader;
+import org.wikipedia.gui.SophoxServerPreference;
+import org.wikipedia.gui.WikidataItemSearchDialog;
+import org.wikipedia.gui.WikidataTagCellRenderer;
+import org.wikipedia.gui.WikipediaToggleDialog;
 
 public class WikipediaPlugin extends Plugin {
 

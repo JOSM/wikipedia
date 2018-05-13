@@ -1,24 +1,8 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.io;
 
-import org.openstreetmap.josm.actions.DownloadPrimitiveAction;
-import org.openstreetmap.josm.data.Bounds;
-import org.openstreetmap.josm.data.DataSource;
-import org.openstreetmap.josm.data.coor.LatLon;
-import org.openstreetmap.josm.data.osm.*;
-import org.openstreetmap.josm.data.preferences.ListProperty;
-import org.openstreetmap.josm.data.preferences.StringProperty;
-import org.openstreetmap.josm.gui.progress.ProgressMonitor;
-import org.openstreetmap.josm.io.*;
-import org.openstreetmap.josm.io.NameFinder.SearchResult;
-import org.openstreetmap.josm.tools.HttpClient;
-import org.openstreetmap.josm.tools.Logging;
-import org.openstreetmap.josm.tools.Utils;
+import static org.openstreetmap.josm.tools.I18n.tr;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonValue;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,12 +11,41 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.openstreetmap.josm.tools.I18n.tr;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonValue;
+
+import org.openstreetmap.josm.actions.DownloadPrimitiveAction;
+import org.openstreetmap.josm.data.Bounds;
+import org.openstreetmap.josm.data.DataSource;
+import org.openstreetmap.josm.data.coor.LatLon;
+import org.openstreetmap.josm.data.osm.BBox;
+import org.openstreetmap.josm.data.osm.DataSet;
+import org.openstreetmap.josm.data.osm.OsmPrimitiveType;
+import org.openstreetmap.josm.data.osm.PrimitiveId;
+import org.openstreetmap.josm.data.osm.SimplePrimitiveId;
+import org.openstreetmap.josm.data.preferences.ListProperty;
+import org.openstreetmap.josm.data.preferences.StringProperty;
+import org.openstreetmap.josm.gui.progress.ProgressMonitor;
+import org.openstreetmap.josm.io.BoundingBoxDownloader;
+import org.openstreetmap.josm.io.IllegalDataException;
+import org.openstreetmap.josm.io.NameFinder;
+import org.openstreetmap.josm.io.NameFinder.SearchResult;
+import org.openstreetmap.josm.io.OsmApiException;
+import org.openstreetmap.josm.io.OsmTransferException;
+import org.openstreetmap.josm.tools.HttpClient;
+import org.openstreetmap.josm.tools.Logging;
+import org.openstreetmap.josm.tools.Utils;
 
 /**
  * Read content from an Sophox server.

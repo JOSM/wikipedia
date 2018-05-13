@@ -7,6 +7,8 @@ import static org.openstreetmap.josm.tools.I18n.tr;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -118,11 +120,16 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
     private void updateTitle() {
         final String lang = getLanguageOfFirstItem();
-        final String host = WikipediaApp.forLanguage(lang).getSiteUrl().split("/+")[1];
-        if (titleContext == null) {
-            setTitle(host);
-        } else {
-            setTitle(tr("{0}: {1}", host, titleContext));
+        try {
+            final URL url = new URL(WikipediaApp.forLanguage(lang).getSiteUrl());
+            if (titleContext == null) {
+                setTitle(url.getHost());
+            } else {
+                setTitle(url.getHost() + ": " + titleContext);
+            }
+        } catch (MalformedURLException e) {
+            Logging.warn("The site URL {0} is malformed!", WikipediaApp.forLanguage(lang).getSiteUrl());
+            setTitle(tr("{0} (malformed site URL)"));
         }
     }
 

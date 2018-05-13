@@ -20,6 +20,10 @@ import static org.openstreetmap.josm.tools.I18n.trn;
 
 public class GuiUtils {
 
+    private GuiUtils() {
+        // Private constructor to avoid instantiation
+    }
+
     public static final String PREF_OVERWRITE = "wikipedia.overwrite-tag";
 
     public static boolean confirmOverwrite(final String key, final String newValue, final Collection<OsmPrimitive> primitives) {

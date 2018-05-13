@@ -189,7 +189,7 @@ public final class WikipediaApp {
                                 .connect().getContentReader()) {
                     reader.lines().forEach(line -> {
                         //[article]\t[0|1]
-                        final String[] x = line.split("\t");
+                        final String[] x = line.split("\t", -1);
                         if (x.length == 2) {
                             status.put(x[0], "1".equals(x[1]));
                         } else {
