@@ -1,54 +1,39 @@
+import java.time.Duration
+import java.time.Instant
 import java.util.regex.Pattern
 
 plugins {
   id "java"
   id "eclipse"
+  id "jacoco"
   id "pmd"
   id "com.github.ben-manes.versions" version "0.17.0"
   id "com.github.spotbugs" version "1.6.1"
-  id "net.ltgt.errorprone" version "0.0.13"
+  id "net.ltgt.errorprone" version "0.0.14"
   id "org.openstreetmap.josm" version "0.4.2"
 }
 def versions = [
     errorprone: "2.3.1",
-    junit: "5.1.1",
-    pmd: "6.2.0",
+    jacoco: "0.8.1",
+    junit: "5.2.0",
+    pmd: "6.3.0",
     spotbugs: "3.1.3"
 ]
 
-// Set up ErrorProne
-tasks.withType(JavaCompile) {
-  options.compilerArgs += [
-    '-Xep:DefaultCharset:ERROR',
-    '-Xep:ClassCanBeStatic:ERROR',
-    '-Xep:StringEquality:ERROR',
-    '-Xep:WildcardImport:WARN',
-    '-Xep:MethodCanBeStatic:WARN',
-    '-Xep:RemoveUnusedImports:WARN',
-    '-Xep:PrivateConstructorForUtilityClass:WARN',
-    '-Xep:LambdaFunctionalInterface:WARN',
-    '-Xep:ConstantField:WARN'
-  ]
+repositories {
+  jcenter()
+}
+dependencies {
+  errorprone "com.google.errorprone:error_prone_core:${versions.errorprone}"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
+  testImplementation "org.junit.vintage:junit-vintage-engine:${versions.junit}"
+  testImplementation "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}"
+  testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
 }
 
-pmd {
-  toolVersion = versions.pmd
-  ignoreFailures true
-  ruleSets = []
-  ruleSetConfig = resources.text.fromFile("$projectDir/config/pmd/ruleset.xml")
-  sourceSets = [sourceSets.main]
-}
-
-spotbugs {
-  toolVersion = versions.spotbugs
-  ignoreFailures = true
-  sourceSets = [sourceSets.main]
-}
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
-  reports {
-    xml.enabled = false
-    html.enabled = true
-  }
+test {
+  useJUnitPlatform()
 }
 
 sourceSets {
@@ -73,22 +58,9 @@ sourceSets {
   }
 }
 
-repositories {
-  jcenter()
-}
-dependencies {
-  errorprone "com.google.errorprone:error_prone_core:${versions.errorprone}"
-  testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
-  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
-  testImplementation "org.junit.vintage:junit-vintage-engine:${versions.junit}"
-  testImplementation "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}"
-  testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-}
-
 archivesBaseName = "wikipedia"
 version = getVersion()
 josm {
-  josmCompileVersion = "13600"
   manifest {
     // Description is duplicated in build.xml, because only there it is synced to Launchpad for translation
     description = "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
@@ -97,6 +69,57 @@ josm {
   }
   i18n {
     pathTransformer = getGithubPathTransformer('JOSM/wikipedia')
+  }
+}
+
+// Set up ErrorProne
+tasks.withType(JavaCompile) {
+  options.compilerArgs += [
+      "-Xep:DefaultCharset:ERROR",
+      "-Xep:StringEquality:ERROR",
+      "-Xep:ConstantField:WARN",
+      "-Xep:LambdaFunctionalInterface:WARN",
+      "-Xep:MethodCanBeStatic:WARN",
+      "-Xep:MultiVariableDeclaration:WARN",
+      "-Xep:PrivateConstructorForUtilityClass:WARN",
+      "-Xep:RemoveUnusedImports:WARN",
+      "-Xep:UngroupedOverloads:WARN",
+      "-Xep:WildcardImport:WARN",
+  ]
+}
+
+// Set up JaCoCo
+jacoco {
+  toolVersion = "${versions.jacoco}"
+}
+jacocoTestReport {
+  dependsOn test
+  reports {
+    xml.enabled true
+    html.enabled true
+  }
+}
+check.dependsOn jacocoTestReport
+
+// Set up PMD
+pmd {
+  toolVersion = versions.pmd
+  ignoreFailures true
+  ruleSets = []
+  ruleSetConfig = resources.text.fromFile("$projectDir/config/pmd/ruleset.xml")
+  sourceSets = [sourceSets.main]
+}
+
+// Set up SpotBugs
+spotbugs {
+  toolVersion = versions.spotbugs
+  ignoreFailures = true
+  sourceSets = [sourceSets.main]
+}
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+  reports {
+    xml.enabled = false
+    html.enabled = true
   }
 }
 
@@ -113,7 +136,7 @@ def getVersion() {
   def result = getVersion("git-svn-id: .*@([1-9][0-9]*) .*", "git", "log", "-1", "--format=%b")
   if (result == null) {
     // Second attempt: Check if the commit can be git-described, return the description by git
-    result = getVersion("(.+)", "git", "describe", "--always", "--long", "--dirty")
+    result = getVersion("(.+)", "git", "describe", "--always", "--dirty")
     if (result == null) {
       // Third attempt: Check if we are in an SVN repo, return revision number
       result = getVersion("Revision: ([1-9][0-9]*)", "svn", "info")
@@ -151,4 +174,26 @@ def getVersion(String linePattern, String... command) {
     .map { it.group(1).trim() }
     .findFirst()
     .orElse(null)
+}
+
+// Show task duration and skipped tasks
+gradle.taskGraph.beforeTask {
+  it.ext.startTime = Instant.now()
+}
+gradle.taskGraph.afterTask {
+  if (!it.getState().skipped) {
+    it.logger.lifecycle(String.format("\n  🏁 Finished after %.3f seconds.", Duration.between(it.ext.startTime as Instant, Instant.now()).toMillis() / 1e3))
+  }
+}
+gradle.buildFinished {
+  def wereTasksSkipped = false
+  tasks.forEach {
+    if (it.state.skipped) {
+      if (!wereTasksSkipped) {
+        it.logger.lifecycle("\nSkipped tasks:")
+        wereTasksSkipped = true
+      }
+      it.logger.lifecycle("⏭️  :${it.name} (${it.state.skipMessage})")
+    }
+  }
 }
