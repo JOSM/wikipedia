@@ -1,0 +1,170 @@
+# Translations for the JOSM plugin 'wikipedia' (zh_CN)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/josm/teams/2544/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add Tag"
+msgstr "添加标签"
+
+msgid "Add Wikidata"
+msgstr "添加 Wikidata"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "添加语言“{0}”的 Wikidata"
+
+msgid "Add names from Wikipedia"
+msgstr "添加维基百科的名称"
+
+msgid "Add new snippet"
+msgstr "添加新片段"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr "添加对应本文的“维基百科”标签到所选对象"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "在本地数据中可用"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "在 WIWOSM 服务器中可用"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Clipboard"
+msgstr "剪贴板"
+
+msgid "Contacting Server..."
+msgstr "正在连接服务器..."
+
+msgid "Coordinates"
+msgstr "坐标"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr "复制 {0} 的模板到系统剪贴板，并以第一个选择节点的坐标填充"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "复制 {0} 个模板"
+
+msgid "Delete selected snippet"
+msgstr "删除选中的片段"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr "双击项目来搜索有文章名称的对象(和中心坐标)"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "下载参照者(父关系)"
+
+msgid "Download relation members"
+msgstr "下载关系成员"
+
+msgid "Edit selected snippet"
+msgstr "编辑选中的片段"
+
+msgid "Enter the Wikipedia language"
+msgstr "输入维基百科语言"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Fetch Wikidata IDs"
+msgstr "获取 Wikidata ID"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "获取带坐标的维基百科文章"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "获取分类下所有维基百科的文章列表"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "从维基百科获取所有当前视图中的坐标"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr "从维基百科获取跨维基链接，以添加多个名称标签"
+
+msgid "Fetching Wikidata IDs"
+msgstr "正在获取 Wikidata ID"
+
+msgid "Language"
+msgstr "语言"
+
+msgid "Not linked yet"
+msgstr "尚未链接"
+
+msgid "Open Article"
+msgstr "打开文章"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "在浏览器中打开所选项目的维基百科文章"
+
+msgid "Overwrite key"
+msgstr "覆盖设定键"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "从系统剪贴板粘贴维基百科文章"
+
+msgid "Please select a download area first."
+msgstr "请先选择下载区域。"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "如果一个关系的成员也应被下载，则选择"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr "如果对象的参照者也应被下载(即父关系，还有节点的父路径)，则选择"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "设置维基百科文章的默认语言"
+
+msgid "Wikipedia"
+msgstr "维基百科"
+
+msgid "Your saved queries:"
+msgstr "您已保存的查询："
+
+msgid "Zoom to selection"
+msgstr "缩放至选择范围"
+
+msgid "clipboard"
+msgstr "剪贴板"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "坐标"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr "简化链接OSM对象至维基百科条目和维基数据项目"

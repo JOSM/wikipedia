@@ -1,0 +1,162 @@
+# Translations for the JOSM plugin 'wikipedia' (lt)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Lithuanian (https://www.transifex.com/josm/teams/2544/lt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+msgid "Add Tag"
+msgstr "Pridėti žymę"
+
+msgid "Add new snippet"
+msgstr "Pridėti naują fragmentą"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Prideda „wikipedia“ žymą atitinkančią šį straipsnį pažymėtiems objektams"
+
+msgid "Cancel"
+msgstr "Atsisakyti"
+
+msgid "Category"
+msgstr "Kategorija"
+
+msgid "Clipboard"
+msgstr "Iškarpinė"
+
+msgid "Contacting Server..."
+msgstr "Jungiamasi prie serverio..."
+
+msgid "Coordinates"
+msgstr "Koordinatės"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Kopijuoja {0} šabloną į iškarpinę užpildytą pirmojo pažymėto taško "
+"koordinatėmis"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "Kopijuoti {0} šabloną"
+
+msgid "Delete selected snippet"
+msgstr "Pašalinti pasirinktą fragmentą"
+
+msgid "Download from Sophox API"
+msgstr "Atsiųsti iš Sophox API"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Atsiųsti turinčius nuorodas (tėvinius ryšius)"
+
+msgid "Download relation members"
+msgstr "Atsiųsti ryšio narius"
+
+msgid "Edit selected snippet"
+msgstr "Redaguoti pasirinktą fragmentą"
+
+msgid "Enter the Wikipedia language"
+msgstr "Įveskite Vikipedijos kalbą"
+
+msgid "Error"
+msgstr "Klaida"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Gauti Wikidata IDs"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Gauti Wikidata IDs naudojant „wikipedia“ žymą"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Ištraukti Wikipedijos straipsnius su koordinatėmis"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Gauna sąrašą visų Vikipedijos straipsnių kategorijoje"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Gauna visas koordinates iš Wikidata dabartiniame rodinyje"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Gauna visas koordinates iš Vikipedijos dabartiniame rodinyje"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Ištraukiami interwiki ryšiai iš Wikipedijos, kad galima būtų pridėti kelias "
+"pavadinimų žymas"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Rasti mokslo įstaigas mažiausiai 2 km, daugiausiai 3 km nuo pažymėjimo "
+"centro"
+
+msgid "Language"
+msgstr "Kalba"
+
+msgid "Open Article"
+msgstr "Atverti straipsnį"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Atveria pažymėto elemento Vikipedijos straipsnį naršyklėje"
+
+msgid "Overwrite key"
+msgstr "Perrašyti raktą"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Įdeda Vikipedijos straipsnius iš sistemos iškarpinės"
+
+msgid "Please select a download area first."
+msgstr "Prašome iš pradžių pažymėti atsiunčiamą plotą."
+
+msgid "Search Wikidata items"
+msgstr "Ieškoti Wikidata elementų"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Pažymėkite, jei taipogi reikia atsiųsti ir ryšių narius"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Pažymėkite, jei norite atsiųsti ir objektus naudojančius ryšius, t.y. "
+"tėvinius ryšius, o taškams, papildomai, ir tėvinius kelius"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Nustato Vikipedijos straipsnių numatytąją kalbą"
+
+msgid "Wikipedia"
+msgstr "Vikipedija"
+
+msgid "Your saved queries:"
+msgstr "Jūsų išsaugotos užklausos:"
+
+msgid "Zoom to selection"
+msgstr "Padidinti pažymėjimą"
+
+msgid "clipboard"
+msgstr "iškarpinė"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "koordinatės"

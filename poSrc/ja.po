@@ -1,0 +1,192 @@
+# Translations for the JOSM plugin 'wikipedia' (ja)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Japanese (https://www.transifex.com/josm/teams/2544/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add Tag"
+msgstr "タグを追加"
+
+msgid "Add Wikidata"
+msgstr "Wikidata を追加"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "''{0}'' の Wikideta を追加"
+
+msgid "Add names from Wikipedia"
+msgstr "Wikipediaから名前を追加"
+
+msgid "Add new snippet"
+msgstr "新しいスニペットを追加"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr "この文書に対応する選択されたオブジェクトに''wikipedia''タグを追加します"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "ローカルデータセットで有効"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "WIWOSMサーバーで有効"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Category"
+msgstr "カテゴリ"
+
+msgid "Clipboard"
+msgstr "クリップボード"
+
+msgid "Contacting Server..."
+msgstr "サーバーに接続中..."
+
+msgid "Coordinates"
+msgstr "座標"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr "最初に選択されたノードの座標を例に、{0}のテンプレートをシステムのクリップボードにコピーする"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "{0}のテンプレートをコピー"
+
+msgid "Delete selected snippet"
+msgstr "選択したスニペットを削除"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr "ダブルクリックで記事名(と中心のノード)でオブジェクトを検索"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "参照元(親リレーション)をダウンロード"
+
+msgid "Download relation members"
+msgstr "リレーションメンバーをダウンロード"
+
+msgid "Edit selected snippet"
+msgstr "選択されたスニペットを編集"
+
+msgid "Enter the Wikipedia language"
+msgstr "Wikipediaの言語を入力"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Wikidata IDを検索"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "''wikipedia'' タグを使用して Wikidata ID を検索"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "座標からWikipediaの記事を検索"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "カテゴリのWikipediaの全記事を検索"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "現在のビューのすべての座標をWikipedia上で検索"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr "該当するnameタグを追加するためにWikipediaからインターウィキリンクを探す"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Wikidata ID を検索"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "{0} の ''{1}'' の Wikideta IDを検索しています"
+
+msgid "Language"
+msgstr "言語"
+
+msgid "Load category"
+msgstr "カテゴリを読み込む"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "{0} の Wikidata ID が見つかりませんでした"
+
+msgid "Not linked yet"
+msgstr "まだリンクされていません"
+
+msgid "Open Article"
+msgstr "記事を開く"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "選択された項目に関するWikipediaの記事をブラウザーで開く"
+
+msgid "Overwrite key"
+msgstr "キーを上書き"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "システムのクリップボードからWikipediaの記事を貼り付け"
+
+msgid "Please select a download area first."
+msgstr "最初にダウンロード領域を選択してください。"
+
+msgid "Search Wikidata items"
+msgstr "ウィキデータの項目を検索"
+
+msgid "Search Wikipedia category"
+msgstr "ウィキペディアのカテゴリを検索"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "リレーションのメンバーを一緒にダウンロードする場合は選択してください"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr "このオブジェクトを参照しているもの(親リレーションや、ノードの場合は親ウェイなど)を一緒にダウンロードする場合は選択してください"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Wikipediaの記事について既定の言語を設定する"
+
+msgid "Target key: "
+msgstr "ターゲットのキー: "
+
+msgid "Wikidata"
+msgstr "ウィキデータ"
+
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+msgid "Your saved queries:"
+msgstr "保存したクエリ:"
+
+msgid "Zoom to selection"
+msgstr "選択へズーム"
+
+msgid "clipboard"
+msgstr "クリップボード"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "座標"

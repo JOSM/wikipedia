@@ -1,0 +1,211 @@
+# Translations for the JOSM plugin 'wikipedia' (be)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Belarusian (https://www.transifex.com/josm/teams/2544/be/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: be\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "Add Tag"
+msgstr "Дадаць тэг"
+
+msgid "Add Wikidata"
+msgstr "Дадаць Вікідадзеныя"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Дадаць Вікідадзеныя для мовы ''{0}''"
+
+msgid "Add names from Wikipedia"
+msgstr "Дадаць назвы з Вікіпедыі"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr "Дадае тэг wikipedia, адпаведны гэтаму артыкулу, абраным аб’ектам"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "Даступна ў лакальным наборы дадзеных"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Даступна праз WIWOSM сервер"
+
+msgid "Cancel"
+msgstr "Скасаваць"
+
+msgid "Category"
+msgstr "Катэгорыя"
+
+msgid "Clipboard"
+msgstr "Буфер абмену"
+
+msgid "Contacting Server..."
+msgstr "Злучэнне з серверам..."
+
+msgid "Coordinates"
+msgstr "Каардынаты"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Капіюе ў буфер абмену шаблон {0}, падставіўшы ў яго каардынаты першага "
+"вылучанага пункта"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "Капіяваць шаблон {0}"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Пстрыкніце на радку двойчы, каб знайсці аб’ект па назве артыкула і наблізіць"
+" яго."
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Спампаваць спасылаюшчых на аб’ект (бацькоўскія дачыненні)"
+
+msgid "Download relation members"
+msgstr "Спампаваць удзельнікаў дачынення"
+
+msgid "Enter the Wikipedia language"
+msgstr "Увядзіце мову Вікіпедыі"
+
+msgid "Error"
+msgstr "Памылка"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Атрымаць ID Вікідадзеных"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr ""
+"Атрымаць ідэнтыфікатары Вікідадзеных, выкарыстоўваючы тэг ''wikipedia''"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Атрымаць артыкулы Вікіпедыі з каардынатамі"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Атрыманне спісу ўсіх артыкулаў катэгорыі з Вікіпедыі"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr ""
+"Атрыманне з Вікідадзеных усіх каардынат для бачнай у акне вобласці карты"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Атрыманне з Вікіпедыі ўсіх каардынат для бачнай у акне вобласці карты"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Атрымаць інтэрвікі спасылкі з Вікіпедыі для таго, каб дадаць некаторыя тэгі "
+"name"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Атрыманне ідэнтыфікатараў Вікідадзеных"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Атрыманне {0} ідэнтыфікатара Вікідадзеных для мовы ''{1}''"
+msgstr[1] "Атрыманне {0} ідэнтыфікатараў Вікідадзеных для мовы ''{1}''"
+msgstr[2] "Атрыманне {0} ідэнтыфікатараў Вікідадзеных для мовы ''{1}''"
+msgstr[3] "Атрыманне {0} ідэнтыфікатараў Вікідадзеных для мовы ''{1}''"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Load category"
+msgstr "Загрузка катэгорыі"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Не знойдзены ідэнтыфікатар Вікідадзеных для: {0}"
+
+msgid "Not linked yet"
+msgstr "Спасылка яшчэ не створана"
+
+msgid "Open Article"
+msgstr "Адкрыць артыкул"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Адкрыць у браўзары артыкул з Вікіпедыі пра абраны аб’ект"
+
+#, java-format
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "Перазапісаць ''{0}'' тэг {1} з {2} новым значэннем ''{3}''?"
+msgstr[1] "Перазапісаць ''{0}'' тэгі {1} з {2} новым значэннем ''{3}''?"
+msgstr[2] "Перазапісаць ''{0}'' тэгаў {1} з {2} новым значэннем ''{3}''?"
+msgstr[3] "Перазапісаць ''{0}'' тэгаў {1} з {2} новым значэннем ''{3}''?"
+
+msgid "Overwrite key"
+msgstr "Зацерці клавішу"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Устаўляе артыкулы Вікіпедыі з сістэмнага буфера абмену"
+
+msgid "Please select a download area first."
+msgstr "Калі ласка, абярыце спачатку вобласць для спампоўкі."
+
+msgid "Search Wikidata items"
+msgstr "Пошук элементаў Вікідадзеных"
+
+msgid "Search Wikipedia category"
+msgstr "Пошук катэгорыі Вікіпедыі"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Адзначце, калі павінны быць запампаваны і ўдзельнікі дачынення"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Адзначце, калі павінны быць запампаваны і аб’екты, якія спасылаюцца на "
+"дадзены (бацькоўскія дачыненні, для пунктаў - бацькоўскія лініі)"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Абраць мову па змаўчанні для артыкулаў Вікіпедыі"
+
+msgid "Target key: "
+msgstr "Мэтавы ключ: "
+
+msgid "Wikidata"
+msgstr "Вікідадзеныя"
+
+msgid "Wikipedia"
+msgstr "Вікіпедыя"
+
+msgid "Zoom to selection"
+msgstr "Наблізіцца да вылучанага"
+
+msgid "clipboard"
+msgstr "буфер абмену"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "каардынаты"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Спрашчае звязванне абʼектаў OSM з артыкуламі Вікіпедыі і элементамі "
+"вікідадзеных"

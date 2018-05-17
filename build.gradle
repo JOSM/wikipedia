@@ -41,8 +41,8 @@ sourceSets {
     java {
       srcDirs = ["src"]
     }
-    lang {
-      srcDirs = ["data"]
+    po {
+      srcDirs = ["poSrc"]
     }
     resources {
       srcDirs = ["$projectDir"]

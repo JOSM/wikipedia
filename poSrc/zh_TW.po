@@ -1,0 +1,206 @@
+# Translations for the JOSM plugin 'wikipedia' (zh_TW)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Chinese (Taiwan) (https://www.transifex.com/josm/teams/2544/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add Tag"
+msgstr "新增標籤"
+
+msgid "Add Wikidata"
+msgstr "添加維基數據"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "為語言添加 {0} 的維基數據"
+
+msgid "Add names from Wikipedia"
+msgstr "從維基百科加入名稱"
+
+msgid "Add new snippet"
+msgstr "增加新的文字片段"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr "添加與本文對應的維基百科「標籤」至已選擇物件"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "可供本地數據資料庫利用"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "可透過 WIWOSM 伺服器利用"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Category"
+msgstr "分類"
+
+msgid "Clipboard"
+msgstr "剪貼簿"
+
+msgid "Contacting Server..."
+msgstr "正在連接伺服器..."
+
+msgid "Coordinates"
+msgstr "坐標"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "複製 {0} 模板"
+
+msgid "Delete selected snippet"
+msgstr "刪除選擇的文字片段"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr "點撃兩下以條目名稱 (和中心坐標) 搜索物件"
+
+msgid "Download from Sophox API"
+msgstr "從 Sophox API 下載"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "下載參照 (上層關聯)"
+
+msgid "Download relation members"
+msgstr "下載關聯成員"
+
+msgid "Edit selected snippet"
+msgstr "編輯選擇的文字片段"
+
+msgid "Enter the Wikipedia language"
+msgstr "輸入維基百科語言"
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid "Fetch Wikidata IDs"
+msgstr "取得維基數據ID"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "使用維基百科標籤取得維基數據ID"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "獲取含有地理坐標的維基百科條目"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "取得分類内所有維基百科條目列表"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "從維基數據取得所有目前檢視裡的所有座標"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "自維基百科取得目前檢視區域之坐標"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr "從維基百科內部連結增加名稱標籤"
+
+msgid "Fetching Wikidata IDs"
+msgstr "取得維基數據ID"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "取得 {0} 語言 ''{1}''  的維基數據ID"
+
+msgid "Language"
+msgstr "語言"
+
+msgid "Load category"
+msgstr "載入分類"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "找不到: {0} 的維基數據ID"
+
+msgid "Not linked yet"
+msgstr "尚未連結"
+
+msgid "Open Article"
+msgstr "開啟條目"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "在瀏覽器内開啟所選項目的維基百科條目"
+
+#, java-format
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "自 {2} 以 ''{3}'' 這個值去覆蓋 ''{0}'' 標籤 {1} 嗎？"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "從系統剪貼簿貼上維基百科條目"
+
+msgid "Please select a download area first."
+msgstr "請先選擇下載區域。"
+
+msgid "Search Wikidata items"
+msgstr "搜尋維基數據項目"
+
+msgid "Search Wikipedia category"
+msgstr "搜尋維基百科分類"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "如果關聯的成員也要下載請選擇"
+
+msgid "Server: "
+msgstr "伺服器： "
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "設定維基百科的預設語言版本"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "顯示/隱藏 Sophox 片段清單"
+
+msgid "Target key: "
+msgstr "目標連結 "
+
+msgid "Wikidata"
+msgstr "維基數據"
+
+msgid "Wikidata+OSM server"
+msgstr "Wikidata+OSM 伺服器"
+
+msgid "Wikipedia"
+msgstr "維基百科"
+
+msgid "Your saved queries:"
+msgstr "你儲存的檢索："
+
+msgid "Zoom to selection"
+msgstr "縮放至選擇區域"
+
+msgid "clipboard"
+msgstr "剪貼簿"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "座標"
+
+msgid "help"
+msgstr "說明"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr "簡化連結OSM物件到維基百科條目和維基數據項目"

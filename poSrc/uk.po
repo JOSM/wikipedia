@@ -1,0 +1,243 @@
+# Translations for the JOSM plugin 'wikipedia' (uk)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Ukrainian (https://www.transifex.com/josm/teams/2544/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+msgid "Add Tag"
+msgstr "Додати теґ"
+
+msgid "Add Wikidata"
+msgstr "Додати Вікідані"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Додати Вікідані для мови ''{0}''"
+
+msgid "Add names from Wikipedia"
+msgstr "Додати назву з Вікіпедії"
+
+msgid "Add new snippet"
+msgstr "Додати новий фрагмент"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Додає теґ ''wikipedia'', який відповідає певній статті про виділені об’єкти"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "Доступно у локальному наборі даних"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Доступно через сервер WIWOSM"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Category"
+msgstr "Категорія"
+
+msgid "Clipboard"
+msgstr "Буфер обміну"
+
+msgid "Contacting Server..."
+msgstr "З’єднання з сервером…"
+
+msgid "Coordinates"
+msgstr "Координати"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Копіювання шаблону {0} до системного буферу екземплярів з координатами "
+"першої виділеної точки"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "Копіювати {0} шаблон(и)"
+
+msgid "Delete selected snippet"
+msgstr "Вилучити виділений фрагмент"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Двічі клацніть на елемент для пошуку об’єкту за назвою статті (та "
+"координатами центру)"
+
+msgid "Download from Sophox API"
+msgstr "Завантажити з Sophox API"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Завантаження пов’язаних членів (батьківські зв’язки)"
+
+msgid "Download relation members"
+msgstr "Завантажити членів зв’язку"
+
+msgid "Edit selected snippet"
+msgstr "Редагувати виділений фрагмент"
+
+msgid "Enter the Wikipedia language"
+msgstr "Вкажіть мову у Вікіпедії"
+
+msgid "Error"
+msgstr "Помилка"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Отримати id Вікіданих"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Отримати id Вікіданих, використовуючи теґ ''wikipedia''"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Отримати статті Вікіпедії з координатами"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Вибирає список всіх статей Вікіпедії з категорії"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Отримує з Вікіданих відомості для всіх координат поточного виду мапи"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Отримати всі координати з Вікіпедії для поточного виду"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Отримати інтервікі-посилання з Вікіпедії для того, щоб додати деякі теґи "
+"name"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Отримання id  Вікіданих"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Отримання {0} id Вікіданих для мови ''{1}''"
+msgstr[1] "Отримання {0} id Вікіданих для мови ''{1}''"
+msgstr[2] "Отримання {0} id Вікіданих для мови ''{1}''"
+msgstr[3] "Отримання {0} id Вікіданих для мови ''{1}''"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Пошук навчальних закладів у межах від 2 до 3 км від центру виділеної ділянки"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Load category"
+msgstr "Завантаження категорії"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Не знайдено id Вікіданих для: {0}"
+
+msgid "Not linked yet"
+msgstr "Ще не має прив’язок"
+
+msgid "Open Article"
+msgstr "Відкрити статтю"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Відкрити у оглядачі статтю з Вікіпедії про вибраний об’єкт"
+
+#, java-format
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "Перезаписати ''{0}'' теґ {1} з {2} новим значенням ''{3}''?"
+msgstr[1] "Перезаписати ''{0}'' теґи {1} з {2} новим значенням ''{3}''?"
+msgstr[2] "Перезаписати ''{0}'' теґів {1} з {2} новим значенням ''{3}''?"
+msgstr[3] "Перезаписати ''{0}'' теґів {1} з {2} новим значенням ''{3}''?"
+
+msgid "Overwrite key"
+msgstr "Перезаписати ключі"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Вставляє назви статей Вікіпедії з системного буферу"
+
+msgid "Please select a download area first."
+msgstr "Будь ласка, виберіть спочатку ділянку для завантаження"
+
+msgid "Search Wikidata items"
+msgstr "Пошук у Вікіданих"
+
+msgid "Search Wikipedia category"
+msgstr "Пошук категорії Вікіпедії"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Виберіть, якщо члени зв’язку повинні також бути завантажені"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Виберіть, якщо джерела об’єкта також повинні бути завантажені, наприклад, "
+"батьківські зв’язки, а для точок, крім того, батьківські лінії"
+
+msgid "Server: "
+msgstr "Сервер: "
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Встановити типову мову для статей з Вікіпедії"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Показати/приховати список фрагментів Sophox"
+
+msgid "Target key: "
+msgstr "Цільовий ключ: "
+
+msgid "Wikidata"
+msgstr "Вікідані"
+
+msgid "Wikidata+OSM server"
+msgstr "Сервер Wikidata+OSM"
+
+msgid "Wikipedia"
+msgstr "Вікіпедія"
+
+msgid "Your saved queries:"
+msgstr "Ваші збережені запити:"
+
+msgid "Zoom to selection"
+msgstr "Масштабувати до виділення"
+
+msgid "clipboard"
+msgstr "буфер обміну"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "координати"
+
+msgid "help"
+msgstr "довідка"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Спрощує створення посилань з обʼєктів OSM на статті у Вікіпедії та на "
+"Вікідані"

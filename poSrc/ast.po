@@ -1,0 +1,229 @@
+# Translations for the JOSM plugin 'wikipedia' (ast)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Asturian (https://www.transifex.com/josm/teams/2544/ast/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ast\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add Tag"
+msgstr "Añedir etiqueta"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Añadir Wikidata pal idioma ''{0}''"
+
+msgid "Add names from Wikipedia"
+msgstr "Añedir nomes dende Wikipedia"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Añede una etiqueta ''wikipedia'' correspondiente a esti artículu pa los "
+"oxetos escoyíos"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "Disponible nel conxuntu de datos llocal"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Disponible vía sirvidor WIWOSM"
+
+msgid "Cancel"
+msgstr "Encaboxar"
+
+msgid "Category"
+msgstr "Categoría"
+
+msgid "Clipboard"
+msgstr "Cartafueyu"
+
+msgid "Contacting Server..."
+msgstr "Coneutando col sirvidor..."
+
+msgid "Coordinates"
+msgstr "Coordenaes"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Copia la plantía {0} al cartafueyu del sistema como instancia coles "
+"coordenaes del primer nodiu seleicionáu"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "Copiar plantía {0}"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Doble clic nel elementu pa buscar oxetos col nome del artículu (y centru de "
+"coordenaes)"
+
+msgid "Download from Sophox API"
+msgstr "Descargar dende la API de Sophox"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Descargar referencies (rellaciones padre)"
+
+msgid "Download relation members"
+msgstr "Descargar los miembros de la rellación"
+
+msgid "Enter the Wikipedia language"
+msgstr "Escribe la llingua de Wikipedia"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Llograr les IDs de Wikidata"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Llograr les IDs de Wikidata usando la etiqueta ''wikipedia''"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Buscar artículos de Wikipedia con coordenaes"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Llogra una llista de tolos artículos de Wikipedia d''una categoría"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Llograr toles coordenaes de la vista actual dende Wikidata "
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Llogra toles coordenaes de Wikipedia pa la vista actual"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Llogra los enllaces interwiki de Wikipedia p''amestar delles etiquetes de "
+"nomes"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Llogrando les ID dende Wikidata"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Llogrando {0} ID de Wikidata pa la llingua ''{1}''"
+msgstr[1] "Llogrando {0} IDs de Wikidata pa la  llingua ''{1}''"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Alcontrar centros educativos que tean a una distancia ente 2km y 3km del "
+"centru de la seleición"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Load category"
+msgstr "Cargar categoría"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Nun s'alcontró nenguna ID de Wikidata pa: {0}"
+
+msgid "Not linked yet"
+msgstr "Ensin enllazar entá"
+
+msgid "Open Article"
+msgstr "Abrir artículu"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Abre l''artículu de Wikipedia del elementu escoyíu nun navegador"
+
+#, java-format
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "¿Sustituir ''{0}'' etiqueta {1} dende {2} col nuevu valor ''{3}''?"
+msgstr[1] ""
+"¿Sustituir ''{0}'' etiquetes {1} dende {2} col nuevu valor ''{3}''?"
+
+msgid "Overwrite key"
+msgstr "Sustituir clave"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Pegar artículos de la Wikipedia dende''l cartafueyu del sistema"
+
+msgid "Please select a download area first."
+msgstr "Seleiciona primero una área pa descargar."
+
+msgid "Search Wikidata items"
+msgstr "Buscar elementos de Wikidata"
+
+msgid "Search Wikipedia category"
+msgstr "Buscar categoría de Wikipedia"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr ""
+"Seleicionar si los miembros d''una rellación tienen de descargase tamién"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Seleicionar si les referencies del oxetu tienen de descargase tamién; esto "
+"ye, les rellaciones padre y pa los nodios, amás, les víes padre"
+
+msgid "Server: "
+msgstr "Sirvidor: "
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Establez l''idioma predetermináu pa los artículos de Wikipedia"
+
+msgid "Wikidata"
+msgstr "Wikidata"
+
+msgid "Wikidata+OSM server"
+msgstr "Wikidata+sirvidor OSM"
+
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+msgid "Your saved queries:"
+msgstr "Consultes guardaes:"
+
+msgid "Zoom to selection"
+msgstr "Averar a la escoyeta"
+
+msgid "clipboard"
+msgstr "cartafueyu"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "coordenaes"
+
+msgid "help"
+msgstr "ayuda"
+
+#, java-format
+msgid "{0} (malformed site URL)"
+msgstr "{0} (URL del sitiu mal escrita)"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Simplifica enllazar oxetos d''OSM con artículos de Wikipedia y elementos de "
+"Wikidata"

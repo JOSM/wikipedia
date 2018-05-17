@@ -1,0 +1,249 @@
+# Translations for the JOSM plugin 'wikipedia' (ru)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Russian (https://www.transifex.com/josm/teams/2544/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "Add Tag"
+msgstr "Добавить тег"
+
+msgid "Add Wikidata"
+msgstr "Добавить Викиданные"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Добавить Викиданные для языка ''{0}''"
+
+msgid "Add names from Wikipedia"
+msgstr "Добавить названия из Википедии"
+
+msgid "Add new snippet"
+msgstr "Добавить новый фрагмент"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Добавляет тег «wikipedia», соответствующий этой статье, выбранным объектам"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "Доступно в локальном наборе данных"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Доступно через WIWOSM сервер"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Category"
+msgstr "Категория"
+
+msgid "Clipboard"
+msgstr "Буфер обмена"
+
+msgid "Contacting Server..."
+msgstr "Соединение с сервером..."
+
+msgid "Coordinates"
+msgstr "Координаты"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Копирует в буфер обмена шаблон {0}, подставив в него координаты первой "
+"выделенной точки"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "Копировать шаблон {0}"
+
+msgid "Delete selected snippet"
+msgstr "Удалить выделенный фрагмент"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Щёлкните на строчке дважды, чтобы найти объект по названию статьи и "
+"приблизить его."
+
+msgid "Download from Sophox API"
+msgstr "Скачать из Sophox API"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Скачать ссылающихся на объект (родительские отношения)"
+
+msgid "Download relation members"
+msgstr "Скачать участников отношений"
+
+msgid "Edit selected snippet"
+msgstr "Изменить выделенный фрагмент"
+
+msgid "Enter the Wikipedia language"
+msgstr "Введите язык Википедии"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Получить ID Викиданных"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Получить идентификаторы Викиданных, используя тег ''wikipedia''"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Получить статьи Википедии с координатами"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Получение списка всех статей категории из Википедии"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr ""
+"Получение из Викиданных всех координат для видимой в окне области карты"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr ""
+"Получение из Википедии всех координат для видимой в окне области карты"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Получить интервики-ссылки из Википедии для добавления нескольких тегов name"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Получение идентификаторов Викиданных"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Получение {0} идентификатора Викиданных для языка ''{1}''"
+msgstr[1] "Получение {0} идентификаторов Викиданных для языка ''{1}''"
+msgstr[2] "Получение {0} идентификаторов Викиданных для языка ''{1}''"
+msgstr[3] "Получение {0} идентификаторов Викиданных для языка ''{1}''"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Поиск образовательных учреждений в пределах от 2 до 3 км от центра "
+"выделенной области"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Load category"
+msgstr "Загрузка категории"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Не найден идентификатор Викиданных для: {0}"
+
+msgid "Not linked yet"
+msgstr "Ссылка ещё не создана"
+
+msgid "Open Article"
+msgstr "Открыть статью"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Открыть в браузере статью из Википедии о выбранном объекте"
+
+#, java-format
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "Перезаписать тег ''{0}''  {1} из {2} новым значением ''{3}''?"
+msgstr[1] "Перезаписать теги ''{0}''  {1} из {2} новым значением ''{3}''?"
+msgstr[2] "Перезаписать теги ''{0}''  {1} из {2} новым значением ''{3}''?"
+msgstr[3] "Перезаписать теги ''{0}''  {1} из {2} новым значением ''{3}''?"
+
+msgid "Overwrite key"
+msgstr "Затереть клавишу"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Вставляет статьи Википедии из системного буфера обмена"
+
+msgid "Please select a download area first."
+msgstr "Пожалуйста, выберите сначала область для скачивания."
+
+msgid "Search Wikidata items"
+msgstr "Поиск элементов Викиданных"
+
+msgid "Search Wikipedia category"
+msgstr "Поиск категории Википедии"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Отметьте, если должны быть скачаны и участники отношения"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Отметьте, если должны быть скачаны и объекты, ссылающиеся на данный "
+"(родительские отношения, для точек - родительские линии)"
+
+msgid "Server: "
+msgstr "Сервер: "
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Выбрать язык по умолчанию для статей Википедии"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Показать/скрыть список фрагментов запросов Sophox"
+
+msgid "Target key: "
+msgstr "Целевой ключ: "
+
+msgid "Wikidata"
+msgstr "Викиданные"
+
+msgid "Wikidata+OSM server"
+msgstr "Сервер Wikidata+OSM"
+
+msgid "Wikipedia"
+msgstr "Википедия"
+
+msgid "Your saved queries:"
+msgstr "Сохранённые запросы:"
+
+msgid "Zoom to selection"
+msgstr "Приблизиться к выделенному"
+
+msgid "clipboard"
+msgstr "буфер обмена"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "координаты"
+
+msgid "help"
+msgstr "Справка"
+
+#, java-format
+msgid "{0} (malformed site URL)"
+msgstr "{0} (некорректный URL сайта)"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Упрощает связывание объектов OSM со статьями Википедии и элементами "
+"Викиданных"

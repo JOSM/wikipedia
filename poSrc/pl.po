@@ -1,0 +1,201 @@
+# Translations for the JOSM plugin 'wikipedia' (pl)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Polish (https://www.transifex.com/josm/teams/2544/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "Add Tag"
+msgstr "Dodaj znacznik"
+
+msgid "Add Wikidata"
+msgstr "Dodaj Wikidata"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Dodaj Wikidata dla języka ''{0}''"
+
+msgid "Add names from Wikipedia"
+msgstr "Dodaj nazwy z Wikipedii"
+
+msgid "Add new snippet"
+msgstr "Dodaje nową wstawkę"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Dodaje do zaznaczonych obiektów znacznik „wikidata” powiązany z tym "
+"artykułem"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "Dostępne w lokalnym zestawie danych"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Dostępne przez serwer WIWOSM"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Category"
+msgstr "Kategoria"
+
+msgid "Clipboard"
+msgstr "Schowek"
+
+msgid "Contacting Server..."
+msgstr "Łączenie z serwerem..."
+
+msgid "Coordinates"
+msgstr "Współrzędne"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "Kopiuj {0} szablon"
+
+msgid "Delete selected snippet"
+msgstr "Usuwa zaznaczoną wstawkę"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Pobranie obiektów nadrzędnych (relacji)"
+
+msgid "Download relation members"
+msgstr "Pobranie członków relacji"
+
+msgid "Edit selected snippet"
+msgstr "Modyfikuje zaznaczoną wstawkę"
+
+msgid "Enter the Wikipedia language"
+msgstr "Wprowadź język Wikipedii"
+
+msgid "Error"
+msgstr "Błąd"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Pobierz Wikdata ID"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Pobierz Wikdata ID używając \"wikidata\" tag"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Pobierz artykuły z Wikipedii ze współrzędnymi"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Pobiera listę wszystkich artykułów Wikipedii z kategorii"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Pobieranie wszystkich współrzędnych z Wikidata w bieżącym widoku"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Pobiera wszystkie współrzędne z Wikipedii dla aktualnego widoku"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr "Pobiera z Wikipedii linki interwiki w celu dodanie kilku znaczników"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Pobieranie Wikdata ID''s"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Pobieranie {0} Wikidata ID dla języka „{1}”"
+msgstr[1] "Pobieranie {0} Wikidata ID dla języka „{1}”"
+msgstr[2] "Pobieranie {0} Wikidata ID dla języka „{1}”"
+msgstr[3] "Pobieranie {0} Wikidata ID dla języka „{1}”"
+
+msgid "Language"
+msgstr "Język"
+
+msgid "Load category"
+msgstr "Wczytaj kategorię"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Nie znaleziono Wikidata ID dla: {0}"
+
+msgid "Not linked yet"
+msgstr "Jeszcze nie połączone"
+
+msgid "Open Article"
+msgstr "Otwórz artykuł"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr ""
+"Otwiera artykuł Wikipedii dla zaznaczonego obiektu w przeglądarce "
+"internetowej"
+
+msgid "Overwrite key"
+msgstr "Zastąpienie klucza"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Wkleja artykuły zamieszczone w Wikipedii ze schowka systemowego"
+
+msgid "Please select a download area first."
+msgstr "Proszę najpierw zaznaczyć obszar."
+
+msgid "Search Wikidata items"
+msgstr "Wyszukaj obiekty Wikidata"
+
+msgid "Search Wikipedia category"
+msgstr "Szukaj kategorii w Wikipedii"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Pobiera również obiekty należące do relacji"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Pobiera obiekty z odniesieniami do tego obiektu (np. relacje, węzły i linie)"
+
+msgid "Server: "
+msgstr "Serwer: "
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Ustawia domyślny język dla artykułów Wikipedii"
+
+msgid "Target key: "
+msgstr "Klucz docelowy: "
+
+msgid "Wikidata"
+msgstr "Wikidata"
+
+msgid "Wikidata+OSM server"
+msgstr "Wikidata + serwer OSM"
+
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+msgid "Your saved queries:"
+msgstr "Twoje zapisane zapytania:"
+
+msgid "Zoom to selection"
+msgstr "Przybliż do zaznaczenia"
+
+msgid "clipboard"
+msgstr "schowek"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "współrzędne"
+
+msgid "help"
+msgstr "pomoc"

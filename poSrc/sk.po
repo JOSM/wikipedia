@@ -1,0 +1,238 @@
+# Translations for the JOSM plugin 'wikipedia' (sk)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Slovak (https://www.transifex.com/josm/teams/2544/sk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+msgid "Add Tag"
+msgstr "Pridať značku"
+
+msgid "Add Wikidata"
+msgstr "Pridať Wikidata"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Pridať Wikidata pre jazyk \"{0}\""
+
+msgid "Add names from Wikipedia"
+msgstr "Pridať názvy z Wikipedie"
+
+msgid "Add new snippet"
+msgstr "Pridať nový úryvok"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Pridá do vybratých objektov značku \"wikipedia\" zodpovedajúcu tomuto článku"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "Dostupné v lokálnej dátovej sade"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Dostupné cez WIWOSM server"
+
+msgid "Cancel"
+msgstr "Zrušiť"
+
+msgid "Category"
+msgstr "Kategória"
+
+msgid "Clipboard"
+msgstr "Schránka"
+
+msgid "Contacting Server..."
+msgstr "Kontaktujem server..."
+
+msgid "Coordinates"
+msgstr "Súradnice"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Skopíruje šablónu {0} do systémovej schránky s vloženými súradnicami prvého "
+"vybraného bodu"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "Kopírovať šablónu {0}"
+
+msgid "Delete selected snippet"
+msgstr "Odstrániť vybraný úryvok"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Dvojklikom na položku vyhľadáte objekt s názvom článku (a súradnicou stredu)"
+
+msgid "Download from Sophox API"
+msgstr "Stiahnuť zo Sophox API"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Stiahnuť aj odkazujúce (nadradené) relácie"
+
+msgid "Download relation members"
+msgstr "Stiahnuť členov relácie"
+
+msgid "Edit selected snippet"
+msgstr "Upraviť vybraný úryvok"
+
+msgid "Enter the Wikipedia language"
+msgstr "Zadajte jazyk Wikipedie"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Stiahnuť ID z Wikidata"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Stiahnuť ID z Wikidata pomocou značky \"wikipedia\""
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Získať články Wikipedie so súradnicami"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Získa zoznam všetkých článkov Wikipedie pre danú kategóriu"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Stiahne všetky súradnice z Wikidata v aktuálnom pohľade"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Získa všetky súradnice z Wikipedie v aktuálnom zobrazení"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr "Stiahne linky interwiki z Wikipedie na pridanie viacerých názvov"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Sťahujú sa ID z Wikidata"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Sťahuje sa {0} ID z Wikidata pre jazyk \"{1}\""
+msgstr[1] "Sťahuje sa {0} ID z Wikidata pre jazyk \"{1}\""
+msgstr[2] "Sťahuje sa {0} ID z Wikidata pre jazyk \"{1}\""
+msgstr[3] "Sťahuje sa {0} ID z Wikidata pre jazyk \"{1}\""
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr "Nájsť miesta vzdelávania aspoň 2km ale najviac 3km od stredu výberu"
+
+msgid "Language"
+msgstr "Jazyk"
+
+msgid "Load category"
+msgstr "Načítať kategóriu"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Nenašlo sa ID z Wikidata pre: {0}"
+
+msgid "Not linked yet"
+msgstr "Zatiaľ neprepojené"
+
+msgid "Open Article"
+msgstr "Otvoriť článok"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Otvorí v prehliadači článok Wikipedie pre zvolenú položku"
+
+#, java-format
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "Prepísať značky \"{0}\" {1} z {2} novou hodnotou \"{3}\"?"
+msgstr[1] "Prepísať značku \"{0}\" {1} z {2} novou hodnotou \"{3}\"?"
+msgstr[2] "Prepísať značky \"{0}\" {1} z {2} novou hodnotou \"{3}\"?"
+msgstr[3] "Prepísať značky \"{0}\" {1} z {2} novou hodnotou \"{3}\"?"
+
+msgid "Overwrite key"
+msgstr "Prepísať kľúč (key)"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Prilepí články Wikipedie zo systémovej schránky"
+
+msgid "Please select a download area first."
+msgstr "Prosím vyberte najskôr sťahovanú oblasť"
+
+msgid "Search Wikidata items"
+msgstr "Hľadať položky Wikidata"
+
+msgid "Search Wikipedia category"
+msgstr "Hľadať kategóriu Wikidata"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Zvoľte, ak by mali byť tiež stiahnuté členy relácie"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Zvoľte ak odkazy na objekty by mali byť tiež stiahnuté, t.j. nadradené "
+"relácie a pre body ich obsahujúce cesty"
+
+msgid "Server: "
+msgstr "Server: "
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Nastaví predvolený jazyk pre články Wikipedie"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Zobraziť/skryť zoznam úryvkov pre Sophox"
+
+msgid "Target key: "
+msgstr "Cieľový kľúč: "
+
+msgid "Wikidata"
+msgstr "Wikidata"
+
+msgid "Wikidata+OSM server"
+msgstr "Wikidata+OSM server"
+
+msgid "Wikipedia"
+msgstr "Wikipédia"
+
+msgid "Your saved queries:"
+msgstr "Uložené vyhľadávania:"
+
+msgid "Zoom to selection"
+msgstr "Priblížiť na výber"
+
+msgid "clipboard"
+msgstr "schránka"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "súradnice"
+
+msgid "help"
+msgstr "pomocník"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Zjednodušuje prepojenie OSM objektov na články Wikipedie a položky Wikidata"

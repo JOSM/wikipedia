@@ -1,0 +1,239 @@
+# Translations for the JOSM plugin 'wikipedia' (hu)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Hungarian (https://www.transifex.com/josm/teams/2544/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add Tag"
+msgstr "Címke hozzáadása"
+
+msgid "Add Wikidata"
+msgstr "Wikidata hozzáadása"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Wikidata hozzáadása \"{0}\" nyelvhez"
+
+msgid "Add names from Wikipedia"
+msgstr "Nevek hozzáadása a Wikipédiáról"
+
+msgid "Add new snippet"
+msgstr "Új kódtöredék hozzáadása"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"A kijelölt objektumhoz hozzáad egy ennek a cikknek megfelelő <wikipedia> "
+"címkét"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "A helyi adathalmazban elérhető"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Elérhető WIWOSM szerveren keresztül"
+
+msgid "Cancel"
+msgstr "Mégse"
+
+msgid "Category"
+msgstr "Kategória"
+
+msgid "Clipboard"
+msgstr "Vágólap"
+
+msgid "Contacting Server..."
+msgstr "Kapcsolódás a szerverhez…"
+
+msgid "Coordinates"
+msgstr "Koordináták"
+
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"A vágólapra másolja a(z) {0} sablont, kitöltve az első kijelölt pont "
+"koordinátáival"
+
+#, java-format
+msgid "Copy {0} template"
+msgstr "{0} sablon másolása"
+
+msgid "Delete selected snippet"
+msgstr "A kijelölt kódtöredék törlése"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Dupla kattintás az elemen a szócikkekre (és központi koordinátákra) való "
+"kereséshez"
+
+msgid "Download from Sophox API"
+msgstr "Letöltés a Sophox API-ról"
+
+#. TODO: Once new core is widely avialable, replace:
+#. Main.pref.getBoolean --> Config.getPref().getBoolean
+#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download referrers (parent relations)"
+msgstr "Hivatkozók (szülő kapcsolatok) letöltése"
+
+msgid "Download relation members"
+msgstr "Kapcsolat tagjainak letöltése"
+
+msgid "Edit selected snippet"
+msgstr "A kijelölt kódtöredék szerkesztése"
+
+msgid "Enter the Wikipedia language"
+msgstr "Wikipedia nyelv megadása"
+
+msgid "Error"
+msgstr "Hiba"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Wikidata ID-k lekérése"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Wikidata ID-k lekérése a \"wikipedia\" címke használatával"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Wikipédia cikkeket hoz el koordinátákkal"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Az egy kategóriába tartozó Wikipédia cikkeket listázza ki"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "A jelenlegi nézet összes koordinátájának lekérése Wikidatáról"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Minden koordinátát elhoz a Wikipédiából, az aktuális nézet szerint"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Interwiki linkek lekérése a Wikipédiából további név címkék hozzáadása "
+"céljából"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Wikidata ID-k lekérése"
+
+#, java-format
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "{0} Wikidata ID lekérése a \"{1}\" nyelvhez"
+msgstr[1] "{0} Wikidata ID lekérése a \"{1}\" nyelvhez"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Oktatási intézmény keresése a kijelölés közepétől legalább 2 km és "
+"legfeljebb 3 km távolságra"
+
+msgid "Language"
+msgstr "Nyelv"
+
+msgid "Load category"
+msgstr "Kategória betöltése"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Nem található Wikidata ID ehhez: {0}"
+
+msgid "Not linked yet"
+msgstr "Nincs még hivatkozás"
+
+msgid "Open Article"
+msgstr "Cikk megnyitása"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Megnyitja böngészőben a kijelölt elemhez tartozó Wikipédia cikket"
+
+msgid "Overwrite key"
+msgstr "Kulcs felülírása"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Wikipédia cikkeket illeszt be a rendszer-vágólapról"
+
+msgid "Please select a download area first."
+msgstr "Előbb kérlek jelölj ki letöltési területet."
+
+msgid "Search Wikidata items"
+msgstr "Wikidata elemek keresése"
+
+msgid "Search Wikipedia category"
+msgstr "Wikipédia kategória keresése"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Jelöld be, ha a kapcsolat tagjait is le kellene tölteni"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Jelöld be, ha a hivatkozókat, például a szülő kapcsolatokat, utakat is le "
+"kell tölteni a pontokhoz"
+
+msgid "Server: "
+msgstr "Szerver: "
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Megadja az alapértelmezett nyelvet a Wikipédia cikkekhez"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "A Sophox-kódtöredéklista megjelenítése/elrejtése"
+
+msgid "Target key: "
+msgstr "Cél kulcs: "
+
+msgid "Wikidata"
+msgstr "Wikidata"
+
+msgid "Wikidata+OSM server"
+msgstr "Wikidata+OSM szerver"
+
+msgid "Wikipedia"
+msgstr "Wikipédia"
+
+msgid "Your saved queries:"
+msgstr "Az elmentett lekérdezéseid:"
+
+msgid "Zoom to selection"
+msgstr "Nagyítás a kijelölésre"
+
+msgid "clipboard"
+msgstr "Vágólap"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "koordináták"
+
+msgid "help"
+msgstr "súgó"
+
+#, java-format
+msgid "{0} (malformed site URL)"
+msgstr "{0} (helytelen alakú webhely URL)"
+
+#. Plugin description for project
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Egyszerűsíti az OSM objektumok összekapcsolását Wikipédia cikkekkel és "
+"Wikidata elemekkel"
