@@ -1,63 +1,74 @@
-images:
-  jdk8: &jdk8_image
-    - image: circleci/openjdk:8-jdk-node-browsers
-  jdk9: &jdk9_image
-    - image: circleci/openjdk:9-jdk-node-browsers
-
 version: 2
 jobs:
-  assemble-java-9:
-    docker: *jdk9_image
-    steps:
-      - checkout
-      # Main commands
-      - run: ./gradlew assemble
-      # Persist build artifacts
-      - run: mv -fT build /tmp/jdk9-build-artifacts
-      - persist_to_workspace:
-          root: /tmp/
-          paths: jdk9-build-artifacts
   test-java-9:
-    docker: *jdk9_image
+    docker:
+      - image: circleci/openjdk:9-jdk-browsers
     steps:
-      - checkout
-      # Attach build artifacts
-      - attach_workspace:
-          at: /tmp/
-      - run: mv -fT /tmp/jdk9-build-artifacts build
-      # Main commands
-      - run: ./gradlew test
-
-  assemble-java-8:
-    docker: *jdk8_image
-    steps:
-      - checkout
+      - restore_cache: &restore_gradleGit_cache
+          keys:
+            - gradleGit-v1-{{ .Branch }}-{{ .Revision }}
+            - gradleGit-v1-{{ .Branch }}-
+            - gradleGit-v1-
       - run: sudo apt install -y gettext
-      # Main commands
-      - run: ./gradlew assemble generatePot
-      # Persist build artifacts
-      - persist_to_workspace:
-          root: .
-          paths: build
-  test-java-8:
-    docker: *jdk8_image
-    steps:
+      # Temporary workaround for https://discuss.circleci.com/t/22437
+      - run: |
+          if [ -n "$CIRCLE_TAG" ]
+          then
+            mkdir -p ~/.ssh
+            echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+            ' >> ~/.ssh/known_hosts
+            git fetch --force origin "refs/tags/${CIRCLE_TAG}:refs/tags/${CIRCLE_TAG}"
+          fi
       - checkout
-      # Attach build artifacts
-      - attach_workspace:
-          at: .
+      - run: ./gradlew assemble test
+      - store_test_results:
+          path: ./build/test-results/test
+      - save_cache: &save_gradleGit_cache
+          key: gradleGit-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - "~/.gradle/caches"
+            - "~/.gradle/wrapper"
+            - ".git"
+            - ".gradle"
+
+  test-java-8:
+    docker: &jdk8_image
+      - image: circleci/openjdk:8-jdk-browsers
+    steps:
+      - restore_cache: *restore_gradleGit_cache
+      - run: sudo apt install -y gettext
+      # Temporary workaround for https://discuss.circleci.com/t/22437
+      - run: |
+          if [ -n "$CIRCLE_TAG" ]
+          then
+            mkdir -p ~/.ssh
+            echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+            ' >> ~/.ssh/known_hosts
+            git fetch --force origin "refs/tags/${CIRCLE_TAG}:refs/tags/${CIRCLE_TAG}"
+          fi
+      - checkout
       # Main commands
-      - run: ./gradlew test
+      - run: ./gradlew assemble test generatePot
       # Persist build artifacts
       - persist_to_workspace:
           root: .
           paths:
             - .tx
             - build
+      - store_test_results:
+          path: ./build/test-results/test
+      - store_artifacts:
+          path: ./build/dist
+          destination: dist
+      - store_artifacts:
+          path: ./build/tmp/jar/MANIFEST.MF
+          destination: dist/MANIFEST.MF
+      - save_cache: *save_gradleGit_cache
 
   min-josm:
     docker: *jdk8_image
     steps:
+      - restore_cache: *restore_gradleGit_cache
       - checkout
       # Attach build artifacts
       - attach_workspace:
@@ -68,12 +79,20 @@ jobs:
   check:
     docker: *jdk8_image
     steps:
+      - restore_cache: *restore_gradleGit_cache
+      - run: sudo apt install -y gettext
       - checkout
       # Attach build artifacts
       - attach_workspace:
           at: .
       # Main commands
       - run: ./gradlew check
+      - store_artifacts:
+          path: ./build/reports/jacoco/test
+          destination: jacoco
+      - store_artifacts:
+          path: ./build/reports/pmd
+          destination: pmd
 
   transifex-upload:
     docker:
@@ -87,29 +106,48 @@ jobs:
           if [ ! -z "$TRANSIFEX_TOKEN" ]; then
             TX_TOKEN="$TRANSIFEX_TOKEN" tx push -s --no-interactive
           fi
+  publish-release:
+    docker:
+      - image: circleci/golang:1.10
+    steps:
+      - restore_cache: *restore_gradleGit_cache
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: go get github.com/aktau/github-release
+      - run: |
+          export TAG_SUBJECT=`git tag -l --format="%(contents:subject)" $CIRCLE_TAG`
+          export TAG_BODY=`git tag -l --format="%(contents:body)" $CIRCLE_TAG`
+          export GITHUB_USER="$CIRCLE_PROJECT_USERNAME"
+          export GITHUB_REPO="$CIRCLE_PROJECT_REPONAME"
+          github-release release --tag "$CIRCLE_TAG" --name "$TAG_SUBJECT" --description "$TAG_BODY"
+          github-release upload --tag "$CIRCLE_TAG" --file "./build/dist/wikipedia.jar" --name "wikipedia.jar"
+          github-release upload --tag "$CIRCLE_TAG" --file "./build/tmp/jar/MANIFEST.MF" --name "MANIFEST.MF"
 
 workflows:
   version: 2
   build-workflow:
     jobs:
-      - assemble-java-8
       - test-java-8:
-          requires:
-            - assemble-java-8
-
-      - assemble-java-9
+          filters:
+            tags: &semver_tag_regex
+              only: /v[0-9].*/
       - test-java-9:
-          requires:
-            - assemble-java-9
+          filters:
+            tags: *semver_tag_regex
 
       - check:
           requires:
             - test-java-8
             - test-java-9
+          filters:
+            tags: *semver_tag_regex
       - min-josm:
           requires:
             - test-java-8
             - test-java-9
+          filters:
+            tags: *semver_tag_regex
 
       - transifex-upload:
           requires:
@@ -118,3 +156,11 @@ workflows:
           filters:
             branches:
               only: master
+      - publish-release:
+          requires:
+            - check
+            - min-josm
+          filters:
+            tags: *semver_tag_regex
+            branches:
+              ignore: /.*/
