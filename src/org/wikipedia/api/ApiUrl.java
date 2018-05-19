@@ -8,8 +8,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
-
 import org.openstreetmap.josm.tools.Logging;
 
 public class ApiUrl {
@@ -31,8 +29,7 @@ public class ApiUrl {
      * @throws IllegalArgumentException
      *     when the returned URL would be malformed
      */
-    @Nonnull
-    public static URL url(@Nonnull final String part1, @Nonnull final String part2, @Nonnull final String... moreParts) {
+    public static URL url(final String part1, final String part2, final String... moreParts) {
         return url(
             Stream.concat(Stream.of(part1, part2), Arrays.stream(moreParts))
                     .filter(Objects::nonNull)
@@ -49,9 +46,9 @@ public class ApiUrl {
      * @return the resulting URL
      * @throws IllegalArgumentException
      *     when the URL parsed from the parameter would be malformed
+     *
      */
-    @Nonnull
-    public static URL url(@Nonnull final String url) {
+    public static URL url(final String url) {
         try {
             return new URL(url);
         } catch (MalformedURLException e) {

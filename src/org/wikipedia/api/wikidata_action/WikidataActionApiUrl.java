@@ -4,8 +4,6 @@ package org.wikipedia.api.wikidata_action;
 import java.net.URL;
 import java.util.Collection;
 
-import javax.annotation.Nonnull;
-
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.tools.RegexUtil;
@@ -17,8 +15,7 @@ public class WikidataActionApiUrl {
         // Private constructor to avoid instantiation
     }
 
-    @Nonnull
-    public static URL checkEntityExistsUrl(@Nonnull final Collection<String> qIds) {
+    public static URL checkEntityExistsUrl(final Collection<String> qIds) {
         if (qIds.size() < 1) {
             throw new IllegalArgumentException("You must supply at least one Q-ID to construct a checkEntityExists URL.");
         }
