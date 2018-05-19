@@ -110,7 +110,7 @@ public class WikidataItemExists extends Test.TagTest {
                 errors.add(
                     AllValidationTests.INVALID_QID.getBuilder(this)
                         .primitives(osmPrimitive)
-                        .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("Invalid Q-ID! Does not exist on Wikidata."), I18n.marktr("{0} is not a valid Wikidata-ID"))
+                        .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("Invalid Q-ID! Cannot exist on Wikidata."), I18n.marktr("{0} is not a valid Wikidata-ID"))
                         .build()
                 );
             }

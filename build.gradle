@@ -53,8 +53,8 @@ sourceSets {
     resources {
       srcDirs = ["$projectDir"]
       include "images/**"
-      include "GPL-v2.0.txt"
-      include "README"
+      include "LICENSE"
+      include "README.md"
     }
   }
   test {
@@ -71,8 +71,6 @@ archivesBaseName = "wikipedia"
 version = getVersion()
 josm {
   manifest {
-    // Description is duplicated in build.xml, because only there it is synced to Launchpad for translation
-    description = "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
     oldVersionDownloadLink 12900, "34109", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=34113")
     oldVersionDownloadLink 12878, "33635", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=33636")
   }
