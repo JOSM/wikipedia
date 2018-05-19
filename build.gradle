@@ -28,7 +28,7 @@ dependencies {
   testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
   testImplementation "org.junit.vintage:junit-vintage-engine:${versions.junit}"
-  testImplementation "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}"
+  implementation "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}"
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
 }
 
@@ -54,6 +54,9 @@ sourceSets {
   test {
     java {
       srcDirs = ["test/unit"]
+    }
+    resources {
+      srcDirs = ["test/data"]
     }
   }
 }
