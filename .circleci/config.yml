@@ -49,20 +49,12 @@ jobs:
       - checkout
       # Main commands
       - run: ./gradlew assemble test generatePot
-      # Persist build artifacts
-      - persist_to_workspace:
+      # Storing to cache/workspace
+      - persist_to_workspace: &persist_build_artifacts
           root: .
           paths:
             - .tx
             - build
-      - store_test_results:
-          path: ./build/test-results/test
-      - store_artifacts:
-          path: ./build/dist
-          destination: dist
-      - store_artifacts:
-          path: ./build/tmp/jar/MANIFEST.MF
-          destination: dist/MANIFEST.MF
       - save_cache: *save_gradleGit_cache
 
   min-josm:
@@ -87,12 +79,8 @@ jobs:
           at: .
       # Main commands
       - run: ./gradlew check
-      - store_artifacts:
-          path: ./build/reports/jacoco/test
-          destination: jacoco
-      - store_artifacts:
-          path: ./build/reports/pmd
-          destination: pmd
+      # Storing to workspace
+      - persist_to_workspace: *persist_build_artifacts
 
   transifex-upload:
     docker:
@@ -101,11 +89,31 @@ jobs:
       - attach_workspace:
           at: .
       - run: pip install --user git+https://github.com/transifex/transifex-client.git@699dd42e04074be92a07b5b87e8f1ea672a6571f#egg=transifex-client
+      - run: export PATH="$PATH:$HOME/.local/bin" && pip install --user codecov && codecov
       - run: |
           export PATH="$PATH:$HOME/.local/bin" && echo "$PATH"
           if [ ! -z "$TRANSIFEX_TOKEN" ]; then
             TX_TOKEN="$TRANSIFEX_TOKEN" tx push -s --no-interactive
           fi
+      # Store artifacts
+      - store_test_results:
+          path: ./build/test-results/test
+      - store_artifacts:
+          path: ./build/dist
+          destination: dist
+      - store_artifacts:
+          path: ./build/tmp/jar/MANIFEST.MF
+          destination: dist/MANIFEST.MF
+      - store_artifacts:
+          path: ./build/reports/jacoco/test
+          destination: jacoco
+      - store_artifacts:
+          path: ./build/reports/pmd
+          destination: pmd
+      - store_artifacts:
+          path: ./build/reports/tests/test
+          destination: junit
+
   publish-release:
     docker:
       - image: circleci/golang:1.10
@@ -129,26 +137,20 @@ workflows:
   build-workflow:
     jobs:
       - test-java-8:
-          filters:
-            tags: &semver_tag_regex
-              only: /v[0-9].*/
+          filters: &always_run
+            tags:
+              only: /.*/
       - test-java-9:
-          filters:
-            tags: *semver_tag_regex
+          filters: *always_run
 
-      - check:
+      - check: &depends_on_test_tasks
           requires:
             - test-java-8
             - test-java-9
-          filters:
-            tags: *semver_tag_regex
-      - min-josm:
-          requires:
-            - test-java-8
-            - test-java-9
-          filters:
-            tags: *semver_tag_regex
+          filters: *always_run
+      - min-josm: *depends_on_test_tasks
 
+      # Runs only on master branch
       - transifex-upload:
           requires:
             - check
@@ -156,11 +158,13 @@ workflows:
           filters:
             branches:
               only: master
+      # Runs only on tags matching /v[0-9].*/
       - publish-release:
           requires:
             - check
             - min-josm
           filters:
-            tags: *semver_tag_regex
+            tags:
+              only: /v[0-9].*/
             branches:
               ignore: /.*/
