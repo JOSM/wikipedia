@@ -9,7 +9,6 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import org.wikipedia.api.wikidata_action.WikidataActionApiUrlTest;
 
 public class CheckEntityExistsResultTest {
     @Test

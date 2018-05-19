@@ -3,6 +3,8 @@ package org.wikipedia;
 
 import javax.swing.JMenu;
 
+import org.openstreetmap.josm.data.Version;
+import org.openstreetmap.josm.data.validation.OsmValidator;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.MainMenu;
 import org.openstreetmap.josm.gui.MapFrame;
@@ -18,13 +20,19 @@ import org.wikipedia.gui.SophoxServerPreference;
 import org.wikipedia.gui.WikidataItemSearchDialog;
 import org.wikipedia.gui.WikidataTagCellRenderer;
 import org.wikipedia.gui.WikipediaToggleDialog;
+import org.wikipedia.validator.WikidataItemExists;
 
-public class WikipediaPlugin extends Plugin {
+public final class WikipediaPlugin extends Plugin {
+
+    private static String name;
+    private static String versionInfo;
 
     private PreferenceSetting preferences;
 
     public WikipediaPlugin(PluginInformation info) {
         super(info);
+        versionInfo = String.format("JOSM/%s & JOSM-wikipedia/%s", Version.getInstance().getVersionString(), info.version);
+        name = info.name;
         new WikipediaCopyTemplate();
         JMenu dataMenu = MainApplication.getMenu().dataMenu;
         MainMenu.add(dataMenu, new WikipediaAddNamesAction());
@@ -32,6 +40,16 @@ public class WikipediaPlugin extends Plugin {
         MainMenu.add(dataMenu, new WikidataItemSearchDialog.Action());
 
         DownloadDialog.addDownloadSource(new SophoxDownloadReader());
+
+        OsmValidator.addTest(WikidataItemExists.class);
+    }
+
+    public static String getVersionInfo() {
+        return versionInfo;
+    }
+
+    public static String getName() {
+        return name;
     }
 
     @Override
