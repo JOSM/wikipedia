@@ -24,6 +24,7 @@ repositories {
   jcenter()
 }
 dependencies {
+  packIntoJar "com.fasterxml.jackson.core:jackson-databind:2.9.5"
   errorprone "com.google.errorprone:error_prone_core:${versions.errorprone}"
   testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
@@ -31,6 +32,11 @@ dependencies {
   implementation "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}"
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
 }
+task copyToLib(type: Sync) {
+  from configurations.packIntoJar
+  into file("$projectDir/lib")
+}
+classes.dependsOn(copyToLib)
 
 test {
   useJUnitPlatform()

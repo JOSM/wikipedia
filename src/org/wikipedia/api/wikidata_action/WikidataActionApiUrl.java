@@ -13,6 +13,10 @@ import org.wikipedia.tools.RegexUtil;
 public class WikidataActionApiUrl {
     private static final String BASE_URL = "https://www.wikidata.org/w/api.php";
 
+    private WikidataActionApiUrl() {
+        // Private constructor to avoid instantiation
+    }
+
     @Nonnull
     public static URL checkEntityExistsUrl(@Nonnull final Collection<String> qIds) {
         if (qIds.size() < 1) {
