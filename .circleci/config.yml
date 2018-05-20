@@ -48,7 +48,7 @@ jobs:
           fi
       - checkout
       # Main commands
-      - run: ./gradlew assemble test generatePot
+      - run: ./gradlew assemble test generatePot generateMasterPluginList
       # Storing to cache/workspace
       - persist_to_workspace: &persist_build_artifacts
           root: .
@@ -56,6 +56,21 @@ jobs:
             - .tx
             - build
       - save_cache: *save_gradleGit_cache
+      - store_artifacts:
+          path: ./build/dist
+          destination: dist
+      - store_artifacts:
+          path: ./build/tmp/jar/MANIFEST.MF
+          destination: dist/MANIFEST.MF
+      - run: |
+          git fetch origin gh-pages
+          git checkout gh-pages
+          cp ./build/pluginMasterSnapshots .
+          git stage pluginMasterSnapshots
+          git config user.name "CircleCI $CIRCLE_BUILD_NUM"
+          git config user.email "deploy@circleci"
+          git commit -m "[ci skip] Update plugin update site for JOSM with latest version from master branch"
+          git push -q https://${GITHUB_TOKEN}@github.com/JOSM/wikipedia.git gh-pages > /dev/null 2>&1
 
   min-josm:
     docker: *jdk8_image
@@ -98,12 +113,6 @@ jobs:
       # Store artifacts
       - store_test_results:
           path: ./build/test-results/test
-      - store_artifacts:
-          path: ./build/dist
-          destination: dist
-      - store_artifacts:
-          path: ./build/tmp/jar/MANIFEST.MF
-          destination: dist/MANIFEST.MF
       - store_artifacts:
           path: ./build/reports/jacoco/test
           destination: jacoco

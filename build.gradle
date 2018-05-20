@@ -1,6 +1,11 @@
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.time.Duration
 import java.time.Instant
+import java.util.jar.JarInputStream
 import java.util.regex.Pattern
+import java.util.stream.Collectors
+import org.openstreetmap.josm.gradle.plugin.task.GeneratePluginList
 
 plugins {
   id "java"
@@ -10,7 +15,7 @@ plugins {
   id "com.github.ben-manes.versions" version "0.17.0"
   id "com.github.spotbugs" version "1.6.1"
   id "net.ltgt.errorprone" version "0.0.14"
-  id "org.openstreetmap.josm" version "0.4.2"
+  id "org.openstreetmap.josm" version "0.4.4"
 }
 def versions = [
     errorprone: "2.3.1",
@@ -127,6 +132,43 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
   reports {
     xml.enabled = false
     html.enabled = true
+  }
+}
+
+task generateMasterPluginList(type: GeneratePluginList) {
+  dependsOn(tasks.processResources)
+
+  outputFile = file("$buildDir/pluginMasterSnapshots")
+  def defaultVersionSuffix = versionSuffix
+  versionSuffix = {String s ->
+    if (s.startsWith(archivesBaseName)) {
+      return ""
+    }
+    return defaultVersionSuffix.invoke(s)
+  }
+  doFirst {
+    def wikipediaURL = System.getenv("WIKIPEDIA_URL")
+    def ptAssistantURL = System.getenv("PT_ASSISTANT_URL")
+    if (wikipediaURL == null || ptAssistantURL == null) {
+      throw new TaskExecutionException(it, new IllegalStateException("This tasks requires the environment variables `WIKIPEDIA_URL` and `PT_ASSISTANT_URL` to be set!"))
+    }
+    def circleBuildNum = System.getenv("CIRCLE_BUILD_NUM")
+    if (wikipediaURL.count("%s") == 1 && circleBuildNum != null) {
+      wikipediaURL = String.format(wikipediaURL, circleBuildNum)
+    }
+
+    it.iconBase64Provider = {
+      def file = new File(sourceSets.main.resources.srcDirs[0], it)
+      if (file.exists()) {
+        def contentType = file.name.endsWith(".svg") ? "svg+xml" : "png"
+        return "data:image/" + contentType + ";base64," + Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(file.toURI())));
+      }
+    }
+    it.addPlugin("$archivesBaseName-dev.jar", project.josm.manifest.createJosmPluginJarManifest(), new URL(wikipediaURL))
+    def manifestAttributes = new JarInputStream(new URL(ptAssistantURL).openConnection().inputStream).manifest.mainAttributes.entrySet().stream()
+        .collect(Collectors.toMap({ e -> e.key.toString()}, { e -> e.value.toString()}))
+
+    it.addPlugin("pt_assistant-dev.jar", manifestAttributes, new URL(ptAssistantURL))
   }
 }
 
