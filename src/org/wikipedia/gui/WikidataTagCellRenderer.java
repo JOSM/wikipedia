@@ -23,6 +23,7 @@ import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.data.WikidataEntry;
+import org.wikipedia.tools.RegexUtil;
 
 public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
 
@@ -41,11 +42,11 @@ public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
 
         final String id = ((Map<?, ?>) value).keySet().iterator().next().toString();
         final JLabel component = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if (WikipediaApp.WIKIDATA_PATTERN.matcher(id).matches()) {
+        if (RegexUtil.isValidQId(id)) {
             return renderValues(Collections.singleton(id), table, component);
         } else if (id.contains(";")) {
             final List<String> ids = Arrays.asList(id.split("\\s*;\\s*"));
-            if (ids.stream().allMatch(i -> WikipediaApp.WIKIDATA_PATTERN.matcher(i).matches())) {
+            if (ids.stream().allMatch(RegexUtil::isValidQId)) {
                 return renderValues(ids, table, component);
             }
         }

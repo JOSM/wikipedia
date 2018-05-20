@@ -7,6 +7,7 @@ import org.openstreetmap.josm.tools.AlphanumComparator;
 import org.openstreetmap.josm.tools.CheckParameterUtil;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
+import org.wikipedia.tools.RegexUtil;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -44,7 +45,7 @@ public class WikidataEntry extends WikipediaEntry {
     }
 
     private static void ensureValidWikidataId(String id) {
-        CheckParameterUtil.ensureThat(WikipediaApp.WIKIDATA_PATTERN.matcher(id).matches(), "Invalid Wikidata ID given: " + id);
+        CheckParameterUtil.ensureThat(RegexUtil.isValidQId(id), "Invalid Wikidata ID given: " + id);
     }
 
     @Override

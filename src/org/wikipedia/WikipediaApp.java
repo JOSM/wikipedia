@@ -39,11 +39,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
+import org.wikipedia.tools.RegexUtil;
 import org.wikipedia.tools.XPath;
 
 public final class WikipediaApp {
 
-    public static final Pattern WIKIDATA_PATTERN = Pattern.compile("Q\\d+");
     private static final XPath X_PATH = XPath.getInstance();
     private final String wikipediaLang;
     private final String siteId;
@@ -311,7 +311,7 @@ public final class WikipediaApp {
                 X_PATH.evaluateNodes("//entity", xml).forEach(node -> {
                     final String wikidata = X_PATH.evaluateString("./@id", node);
                     final String wikipedia = X_PATH.evaluateString("./sitelinks/sitelink/@title", node);
-                    if (WIKIDATA_PATTERN.matcher(wikidata).matches()) { // non existing entries result in negative integers
+                    if (RegexUtil.isValidQId(wikidata)) { // non existing entries result in negative integers
                         r.put(wikipedia, wikidata);
                     }
                 });
