@@ -145,7 +145,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
         private final boolean wikidata;
 
-        public WikipediaLoadCoordinatesAction(boolean wikidata) {
+        WikipediaLoadCoordinatesAction(boolean wikidata) {
             super(wikidata ? tr("Wikidata") : tr("Coordinates"));
             this.wikidata = wikidata;
             new ImageProvider("dialogs", wikidata ? "wikidata" : "wikipedia").getResource().attachImageIcon(this, true);
@@ -158,7 +158,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
         public void actionPerformed(ActionEvent e) {
             try {
                 // determine bbox
-            	MapView mapView = MainApplication.getMap().mapView;
+                MapView mapView = MainApplication.getMap().mapView;
                 final LatLon min = mapView.getLatLon(0, mapView.getHeight());
                 final LatLon max = mapView.getLatLon(mapView.getWidth(), 0);
                 // add entries to list model
@@ -206,7 +206,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
     class WikipediaLoadCategoryAction extends AbstractAction {
 
-        public WikipediaLoadCategoryAction() {
+        WikipediaLoadCategoryAction() {
             super(tr("Category"));
             new ImageProvider("data", "sequence").getResource().attachImageIcon(this, true);
             putValue(SHORT_DESCRIPTION, tr("Fetches a list of all Wikipedia articles of a category"));
@@ -239,7 +239,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
     class PasteWikipediaArticlesAction extends AbstractAction {
 
-        public PasteWikipediaArticlesAction() {
+        PasteWikipediaArticlesAction() {
             super(tr("Clipboard"));
             new ImageProvider("paste").getResource().attachImageIcon(this, true);
             putValue(SHORT_DESCRIPTION, tr("Pastes Wikipedia articles from the system clipboard"));
@@ -261,7 +261,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
     class OpenWikipediaArticleAction extends AbstractAction {
 
-        public OpenWikipediaArticleAction() {
+        OpenWikipediaArticleAction() {
             super(tr("Open Article"));
             new ImageProvider("browser").getResource().attachImageIcon(this);
             putValue(SHORT_DESCRIPTION, tr("Opens the Wikipedia article of the selected item in a browser"));
@@ -279,7 +279,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
     class WikipediaSettingsAction extends AbstractAction {
 
-        public WikipediaSettingsAction() {
+        WikipediaSettingsAction() {
             super(tr("Language"));
             new ImageProvider("dialogs/settings").getResource().attachImageIcon(this, true);
             putValue(SHORT_DESCRIPTION, tr("Sets the default language for the Wikipedia articles"));
@@ -303,7 +303,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
         private final JList<WikipediaEntry> list;
 
-        public AddWikipediaTagAction(JList<WikipediaEntry> list) {
+        AddWikipediaTagAction(JList<WikipediaEntry> list) {
             super(tr("Add Tag"));
             this.list = list;
             new ImageProvider("pastetags").getResource().attachImageIcon(this, true);

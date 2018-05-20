@@ -16,7 +16,7 @@ import javax.xml.xpath.XPathVariableResolver;
 import java.util.AbstractList;
 import java.util.Collection;
 
-public class XPath implements javax.xml.xpath.XPath {
+public final class XPath implements javax.xml.xpath.XPath {
     private final javax.xml.xpath.XPath xPath;
     private static final XPath INSTANCE = new XPath(XPathFactory.newInstance().newXPath());
 

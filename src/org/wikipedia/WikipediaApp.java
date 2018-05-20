@@ -102,7 +102,7 @@ public final class WikipediaApp {
                     + "&gslimit=500"
                     + "&gsbbox=" + max.lat() + "|" + min.lon() + "|" + min.lat() + "|" + max.lon();
             // parse XML document
-            try (final InputStream in = connect(url).getContent()) {
+            try (InputStream in = connect(url).getContent()) {
                 final Document doc = newDocumentBuilder().parse(in);
                 final List<WikipediaEntry> entries = X_PATH.evaluateNodes("//gs", doc).stream()
                         .map(node -> {
@@ -136,7 +136,7 @@ public final class WikipediaApp {
                     "&search=" + Utils.encodeUrl(query) +
                     "&limit=50" +
                     "&format=xml";
-            try (final InputStream in = connect(url).getContent()) {
+            try (InputStream in = connect(url).getContent()) {
                 final Document xml = newDocumentBuilder().parse(in);
                 final List<WikidataEntry> r = X_PATH.evaluateNodes("//entity", xml).stream()
                         .map(node -> new WikidataEntry(X_PATH.evaluateString("@id", node), null, null, null))
