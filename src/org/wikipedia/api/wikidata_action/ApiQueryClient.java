@@ -16,6 +16,7 @@ import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.bugreport.BugReport;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.InvalidApiQueryException;
+import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 
 public final class ApiQueryClient {
     private static final ObjectMapper JSON_OBJECT_MAPPER = new ObjectMapper();
@@ -36,7 +37,7 @@ public final class ApiQueryClient {
      * @return the deserialized object
      * @throws IOException if any error occurs while executing the query, with a translated message that can be shown to the user.
      */
-    public static <T> T query(final URL url, final Class<T> klass) throws IOException {
+    public static <T> T query(final URL url, final SerializationSchema<T> schema) throws IOException {
         final HttpClient.Response response;
         try {
             response = HttpClient.create(url)
@@ -63,8 +64,7 @@ public final class ApiQueryClient {
             throw new IOException(I18n.tr("The Wikidata Action API reported that the query was invalid! Please report as bug to the Wikipedia plugin!"));
         }
         try {
-
-            return JSON_OBJECT_MAPPER.readValue(response.getContent(), klass);
+            return schema.getMapper().readValue(response.getContent(), schema.getSchemaClass());
         } catch (JsonMappingException | JsonParseException e) {
             throw new IOException(I18n.tr("The JSON response from the Wikidata Action API can't be read!"), e);
         } catch (IOException e) {

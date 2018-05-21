@@ -1,16 +1,15 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.data;
 
+import java.util.Comparator;
+import java.util.Optional;
+
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.tools.AlphanumComparator;
 import org.openstreetmap.josm.tools.CheckParameterUtil;
 import org.openstreetmap.josm.tools.Utils;
-import org.wikipedia.WikipediaApp;
 import org.wikipedia.tools.RegexUtil;
-
-import java.util.Comparator;
-import java.util.Optional;
 
 public class WikidataEntry extends WikipediaEntry {
 

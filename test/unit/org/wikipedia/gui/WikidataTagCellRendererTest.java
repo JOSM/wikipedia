@@ -7,7 +7,6 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-
 import javax.swing.JLabel;
 import javax.swing.JTable;
 

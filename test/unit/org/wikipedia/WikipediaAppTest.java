@@ -1,12 +1,12 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.openstreetmap.josm.data.coor.LatLon;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
-import org.wikipedia.data.WikidataEntry;
-import org.wikipedia.data.WikipediaEntry;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.junit.Rule;
+import org.junit.Test;
+import org.openstreetmap.josm.data.coor.LatLon;
+import org.openstreetmap.josm.testutils.JOSMTestRules;
+import org.wikipedia.data.WikidataEntry;
+import org.wikipedia.data.WikipediaEntry;
 
 public class WikipediaAppTest {
 

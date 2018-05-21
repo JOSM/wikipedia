@@ -20,6 +20,7 @@ import org.openstreetmap.josm.tools.ImageProvider;
 import org.wikipedia.api.wikidata_action.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiUrl;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.tools.RegexUtil;
 
 /**
@@ -52,7 +53,7 @@ public class WikidataItemExists extends Test.TagTest {
         if (qIds.stream().anyMatch(Objects::nonNull)) {
             try {
                 final URL url = WikidataActionApiUrl.checkEntityExistsUrl(qIds.stream().filter(Objects::nonNull).collect(Collectors.toList()));
-                final CheckEntityExistsResult entityQueryResult = ApiQueryClient.query(url, CheckEntityExistsResult.class);
+                final CheckEntityExistsResult entityQueryResult = ApiQueryClient.query(url, SerializationSchema.WBGETENTITIES);
                 if (entityQueryResult.getSuccess() != 1) {
                     errors.add(AllValidationTests.API_REQUEST_FAILED.getBuilder(this).primitives(new ArrayList<>(primitives)).message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata Action API reports a failed query!")).build());
                 } else {

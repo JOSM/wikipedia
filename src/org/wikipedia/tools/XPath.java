@@ -1,10 +1,8 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.tools;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
+import java.util.AbstractList;
+import java.util.Collection;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.namespace.QName;
 import javax.xml.xpath.XPathConstants;
@@ -13,8 +11,10 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import javax.xml.xpath.XPathFunctionResolver;
 import javax.xml.xpath.XPathVariableResolver;
-import java.util.AbstractList;
-import java.util.Collection;
+
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 public final class XPath implements javax.xml.xpath.XPath {
     private final javax.xml.xpath.XPath xPath;

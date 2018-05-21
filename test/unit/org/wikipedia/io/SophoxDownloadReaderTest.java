@@ -1,13 +1,8 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.io;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.junit.Rule;
-import org.junit.Test;
-import org.openstreetmap.josm.data.osm.OsmPrimitiveType;
-import org.openstreetmap.josm.data.osm.PrimitiveId;
-import org.openstreetmap.josm.data.osm.SimplePrimitiveId;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -16,8 +11,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.junit.Rule;
+import org.junit.Test;
+import org.openstreetmap.josm.data.osm.OsmPrimitiveType;
+import org.openstreetmap.josm.data.osm.PrimitiveId;
+import org.openstreetmap.josm.data.osm.SimplePrimitiveId;
+import org.openstreetmap.josm.testutils.JOSMTestRules;
 
 /**
  * Unit tests of {@link SophoxDownloadReader} class.

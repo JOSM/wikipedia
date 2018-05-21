@@ -32,19 +32,19 @@ public class WikidataActionApiUrlTest {
     @Test
     public void testCheckEntityExistsUrl() {
         assertEquals(
-            "https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&sites=&props=&ids=Q1",
+            "https://www.wikidata.org/w/api.php?format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1",
             WikidataActionApiUrl.checkEntityExistsUrl(Collections.singletonList("Q1")).toString()
         );
         assertEquals(
-            "https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&sites=&props=&ids=Q1%7CQ42",
+            "https://www.wikidata.org/w/api.php?format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1%7CQ42",
             WikidataActionApiUrl.checkEntityExistsUrl(Arrays.asList("Q1", "Q42")).toString()
         );
         assertEquals(
-            "https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&sites=&props=&ids=Q1%7CQ42%7CQ12345",
+            "https://www.wikidata.org/w/api.php?format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1%7CQ42%7CQ12345",
             WikidataActionApiUrl.checkEntityExistsUrl(Arrays.asList("Q1", "Q42", "Q12345")).toString()
         );
         assertEquals(
-            "https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&sites=&props=&ids=Q1%7CQ13%7CQ24%7CQ20150617%7CQ42%7CQ12345",
+            "https://www.wikidata.org/w/api.php?format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1%7CQ13%7CQ24%7CQ20150617%7CQ42%7CQ12345",
             WikidataActionApiUrl.checkEntityExistsUrl(Arrays.asList("Q1", "Q13", "Q24", "Q20150617", "Q42", "Q12345")).toString()
         );
     }
