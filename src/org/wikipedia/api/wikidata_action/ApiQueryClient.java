@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.api.wikidata_action;
 
+import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.net.URL;
 
@@ -13,6 +14,7 @@ import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.bugreport.BugReport;
+import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.InvalidApiQueryException;
 
 public final class ApiQueryClient {
@@ -39,7 +41,7 @@ public final class ApiQueryClient {
         try {
             response = HttpClient.create(url)
                 .setAccept("application/json")
-                .setHeader("User-Agent", "JOSM-wikipedia (). Report issues at https://josm.openstreetmap.de/newticket?component=Plugin%20wikipedia&priority=major&keywords=api%20wikidata%20ActionAPI")
+                .setHeader("User-Agent", String.format("JOSM-wikipedia (%s). Report issues at https://josm.openstreetmap.de/newticket?component=Plugin%%20wikipedia&priority=major&keywords=api%%20wikidata%%20ActionAPI", WikipediaPlugin.getVersionInfo()))
                 .connect();
         } catch (IOException e) {
             // i18n: {0} is the name of the exception, {1} is the message of the exception. Typical values would be: {0}="UnknownHostException" {1}="www.wikidata.org"
@@ -53,9 +55,11 @@ public final class ApiQueryClient {
         if (errorHeader != null) {
             Logging.error(I18n.tr("The Wikidata Action API reported a query failure for URL {0} ({1}). This is a programming error, please report to the Wikipedia plugin.", url, errorHeader));
 
-            BugReport report = new BugReport(BugReport.intercept(new InvalidApiQueryException(url)));
-            BugReportDialog dialog = new BugReportDialog(report);
-            dialog.setVisible(true);
+            if (!GraphicsEnvironment.isHeadless()) {
+                BugReport report = new BugReport(BugReport.intercept(new InvalidApiQueryException(url)));
+                BugReportDialog dialog = new BugReportDialog(report);
+                dialog.setVisible(true);
+            }
             throw new IOException(I18n.tr("The Wikidata Action API reported that the query was invalid! Please report as bug to the Wikipedia plugin!"));
         }
         try {

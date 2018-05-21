@@ -31,7 +31,7 @@ public final class WikipediaPlugin extends Plugin {
 
     public WikipediaPlugin(PluginInformation info) {
         super(info);
-        versionInfo = String.format("JOSM/%s & JOSM-wikipedia/%s", Version.getInstance().getVersionString(), info.version);
+        versionInfo = String.format("JOSM/%s JOSM-wikipedia/%s", Version.getInstance().getVersionString(), info.version);
         name = info.name;
         new WikipediaCopyTemplate();
         JMenu dataMenu = MainApplication.getMenu().dataMenu;
