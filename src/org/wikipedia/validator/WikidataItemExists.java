@@ -29,7 +29,7 @@ import org.wikipedia.tools.RegexUtil;
  */
 public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists.TestCompanion> {
 
-    private static Notification NETWORK_FAILED_NOTIFICATION = new Notification(
+    private static final Notification NETWORK_FAILED_NOTIFICATION = new Notification(
         I18n.tr("Could not validate all wikidata=* tags over the internet.") + "\n" + SEE_OTHER_CATEGORY_VALIDATOR_ERRORS
     ).setIcon(WikipediaPlugin.LOGO);
 
@@ -71,29 +71,29 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
      * @param entityQueryResult the result from the Wikidata Action API
      */
     private void check(final TestCompanion tc, final CheckEntityExistsResult entityQueryResult) {
-            final CheckEntityExistsResult.Entity entity = entityQueryResult.getEntities().get(tc.wikidataId);
-            if (entity == null) {
-                errors.add(
-                    AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
-                        .primitives(tc.getPrimitive())
-                        .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata Action API did not respond with all requested entities!"), I18n.marktr("Item {0} is missing"), tc.wikidataId)
-                        .build());
-            } else if (!tc.wikidataId.equals(entity.getId())) {
-                errors.add(
-                    AllValidationTests.WIKIDATA_ITEM_IS_REDIRECT.getBuilder(this)
-                        .primitives(tc.getPrimitive())
-                        .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata item is a redirect", tc.wikidataId, entity.getId()), I18n.marktr("Item {0} redirects to {1}"), tc.wikidataId, entity.getId())
-                        .fix(() -> new ChangePropertyCommand(tc.getPrimitive(), "wikidata", entity.getId()))
-                        .build()
-                );
-            } else if (entity.getType() == null) {
-                errors.add(
-                    AllValidationTests.WIKIDATA_ITEM_DOES_NOT_EXIST.getBuilder(this)
-                        .primitives(tc.getPrimitive())
-                        .message(I18n.tr("The Wikidata item does not exist! Replace the wikidata=* tag with an existing Wikidata item or remove the Wikidata tag."), I18n.marktr("Item {0} does not exist!"), tc.wikidataId)
-                        .build()
-                );
-            }
+        final CheckEntityExistsResult.Entity entity = entityQueryResult.getEntities().get(tc.wikidataId);
+        if (entityQueryResult.getMissingEntities().stream().anyMatch(it -> tc.wikidataId.equals(it.getId()))) {
+            errors.add(
+                AllValidationTests.WIKIDATA_ITEM_DOES_NOT_EXIST.getBuilder(this)
+                    .primitives(tc.getPrimitive())
+                    .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata item does not exist! Replace the wikidata=* tag with an existing Wikidata item or remove the Wikidata tag."), I18n.marktr("Item {0} does not exist!"), tc.wikidataId)
+                    .build()
+            );
+        } else if (entity == null) {
+            errors.add(
+                AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
+                    .primitives(tc.getPrimitive())
+                    .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata Action API did not respond with all requested entities!"), I18n.marktr("Item {0} is missing"), tc.wikidataId)
+                    .build());
+        } else if (!tc.wikidataId.equals(entity.getId())) {
+            errors.add(
+                AllValidationTests.WIKIDATA_ITEM_IS_REDIRECT.getBuilder(this)
+                    .primitives(tc.getPrimitive())
+                    .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata item is a redirect", tc.wikidataId, entity.getId()), I18n.marktr("Item {0} redirects to {1}"), tc.wikidataId, entity.getId())
+                    .fix(() -> new ChangePropertyCommand(tc.getPrimitive(), "wikidata", entity.getId()))
+                    .build()
+            );
+        }
     }
 
     @Override
