@@ -6,8 +6,8 @@ import static org.wikipedia.validator.AllValidationTests.VALIDATOR_MESSAGE_MARKE
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,6 +19,7 @@ import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.wikidata_action.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiUrl;
+import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
 import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.RegexUtil;
@@ -65,27 +66,31 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
 
     private void checkBatch(final String language, final List<TestCompanion> primitiveBatch) {
         try {
-            ApiQueryClient.query(
-                WikidataActionApiUrl.getEntityForSitelink(language + "wiki", primitiveBatch.stream().map(it -> it.title).collect(Collectors.toList())),
-                SerializationSchema.WBGETENTITIES
-            ).getEntities().values().stream()
-                .flatMap(entity -> entity.getSitelinks().isPresent() ? entity.getSitelinks().get().stream().map(it -> Pair.create(it, entity.getId())) : Stream.empty())
-                .forEach(sitelinkAndQId -> {
-                    Optional<TestCompanion> curTestCompanion = primitiveBatch.stream().filter(it -> sitelinkAndQId.a.getTitle().equals(it.title)).findAny();
-                    if (curTestCompanion.isPresent()) {
-                        if (!curTestCompanion.get().qId.equals(sitelinkAndQId.b)) {
-                            errors.add(AllValidationTests.WIKIDATA_ITEM_NOT_MATCHING_WIKIPEDIA.getBuilder(this)
-                                .primitives(curTestCompanion.get().getPrimitive())
-                                .message(
-                                    VALIDATOR_MESSAGE_MARKER + I18n.tr("Wikidata item and Wikipedia article do not match!"),
-                                    I18n.marktr("Wikidata item {0} is not associated with Wikipedia article {1} ({2})"),
-                                    curTestCompanion.get().qId,
-                                    sitelinkAndQId.a.getTitle(),
-                                    sitelinkAndQId.b
-                                ).build());
-                        }
-                    }
-                });
+            final Map<String, CheckEntityExistsResult.Entity.Sitelink> sitelinks =
+                ApiQueryClient.query(
+                    WikidataActionApiUrl.getEntityForSitelink(language + "wiki", primitiveBatch.stream().map(it -> it.title).collect(Collectors.toList())),
+                    SerializationSchema.WBGETENTITIES
+                ).getEntities().values().stream()
+                    .flatMap(entity -> entity.getSitelinks().isPresent() ? entity.getSitelinks().get().stream().map(it -> Pair.create(entity.getId(), it)) : Stream.empty())
+                    .collect(Collectors.toMap(it -> it.a, it -> it.b));
+            primitiveBatch.forEach(tc -> {
+                if (!sitelinks.containsKey(tc.qId) || !tc.title.equals(sitelinks.get(tc.qId).getTitle())) {
+                    errors.add(AllValidationTests.WIKIDATA_ITEM_NOT_MATCHING_WIKIPEDIA.getBuilder(this)
+                        .primitives(tc.getPrimitive())
+                        .message(
+                            VALIDATOR_MESSAGE_MARKER + I18n.tr("Wikidata item and Wikipedia article do not match!"),
+                            I18n.marktr("Wikidata item {0} is not associated with Wikipedia article {1} ({2})"),
+                            tc.qId,
+                            tc.language + ':' + tc.title,
+                            sitelinks.entrySet().stream()
+                                .filter(it -> tc.title.equals(it.getValue().getTitle()))
+                                .findAny()
+                                .map(Map.Entry::getKey)
+                                .orElse(I18n.tr("has no Q-ID"))
+                        ).build()
+                    );
+                }
+            });
         } catch (IOException e) {
             errors.add(
                 AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
