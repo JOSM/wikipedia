@@ -21,6 +21,7 @@ import org.wikipedia.gui.WikidataItemSearchDialog;
 import org.wikipedia.gui.WikidataTagCellRenderer;
 import org.wikipedia.gui.WikipediaToggleDialog;
 import org.wikipedia.validator.WikidataItemExists;
+import org.wikipedia.validator.WikipediaAgainstWikidata;
 
 public final class WikipediaPlugin extends Plugin {
 
@@ -42,6 +43,7 @@ public final class WikipediaPlugin extends Plugin {
         DownloadDialog.addDownloadSource(new SophoxDownloadReader());
 
         OsmValidator.addTest(WikidataItemExists.class);
+        OsmValidator.addTest(WikipediaAgainstWikidata.class);
     }
 
     public static String getVersionInfo() {

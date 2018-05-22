@@ -23,6 +23,7 @@ import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
 import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.tools.RegexUtil;
 
+// TODO: Make this a subclass of BatchProcessedTagTest!
 /**
  * Checks if for the wikidata=* tag on an {@link OsmPrimitive} a Wikidata item really exists.
  * This check requires a working internet connection, because it queries the Wikidata Action API.
