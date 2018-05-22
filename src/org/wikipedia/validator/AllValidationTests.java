@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.validator;
 
+import org.openstreetmap.josm.data.preferences.sources.ValidatorPrefHelper;
 import org.openstreetmap.josm.data.validation.Severity;
 import org.openstreetmap.josm.data.validation.Test;
 import org.openstreetmap.josm.data.validation.TestError;
@@ -16,6 +17,12 @@ class AllValidationTests {
 
     // i18n: Prefix for the validator messages. Note the space at the end!
     static final String VALIDATOR_MESSAGE_MARKER = I18n.tr("[Wiki] ");
+
+    static final String SEE_OTHER_CATEGORY_VALIDATOR_ERRORS = (
+        ValidatorPrefHelper.PREF_OTHER.get()
+        ? I18n.tr("See the validator messages of the category ''Other'' for more details.")
+        : I18n.tr("Turn on the informational level validator messages in the preferences to see more details.")
+    );
 
     private AllValidationTests() {
         // Private constructor to avoid instantiation

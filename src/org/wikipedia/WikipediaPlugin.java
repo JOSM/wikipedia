@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 
 import org.openstreetmap.josm.data.Version;
@@ -12,6 +13,7 @@ import org.openstreetmap.josm.gui.download.DownloadDialog;
 import org.openstreetmap.josm.gui.preferences.PreferenceSetting;
 import org.openstreetmap.josm.plugins.Plugin;
 import org.openstreetmap.josm.plugins.PluginInformation;
+import org.openstreetmap.josm.tools.ImageProvider;
 import org.wikipedia.actions.FetchWikidataAction;
 import org.wikipedia.actions.WikipediaAddNamesAction;
 import org.wikipedia.actions.WikipediaCopyTemplate;
@@ -24,6 +26,7 @@ import org.wikipedia.validator.WikidataItemExists;
 import org.wikipedia.validator.WikipediaAgainstWikidata;
 
 public final class WikipediaPlugin extends Plugin {
+    public static final ImageIcon LOGO = ImageProvider.get("dialogs/wikipedia");
 
     private static String name;
     private static String versionInfo;

@@ -1,6 +1,9 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.validator;
 
+import static org.wikipedia.validator.AllValidationTests.SEE_OTHER_CATEGORY_VALIDATOR_ERRORS;
+import static org.wikipedia.validator.AllValidationTests.VALIDATOR_MESSAGE_MARKER;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -10,11 +13,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
-import org.openstreetmap.josm.data.preferences.sources.ValidatorPrefHelper;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.tools.I18n;
-import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Pair;
+import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.wikidata_action.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiUrl;
 import org.wikipedia.api.wikidata_action.json.SerializationSchema;
@@ -24,12 +26,9 @@ import org.wikipedia.tools.RegexUtil;
 public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAgainstWikidata.TestCompanion> {
 
     private static final Notification NETWORK_FAILED_NOTIFICATION = new Notification(
-        I18n.tr("Could not check for all wikipedia=* tags if they match the wikidata=* tag.") + "\n" +
-            (ValidatorPrefHelper.PREF_OTHER.get()
-                ? I18n.tr("See the validator messages of the category ''Other'' for more details.")
-                : I18n.tr("Turn on the informational level validator messages in the preferences to see more details.")
-            )
-    ).setIcon(ImageProvider.get("dialogs/wikipedia"));
+        I18n.tr("Could not check for all wikipedia=* tags if they match the wikidata=* tag.") +
+        "\n" + SEE_OTHER_CATEGORY_VALIDATOR_ERRORS
+    ).setIcon(WikipediaPlugin.LOGO);
 
     public WikipediaAgainstWikidata() {
         super("Check wikipedia=* is interwiki link of wikidata=*", "make sure that the wikipedia=* article is connected to the wikidata=* item");
@@ -78,7 +77,7 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
                             errors.add(AllValidationTests.WIKIDATA_ITEM_NOT_MATCHING_WIKIPEDIA.getBuilder(this)
                                 .primitives(curTestCompanion.get().getPrimitive())
                                 .message(
-                                    AllValidationTests.VALIDATOR_MESSAGE_MARKER + I18n.tr("Wikidata item and Wikipedia article do not match!"),
+                                    VALIDATOR_MESSAGE_MARKER + I18n.tr("Wikidata item and Wikipedia article do not match!"),
                                     I18n.marktr("Wikidata item {0} is not associated with Wikipedia article {1} ({2})"),
                                     curTestCompanion.get().qId,
                                     sitelinkAndQId.a.getTitle(),
@@ -91,7 +90,7 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
             errors.add(
                 AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
                     .primitives(primitiveBatch.stream().map(BatchProcessedTagTest.TestCompanion::getPrimitive).collect(Collectors.toList()))
-                    .message(AllValidationTests.VALIDATOR_MESSAGE_MARKER + e.getMessage())
+                    .message(VALIDATOR_MESSAGE_MARKER + e.getMessage())
                     .build()
             );
             finalNotification = NETWORK_FAILED_NOTIFICATION;

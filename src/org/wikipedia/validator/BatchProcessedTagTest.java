@@ -3,6 +3,7 @@ package org.wikipedia.validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -71,7 +72,7 @@ public abstract class BatchProcessedTagTest<T extends BatchProcessedTagTest.Test
         private final OsmPrimitive primitive;
 
         TestCompanion(final OsmPrimitive primitive) {
-            this.primitive = primitive;
+            this.primitive = Objects.requireNonNull(primitive);
         }
 
         final OsmPrimitive getPrimitive() {
