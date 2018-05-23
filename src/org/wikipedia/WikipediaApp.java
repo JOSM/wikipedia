@@ -18,12 +18,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,8 +37,13 @@ import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.wikipedia.api.wikidata_action.ApiQueryClient;
+import org.wikipedia.api.wikidata_action.WikidataActionApiUrl;
+import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
+import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.RegexUtil;
 import org.wikipedia.tools.XPath;
 
@@ -394,47 +399,43 @@ public final class WikipediaApp {
     }
 
     static List<WikidataEntry> getLabelForWikidata(List<? extends WikipediaEntry> entries, Locale locale, String ... preferredLanguage) {
-        if (entries.size() > 50) {
-            return partitionList(entries, 50).stream()
-                    .flatMap(chunk -> getLabelForWikidata(chunk, locale, preferredLanguage).stream())
-                    .collect(Collectors.toList());
-        } else if (entries.isEmpty()) {
-            return Collections.emptyList();
+        final Collection<String> languages = new ArrayList<>();
+        if (locale != null) {
+            languages.add(getMediawikiLocale(locale));
+            languages.add(getMediawikiLocale(new Locale(locale.getLanguage())));
         }
-        try {
-            final String url = "https://www.wikidata.org/w/api.php" +
+        languages.addAll(Arrays.asList(preferredLanguage));
+        languages.add("en");
+        languages.add(null);
+
+        final List<WikidataEntry> result = new ArrayList<>(entries.size());
+        ListUtil.processInBatches(entries, 50, batch -> {
+            try {
+                final String url = "https://www.wikidata.org/w/api.php" +
                     "?action=wbgetentities" +
                     "&props=labels|descriptions" +
                     "&ids=" + entries.stream().map(x -> x.article).collect(Collectors.joining("|")) +
                     "&format=xml";
-            final Collection<String> languages = new ArrayList<>();
-            if (locale != null) {
-                languages.add(getMediawikiLocale(locale));
-                languages.add(getMediawikiLocale(new Locale(locale.getLanguage())));
-            }
-            languages.addAll(Arrays.asList(preferredLanguage));
-            languages.add("en");
-            languages.add(null);
-            final List<WikidataEntry> r = new ArrayList<>(entries.size());
-            try (final InputStream in = connect(url).getContent()) {
-                final Document xml = newDocumentBuilder().parse(in);
-                for (final WikipediaEntry entry : entries) {
-                    final Node entity = X_PATH.evaluateNode("//entity[@id='" + entry.article + "']", xml);
-                    if (entity == null) {
-                        continue;
-                    }
-                    r.add(new WikidataEntry(
+                try (InputStream in = connect(url).getContent()) {
+                    final Document xml = newDocumentBuilder().parse(in);
+                    for (final WikipediaEntry entry : entries) {
+                        final Node entity = X_PATH.evaluateNode("//entity[@id='" + entry.article + "']", xml);
+                        if (entity == null) {
+                            continue;
+                        }
+                        result.add(new WikidataEntry(
                             entry.article,
                             getFirstField(languages, "label", entity),
                             entry.coordinate,
                             getFirstField(languages, "description", entity)
-                    ));
+                        ));
+                    }
                 }
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
-            return r;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+        });
+        return result;
     }
 
     private static String getFirstField(Collection<String> languages, String field, Node entity) {

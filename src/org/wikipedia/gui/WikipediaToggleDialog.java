@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -51,6 +50,7 @@ import org.openstreetmap.josm.tools.OpenBrowser;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.actions.FetchWikidataAction;
 import org.wikipedia.data.WikipediaEntry;
+import org.wikipedia.tools.ListUtil;
 
 public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerChangeListener, DataSetListenerAdapter.Listener {
 
@@ -187,8 +187,8 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
             final List<WikipediaEntry> entries = getEntries();
             entries.sort(null);
             publish(entries.toArray(new WikipediaEntry[entries.size()]));
-            WikipediaApp.partitionList(entries, 20).forEach(chunk -> {
-                WikipediaApp.forLanguage(chunk.get(0).lang).updateWIWOSMStatus(chunk);
+            ListUtil.processInBatches(entries, 20, batch -> {
+                WikipediaApp.forLanguage(batch.get(0).lang).updateWIWOSMStatus(batch);
                 list.repaint();
             });
             return null;

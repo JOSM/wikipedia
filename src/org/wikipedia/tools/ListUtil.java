@@ -10,6 +10,8 @@ public final class ListUtil {
         // Private constructor to avoid instantiation
     }
 
+    private static final BiConsumer<Integer, Integer> EMPTY_BICONSUMER = (a, b) -> {};
+
     /**
      * Splits the given list {@code fullList} into batches of a size of {@code maxBatchSize} or less and each batch is
      * then consumed by the given {@link Consumer} {@code processBatch}.
@@ -25,6 +27,10 @@ public final class ListUtil {
             updateProgress.accept(batchIndex, numBatches);
             processBatch.accept(fullList.subList(batchIndex * maxBatchSize, Math.min(numPrimitives, (batchIndex + 1) * maxBatchSize)));
         }
+    }
+
+    public static <T> void processInBatches(final List<T> fullList, int maxBatchSize, final Consumer<List<T>> processBatch) {
+        processInBatches(fullList, maxBatchSize, processBatch, EMPTY_BICONSUMER);
     }
 
 
