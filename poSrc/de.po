@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.0-15-gd945333\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-05-22 23:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: German (https://www.transifex.com/josm/teams/2544/de/)\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, java-format
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} Objekte, verarbeite Teil {1} von {2})"
 
 msgid "Add Tag"
 msgstr "Merkmal hinzufügen"
@@ -74,6 +78,16 @@ msgstr ""
 #, java-format
 msgid "Copy {0} template"
 msgstr "{0}-Vorlage kopieren"
+
+msgid ""
+"Could not check for all wikipedia=* tags if they match the wikidata=* tag."
+msgstr ""
+"Nicht für alle wikipedia=* Tags konnte geprüft werden, ob sie zum wikidata=*"
+" Tag passen."
+
+msgid "Could not validate all wikidata=* tags over the internet."
+msgstr ""
+"Nicht alle wikidata=* Tags konnten über das Internet validiert werden."
 
 msgid "Delete selected snippet"
 msgstr "Ausgewählten Schnipsel entfernen"
@@ -147,11 +161,33 @@ msgstr ""
 "Bildungseinrichtungen finden, die mindestens 2km und maximal 3km vom "
 "Mittelpunkt der Auswahl entfernt sind"
 
+msgid "Invalid Q-ID! Cannot exist on Wikidata."
+msgstr "Ungültige Q-ID! Kann nicht auf Wikidata existieren."
+
+#, java-format
+msgid "Item {0} does not exist!"
+msgstr "Eintrag {0} existiert nicht!"
+
+#, java-format
+msgid "Item {0} is missing"
+msgstr "Eintrag {0} fehlt"
+
+#, java-format
+msgid "Item {0} redirects to {1}"
+msgstr "Eintrag {0} leitet auf {1} weiter"
+
 msgid "Language"
 msgstr "Sprache"
 
 msgid "Load category"
 msgstr "Kategorie laden"
+
+msgid ""
+"Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
+"exists"
+msgstr ""
+"Stelle sicher, dass der Wikidata-Eintrag für die Q-ID im wikidata=* Tag "
+"wirklich existiert"
 
 #, java-format
 msgid "No Wikidata ID found for: {0}"
@@ -211,8 +247,65 @@ msgstr "Zeige/Verstecke die Sophox Schnipsel-Liste"
 msgid "Target key: "
 msgstr "Zielschlüssel: "
 
+msgid "The JSON response from the Wikidata Action API can't be read!"
+msgstr ""
+"Die JSON-Antwort vom Wikidata Action API kann nicht eingelesen werden!"
+
+msgid "The Wikidata Action API did not respond with all requested entities!"
+msgstr ""
+"Die Wikidata Action API hat nicht alle Objekte zurückgeliefert, die "
+"angefragt wurden!"
+
+#, java-format
+msgid ""
+"The Wikidata Action API reported a query failure for URL {0} ({1}). This is "
+"a programming error, please report to the Wikipedia plugin."
+msgstr ""
+"Das Wikidata Action API hat eine fehlgeschlagene Anfrage an den URL {0} "
+"gemeldet ({1}). Das ist ein Programmierfehler, bitte melden Sie den Fehler "
+"an das Wikidata-Plugin."
+
+msgid "The Wikidata Action API reports a failed query!"
+msgstr "Das Wikidata Action API meldet eine fehlgeschlagene Anfrage!"
+
+#. i18n: {0} is the response code, {1} is the response message. Typical values
+#. would be: {0}=404 {1}="Not Found"
+#, java-format
+msgid ""
+"The Wikidata Action API responded with an unexpected response code: {0} {1}"
+msgstr ""
+"Die Wikidata Action API hat mit einem unerwarteten Antwortcode geantwortet: "
+"{0} {1}"
+
+msgid ""
+"The Wikidata item does not exist! Replace the wikidata=* tag with an "
+"existing Wikidata item or remove the Wikidata tag."
+msgstr ""
+"Der Wikidata-Eintrag existiert nicht! Ersetze das wikidata=* Tag mit einem "
+"existierenden Wikidata-Eintrag oder entferne das Wikidata-Tag."
+
+msgid "The Wikidata item is a redirect"
+msgstr "Der Wikidata-Eintrag ist eine Weiterleitung"
+
+#, java-format
+msgid ""
+"When reading the JSON response from the Wikidata Action API, an error "
+"occured! ({0}: {1})"
+msgstr ""
+"Beim Lesen der JSON-Antwort von der Wikidata Action API ist ein Fehler "
+"aufgetreten! ({0}: {1})"
+
 msgid "Wikidata"
 msgstr "Wikidata"
+
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "Der Wikidata-Eintrag und der Wikipedia-Artikel passen nicht zusammen!"
+
+#, java-format
+msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
+msgstr ""
+"Der Wikidata-Eintrag {0} ist nicht mit dem Wikipedia-Artikel {1} ({2}) "
+"verknüpft"
 
 msgid "Wikidata+OSM server"
 msgstr "Wikidata+OSM Server"
@@ -226,6 +319,10 @@ msgstr "Ihre gespeicherten Abfragen:"
 msgid "Zoom to selection"
 msgstr "Auf Auswahl zoomen"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
+msgid "[Wiki] "
+msgstr "[Wiki] "
+
 msgid "clipboard"
 msgstr "Zwischenablage"
 
@@ -236,9 +333,16 @@ msgstr "Koordinaten"
 msgid "help"
 msgstr "Hilfe"
 
+msgid "wikidata=* item exists"
+msgstr "Der Eintrag für wikidata=* existiert"
+
 #, java-format
 msgid "{0} (malformed site URL)"
 msgstr "{0} (ungültiger Website-URL)"
+
+#, java-format
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} ist keine gültige Wikidata-ID"
 
 #. Plugin description for project
 msgid ""

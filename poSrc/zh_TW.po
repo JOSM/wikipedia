@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.0-15-gd945333\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-05-22 23:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/josm/teams/2544/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -148,6 +148,9 @@ msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
 msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
 msgstr[0] "自 {2} 以 ''{3}'' 這個值去覆蓋 ''{0}'' 標籤 {1} 嗎？"
 
+msgid "Overwrite key"
+msgstr "覆寫鍵值"
+
 msgid "Pastes Wikipedia articles from the system clipboard"
 msgstr "從系統剪貼簿貼上維基百科條目"
 
@@ -189,6 +192,10 @@ msgstr "你儲存的檢索："
 
 msgid "Zoom to selection"
 msgstr "縮放至選擇區域"
+
+#. i18n: Prefix for the validator messages. Note the space at the end!
+msgid "[Wiki] "
+msgstr "[Wiki] "
 
 msgid "clipboard"
 msgstr "剪貼簿"
