@@ -13,7 +13,6 @@ import java.awt.event.FocusListener;
 import java.util.Collection;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -27,7 +26,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicArrowButton;
 
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.downloadtasks.DownloadOsmTask;
 import org.openstreetmap.josm.actions.downloadtasks.PostDownloadHandler;
 import org.openstreetmap.josm.data.Bounds;
@@ -89,9 +87,13 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
         private static final String HELP_PAGE = "https://wiki.openstreetmap.org/wiki/Wikidata%2BOSM_SPARQL_query_service";
         private static final String SIMPLE_NAME = "sophoxdownloadpanel";
         private static final AbstractProperty<Integer> PANEL_SIZE_PROPERTY =
-                new IntegerProperty(TAB_SPLIT_NAMESPACE + SIMPLE_NAME, 150).cached();
+            new IntegerProperty(TAB_SPLIT_NAMESPACE + SIMPLE_NAME, 150).cached();
         private static final BooleanProperty SOPHOX_QUERY_LIST_OPENED =
-                new BooleanProperty("download.sophox.query-list.opened", false);
+            new BooleanProperty("download.sophox.query-list.opened", false);
+        private static final BooleanProperty SOPHOX_DOWNLOADPRIMITIVE_REFERRERS =
+            new BooleanProperty("sophox.downloadprimitive.referrers", true);
+        private static final BooleanProperty SOPHOX_DOWNLOADPRIMITIVE_FULL =
+            new BooleanProperty("sophox.downloadprimitive.full", true);
         private static final String ACTION_IMG_SUBDIR = "dialogs";
 
         private final JosmTextArea sophoxQuery;
@@ -167,20 +169,16 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
                 }
             });
 
-            // TODO: Once new core is widely avialable, replace:
-            //   Main.pref.getBoolean --> Config.getPref().getBoolean
-            //   Main.pref.put --> Config.getPref().putBoolean
-
             referrers = new JCheckBox(tr("Download referrers (parent relations)"));
             referrers.setToolTipText(tr("Select if the referrers of the object should be downloaded as well, i.e.,"
                     + "parent relations and for nodes, additionally, parent ways"));
-            referrers.setSelected(Main.pref.getBoolean("sophox.downloadprimitive.referrers", true));
-            referrers.addActionListener(e -> Main.pref.putBoolean("sophox.downloadprimitive.referrers", referrers.isSelected()));
+            referrers.setSelected(SOPHOX_DOWNLOADPRIMITIVE_REFERRERS.get());
+            referrers.addActionListener(e -> SOPHOX_DOWNLOADPRIMITIVE_REFERRERS.put(referrers.isSelected()));
 
             fullRel = new JCheckBox(tr("Download relation members"));
             fullRel.setToolTipText(tr("Select if the members of a relation should be downloaded as well"));
-            fullRel.setSelected(Main.pref.getBoolean("sophox.downloadprimitive.full", true));
-            fullRel.addActionListener(e -> Main.pref.putBoolean("sophox.downloadprimitive.full", fullRel.isSelected()));
+            fullRel.setSelected(SOPHOX_DOWNLOADPRIMITIVE_FULL.get());
+            fullRel.addActionListener(e -> SOPHOX_DOWNLOADPRIMITIVE_FULL.put(fullRel.isSelected()));
 
             // https://stackoverflow.com/questions/527719/how-to-add-hyperlink-in-jlabel
             JButton helpLink = new JButton();
