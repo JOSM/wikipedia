@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
@@ -71,7 +70,7 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
                     WikidataActionApiUrl.getEntityForSitelink(language + "wiki", primitiveBatch.stream().map(it -> it.title).collect(Collectors.toList())),
                     SerializationSchema.WBGETENTITIES
                 ).getEntities().values().stream()
-                    .flatMap(entity -> entity.getSitelinks().isPresent() ? entity.getSitelinks().get().stream().map(it -> Pair.create(entity.getId(), it)) : Stream.empty())
+                    .flatMap(entity -> entity.getSitelinks().stream().map(it -> Pair.create(entity.getId(), it)))
                     .collect(Collectors.toMap(it -> it.a, it -> it.b));
             primitiveBatch.forEach(tc -> {
                 if (!sitelinks.containsKey(tc.qId) || !tc.title.equals(sitelinks.get(tc.qId).getTitle())) {

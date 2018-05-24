@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,12 +27,9 @@ public final class CheckEntityExistsResult {
     @JsonCreator
     public CheckEntityExistsResult(@JsonProperty("success") final int success, @JsonProperty("entities") final Map<String, AbstractEntity> entities) {
         this.success = success;
-        entities.entrySet().stream().filter(it -> it.getValue() instanceof Entity).forEach(it -> {
-            this.entities.put(it.getKey(), (Entity) it.getValue());
-        });
-        entities.entrySet().stream().filter(it -> it.getValue() instanceof MissingEntity).forEach(it -> {
-            this.missingEntities.add((MissingEntity) it.getValue());
-        });
+        for (final Map.Entry<String, AbstractEntity> entry : entities.entrySet()) {
+            entry.getValue().addTo(entry.getKey(), this);
+        }
     }
 
     /**
@@ -63,6 +59,14 @@ public final class CheckEntityExistsResult {
      * Supertype for {@link MissingEntity} and {@link Entity}
      */
     interface AbstractEntity {
+        /**
+         * Adds this entity to the entity lists/maps of {@link CheckEntityExistsResult}, depending on the implementing
+         * class it can vary to which list or map the entity is added.
+         * @param key the key to which the entity is associated in the JSON
+         * @param result the object to which the entity should be added
+         */
+        void addTo(final String key, CheckEntityExistsResult result);
+
         class Deserializer extends StdDeserializer<AbstractEntity> {
             private final ObjectMapper mapper;
             Deserializer(final ObjectMapper mapper) {
@@ -71,7 +75,9 @@ public final class CheckEntityExistsResult {
             }
 
             @Override
-            public AbstractEntity deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            public AbstractEntity deserialize(final JsonParser p, final DeserializationContext ctxt)
+                throws IOException, JsonProcessingException
+            {
                 final JsonNode node = p.getCodec().readTree(p);
                 if (node.has("missing")) {
                     return mapper.treeToValue(node, MissingEntity.class);
@@ -86,7 +92,11 @@ public final class CheckEntityExistsResult {
         private final String site;
         private final String title;
         @JsonCreator
-        public MissingEntity(@JsonProperty("id") final String id, @JsonProperty("site") final String site, @JsonProperty("title") final String title) {
+        public MissingEntity(
+            @JsonProperty("id") final String id,
+            @JsonProperty("site") final String site,
+            @JsonProperty("title") final String title
+        ) {
             this.id = id;
             this.site = site;
             this.title = title;
@@ -103,12 +113,17 @@ public final class CheckEntityExistsResult {
         public String getTitle() {
             return title;
         }
+
+        @Override
+        public void addTo(final String key, final CheckEntityExistsResult result) {
+            result.missingEntities.add(this);
+        }
     }
 
     public static final class Entity implements AbstractEntity {
         private final String id;
         private final String type;
-        private final Map<String, Sitelink> sitelinks;
+        private final Map<String, Sitelink> sitelinks = new HashMap<>();
 
         @JsonCreator
         public Entity(
@@ -118,10 +133,8 @@ public final class CheckEntityExistsResult {
         ) {
             this.id = id;
             this.type = type;
-            if (sitelinks == null) {
-                this.sitelinks = null;
-            } else {
-                this.sitelinks = new HashMap<>(sitelinks);
+            if (sitelinks != null) {
+                this.sitelinks.putAll(sitelinks);
             }
         }
 
@@ -133,11 +146,13 @@ public final class CheckEntityExistsResult {
             return type;
         }
 
-        public Optional<Collection<Sitelink>> getSitelinks() {
-            if (sitelinks == null) {
-                return Optional.empty();
-            }
-            return Optional.of(Collections.unmodifiableCollection(sitelinks.values()));
+        public Collection<Sitelink> getSitelinks() {
+            return Collections.unmodifiableCollection(sitelinks.values());
+        }
+
+        @Override
+        public void addTo(final String key, final CheckEntityExistsResult result) {
+            result.entities.put(key, this);
         }
 
         public static final class Sitelink {
