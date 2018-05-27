@@ -4,9 +4,8 @@ package org.wikipedia.api.wikidata_action;
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.net.URL;
-
+import java.nio.charset.StandardCharsets;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openstreetmap.josm.gui.bugreport.BugReportDialog;
@@ -19,31 +18,50 @@ import org.wikipedia.api.InvalidApiQueryException;
 import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 
 public final class ApiQueryClient {
-    private static final ObjectMapper JSON_OBJECT_MAPPER = new ObjectMapper();
-
-    static {
-        JSON_OBJECT_MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-    }
 
     private ApiQueryClient() {
         // Private constructor to avoid instantiation
     }
 
+    private static String getUserAgent() {
+        return String.format("JOSM-wikipedia (%s).", WikipediaPlugin.getVersionInfo()) +
+            "Report issues at https://josm.openstreetmap.de/newticket?component=Plugin%20wikipedia&priority=major&keywords=api%20wikidata%20ActionAPI";
+    }
+
+    public static <T> T query(final WikidataActionApiQuery<T> query) throws IOException {
+        return query(
+            HttpClient.create(query.getUrl(), "POST")
+                .setAccept("application/json")
+                .setHeader("Content-Type", "text/plain; charset=utf-8")
+                .setHeader("User-Agent", getUserAgent())
+                .setRequestBody(query.getQuery().getBytes(StandardCharsets.UTF_8)),
+            query.getUrl(),
+            query.getSchema().getSchemaClass(),
+            query.getSchema().getMapper()
+        );
+    }
+
     /**
      * Queries the given URL and converts the received JSON to the given class using the Jackson library
      * @param url the {@link URL} to query
-     * @param klass the class object of the desired type
+     * @param schema the {@link SerializationSchema} determining how to map from JSON to the desired type
      * @param <T> the type to which the JSON is deserialized
      * @return the deserialized object
      * @throws IOException if any error occurs while executing the query, with a translated message that can be shown to the user.
      */
     public static <T> T query(final URL url, final SerializationSchema<T> schema) throws IOException {
+        return query(
+            HttpClient.create(url).setAccept("application/json").setHeader("User-Agent", getUserAgent()),
+            url,
+            schema.getSchemaClass(),
+            schema.getMapper()
+        );
+    }
+
+    private static <T> T query(final HttpClient client, final URL url, final Class<T> resultClass, final ObjectMapper mapper) throws IOException {
         final HttpClient.Response response;
         try {
-            response = HttpClient.create(url)
-                .setAccept("application/json")
-                .setHeader("User-Agent", String.format("JOSM-wikipedia (%s). Report issues at https://josm.openstreetmap.de/newticket?component=Plugin%%20wikipedia&priority=major&keywords=api%%20wikidata%%20ActionAPI", WikipediaPlugin.getVersionInfo()))
-                .connect();
+            response = client.connect();
         } catch (IOException e) {
             // i18n: {0} is the name of the exception, {1} is the message of the exception. Typical values would be: {0}="UnknownHostException" {1}="www.wikidata.org"
             throw new IOException(I18n.tr("Could not connect to the Wikidata Action API, probably a network issue or the website is currently offline ({0}: {1})", e.getClass().getSimpleName(), e.getLocalizedMessage()), e);
@@ -64,10 +82,12 @@ public final class ApiQueryClient {
             throw new IOException(I18n.tr("The Wikidata Action API reported that the query was invalid! Please report as bug to the Wikipedia plugin!"));
         }
         try {
-            return schema.getMapper().readValue(response.getContent(), schema.getSchemaClass());
+            return mapper.readValue(response.getContent(), resultClass);
         } catch (JsonMappingException | JsonParseException e) {
+            Logging.warn(e);
             throw new IOException(I18n.tr("The JSON response from the Wikidata Action API can't be read!"), e);
         } catch (IOException e) {
+            Logging.warn(e);
             throw new IOException(I18n.tr("When reading the JSON response from the Wikidata Action API, an error occured! ({0}: {1})", e.getClass().getSimpleName(), e.getLocalizedMessage()), e);
         }
     }
