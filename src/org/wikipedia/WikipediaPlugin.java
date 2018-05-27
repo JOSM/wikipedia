@@ -3,7 +3,6 @@ package org.wikipedia;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
-
 import org.openstreetmap.josm.data.Version;
 import org.openstreetmap.josm.data.validation.OsmValidator;
 import org.openstreetmap.josm.gui.MainApplication;

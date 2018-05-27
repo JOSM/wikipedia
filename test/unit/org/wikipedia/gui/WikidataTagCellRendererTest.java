@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;

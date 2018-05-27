@@ -13,12 +13,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-
 import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.data.osm.DataSet;

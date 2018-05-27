@@ -22,7 +22,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingWorker;
-
 import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.search.SearchAction;
 import org.openstreetmap.josm.command.ChangePropertyCommand;
@@ -65,6 +64,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
                 new SideButton(new WikipediaSettingsAction(), false)));
         updateTitle();
     }
+
     /** A string describing the context (use-case) for determining the dialog title */
     String titleContext = null;
     static final StringProperty wikipediaLang = new StringProperty("wikipedia.lang", LanguageInfo.getJOSMLocaleCode().substring(0, 2));
@@ -367,7 +367,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
         final String language = getLanguageOfFirstItem();
         articles.clear();
         if (Main.main != null && MainApplication.getLayerManager().getEditDataSet() != null) {
-        	MainApplication.getLayerManager().getEditDataSet().allPrimitives().stream()
+            MainApplication.getLayerManager().getEditDataSet().allPrimitives().stream()
                     .flatMap(p -> WikipediaApp.forLanguage(language).getWikipediaArticles(p))
                     .forEach(articles::add);
         }

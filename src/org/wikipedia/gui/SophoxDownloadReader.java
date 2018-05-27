@@ -25,7 +25,6 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicArrowButton;
-
 import org.openstreetmap.josm.actions.downloadtasks.DownloadOsmTask;
 import org.openstreetmap.josm.actions.downloadtasks.PostDownloadHandler;
 import org.openstreetmap.josm.data.Bounds;
@@ -388,7 +387,9 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
             return this.downloadReferrers;
         }
 
-        boolean getDownloadFull() { return this.downloadFull; }
+        boolean getDownloadFull() {
+            return this.downloadFull;
+        }
 
         Consumer<Collection<Object>> getErrorReporter() {
             return this.errorReporter;

@@ -4,7 +4,6 @@ package org.wikipedia.data;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.tools.AlphanumComparator;

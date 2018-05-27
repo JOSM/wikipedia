@@ -2,7 +2,6 @@
 package org.wikipedia.gui;
 
 import java.util.concurrent.Executors;
-
 import org.openstreetmap.josm.gui.widgets.SearchTextResultListPanel;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.tools.Debouncer;

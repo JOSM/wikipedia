@@ -3,12 +3,11 @@ package org.wikipedia.api.wikidata_action;
 
 import java.net.URL;
 import java.util.Collection;
-
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.tools.RegexUtil;
 
-public class WikidataActionApiUrl {
+public final class WikidataActionApiUrl {
     private static final String BASE_URL = "https://www.wikidata.org/w/api.php?";
     private static final String FORMAT_PARAMS = "format=json&utf8=1&formatversion=1";
 
@@ -47,5 +46,4 @@ public class WikidataActionApiUrl {
             "&titles=", Utils.encodeUrl(String.join("|", titles))
         );
     }
-
 }

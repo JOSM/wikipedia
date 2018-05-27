@@ -3,7 +3,6 @@ package org.wikipedia.data;
 
 import java.util.Comparator;
 import java.util.Optional;
-
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.tools.AlphanumComparator;

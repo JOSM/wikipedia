@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
-
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.tools.I18n;

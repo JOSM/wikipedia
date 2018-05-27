@@ -9,7 +9,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
-
 import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.data.osm.DefaultNameFormatter;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
@@ -18,7 +17,7 @@ import org.openstreetmap.josm.gui.util.GuiHelper;
 import org.openstreetmap.josm.tools.AlphanumComparator;
 import org.openstreetmap.josm.tools.Utils;
 
-public class GuiUtils {
+public final class GuiUtils {
 
     private GuiUtils() {
         // Private constructor to avoid instantiation

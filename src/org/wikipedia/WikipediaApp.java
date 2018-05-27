@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
@@ -27,7 +26,6 @@ import java.util.stream.Stream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.datatransfer.ClipboardUtils;
@@ -37,10 +35,6 @@ import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.wikipedia.api.wikidata_action.ApiQueryClient;
-import org.wikipedia.api.wikidata_action.WikidataActionApiUrl;
-import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
-import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
@@ -160,7 +154,7 @@ public final class WikipediaApp {
                     + "&depth=" + depth
                     + "&cat=" + Utils.encodeUrl(category);
 
-            try (final BufferedReader reader = connect(url).getContentReader()) {
+            try (BufferedReader reader = connect(url).getContentReader()) {
                 return reader.lines()
                         .map(line -> new WikipediaEntry(wikipediaLang, line.trim().replace("_", " ")))
                         .collect(Collectors.toList());
@@ -188,7 +182,7 @@ public final class WikipediaApp {
             try {
                 final String articles = entries.stream().map(i -> i.article).collect(Collectors.joining(","));
                 final String requestBody = "articles=" + Utils.encodeUrl(articles);
-                try (final BufferedReader reader = HttpClient.create(new URL(url), "POST").setReasonForRequest("Wikipedia")
+                try (BufferedReader reader = HttpClient.create(new URL(url), "POST").setReasonForRequest("Wikipedia")
                                 .setHeader("Content-Type", "application/x-www-form-urlencoded")
                                 .setRequestBody(requestBody.getBytes(StandardCharsets.UTF_8))
                                 .connect().getContentReader()) {
@@ -311,7 +305,7 @@ public final class WikipediaApp {
                     "&format=xml" +
                     "&titles=" + articles.stream().map(Utils::encodeUrl).collect(Collectors.joining("|"));
             final Map<String, String> r = new TreeMap<>();
-            try (final InputStream in = connect(url).getContent()) {
+            try (InputStream in = connect(url).getContent()) {
                 final Document xml = newDocumentBuilder().parse(in);
                 X_PATH.evaluateNodes("//entity", xml).forEach(node -> {
                     final String wikidata = X_PATH.evaluateString("./@id", node);
@@ -340,7 +334,7 @@ public final class WikipediaApp {
                     "&redirects" +
                     "&format=xml" +
                     "&titles=" + articles.stream().map(Utils::encodeUrl).collect(Collectors.joining("|"));
-            try (final InputStream in = connect(url).getContent()) {
+            try (InputStream in = connect(url).getContent()) {
                 final Document xml = newDocumentBuilder().parse(in);
 
                 // Add both redirects and normalization results to the same map
@@ -377,7 +371,7 @@ public final class WikipediaApp {
                     + "&pslimit=50"
                     + "&pssearch=" + Utils.encodeUrl(prefix);
             // parse XML document
-            try (final InputStream in = connect(url).getContent()) {
+            try (InputStream in = connect(url).getContent()) {
                 final Document doc = newDocumentBuilder().parse(in);
                 return X_PATH.evaluateNodes("//ps/@title", doc).stream()
                         .map(Node::getNodeValue)
@@ -398,7 +392,7 @@ public final class WikipediaApp {
         }
     }
 
-    static List<WikidataEntry> getLabelForWikidata(List<? extends WikipediaEntry> entries, Locale locale, String ... preferredLanguage) {
+    static List<WikidataEntry> getLabelForWikidata(List<? extends WikipediaEntry> entries, Locale locale, String... preferredLanguage) {
         final Collection<String> languages = new ArrayList<>();
         if (locale != null) {
             languages.add(getMediawikiLocale(locale));
@@ -456,7 +450,7 @@ public final class WikipediaApp {
                     "&titles=" + Utils.encodeUrl(article) +
                     "&lllimit=500" +
                     "&format=xml";
-            try (final InputStream in = connect(url).getContent()) {
+            try (InputStream in = connect(url).getContent()) {
                 final Document xml = newDocumentBuilder().parse(in);
                 return X_PATH.evaluateNodes("//ll", xml).stream()
                         .map(node -> {
@@ -477,7 +471,7 @@ public final class WikipediaApp {
                     "&prop=coordinates" +
                     "&titles=" + Utils.encodeUrl(article) +
                     "&format=xml";
-            try (final InputStream in = connect(url).getContent()) {
+            try (InputStream in = connect(url).getContent()) {
                 final Document xml = newDocumentBuilder().parse(in);
                 final Node node = X_PATH.evaluateNode("//coordinates/co", xml);
                 if (node == null) {
@@ -511,8 +505,8 @@ public final class WikipediaApp {
         try {
             return DocumentBuilderFactory.newInstance().newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-        	Logging.warn("Cannot create DocumentBuilder");
-        	Logging.warn(e);
+            Logging.warn("Cannot create DocumentBuilder");
+            Logging.warn(e);
             throw new RuntimeException(e);
         }
     }
