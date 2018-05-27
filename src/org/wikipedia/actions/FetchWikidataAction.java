@@ -45,7 +45,7 @@ public class FetchWikidataAction extends JosmAction {
         if (ds == null) {
             return;
         }
-        MainApplication.worker.submit(new Fetcher(ds.getSelected()));
+        MainApplication.worker.execute(new Fetcher(ds.getSelected()));
     }
 
     public static class Fetcher extends PleaseWaitRunnable {

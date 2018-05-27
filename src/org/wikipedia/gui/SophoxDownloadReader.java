@@ -66,7 +66,7 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
                         settings.asNewLayer(), data.getDownloadReferrers(), data.getDownloadFull()),
 
                 settings.asNewLayer(), area, null);
-        MainApplication.worker.submit(new PostDownloadHandler(task, future, data.getErrorReporter()));
+        MainApplication.worker.execute(new PostDownloadHandler(task, future, data.getErrorReporter()));
     }
 
     @Override

@@ -335,7 +335,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
                     selected,
                     tag.getKey(), tag.getValue());
             MainApplication.undoRedo.add(cmd);
-            MainApplication.worker.submit(new FetchWikidataAction.Fetcher(selected));
+            MainApplication.worker.execute(new FetchWikidataAction.Fetcher(selected));
         }
     }
 

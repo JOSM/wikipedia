@@ -12,12 +12,11 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
-
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-
 import org.openstreetmap.josm.gui.util.GuiHelper;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.Utils;
@@ -72,8 +71,7 @@ public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
             try {
                 label = labelCache.get(id).get();
             } catch (InterruptedException | ExecutionException e) {
-                Logging.warn("Could not fetch Wikidata label for " + id);
-                Logging.warn(e);
+                Logging.log(Level.WARNING, "Could not fetch Wikidata label for " + id, e);
                 return null;
             }
             if (label == null) {
