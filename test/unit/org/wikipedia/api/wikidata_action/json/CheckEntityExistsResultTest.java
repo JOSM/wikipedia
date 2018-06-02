@@ -11,7 +11,7 @@ public class CheckEntityExistsResultTest {
     @Test
     public void test() throws IOException {
         final CheckEntityExistsResult enitityQueryResult = SerializationSchema.WBGETENTITIES.getMapper().readValue(
-            CheckEntityExistsResultTest.class.getResourceAsStream("response-wbgetentities-checkExists-Q1_Q1234567.json"),
+            CheckEntityExistsResultTest.class.getResourceAsStream("../response/wbgetentities/Q1_Q1234567.json"),
             SerializationSchema.WBGETENTITIES.getSchemaClass()
         );
         assertEquals(1, enitityQueryResult.getSuccess());
