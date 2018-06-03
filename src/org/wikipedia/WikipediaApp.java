@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
@@ -35,6 +33,9 @@ import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.wikipedia.api.wikidata_action.ApiQueryClient;
+import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
+import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
@@ -223,29 +224,12 @@ public final class WikipediaApp {
      * @return article / wikidata id map
      */
     public Map<String, String> getWikidataForArticles(Collection<String> articles) {
-        return articles.stream()
-                .distinct()
-                .collect(Collectors.groupingBy(new Function<String, Integer>() {
-                    final AtomicInteger group = new AtomicInteger();
-                    final AtomicInteger count = new AtomicInteger();
-                    final AtomicInteger length = new AtomicInteger();
-
-                    @Override
-                    public Integer apply(String o) {
-                        // max. 50 titles, max. 2048 of URL encoded title chars (to avoid HTTP 414)
-                        if (count.incrementAndGet() > 50 || length.addAndGet(Utils.encodeUrl(o).length()) > 2048) {
-                            count.set(0);
-                            length.set(0);
-                            return group.incrementAndGet();
-                        } else {
-                            return group.get();
-                        }
-                    }
-                }))
-                .values()
-                .stream()
-                .flatMap(chunk -> resolveWikidataItems(chunk).entrySet().stream())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        final Map<String, String> result = new HashMap<>();
+        // maximum of 50 titles
+        ListUtil.processInBatches(new ArrayList<String>(articles), 50, batch -> {
+            result.putAll(resolveWikidataItems(batch));
+        });
+        return result;
     }
 
     /**
@@ -297,26 +281,12 @@ public final class WikipediaApp {
             return Collections.emptyMap();
         }
         try {
-            final String url = "https://www.wikidata.org/w/api.php" +
-                    "?action=wbgetentities" +
-                    "&props=sitelinks" +
-                    "&sites=" + siteId +
-                    "&sitefilter=" + siteId +
-                    "&format=xml" +
-                    "&titles=" + articles.stream().map(Utils::encodeUrl).collect(Collectors.joining("|"));
-            final Map<String, String> r = new TreeMap<>();
-            try (InputStream in = connect(url).getContent()) {
-                final Document xml = newDocumentBuilder().parse(in);
-                X_PATH.evaluateNodes("//entity", xml).forEach(node -> {
-                    final String wikidata = X_PATH.evaluateString("./@id", node);
-                    final String wikipedia = X_PATH.evaluateString("./sitelinks/sitelink/@title", node);
-                    if (RegexUtil.isValidQId(wikidata)) { // non existing entries result in negative integers
-                        r.put(wikipedia, wikidata);
-                    }
-                });
-            }
-            return r;
-        } catch (Exception ex) {
+            return ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(siteId, articles))
+                .getEntities().values()
+                .stream()
+                .filter(it -> RegexUtil.isValidQId(it.getId()) && it.getSitelinks().size() >= 1)
+                .collect(Collectors.toMap(it -> it.getSitelinks().iterator().next().getTitle(), CheckEntityExistsResult.Entity::getId));
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }

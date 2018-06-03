@@ -16,9 +16,8 @@ import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.wikidata_action.ApiQueryClient;
-import org.wikipedia.api.wikidata_action.WikidataActionApiUrl;
+import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
-import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.RegexUtil;
 
@@ -30,7 +29,10 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
     ).setIcon(WikipediaPlugin.LOGO);
 
     public WikipediaAgainstWikidata() {
-        super("Check wikipedia=* is interwiki link of wikidata=*", "make sure that the wikipedia=* article is connected to the wikidata=* item");
+        super(
+            I18n.tr("Check wikipedia=* is interwiki link of wikidata=*"),
+            I18n.tr("Makes sure that the wikipedia=* article is connected to the wikidata=* item")
+        );
     }
 
     @Override
@@ -64,11 +66,12 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
 
     private void checkBatch(final String language, final List<TestCompanion> primitiveBatch) {
         try {
-            final Map<String, CheckEntityExistsResult.Entity.Sitelink> sitelinks =
-                ApiQueryClient.query(
-                    WikidataActionApiUrl.getEntityForSitelink(language + "wiki", primitiveBatch.stream().map(it -> it.title).collect(Collectors.toList())),
-                    SerializationSchema.WBGETENTITIES
-                ).getEntities().values().stream()
+            final Map<String, CheckEntityExistsResult.Entity.Sitelink> sitelinks = ApiQueryClient
+                .query(WikidataActionApiQuery.wbgetentities(
+                    language + "wiki",
+                    primitiveBatch.stream().map(it -> it.title).collect(Collectors.toList())
+                ))
+                .getEntities().values().stream()
                     .flatMap(entity -> entity.getSitelinks().stream().map(it -> Pair.create(entity.getId(), it)))
                     .collect(Collectors.toMap(it -> it.a, it -> it.b));
             primitiveBatch.forEach(tc -> {

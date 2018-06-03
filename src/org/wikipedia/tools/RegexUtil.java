@@ -8,6 +8,8 @@ public class RegexUtil {
     private static final Pattern SITE_ID_PATTERN = Pattern.compile("^[a-z][a-z][a-z]?wiki$");
     public static final Pattern WIKIPEDIA_TAG_VALUE_PATTERN = Pattern.compile("([a-z][a-z][a-z]?):(.+)");
 
+    public static final Pattern INTEGER_PATTERN = Pattern.compile("^[0-9]+$");
+
     private RegexUtil() {
         // Private constructor to avoid instantiation
     }
