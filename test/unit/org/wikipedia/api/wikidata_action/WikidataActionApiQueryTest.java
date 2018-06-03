@@ -53,6 +53,37 @@ public class WikidataActionApiQueryTest {
         WikidataActionApiQuery.defaultUrl = oldDefaultUrl;
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testWbgetentities_nonQId() {
+        WikidataActionApiQuery.wbgetentities(Collections.singletonList("X1"));
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testCheckEntityExists_nonQId2() {
+        WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q2", "X1"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWbgetentities_nullId() {
+        WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", null, "Q3"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWbgetentities_emptyIdList() {
+        WikidataActionApiQuery.wbgetentities(Collections.emptyList());
+    }
+
+    @Test
+    public void testWbgetentitiesQuery() {
+        assertEquals(
+            "format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1",
+            WikidataActionApiQuery.wbgetentities(Collections.singletonList("Q1")).getQuery()
+        );
+        assertEquals(
+            "format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1%7CQ13%7CQ24%7CQ20150617%7CQ42%7CQ12345",
+            WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q13", "Q24", "Q20150617", "Q42", "Q12345")).getQuery()
+        );
+    }
+
     @Test
     public void testWikidataForArticles1() throws IOException, URISyntaxException {
 

@@ -5,7 +5,6 @@ import static org.wikipedia.validator.AllValidationTests.SEE_OTHER_CATEGORY_VALI
 import static org.wikipedia.validator.AllValidationTests.VALIDATOR_MESSAGE_MARKER;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,9 +16,8 @@ import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.tools.I18n;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.wikidata_action.ApiQueryClient;
-import org.wikipedia.api.wikidata_action.WikidataActionApiUrl;
+import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
-import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.RegexUtil;
 
@@ -38,15 +36,19 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
 
 
     public WikidataItemExists() {
-        super(I18n.tr("wikidata=* item exists"), I18n.tr("Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually exists"));
+        super(
+            I18n.tr("wikidata=* item exists"),
+            I18n.tr("Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually exists")
+        );
     }
 
     @Override
     protected void check(List<TestCompanion> allPrimitives) {
         ListUtil.processInBatches(allPrimitives, 50, primitiveBatch -> {
             try {
-                final URL url = WikidataActionApiUrl.checkEntityExistsUrl(primitiveBatch.stream().map(tc -> tc.wikidataId).collect(Collectors.toList()));
-                final CheckEntityExistsResult entityQueryResult = ApiQueryClient.query(url, SerializationSchema.WBGETENTITIES);
+                final CheckEntityExistsResult entityQueryResult = ApiQueryClient.query(
+                    WikidataActionApiQuery.wbgetentities(primitiveBatch.stream().map(tc -> tc.wikidataId).collect(Collectors.toList()))
+                );
                 if (entityQueryResult.getSuccess() != 1) {
                     errors.add(AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
                         .primitives(primitiveBatch.stream().map(BatchProcessedTagTest.TestCompanion::getPrimitive).collect(Collectors.toList()))
@@ -60,7 +62,11 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
                 }
             } catch (IOException e) {
                 finalNotification = NETWORK_FAILED_NOTIFICATION;
-                errors.add(AllValidationTests.API_REQUEST_FAILED.getBuilder(this).primitives(primitiveBatch.stream().map(BatchProcessedTagTest.TestCompanion::getPrimitive).collect(Collectors.toList())).message(VALIDATOR_MESSAGE_MARKER + e.getMessage()).build());
+                errors.add(AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
+                    .primitives(primitiveBatch.stream().map(BatchProcessedTagTest.TestCompanion::getPrimitive).collect(Collectors.toList()))
+                    .message(VALIDATOR_MESSAGE_MARKER + e.getMessage())
+                    .build()
+                );
             }
         }, this::updateBatchProgress);
     }
@@ -76,20 +82,33 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
             errors.add(
                 AllValidationTests.WIKIDATA_ITEM_DOES_NOT_EXIST.getBuilder(this)
                     .primitives(tc.getPrimitive())
-                    .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata item does not exist! Replace the wikidata=* tag with an existing Wikidata item or remove the Wikidata tag."), I18n.marktr("Item {0} does not exist!"), tc.wikidataId)
+                    .message(
+                        VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata item does not exist! Replace the wikidata=* tag with an existing Wikidata item or remove the Wikidata tag."),
+                        I18n.marktr("Item {0} does not exist!"),
+                        tc.wikidataId
+                    )
                     .build()
             );
         } else if (entity == null) {
             errors.add(
                 AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
                     .primitives(tc.getPrimitive())
-                    .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata Action API did not respond with all requested entities!"), I18n.marktr("Item {0} is missing"), tc.wikidataId)
+                    .message(
+                        VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata Action API did not respond with all requested entities!"),
+                        I18n.marktr("Item {0} is missing"),
+                        tc.wikidataId
+                    )
                     .build());
         } else if (!tc.wikidataId.equals(entity.getId())) {
             errors.add(
                 AllValidationTests.WIKIDATA_ITEM_IS_REDIRECT.getBuilder(this)
                     .primitives(tc.getPrimitive())
-                    .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata item is a redirect", tc.wikidataId, entity.getId()), I18n.marktr("Item {0} redirects to {1}"), tc.wikidataId, entity.getId())
+                    .message(
+                        VALIDATOR_MESSAGE_MARKER + I18n.tr("The Wikidata item is a redirect", tc.wikidataId, entity.getId()),
+                        I18n.marktr("Item {0} redirects to {1}"),
+                        tc.wikidataId,
+                        entity.getId()
+                    )
                     .fix(() -> new ChangePropertyCommand(tc.getPrimitive(), "wikidata", entity.getId()))
                     .build()
             );
@@ -106,7 +125,10 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
                 errors.add(
                     AllValidationTests.INVALID_QID.getBuilder(this)
                         .primitives(primitive)
-                        .message(VALIDATOR_MESSAGE_MARKER + I18n.tr("Invalid Q-ID! Cannot exist on Wikidata."), I18n.marktr("{0} is not a valid Wikidata-ID"))
+                        .message(
+                            VALIDATOR_MESSAGE_MARKER + I18n.tr("Invalid Q-ID! Cannot exist on Wikidata."),
+                            I18n.marktr("{0} is not a valid Wikidata-ID")
+                        )
                         .build()
                 );
             }

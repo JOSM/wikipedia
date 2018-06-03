@@ -33,6 +33,19 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
         );
     }
 
+    public static WikidataActionApiQuery<CheckEntityExistsResult> wbgetentities(final Collection<String> qIds) {
+        if (qIds.size() < 1) {
+            throw new IllegalArgumentException("You must supply at least one Q-ID to construct a checkEntityExists URL.");
+        }
+        if (!qIds.stream().allMatch(RegexUtil::isValidQId)) {
+            throw new IllegalArgumentException("You must supply only Q-IDs as argument to construct a checkEntityExists URL.");
+        }
+        return new WikidataActionApiQuery<>(
+          FORMAT_PARAMS + "&action=wbgetentities&sites=&props=&ids=" + Utils.encodeUrl(String.join("|", qIds)),
+          SerializationSchema.WBGETENTITIES
+        );
+    }
+
     public static WikidataActionApiQuery<CheckEntityExistsResult> wbgetentities(final String siteId, final Collection<String> titles) {
         if (siteId == null || titles == null || titles.size() <= 0) {
             throw new IllegalArgumentException("The site ID and titles must be present!");
