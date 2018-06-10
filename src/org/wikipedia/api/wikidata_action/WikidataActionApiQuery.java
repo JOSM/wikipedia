@@ -1,8 +1,9 @@
 package org.wikipedia.api.wikidata_action;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-
+import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
@@ -14,12 +15,17 @@ import org.wikipedia.tools.RegexUtil;
 public class WikidataActionApiQuery<T> extends ApiQuery<T> {
     static URL defaultUrl = ApiUrl.url("https://www.wikidata.org/w/api.php");
     private static final String FORMAT_PARAMS = "format=json&utf8=1&formatversion=1";
+    private static final String[] TICKET_KEYWORDS = {"wikidata", "ActionAPI"};
 
     private final String query;
 
-    private WikidataActionApiQuery(final String query, final SerializationSchema<T> schema) {
-        super(defaultUrl, schema);
+    private WikidataActionApiQuery(final String query, final SerializationSchema<T> schema, final long cacheExpiryTime) {
+        super(defaultUrl, schema, cacheExpiryTime);
         this.query = query;
+    }
+
+    private WikidataActionApiQuery(final String query, final SerializationSchema<T> schema) {
+        this(query, schema, -1);
     }
 
     public String getQuery() {
@@ -29,7 +35,8 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
     public static WikidataActionApiQuery<SitematrixResult> sitematrix() {
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=sitematrix",
-            SerializationSchema.SITEMATRIX
+            SerializationSchema.SITEMATRIX,
+            2_592_000_000L // = 1000*60*60*24*30 = number of ms in 30 days
         );
     }
 
@@ -41,8 +48,8 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
             throw new IllegalArgumentException("You must supply only Q-IDs as argument to construct a checkEntityExists URL.");
         }
         return new WikidataActionApiQuery<>(
-          FORMAT_PARAMS + "&action=wbgetentities&sites=&props=&ids=" + Utils.encodeUrl(String.join("|", qIds)),
-          SerializationSchema.WBGETENTITIES
+            FORMAT_PARAMS + "&action=wbgetentities&sites=&props=&ids=" + Utils.encodeUrl(String.join("|", qIds)),
+            SerializationSchema.WBGETENTITIES
         );
     }
 
@@ -64,5 +71,15 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
     @Override
     public String getCacheKey() {
         return getUrl().toString() + '?' + getQuery();
+    }
+
+    @Override
+    public HttpClient getHttpClient() {
+        return HttpClient.create(getUrl(), "POST")
+            .setAccept("application/json")
+            .setHeader("Content-Type", "text/plain; charset=utf-8")
+            .setHeader("User-Agent", getUserAgent(TICKET_KEYWORDS))
+            .setReasonForRequest(String.join(" ", getQuery().split("&")))
+            .setRequestBody(getQuery().getBytes(StandardCharsets.UTF_8));
     }
 }
