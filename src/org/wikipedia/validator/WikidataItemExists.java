@@ -5,7 +5,6 @@ import static org.wikipedia.validator.AllValidationTests.SEE_OTHER_CATEGORY_VALI
 import static org.wikipedia.validator.AllValidationTests.VALIDATOR_MESSAGE_MARKER;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,8 +29,7 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
         I18n.tr("Could not validate all wikidata=* tags over the internet.") + "\n" + SEE_OTHER_CATEGORY_VALIDATOR_ERRORS
     ).setIcon(WikipediaPlugin.LOGO);
 
-    private static final int CHUNK_SIZE = 50;
-    private List<OsmPrimitive> primitivesForChunks = new ArrayList<>();
+    private static final int BATCH_SIZE = 50;
 
 
     public WikidataItemExists() {
@@ -43,7 +41,7 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
 
     @Override
     protected void check(List<TestCompanion> allPrimitives) {
-        ListUtil.processInBatches(allPrimitives, 50, primitiveBatch -> {
+        ListUtil.processInBatches(allPrimitives, BATCH_SIZE, primitiveBatch -> {
             try {
                 final CheckEntityExistsResult entityQueryResult = ApiQueryClient.query(
                     WikidataActionApiQuery.wbgetentities(primitiveBatch.stream().map(tc -> tc.wikidataId).collect(Collectors.toList()))

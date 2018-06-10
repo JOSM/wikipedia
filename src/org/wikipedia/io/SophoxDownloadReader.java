@@ -80,7 +80,7 @@ public class SophoxDownloadReader extends BoundingBoxDownloader {
      * @param sophoxQuery  The Sophox query
      * @param asNewLayer if the data should be downloaded into a new layer
      * @param downloadReferrers if the referrers of the object should be downloaded as well
-     * @param downloadFull if the members of a relation should be downloaded as well 
+     * @param downloadFull if the members of a relation should be downloaded as well
      */
     public SophoxDownloadReader(Bounds downloadArea, String sophoxServer, String sophoxQuery,
                                 boolean asNewLayer, boolean downloadReferrers, boolean downloadFull) {
