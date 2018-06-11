@@ -7,12 +7,12 @@ import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
+import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
-import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.tools.RegexUtil;
 
-public class WikidataActionApiQuery<T> extends ApiQuery<T> {
+public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     static URL defaultUrl = ApiUrl.url("https://www.wikidata.org/w/api.php");
     private static final String FORMAT_PARAMS = "format=json&utf8=1&formatversion=1";
     private static final String[] TICKET_KEYWORDS = {"wikidata", "ActionAPI"};
@@ -35,7 +35,7 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
     public static WikidataActionApiQuery<SitematrixResult> sitematrix() {
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=sitematrix",
-            SerializationSchema.SITEMATRIX,
+            SitematrixResult.SCHEMA,
             2_592_000_000L // = 1000*60*60*24*30 = number of ms in 30 days
         );
     }
@@ -49,7 +49,7 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
         }
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=wbgetentities&sites=&props=&ids=" + Utils.encodeUrl(String.join("|", qIds)),
-            SerializationSchema.WBGETENTITIES
+            CheckEntityExistsResult.SCHEMA
         );
     }
 
@@ -64,7 +64,7 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
             FORMAT_PARAMS + "&action=wbgetentities&props=sitelinks&sites=" + siteId + // defines the language of the titles
             "&sitefilter=" + siteId + // defines for which languages sitelinks should be returned
             "&titles=" + Utils.encodeUrl(String.join("|", titles)),
-            SerializationSchema.WBGETENTITIES
+            CheckEntityExistsResult.SCHEMA
         );
     }
 

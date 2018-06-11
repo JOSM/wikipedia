@@ -3,7 +3,6 @@ package org.wikipedia.api;
 import java.net.URL;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.wikipedia.WikipediaPlugin;
-import org.wikipedia.api.wikidata_action.json.SerializationSchema;
 
 public abstract class ApiQuery<T> {
     private final SerializationSchema<T> schema;
@@ -24,7 +23,7 @@ public abstract class ApiQuery<T> {
      * @return the number of milliseconds for which the API response should be retrieved
      *     from the cache without trying to get it directly from the API
      */
-    public final long getCacheExpiryTime() {
+    final long getCacheExpiryTime() {
         return cacheExpiryTime;
     }
 

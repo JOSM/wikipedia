@@ -1,22 +1,36 @@
 package org.wikipedia.api.wikidata_action.json;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.tools.RegexUtil;
 
 public final class SitematrixResult {
+    public static final SerializationSchema<SitematrixResult> SCHEMA = new SerializationSchema<>(
+        SitematrixResult.class,
+        mapper -> {
+            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            mapper.registerModule(new SimpleModule().addDeserializer(
+                SitematrixResult.Sitematrix.class,
+                new SitematrixResult.Sitematrix.Deserializer(mapper)
+            ));
+        }
+    );
+
     private final Sitematrix sitematrix;
 
     @JsonCreator

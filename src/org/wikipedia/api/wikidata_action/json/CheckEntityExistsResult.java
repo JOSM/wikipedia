@@ -1,6 +1,16 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.api.wikidata_action.json;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,16 +18,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import org.wikipedia.api.SerializationSchema;
 
 public final class CheckEntityExistsResult {
+    public static final SerializationSchema<CheckEntityExistsResult> SCHEMA = new SerializationSchema<>(
+        CheckEntityExistsResult.class,
+        it -> {
+            it.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            it.registerModule(new SimpleModule().addDeserializer(
+                CheckEntityExistsResult.AbstractEntity.class,
+                new CheckEntityExistsResult.AbstractEntity.Deserializer(it)
+            ));
+        }
+    );
 
     private final int success;
     private final Map<String, Entity> entities = new HashMap<>();
@@ -57,7 +70,7 @@ public final class CheckEntityExistsResult {
     /**
      * Supertype for {@link MissingEntity} and {@link Entity}
      */
-    interface AbstractEntity {
+    public interface AbstractEntity {
         /**
          * Adds this entity to the entity lists/maps of {@link CheckEntityExistsResult}, depending on the implementing
          * class it can vary to which list or map the entity is added.
