@@ -49,20 +49,6 @@ test {
 }
 
 sourceSets {
-  main {
-    java {
-      srcDirs = ["src"]
-    }
-    po {
-      srcDirs = ["poSrc"]
-    }
-    resources {
-      srcDirs = ["$projectDir"]
-      include "images/**"
-      include "LICENSE"
-      include "README.md"
-    }
-  }
   test {
     java {
       srcDirs = ["test/unit"]
@@ -71,6 +57,10 @@ sourceSets {
       srcDirs = ["test/data"]
     }
   }
+}
+tasks.processResources {
+  from("$projectDir/LICENSE")
+  from("$projectDir/README.md")
 }
 
 archivesBaseName = "wikipedia"

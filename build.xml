@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="wikipedia" default="dist2" basedir=".">
+<project name="wikipedia" default="dist" basedir=".">
 
     <!-- enter the SVN commit message -->
     <property name="commit.message" value="Commit message"/>
+    <property name="plugin.src.dir" value="src/main/java"/>
+    <property name="plugin.build.dir" value="src/main/resources"/>
 
     <!-- edit the properties of this plugin in the file `gradle.properties` -->
     <property file="${basedir}/gradle.properties"/>
 
     <!-- ** include targets that all plugins have in common ** -->
     <import file="../build-common.xml"/>
-
-    <target name="dist2" depends="dist">
-      <copy file="${plugin.jar}" todir="${plugin.dist.dir}/../.josm/plugins"/>
-    </target>
 
 </project>
