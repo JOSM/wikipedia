@@ -63,14 +63,16 @@ jobs:
           path: ./build/tmp/jar/MANIFEST.MF
           destination: dist/MANIFEST.MF
       - run: |
-          git fetch origin gh-pages
-          git checkout gh-pages
-          cp ./build/pluginMasterSnapshots .
-          git stage pluginMasterSnapshots
-          git config user.name "CircleCI $CIRCLE_BUILD_NUM"
-          git config user.email "deploy@circleci"
-          git commit -m "[ci skip] Update plugin update site for JOSM with latest version from master branch"
-          git push -q https://${GITHUB_TOKEN}@github.com/JOSM/wikipedia.git gh-pages > /dev/null 2>&1
+          if [ "$CIRCLE_BRANCH" == "master" ]; then
+            git fetch origin gh-pages
+            git checkout gh-pages
+            cp ./build/pluginMasterSnapshots .
+            git stage pluginMasterSnapshots
+            git config user.name "CircleCI $CIRCLE_BUILD_NUM"
+            git config user.email "deploy@circleci"
+            git commit -m "[ci skip] Update plugin update site for JOSM with latest version from master branch"
+            git push -q https://${GITHUB_TOKEN}@github.com/JOSM/wikipedia.git gh-pages > /dev/null 2>&1
+          fi
 
   min-josm:
     docker: *jdk8_image
