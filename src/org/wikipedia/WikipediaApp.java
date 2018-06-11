@@ -33,7 +33,7 @@ import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.wikipedia.api.wikidata_action.ApiQueryClient;
+import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
 import org.wikipedia.data.WikidataEntry;

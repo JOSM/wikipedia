@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package org.wikipedia.api.wikidata_action;
+package org.wikipedia.api;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -18,7 +18,6 @@ import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.bugreport.BugReport;
 import org.openstreetmap.josm.tools.bugreport.ReportedException;
 import org.wikipedia.Caches;
-import org.wikipedia.api.ApiQuery;
 
 public final class ApiQueryClient {
 

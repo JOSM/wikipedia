@@ -30,6 +30,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
+import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
 
 public class WikidataActionApiQueryTest {

@@ -15,7 +15,7 @@ import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.WikipediaPlugin;
-import org.wikipedia.api.wikidata_action.ApiQueryClient;
+import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
 import org.wikipedia.tools.ListUtil;
