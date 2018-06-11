@@ -1,36 +1,37 @@
-wikipedia-dev.jar;https://196-131418177-gh.circle-artifacts.com/0/dist/wikipedia.jar
+wikipedia-dev.jar;https://225-131418177-gh.circle-artifacts.com/0/dist/wikipedia.jar
 	Created-By: 1.8.0_171 (Oracle Corporation)
 	Gradle-Version: 4.7
 	Groovy-Version: 2.4.12
 	Plugin-Class: org.wikipedia.WikipediaPlugin
-	Plugin-Date: 2018-06-03T10:03:15+0000
+	Plugin-Date: 2018-06-11T12:41:45+0000
 	Plugin-Description: Simplifies linking OSM objects to Wikipedia articles and Wikidata items
-	Plugin-Mainversion: 13597
-	Plugin-Version: v1.0.1-9-ga100dee
+	Plugin-Mainversion: 13643
+	Plugin-Version: v1.0.1-15-gf444e52
 	Plugin-Early: false
 	Plugin-Canloadatruntime: true
+	13597_Plugin-Url: v1.0.1;https://github.com/JOSM/wikipedia/releases/download/v1.0.1/wikipedia.jar
 	12900_Plugin-Url: 34109;https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=34113
 	12878_Plugin-Url: 33635;https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=33636
+	zh_CN_Plugin-Description: 简化链接OSM对象至维基百科条目和维基数据项目
+	cs_Plugin-Description: Zjednodušuje spojování objektů OSM a článků na Wikipedii a položek Wikidat
+	ru_Plugin-Description: Упрощает связывание объектов OSM со статьями Википедии и элементами Викиданных
+	id_Plugin-Description: Menyederhanakan tautan objek OSM ke artikel Wikipedia dan Wikidata
+	pt_BR_Plugin-Description: Simplifica vincular objetos do OSM a artigos da Wikipedia e itens Wikidata
 	zh_TW_Plugin-Description: 簡化連結OSM物件到維基百科條目和維基數據項目
+	ast_Plugin-Description: Simplifica enllazar oxetos d''OSM con artículos de Wikipedia y elementos de Wikidata
+	be_Plugin-Description: Спрашчае звязванне абʼектаў OSM з артыкуламі Вікіпедыі і элементамі вікідадзеных
+	hu_Plugin-Description: Egyszerűsíti az OSM objektumok összekapcsolását Wikipédia cikkekkel és Wikidata elemekkel
 	de_Plugin-Description: Vereinfacht das Verlinken von OSM-Objekten zu Wikipedia-Artikeln und Wikidata-Einträgen
 	en_GB_Plugin-Description: Simplifies linking OSM objects to Wikipedia articles and Wikidata items
-	sk_Plugin-Description: Zjednodušuje prepojenie OSM objektov na články Wikipedie a položky Wikidata
-	ast_Plugin-Description: Simplifica enllazar oxetos d''OSM con artículos de Wikipedia y elementos de Wikidata
-	ru_Plugin-Description: Упрощает связывание объектов OSM со статьями Википедии и элементами Викиданных
-	zh_CN_Plugin-Description: 简化链接OSM对象至维基百科条目和维基数据项目
-	pt_BR_Plugin-Description: Simplifica vincular objetos do OSM a artigos da Wikipedia e itens Wikidata
-	cs_Plugin-Description: Zjednodušuje spojování objektů OSM a článků na Wikipedii a položek Wikidat
-	hu_Plugin-Description: Egyszerűsíti az OSM objektumok összekapcsolását Wikipédia cikkekkel és Wikidata elemekkel
-	es_Plugin-Description: Simplifica la vinculación de objetos de OSM a artículos de Wikipedia y elementos de Wikidata
-	id_Plugin-Description: Menyederhanakan tautan objek OSM ke artikel Wikipedia dan Wikidata
-	fr_Plugin-Description: Simplifie la liaison entre les éléments OSM et les articles Wikipedia ou les entrées Wikidata
-	da_Plugin-Description: Forenkler at knytte OSM objekter til Wikipedia artikler og Wikidata emner
 	nl_Plugin-Description: Vereenvoudigt het koppelen van objecten van OSM aan artikelen van Wikipedia en items van Wikidata
-	be_Plugin-Description: Спрашчае звязванне абʼектаў OSM з артыкуламі Вікіпедыі і элементамі вікідадзеных
-	it_Plugin-Description: Semplifica il collegamento di oggetti OSM con gli articoli di Wikipedia e gli elementi di Wikidata
 	uk_Plugin-Description: Спрощує створення посилань з обʼєктів OSM на статті у Вікіпедії та на Вікідані
+	es_Plugin-Description: Simplifica la vinculación de objetos de OSM a artículos de Wikipedia y elementos de Wikidata
+	da_Plugin-Description: Forenkler at knytte OSM objekter til Wikipedia artikler og Wikidata emner
+	it_Plugin-Description: Semplifica il collegamento di oggetti OSM con gli articoli di Wikipedia e gli elementi di Wikidata
+	sk_Plugin-Description: Zjednodušuje prepojenie OSM objektov na články Wikipedie a položky Wikidata
+	fr_Plugin-Description: Simplifie la liaison entre les éléments OSM et les articles Wikipedia ou les entrées Wikidata
 	en_Plugin-Description: Simplifies linking OSM objects to Wikipedia articles and Wikidata items
-	Author: simon04
+	Author: floscher <incoming+floscher/JOSM-wikipedia@incoming.gitlab.com>, simon04
 	Plugin-Icon: data:image/png;base64,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
 	Plugin-Link: https://josm.openstreetmap.de/wiki/Help/Plugin/Wikipedia
 pt_assistant-dev.jar;https://drive.google.com/uc?export=download&id=1JgBV-_6R79gxTqcraHia_nW5WwrEJcrF
@@ -38,10 +39,11 @@ pt_assistant-dev.jar;https://drive.google.com/uc?export=download&id=1JgBV-_6R79g
 	Plugin-Link: https://wiki.openstreetmap.org/wiki/JOSM/Plugins/PT_Assistant
 	Plugin-Description: Provides validation and fixing for public transport route according to version 2 of the public transport schema
 	Plugin-Mainversion: 13729
+	Plugin-Requires: utilsplugin2
 	Ant-Version: Apache Ant 1.10.2
 	Manifest-Version: 1.0
 	Created-By: 1.8.0_144-b01 (Oracle Corporation)
-	Plugin-Date: 2018-05-30T18:13:19.749580Z
+	Plugin-Date: 2018-06-04T18:24:34.212286Z
 	Author: Biswesh Mohapatra biswesh123@gmail.com
-	Plugin-Version: 34236#2018-06-03T10:03:16+0000
+	Plugin-Version: 34253#2018-06-11T12:41:46+0000
 	Plugin-Canloadatruntime: true
