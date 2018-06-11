@@ -12,6 +12,8 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -22,9 +24,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
-
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -45,13 +44,12 @@ public class WikidataActionApiQueryTest {
 
     @Before
     public void before() throws MalformedURLException {
-        oldDefaultUrl = WikidataActionApiQuery.defaultUrl;
-        WikidataActionApiQuery.defaultUrl = new URL("http://localhost:" + wmRule.port());
+        oldDefaultUrl = setApiUrl(new URL("http://localhost:" + wmRule.port()));
     }
 
     @After
     public void after() {
-        WikidataActionApiQuery.defaultUrl = oldDefaultUrl;
+        setApiUrl(oldDefaultUrl);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -94,7 +92,7 @@ public class WikidataActionApiQueryTest {
                 aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody(getFileContentsFromResource("response/wbgetentities/dewiki:Berlin.json"))
+                    .withBody(getApiResponseBytesFromResource("wbgetentities/dewiki:Berlin.json"))
             )
         );
 
@@ -123,7 +121,7 @@ public class WikidataActionApiQueryTest {
                 aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody(getFileContentsFromResource("response/wbgetentities/enwiki:2entities2missing.json"))
+                    .withBody(getApiResponseBytesFromResource("wbgetentities/enwiki:2entities2missing.json"))
             )
         );
 
@@ -154,8 +152,19 @@ public class WikidataActionApiQueryTest {
         verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=enwiki&sitefilter=enwiki&titles=United+States%7Cmissing-article%7CGreat+Britain%7CAnother+missing+article")));
     }
 
-    private static byte[] getFileContentsFromResource(final String path) throws URISyntaxException, IOException {
-        return Files.readAllBytes(Paths.get(WikidataActionApiQueryTest.class.getResource(path).toURI()));
+    public static byte[] getApiResponseBytesFromResource(final String path) throws URISyntaxException, IOException {
+        return Files.readAllBytes(Paths.get(WikidataActionApiQueryTest.class.getResource("response/" + path).toURI()));
+    }
+
+    /**
+     * Sets {@link WikidataActionApiQuery#defaultUrl} to the supplied URL
+     * @param url the new URL
+     * @return the URL to which {@link WikidataActionApiQuery#defaultUrl} was set before
+     */
+    public static URL setApiUrl(final URL url) {
+        final URL prevURL = WikidataActionApiQuery.defaultUrl;
+        WikidataActionApiQuery.defaultUrl = url;
+        return prevURL;
     }
 
 }
