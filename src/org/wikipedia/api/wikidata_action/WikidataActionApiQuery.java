@@ -79,7 +79,7 @@ public class WikidataActionApiQuery<T> extends ApiQuery<T> {
             .setAccept("application/json")
             .setHeader("Content-Type", "text/plain; charset=utf-8")
             .setHeader("User-Agent", getUserAgent(TICKET_KEYWORDS))
-            .setReasonForRequest(String.join(" ", getQuery().split("&")))
+            .setReasonForRequest(getQuery().replace('&', ' '))
             .setRequestBody(getQuery().getBytes(StandardCharsets.UTF_8));
     }
 }
