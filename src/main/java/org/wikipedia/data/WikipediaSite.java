@@ -3,7 +3,6 @@ package org.wikipedia.data;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Optional;
 import org.openstreetmap.josm.tools.I18n;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiQueryClient;
@@ -13,8 +12,9 @@ import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 /**
  * A Wikipedia site for a certain language. For each instance of this class you can assume that there is a Wikipedia in this language.
  */
-public class WikipediaSite {
+public class WikipediaSite implements IWikipediaSite {
     private final SitematrixResult.Sitematrix.Site site;
+    private final SitematrixResult.Sitematrix.Language language;
 
     /**
      * Constructs a Wikipedia site for a given language (iff such a Wikipedia exists).
@@ -25,23 +25,26 @@ public class WikipediaSite {
     public WikipediaSite(final String langCode) throws IOException, IllegalArgumentException {
         Objects.requireNonNull(langCode);
         final SitematrixResult sitematrix = ApiQueryClient.query(WikidataActionApiQuery.sitematrix());
-        final Optional<SitematrixResult.Sitematrix.Language> language = sitematrix.getSitematrix().getLanguages().stream()
+        language = sitematrix.getSitematrix().getLanguages().stream()
             .filter(it -> langCode.equals(it.getCode()))
-            .findFirst();
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException(I18n.tr("''{0}'' is an illegal language code!", langCode)));
         this.site = language
-            .orElseThrow(() -> new IllegalArgumentException(I18n.tr("{0} is an illegal language code!", langCode)))
             .getSites().stream()
                 .filter(it -> "wiki".equals(it.getCode()))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                    I18n.tr("For language {0} there is no Wikipedia site!", language.get().getCode())
+                    I18n.tr("There is no Wikipedia site for language ''{0}''!", language.getCode())
                 ));
     }
 
-    /**
-     * @return the site for a certain language, as returned by {@code action=sitematrix} with the Wikidata Action API
-     */
+    @Override
     public SitematrixResult.Sitematrix.Site getSite() {
         return site;
+    }
+
+    @Override
+    public String getLanguageCode() {
+        return language.getCode();
     }
 }
