@@ -48,6 +48,7 @@ import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.OpenBrowser;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.actions.FetchWikidataAction;
+import org.wikipedia.actions.ToggleWikiLayerAction;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
 
@@ -56,12 +57,14 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     public WikipediaToggleDialog() {
         super(tr("Wikipedia"), "wikipedia", tr("Fetch Wikipedia articles with coordinates"), null, 150);
         createLayout(list, true, Arrays.asList(
+                new SideButton(new ToggleWikiLayerAction(this)),
                 new SideButton(new WikipediaLoadCoordinatesAction(false)),
                 new SideButton(new WikipediaLoadCoordinatesAction(true)),
                 new SideButton(new WikipediaLoadCategoryAction()),
                 new SideButton(new PasteWikipediaArticlesAction()),
                 new SideButton(new AddWikipediaTagAction(list)),
-                new SideButton(new WikipediaSettingsAction(), false)));
+                new SideButton(new WikipediaSettingsAction(), false)
+        ));
         updateTitle();
     }
 
