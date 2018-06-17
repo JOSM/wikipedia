@@ -388,19 +388,19 @@ public final class WikipediaApp {
                 final String url = "https://www.wikidata.org/w/api.php" +
                     "?action=wbgetentities" +
                     "&props=labels|descriptions" +
-                    "&ids=" + entries.stream().map(x -> x.article).collect(Collectors.joining("|")) +
+                    "&ids=" + batch.stream().map(x -> x.article).collect(Collectors.joining("|")) +
                     "&format=xml";
                 try (InputStream in = connect(url).getContent()) {
                     final Document xml = newDocumentBuilder().parse(in);
-                    for (final WikipediaEntry entry : entries) {
-                        final Node entity = X_PATH.evaluateNode("//entity[@id='" + entry.article + "']", xml);
+                    for (final WikipediaEntry batchEntry : batch) {
+                        final Node entity = X_PATH.evaluateNode("//entity[@id='" + batchEntry.article + "']", xml);
                         if (entity == null) {
                             continue;
                         }
                         result.add(new WikidataEntry(
-                            entry.article,
+                            batchEntry.article,
                             getFirstField(languages, "label", entity),
-                            entry.coordinate,
+                            batchEntry.coordinate,
                             getFirstField(languages, "description", entity)
                         ));
                     }
