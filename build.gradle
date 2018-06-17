@@ -15,7 +15,7 @@ plugins {
   id "com.github.ben-manes.versions" version "0.17.0"
   id "com.github.spotbugs" version "1.6.1"
   id "net.ltgt.errorprone" version "0.0.14"
-  id "org.openstreetmap.josm" version "0.4.8"
+  id "org.openstreetmap.josm" version "0.5.0"
 }
 def versions = [
     errorprone: "2.3.1",
@@ -29,14 +29,14 @@ repositories {
   jcenter()
 }
 dependencies {
-  packIntoJar "com.fasterxml.jackson.core:jackson-databind:2.9.5"
-  errorprone "com.google.errorprone:error_prone_core:${versions.errorprone}"
-  testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
-  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
-  testImplementation "org.junit.vintage:junit-vintage-engine:${versions.junit}"
-  testImplementation "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}"
+  packIntoJar("com.fasterxml.jackson.core:jackson-databind:2.9.5")
+  errorprone("com.google.errorprone:error_prone_core:${versions.errorprone}")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
+  testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
+  testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation "com.github.tomakehurst:wiremock:2.18.0"
+  testImplementation("com.github.tomakehurst:wiremock:2.18.0")
 }
 task copyToLib(type: Sync) {
   from configurations.packIntoJar
@@ -64,7 +64,6 @@ tasks.processResources {
 }
 
 archivesBaseName = "wikipedia"
-version = getVersion()
 josm {
   manifest {
     oldVersionDownloadLink 13597, "v1.0.1", new URL("https://github.com/JOSM/wikipedia/releases/download/v1.0.1/wikipedia.jar")
@@ -72,7 +71,7 @@ josm {
     oldVersionDownloadLink 12878, "33635", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=33636")
   }
   i18n {
-    pathTransformer = getGithubPathTransformer('JOSM/wikipedia')
+    pathTransformer = getPathTransformer("github.com/JOSM/wikipedia/blob")
   }
 }
 
@@ -99,8 +98,8 @@ jacoco {
 jacocoTestReport {
   dependsOn test
   reports {
-    xml.enabled true
-    html.enabled true
+    xml.enabled = true
+    html.enabled = true
   }
 }
 check.dependsOn jacocoTestReport
