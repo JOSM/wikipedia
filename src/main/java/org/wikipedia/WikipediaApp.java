@@ -26,8 +26,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
+import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.gui.datatransfer.ClipboardUtils;
 import org.openstreetmap.josm.tools.HttpClient;
+import org.openstreetmap.josm.tools.I18n;
+import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
@@ -104,6 +107,13 @@ public final class WikipediaApp {
             // parse XML document
             try (InputStream in = connect(url).getContent()) {
                 final Document doc = newDocumentBuilder().parse(in);
+                final String errorInfo = X_PATH.evaluateString("//error/@info", doc);
+                if (errorInfo != null && errorInfo.length() >= 1) {
+                    // I18n: {0} is the error message returned by the API
+                    new Notification(I18n.tr("Downloading entries with geo coordinates failed: {0}", errorInfo))
+                        .setIcon(WikipediaPlugin.W_IMAGE.setMaxSize(ImageProvider.ImageSizes.DEFAULT).get())
+                        .show();
+                }
                 final List<WikipediaEntry> entries = X_PATH.evaluateNodes("//gs", doc).stream()
                         .map(node -> {
                             final String name = X_PATH.evaluateString("@title", node);
@@ -117,7 +127,7 @@ public final class WikipediaApp {
                             }
                         }).collect(Collectors.toList());
                 if ("wikidata".equals(wikipediaLang)) {
-                    return getLabelForWikidata(entries, Locale.getDefault()).stream().collect(Collectors.toList());
+                    return new ArrayList<>(getLabelForWikidata(entries, Locale.getDefault()));
                 } else {
                     return entries;
                 }
@@ -362,7 +372,7 @@ public final class WikipediaApp {
         }
     }
 
-    static List<WikidataEntry> getLabelForWikidata(List<? extends WikipediaEntry> entries, Locale locale, String... preferredLanguage) {
+    static List<WikidataEntry> getLabelForWikidata(final List<? extends WikipediaEntry> entries, final Locale locale, final String... preferredLanguage) {
         final Collection<String> languages = new ArrayList<>();
         if (locale != null) {
             languages.add(getMediawikiLocale(locale));

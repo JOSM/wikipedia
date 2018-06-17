@@ -26,6 +26,7 @@ import org.wikipedia.validator.WikipediaAgainstWikidata;
 
 public final class WikipediaPlugin extends Plugin {
     public static final ImageIcon LOGO = ImageProvider.get("dialogs/wikipedia");
+    public static final ImageProvider W_IMAGE = new ImageProvider("w");
 
     private static String name;
     private static String versionInfo;
