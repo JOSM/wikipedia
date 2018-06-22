@@ -18,7 +18,7 @@
         <include name="README"/>
         <include name="LICENSE*"/>
         <include name="*GPL*"/>
-        <exclude name="*.md"/>
+        <include name="*.md"/>
       </fileset>
     </copy>
   </target>

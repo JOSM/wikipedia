@@ -83,7 +83,7 @@ jobs:
       - attach_workspace:
           at: .
       # Main commands
-      - run: ./gradlew minJosmVersionClasses
+      - run: ./gradlew compileJava_minJosm
 
   check:
     docker: *jdk8_image
