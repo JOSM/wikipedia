@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
@@ -50,19 +50,23 @@ import org.openstreetmap.josm.tools.Utils;
  */
 public class SophoxDownloadReader extends BoundingBoxDownloader {
 
+    private static final String DEFAULT_SOPHOX_URL = "https://sophox.org/bigdata/namespace/wdq/sparql";
+
     /**
      * Property for current Sophox server.
      */
-    public static final StringProperty SOPHOX_SERVER = new StringProperty("download.sophox.server",
-            "https://sophox.org/bigdata/namespace/wdq/sparql");
+    public static final StringProperty SOPHOX_SERVER = new StringProperty(
+        "download.sophox.server",
+        DEFAULT_SOPHOX_URL
+    );
+
     /**
      * Property for list of known Sophox servers.
      */
-// TODO: Core dependency:
-//    public static final ListProperty SOPHOX_SERVER_HISTORY = new ListProperty("download.sophox.servers",
-//            Arrays.asList("https://sophox.org/bigdata/namespace/wdq/sparql"));
-    public static final ListProperty SOPHOX_SERVER_HISTORY = new ListProperty("download.sophox.servers",
-            Arrays.asList("https://sophox.org/bigdata/namespace/wdq/sparql"));
+    public static final ListProperty SOPHOX_SERVER_HISTORY = new ListProperty(
+        "download.sophox.servers",
+        Collections.singletonList(DEFAULT_SOPHOX_URL)
+    );
 
     private static final String DATA_PREFIX = "?query=";
 
