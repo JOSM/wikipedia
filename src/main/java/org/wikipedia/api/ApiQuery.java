@@ -2,6 +2,7 @@ package org.wikipedia.api;
 
 import java.net.URL;
 import org.openstreetmap.josm.tools.HttpClient;
+import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaPlugin;
 
 public abstract class ApiQuery<T> {
@@ -61,7 +62,7 @@ public abstract class ApiQuery<T> {
         if (keywords == null || keywords.length <= 0) {
             return result;
         }
-        return result + "%20" + String.join("%20", keywords);
+        return result + Utils.encodeUrl(" " + String.join(" ", keywords));
     }
 
 }
