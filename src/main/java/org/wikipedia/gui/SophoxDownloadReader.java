@@ -26,6 +26,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicArrowButton;
 import org.openstreetmap.josm.actions.downloadtasks.DownloadOsmTask;
+import org.openstreetmap.josm.actions.downloadtasks.DownloadParams;
 import org.openstreetmap.josm.actions.downloadtasks.PostDownloadHandler;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.data.preferences.AbstractProperty;
@@ -61,10 +62,18 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
         DownloadOsmTask task = new DownloadOsmTask();
         task.setZoomAfterDownload(settings.zoomToData());
         Future<?> future = task.download(
-                new org.wikipedia.io.SophoxDownloadReader(area, org.wikipedia.io.SophoxDownloadReader.SOPHOX_SERVER.get(), data.getQuery(),
-                        settings.asNewLayer(), data.getDownloadReferrers(), data.getDownloadFull()),
-
-                settings.asNewLayer(), area, null);
+            new org.wikipedia.io.SophoxDownloadReader(
+                area,
+                org.wikipedia.io.SophoxDownloadReader.SOPHOX_SERVER.get(),
+                data.getQuery(),
+                settings.asNewLayer(),
+                data.getDownloadReferrers(),
+                data.getDownloadFull()
+            ),
+            new DownloadParams().withNewLayer(true),
+            area,
+            null
+        );
         MainApplication.worker.execute(new PostDownloadHandler(task, future, data.getErrorReporter()));
     }
 
