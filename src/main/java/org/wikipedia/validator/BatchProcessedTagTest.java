@@ -11,6 +11,7 @@ import org.openstreetmap.josm.data.validation.Test;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.gui.progress.ProgressMonitor;
 import org.openstreetmap.josm.tools.I18n;
+import org.openstreetmap.josm.tools.Logging;
 import org.wikipedia.tools.ListUtil;
 
 public abstract class BatchProcessedTagTest<T extends BatchProcessedTagTest.TestCompanion> extends Test.TagTest {
@@ -60,11 +61,15 @@ public abstract class BatchProcessedTagTest<T extends BatchProcessedTagTest.Test
 
     @Override
     public final void endTest() {
-        check(primitivesForBatches);
-        if (finalNotification != null) {
-            finalNotification.show();
+        try {
+            check(primitivesForBatches);
+            if (finalNotification != null) {
+                finalNotification.show();
+            }
+            super.endTest();
+        } catch (Exception e) {
+            Logging.error(e);
         }
-        super.endTest();
     }
 
     static abstract class TestCompanion {
