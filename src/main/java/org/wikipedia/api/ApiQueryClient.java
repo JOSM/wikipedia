@@ -57,7 +57,7 @@ public final class ApiQueryClient {
                     Logging.log(Level.INFO, "Failed to update the cached API response. Falling back to the cached response.", e);
                 }
             }
-            Logging.info("API request is served from cache: {0}", query.getCacheKey());
+            Logging.debug("API request is served from cache: {0}", query.getCacheKey());
             stream = new ByteArrayInputStream(cachedValue.getBytes(StandardCharsets.UTF_8));
         } else {
             stream = getInputStreamForQuery(query);
@@ -70,7 +70,7 @@ public final class ApiQueryClient {
         }
     }
 
-    private static InputStream getInputStreamForQuery(final ApiQuery query) throws IOException {
+    private static InputStream getInputStreamForQuery(final ApiQuery<?> query) throws IOException {
         final HttpClient.Response response;
         try {
             response = query.getHttpClient().connect();

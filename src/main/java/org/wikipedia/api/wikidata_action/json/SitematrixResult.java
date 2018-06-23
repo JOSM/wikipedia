@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.tools.RegexUtil;
 
@@ -97,13 +98,16 @@ public final class SitematrixResult {
                 @JsonProperty("name") final String name,
                 @JsonProperty("site") final Collection<Site> sites
             ) {
-                this.code = code;
+                this.code = Objects.requireNonNull(code);
                 this.name = name;
                 if (sites != null) {
                     this.sites.addAll(sites);
                 }
             }
 
+            /**
+             * @return the code representing the language of the Wikimedia site
+             */
             public String getCode() {
                 return code;
             }
@@ -135,10 +139,17 @@ public final class SitematrixResult {
                 this.url = url;
             }
 
+            /**
+             * @return the code representing the type of the Wikimedia site (NOT the language).
+             *     Values can be e.g. "wiki", "wikibooks", "wiktionary", "wikidata", …
+             */
             public String getCode() {
                 return code;
             }
 
+            /**
+             * @return a unique string representing the Wikimedia site
+             */
             public String getDbName() {
                 return dbName;
             }
