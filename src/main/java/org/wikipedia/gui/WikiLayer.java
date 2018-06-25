@@ -44,6 +44,7 @@ public class WikiLayer extends Layer implements ListDataListener {
         super("WikiLayer");
         this.wikiDialog = wikiDialog;
         wikiDialog.model.addListDataListener(this);
+        wikiDialog.list.addListSelectionListener(it -> invalidate());
     }
 
     @Override
@@ -91,17 +92,19 @@ public class WikiLayer extends Layer implements ListDataListener {
         final Point minPoint = mv.getPoint(bbox.getMin());
         bbox.extend(mv.getLatLon(minPoint.getX() - 10, minPoint.getY() + 30));
 
+        final Collection<WikipediaEntry> selectedEntries = wikiDialog.list.getSelectedValuesList();
         final Collection<Point> entriesInBbox = Collections.list(wikiDialog.model.elements()).parallelStream()
-            .filter(it -> it.coordinate != null && bbox.contains(it.coordinate))
+            .filter(it -> it.coordinate != null && bbox.contains(it.coordinate) && !selectedEntries.contains(it))
             .map(it -> mv.getPoint(it.coordinate))
             .collect(Collectors.toList());
-        paintWikiMarkers(g, entriesInBbox);
+        paintWikiMarkers(g, entriesInBbox, false);
+        paintWikiMarkers(g, selectedEntries.stream().map(it -> mv.getPoint(it.coordinate)).collect(Collectors.toList()), true);
     }
 
-    private static void paintWikiMarkers(final Graphics2D g, final Collection<Point> points) {
+    private void paintWikiMarkers(final Graphics2D g, final Collection<Point> points, final boolean selected) {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        g.setStroke(new BasicStroke(2));
+        g.setStroke(new BasicStroke(selected ? 3 : 2));
         for (final Point point: points) {
             final Path2D path = new Path2D.Double();
             path.moveTo(point.getX(), point.getY());
@@ -110,7 +113,7 @@ public class WikiLayer extends Layer implements ListDataListener {
 
             g.setColor(MARKER_FILL_COLOR);
             g.fill(path);
-            g.setColor(MARKER_STROKE_COLOR);
+            g.setColor(selected ? Color.YELLOW : MARKER_STROKE_COLOR);
             g.draw(path);
         }
     }
