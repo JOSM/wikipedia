@@ -89,8 +89,8 @@ tasks.withType(JavaCompile) {
     "-Xep:RemoveUnusedImports:WARN",
     "-Xep:UngroupedOverloads:WARN",
     "-Xep:WildcardImport:WARN",
-    "-Xlint:deprecation",
-    "-Xlint:unchecked",
+    "-Xlint:all",
+    "-Xlint:-serial",
   ]
 }
 
