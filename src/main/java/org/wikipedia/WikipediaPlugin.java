@@ -23,6 +23,7 @@ import org.wikipedia.gui.WikidataTagCellRenderer;
 import org.wikipedia.gui.WikipediaToggleDialog;
 import org.wikipedia.validator.WikidataItemExists;
 import org.wikipedia.validator.WikipediaAgainstWikidata;
+import org.wikipedia.validator.WikipediaRedirect;
 
 public final class WikipediaPlugin extends Plugin {
     public static final ImageIcon LOGO = ImageProvider.get("dialogs/wikipedia");
@@ -47,6 +48,7 @@ public final class WikipediaPlugin extends Plugin {
 
         OsmValidator.addTest(WikidataItemExists.class);
         OsmValidator.addTest(WikipediaAgainstWikidata.class);
+        OsmValidator.addTest(WikipediaRedirect.class);
     }
 
     public static String getVersionInfo() {

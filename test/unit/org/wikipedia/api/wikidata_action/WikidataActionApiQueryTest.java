@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -31,6 +29,7 @@ import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.testutils.ResourceFileLoader;
 
 public class WikidataActionApiQueryTest {
 
@@ -92,7 +91,7 @@ public class WikidataActionApiQueryTest {
                 aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody(getApiResponseBytesFromResource("wbgetentities/dewiki:Berlin.json"))
+                    .withBody(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/dewiki:Berlin.json"))
             )
         );
 
@@ -121,7 +120,7 @@ public class WikidataActionApiQueryTest {
                 aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody(getApiResponseBytesFromResource("wbgetentities/enwiki:2entities2missing.json"))
+                    .withBody(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/enwiki:2entities2missing.json"))
             )
         );
 
@@ -150,10 +149,6 @@ public class WikidataActionApiQueryTest {
         assertEquals("enwiki", missing2.getSite());
 
         verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=enwiki&sitefilter=enwiki&titles=United+States%7Cmissing-article%7CGreat+Britain%7CAnother+missing+article")));
-    }
-
-    public static byte[] getApiResponseBytesFromResource(final String path) throws URISyntaxException, IOException {
-        return Files.readAllBytes(Paths.get(WikidataActionApiQueryTest.class.getResource("response/" + path).toURI()));
     }
 
     /**

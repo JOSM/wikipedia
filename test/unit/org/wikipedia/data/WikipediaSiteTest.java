@@ -18,6 +18,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQueryTest;
+import org.wikipedia.testutils.ResourceFileLoader;
 
 public class WikipediaSiteTest {
 
@@ -39,7 +40,7 @@ public class WikipediaSiteTest {
                 aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody(WikidataActionApiQueryTest.getApiResponseBytesFromResource("sitematrix/sitematrix.json"))
+                    .withBody(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/sitematrix/sitematrix.json"))
             )
         );
     }
