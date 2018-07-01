@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -42,12 +43,15 @@ import org.openstreetmap.josm.gui.SideButton;
 import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeEvent;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeListener;
+import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.LanguageInfo;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.OpenBrowser;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.actions.FetchWikidataAction;
+import org.wikipedia.actions.MultiAction;
+import org.wikipedia.actions.ToggleWikiLayerAction;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
 
@@ -55,13 +59,24 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
     public WikipediaToggleDialog() {
         super(tr("Wikipedia"), "wikipedia", tr("Fetch Wikipedia articles with coordinates"), null, 150);
+
+        final Action[] downloadActions = {
+            new WikipediaLoadCoordinatesAction(false),
+            new WikipediaLoadCoordinatesAction(true),
+            new WikipediaLoadCategoryAction()
+        };
         createLayout(list, true, Arrays.asList(
-                new SideButton(new WikipediaLoadCoordinatesAction(false)),
-                new SideButton(new WikipediaLoadCoordinatesAction(true)),
-                new SideButton(new WikipediaLoadCategoryAction()),
+                new SideButton(new ToggleWikiLayerAction(this)),
+                MultiAction.createButton(
+                    I18n.tr("Download elements"),
+                    "download",
+                    I18n.tr("Download all elements in the current viewport from one of {0} sources", downloadActions.length),
+                    downloadActions
+                ),
                 new SideButton(new PasteWikipediaArticlesAction()),
                 new SideButton(new AddWikipediaTagAction(list)),
-                new SideButton(new WikipediaSettingsAction(), false)));
+                new SideButton(new WikipediaSettingsAction(), false)
+        ));
         updateTitle();
     }
 

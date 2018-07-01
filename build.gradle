@@ -30,14 +30,14 @@ repositories {
   jcenter()
 }
 dependencies {
-  packIntoJar "com.fasterxml.jackson.core:jackson-databind:2.9.5"
-  errorprone "com.google.errorprone:error_prone_core:${versions.errorprone}"
-  testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
-  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
-  testImplementation "org.junit.vintage:junit-vintage-engine:${versions.junit}"
-  testImplementation "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}"
+  packIntoJar("com.fasterxml.jackson.core:jackson-databind:2.9.5")
+  errorprone("com.google.errorprone:error_prone_core:${versions.errorprone}")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
+  testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
+  testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation "com.github.tomakehurst:wiremock:2.18.0"
+  testImplementation("com.github.tomakehurst:wiremock:2.18.0")
 }
 task copyToLib(type: Sync) {
   from(configurations.packIntoJar)
