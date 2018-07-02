@@ -11,6 +11,7 @@ import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.gui.ExtendedDialog;
 import org.openstreetmap.josm.gui.util.GuiHelper;
 import org.wikipedia.WikipediaApp;
+import org.wikipedia.tools.WikiProperties;
 
 final class WikipediaCategorySearchDialog extends ExtendedDialog {
 
@@ -56,7 +57,7 @@ final class WikipediaCategorySearchDialog extends ExtendedDialog {
             debouncer.debounce(getClass(), () -> {
                 final List<String> entries = query == null || query.isEmpty()
                         ? Collections.emptyList()
-                        : WikipediaApp.forLanguage(WikipediaToggleDialog.wikipediaLang.get()).getCategoriesForPrefix(query);
+                        : WikipediaApp.forLanguage(WikiProperties.WIKIPEDIA_LANGUAGE.get()).getCategoriesForPrefix(query);
                 GuiHelper.runInEDT(() -> lsResultModel.setItems(entries));
             }, 200, TimeUnit.MILLISECONDS);
         }

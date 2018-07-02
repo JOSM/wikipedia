@@ -17,7 +17,7 @@ import org.wikipedia.actions.FetchWikidataAction;
 import org.wikipedia.actions.WikipediaAddNamesAction;
 import org.wikipedia.actions.WikipediaCopyTemplate;
 import org.wikipedia.gui.SophoxDownloadReader;
-import org.wikipedia.gui.SophoxServerPreference;
+import org.wikipedia.gui.WikiPreferences;
 import org.wikipedia.gui.WikidataItemSearchDialog;
 import org.wikipedia.gui.WikidataTagCellRenderer;
 import org.wikipedia.gui.WikipediaToggleDialog;
@@ -32,7 +32,7 @@ public final class WikipediaPlugin extends Plugin {
     private static String name;
     private static String versionInfo;
 
-    private PreferenceSetting preferences;
+    private final PreferenceSetting preferences = new WikiPreferences();
 
     public WikipediaPlugin(PluginInformation info) {
         super(info);
@@ -69,9 +69,6 @@ public final class WikipediaPlugin extends Plugin {
 
     @Override
     public PreferenceSetting getPreferenceSetting() {
-        if (preferences == null) {
-            preferences = (new SophoxServerPreference.Factory()).createPreferenceSetting();
-        }
         return preferences;
     }
 }

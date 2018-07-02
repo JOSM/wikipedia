@@ -31,6 +31,7 @@ import org.openstreetmap.josm.tools.GBC;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.data.WikidataEntry;
+import org.wikipedia.tools.WikiProperties;
 
 public final class WikidataItemSearchDialog extends ExtendedDialog {
 
@@ -128,7 +129,7 @@ public final class WikidataItemSearchDialog extends ExtendedDialog {
             debouncer.debounce(getClass(), () -> {
                 final List<WikidataEntry> entries = query == null || query.isEmpty()
                         ? Collections.emptyList()
-                        : WikipediaApp.getWikidataEntriesForQuery(WikipediaToggleDialog.wikipediaLang.get(), query, Locale.getDefault());
+                        : WikipediaApp.getWikidataEntriesForQuery(WikiProperties.WIKIPEDIA_LANGUAGE.get(), query, Locale.getDefault());
                 GuiHelper.runInEDT(() -> lsResultModel.setItems(entries));
             }, 200, TimeUnit.MILLISECONDS);
         }

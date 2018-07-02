@@ -20,7 +20,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingWorker;
 import org.openstreetmap.josm.Main;
@@ -36,7 +35,6 @@ import org.openstreetmap.josm.data.osm.event.DatasetEventManager;
 import org.openstreetmap.josm.data.osm.event.DatasetEventManager.FireMode;
 import org.openstreetmap.josm.data.osm.search.SearchMode;
 import org.openstreetmap.josm.data.osm.visitor.BoundingXYVisitor;
-import org.openstreetmap.josm.data.preferences.StringProperty;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.MapView;
 import org.openstreetmap.josm.gui.SideButton;
@@ -45,7 +43,6 @@ import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeEvent;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeListener;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.ImageProvider;
-import org.openstreetmap.josm.tools.LanguageInfo;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.OpenBrowser;
 import org.wikipedia.WikipediaApp;
@@ -54,11 +51,20 @@ import org.wikipedia.actions.MultiAction;
 import org.wikipedia.actions.ToggleWikiLayerAction;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
+import org.wikipedia.tools.WikiProperties;
 
 public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerChangeListener, DataSetListenerAdapter.Listener {
 
     public WikipediaToggleDialog() {
-        super(tr("Wikipedia"), "wikipedia", tr("Fetch Wikipedia articles with coordinates"), null, 150);
+        super(
+            tr("Wikipedia"),
+            "wikipedia",
+            tr("Fetch Wikipedia articles with coordinates"),
+            null,
+            150,
+            true,
+            WikiPreferences.class
+        );
 
         final Action[] downloadActions = {
             new WikipediaLoadCoordinatesAction(false),
@@ -70,19 +76,17 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
                 MultiAction.createButton(
                     I18n.tr("Download elements"),
                     "download",
-                    I18n.tr("Download all elements in the current viewport from one of {0} sources", downloadActions.length),
+                    I18n.tr("Download all elements from one of {0} sources", downloadActions.length),
                     downloadActions
                 ),
                 new SideButton(new PasteWikipediaArticlesAction()),
-                new SideButton(new AddWikipediaTagAction(list)),
-                new SideButton(new WikipediaSettingsAction(), false)
+                new SideButton(new AddWikipediaTagAction(list))
         ));
         updateTitle();
     }
 
     /** A string describing the context (use-case) for determining the dialog title */
     String titleContext = null;
-    static final StringProperty wikipediaLang = new StringProperty("wikipedia.lang", LanguageInfo.getJOSMLocaleCode().substring(0, 2));
     final Set<String> articles = new HashSet<>();
     final DefaultListModel<WikipediaEntry> model = new DefaultListModel<>();
     final JList<WikipediaEntry> list = new JList<WikipediaEntry>(model) {
@@ -152,7 +156,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
         try {
             return list.getModel().getElementAt(0).lang;
         } catch (ArrayIndexOutOfBoundsException ignore) {
-            return wikipediaLang.get();
+            return WikiProperties.WIKIPEDIA_LANGUAGE.get();
         }
     }
 
@@ -183,7 +187,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
                     @Override
                     List<WikipediaEntry> getEntries() {
-                        return WikipediaApp.forLanguage(wikidata ? "wikidata" : wikipediaLang.get())
+                        return WikipediaApp.forLanguage(wikidata ? "wikidata" : WikiProperties.WIKIPEDIA_LANGUAGE.get())
                                 .getEntriesFromCoordinates(min, max);
                     }
                 }.execute();
@@ -245,7 +249,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
             new UpdateWikipediaArticlesSwingWorker() {
                 @Override
                 List<WikipediaEntry> getEntries() {
-                    return WikipediaApp.forLanguage(wikipediaLang.get())
+                    return WikipediaApp.forLanguage(WikiProperties.WIKIPEDIA_LANGUAGE.get())
                             .getEntriesFromCategory(category, Main.pref.getInt("wikipedia.depth", 3));
                 }
             }.execute();
@@ -268,7 +272,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
                 @Override
                 List<WikipediaEntry> getEntries() {
-                    return WikipediaApp.getEntriesFromClipboard(wikipediaLang.get());
+                    return WikipediaApp.getEntriesFromClipboard(WikiProperties.WIKIPEDIA_LANGUAGE.get());
                 }
             }.execute();
         }
@@ -288,28 +292,6 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
                 final String url = list.getSelectedValue().getBrowserUrl();
                 Logging.info("Wikipedia: opening " + url);
                 OpenBrowser.displayUrl(url);
-            }
-        }
-    }
-
-    class WikipediaSettingsAction extends AbstractAction {
-
-        WikipediaSettingsAction() {
-            super(tr("Language"));
-            new ImageProvider("dialogs/settings").getResource().attachImageIcon(this, true);
-            putValue(SHORT_DESCRIPTION, tr("Sets the default language for the Wikipedia articles"));
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String lang = JOptionPane.showInputDialog(
-                    Main.parent,
-                    tr("Enter the Wikipedia language"),
-                    wikipediaLang.get());
-            if (lang != null) {
-                wikipediaLang.put(lang);
-                updateTitle();
-                updateWikipediaArticles();
             }
         }
     }
