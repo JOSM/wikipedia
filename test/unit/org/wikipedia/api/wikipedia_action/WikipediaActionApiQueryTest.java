@@ -42,7 +42,7 @@ public class WikipediaActionApiQueryTest {
                 aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody(ResourceFileLoader.getResourceBytes(WikipediaActionApiQueryTest.class, "response/query/en:US_USA_Universe.json"))
+                    .withBody(ResourceFileLoader.getResourceBytes(WikipediaActionApiQueryTest.class, "response/query/en_US-USA-Universe.json"))
             )
         );
 
