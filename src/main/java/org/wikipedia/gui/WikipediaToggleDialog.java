@@ -165,7 +165,11 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
         private final boolean wikidata;
 
         WikipediaLoadCoordinatesAction(boolean wikidata) {
-            super(wikidata ? tr("Wikidata") : tr("Coordinates"));
+            super(
+                wikidata
+                ? tr("Wikidata items in viewport")
+                : tr("Wikipedia articles in viewport (for language {0})", WikiProperties.WIKIPEDIA_LANGUAGE.get())
+            );
             this.wikidata = wikidata;
             new ImageProvider("dialogs", wikidata ? "wikidata" : "wikipedia").getResource().attachImageIcon(this, true);
             putValue(SHORT_DESCRIPTION, wikidata
@@ -226,7 +230,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     class WikipediaLoadCategoryAction extends AbstractAction {
 
         WikipediaLoadCategoryAction() {
-            super(tr("Category"));
+            super(tr("all Wikipedia articles in Category"));
             new ImageProvider("data", "sequence").getResource().attachImageIcon(this, true);
             putValue(SHORT_DESCRIPTION, tr("Fetches a list of all Wikipedia articles of a category"));
         }

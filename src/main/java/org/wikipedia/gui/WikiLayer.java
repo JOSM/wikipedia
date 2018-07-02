@@ -4,13 +4,11 @@ package org.wikipedia.gui;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
-import java.awt.geom.Rectangle2D;
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Collections;
@@ -122,7 +120,7 @@ public class WikiLayer extends Layer implements ListDataListener {
         paintWikiMarkers(g, selectedEntries.stream().map(it -> Collections.singleton(mv.getPoint(it.coordinate))).collect(Collectors.toList()), true);
     }
 
-    private void paintWikiMarkers(final Graphics2D g, final Collection<Collection<Point>> clusters, final boolean selected) {
+    private static void paintWikiMarkers(final Graphics2D g, final Collection<Collection<Point>> clusters, final boolean selected) {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
         g.setStroke(new BasicStroke(selected ? 3 : 2));

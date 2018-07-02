@@ -104,7 +104,7 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
     }
 
     static class TestCompanion extends BatchProcessedTagTest.TestCompanion {
-        final String language;
+        final String language; // TODO: Use WikipediaSite here to verify a wiki in that language actually exists
         final String title;
         final String qId;
         private TestCompanion(final OsmPrimitive primitive, String language, String title, final String qId) {
