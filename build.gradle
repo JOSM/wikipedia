@@ -71,7 +71,7 @@ josm {
     oldVersionDownloadLink 12878, "33635", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=33636")
   }
   i18n {
-    pathTransformer = getPathTransformer("github.com/JOSM/wikipedia/blob")
+    pathTransformer = getPathTransformer("gitlab.com/JOSM/wikipedia/blob")
   }
 }
 
