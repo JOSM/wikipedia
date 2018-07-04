@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<link rel=stylesheet href="./bootstrap.min.css"/>
+<meta charset=utf8>
+<title>JOSM update site for dev-version of wikipedia plugin</title>
+<div class="container">
+  <h1 class="display-4 mt-5">JOSM update site for dev-version of the wikipedia plugin</h1>
+
+  <h2>How to install the plugin site</h2>
+  <p class="alert alert-info">Only do this, if you really need to try out the bleeding edge version of the wikipedia plugin. Otherwise you can install the latest released version <a href="https://josm.openstreetmap.de/wiki/Help/Preferences/Plugins">like any other JOSM plugin</a>.</p>
+  <p>Here is how you can install the current development version (not yet released, expect issues) of the <code>wikipedia</code> JOSM plugin:</p>
+
+  <ol>
+    <li>Open any JOSM instance in which you want to try out these development versions.</li>
+    <li>Go to the preferences (e.g. hit <code>F12</code>).</li>
+    <li>Make sure the checkbox <code>Expert mode</code> in the bottom left corner of the preferences dialog is checked.</li>
+    <li>Go to the <code>Plugins</code> tab. Click on <code>Configure…</code> in the bottom right corner.<br><img src="./add_update_site.png" alt="You should now see something like this"/></li>
+    <li>Then click on <code>Add</code> in the new dialog and enter the URL <code><a href="https://josm.gitlab.io/wikipedia/snapshot/master/update-site">https://josm.gitlab.io/wikipedia/snapshot/master/update-site</a></code> and confirm with <code>OK</code>.</li>
+    <li>Now when you click <code>Download list</code>, you have a new plugin in the plugin list: <code>wikipedia-dev</code>. You can install that and it will be updated like the "normal" JOSM plugins.</li>
+  </ol>
+
+  <p class="alert alert-info"><strong>Note:</strong> Please make sure that you don't have both the dev and the non-dev version (<code>wikipedia</code> and <code>wikipedia-dev</code>) installed at the same time! This would lead to conflicts.</p>
+
+</div>

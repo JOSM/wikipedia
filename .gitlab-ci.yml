@@ -1,0 +1,16 @@
+image: alpine:3.7
+
+pages:
+  stage: deploy
+  environment:
+    name: pages site
+    url: https://josm.gitlab.io/wikipedia
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+  - pages@JOSM/wikipedia
