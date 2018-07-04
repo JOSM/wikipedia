@@ -2,9 +2,6 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.Duration
 import java.time.Instant
-import java.util.jar.JarInputStream
-import java.util.regex.Pattern
-import java.util.stream.Collectors
 import org.openstreetmap.josm.gradle.plugin.task.GeneratePluginList
 import com.github.spotbugs.SpotBugsTask
 
@@ -47,6 +44,8 @@ classes.dependsOn(copyToLib)
 
 test {
   useJUnitPlatform()
+  testLogging.showStandardStreams = true
+  testLogging.exceptionFormat = 'full'
 }
 
 sourceSets {
@@ -129,28 +128,13 @@ tasks.withType(SpotBugsTask) {
   }
 }
 
-task generateMasterPluginList(type: GeneratePluginList) {
+task generateSnapshotUpdateSite(type: GeneratePluginList) {
   dependsOn(tasks.processResources)
 
-  outputFile = new File(project.buildDir, "pluginMasterSnapshots")
-  def defaultVersionSuffix = versionSuffix
-  versionSuffix = {String s ->
-    if (s.startsWith(archivesBaseName)) {
-      return ""
-    }
-    return defaultVersionSuffix.invoke(s)
-  }
+  outputFile = new File(project.buildDir, "snapshot-update-site")
+  versionSuffix = {a -> ""}
   doFirst {
-    def wikipediaURL = System.getenv("WIKIPEDIA_URL")
-    def ptAssistantURL = System.getenv("PT_ASSISTANT_URL")
-    if (wikipediaURL == null || ptAssistantURL == null) {
-      throw new TaskExecutionException(it, new IllegalStateException("This tasks requires the environment variables `WIKIPEDIA_URL` and `PT_ASSISTANT_URL` to be set!"))
-    }
-    def circleBuildNum = System.getenv("CIRCLE_BUILD_NUM")
-    if (wikipediaURL.count("%s") == 1 && circleBuildNum != null) {
-      wikipediaURL = String.format(wikipediaURL, circleBuildNum)
-    }
-
+    def pluginDownloadUrl = "https://josm.gitlab.io/$archivesBaseName/snapshot/master/${archivesBaseName}.jar"
     it.iconBase64Provider = {
       def file = new File(sourceSets.main.resources.srcDirs[0], it)
       if (file.exists()) {
@@ -158,65 +142,8 @@ task generateMasterPluginList(type: GeneratePluginList) {
         return "data:image/" + contentType + ";base64," + Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(file.toURI())));
       }
     }
-    it.addPlugin("$archivesBaseName-dev.jar", project.josm.manifest.createJosmPluginJarManifest(), new URL(wikipediaURL))
-    def manifestAttributes = new JarInputStream(new URL(ptAssistantURL).openConnection().inputStream).manifest.mainAttributes.entrySet().stream()
-        .collect(Collectors.toMap({ e -> e.key.toString()}, { e -> e.value.toString()}))
-
-    it.addPlugin("pt_assistant-dev.jar", manifestAttributes, new URL(ptAssistantURL))
+    it.addPlugin("$archivesBaseName-dev.jar", project.josm.manifest.createJosmPluginJarManifest(), new URL(pluginDownloadUrl))
   }
-}
-
-/**
- * @return the current version of the repo as determined by the first of these commands that returns a valid result:
- *   <ul>
- *     <li>`git log` Search for a line with a git-svn-id in the current commit (append "-dirty" if working tree differs)</li>
- *     <li>`git describe` Let git describe the current commit, should only fail, if this is not a git repo</li>
- *     <li>`svn info` take the revision number from the SVN info command</li>
- *   </ul>
- */
-def getVersion() {
-  // First attempt: Check if the commit has a git-svn-id, return SVN revision
-  def result = getVersion("git-svn-id: .*@([1-9][0-9]*) .*", "git", "log", "-1", "--format=%b")
-  if (result == null) {
-    // Second attempt: Check if the commit can be git-described, return the description by git
-    result = getVersion("(.+)", "git", "describe", "--always", "--dirty")
-    if (result == null) {
-      // Third attempt: Check if we are in an SVN repo, return revision number
-      result = getVersion("Revision: ([1-9][0-9]*)", "svn", "info")
-      if (result == null) {
-        result = "UNKNOWN"
-      } else {
-        result = "r$result"
-      }
-    }
-  } else {
-    result = "r$result"
-    def dirtyProcess = new ProcessBuilder("git", "diff-index", "--quiet", "HEAD").start()
-    if (dirtyProcess.waitFor() != 0) {
-      result += "-dirty"
-    }
-  }
-  return result
-}
-
-/**
- * Runs the specified command, matches the lines of the output with the given linePattern.
- * @param linePattern the linePattern to match the lines against
- * @param command the command to execute
- * @return if a line matches, return the first RegEx group, else return null
- */
-def getVersion(String linePattern, String... command) {
-  def process = new ProcessBuilder(command).directory(project.projectDir).start()
-  if (process.waitFor() != 0) {
-    return null
-  }
-  def pattern = Pattern.compile(linePattern)
-  return Arrays.stream(process.inputStream.text.split("\n"))
-    .map { pattern.matcher(it)}
-    .filter { it.matches() }
-    .map { it.group(1).trim() }
-    .findFirst()
-    .orElse(null)
 }
 
 // Show task duration and skipped tasks
