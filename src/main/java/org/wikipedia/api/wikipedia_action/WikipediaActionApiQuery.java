@@ -29,6 +29,11 @@ public class WikipediaActionApiQuery<T> extends ApiQuery<T> {
     }
 
     @Override
+    public String getApiName() {
+        return "Wikipedia Action API";
+    }
+
+    @Override
     public HttpClient getHttpClient() {
         return HttpClient.create(getUrl(), "POST")
             .setAccept("application/json")

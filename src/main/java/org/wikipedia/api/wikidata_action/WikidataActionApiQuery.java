@@ -74,6 +74,11 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     }
 
     @Override
+    public String getApiName() {
+        return "Wikidata Action API";
+    }
+
+    @Override
     public HttpClient getHttpClient() {
         return HttpClient.create(getUrl(), "POST")
             .setAccept("application/json")

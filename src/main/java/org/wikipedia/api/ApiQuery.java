@@ -37,6 +37,8 @@ public abstract class ApiQuery<T> {
         return url.toString();
     }
 
+    public abstract String getApiName();
+
     public abstract HttpClient getHttpClient();
 
     /**

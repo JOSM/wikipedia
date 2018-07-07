@@ -76,16 +76,18 @@ public final class ApiQueryClient {
             response = query.getHttpClient().connect();
         } catch (IOException e) {
             throw new IOException(I18n.tr(
-                // i18n: {0} is the name of the exception, {1} is the message of the exception. Typical values would be: {0}="UnknownHostException" {1}="www.wikidata.org"
-                "Could not connect to the Wikidata Action API, probably a network issue or the website is currently offline ({0}: {1})",
+                // i18n: {0} is the API name, {1} is the name of the exception, {2} is the message of the exception.
+                // i18n: Typical values would be: {0}="Wikidata Action API" {1}="UnknownHostException" {2}="www.wikidata.org"
+                "Could not connect to the {0}, probably a network issue or the website is currently offline ({1}: {2})",
                 e.getClass().getSimpleName(),
                 e.getLocalizedMessage()
             ), e);
         }
         if (response.getResponseCode() != 200) {
             throw new IOException(I18n.tr(
-                // i18n: {0} is the response code, {1} is the response message. Typical values would be: {0}=404 {1}="Not Found"
-                "The Wikidata Action API responded with an unexpected response code: {0} {1}",
+                // i18n: {0} is the API name, {1} is the response code, {2} is the response message.
+                // i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not Found"
+                "The {0} responded with an unexpected response code: {1} {2}",
                 response.getResponseCode(),
                 response.getResponseMessage()
             ));
@@ -93,8 +95,9 @@ public final class ApiQueryClient {
         final String errorHeader = response.getHeaderField("MediaWiki-API-Error");
         if (errorHeader != null) {
             final IOException wrapperEx = new IOException(I18n.tr(
-                // I18n: {0} is the query, normally as URL. {1} is the error message returned from the API
-                "The Wikidata Action API reported an invalid query for {0} ({1}). This is a programming error, please report to the Wikipedia plugin.",
+                // I18n: {0}  is the API name, {1} is the query, normally as URL. {2} is the error message returned from the API
+                "The {0} reported an invalid query for {1} ({2}). This is a programming error, please report to the Wikipedia plugin.",
+                query.getApiName(),
                 query.getCacheKey(),
                 errorHeader
             ));
@@ -116,8 +119,8 @@ public final class ApiQueryClient {
             wrapper = new IOException(I18n.tr("The JSON response from the Wikidata Action API can't be decoded!"), exception);
         } else {
             wrapper = new IOException(I18n.tr(
-                // i18n: {0} is the name of the Exception, {1} is the message that exception provides
-                "When reading the JSON response from the Wikidata Action API, an error occured! ({0}: {1})",
+                // i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is the message that exception provides
+                "When reading the JSON response from the {0}, an error occured! ({1}: {2})",
                 exception.getClass().getSimpleName(),
                 exception.getLocalizedMessage()
             ), exception);

@@ -21,6 +21,7 @@ public class WdqApiQuery<T> extends ApiQuery<T> {
         this.queryString = Objects.requireNonNull(queryString);
     }
 
+    @Override
     public String getApiName() {
         return "Wikidata Query Service API";
     }
