@@ -27,16 +27,19 @@ public class WikiPreferences implements SubPreferenceSetting {
     public WikiPreferences() {
         super();
         languageLabel.setToolTipText(I18n.tr("Sets the default language for the Wikipedia articles"));
-
-        ExpertToggleAction.addExpertModeChangeListener(isExpert -> {
-            sophoxServerLabel.setVisible(isExpert);
-            sophoxServerField.setVisible(isExpert);
-        }, true);
     }
 
     @Override
     public void addGui(PreferenceTabbedPane gui) {
         final JPanel container = new JPanel(new GridBagLayout());
+
+        ExpertToggleAction.addExpertModeChangeListener(isExpert -> {
+            sophoxServerLabel.setVisible(isExpert);
+            sophoxServerField.setVisible(isExpert);
+            container.revalidate();
+            container.repaint();
+        }, true);
+
         container.setAlignmentY(JPanel.TOP_ALIGNMENT);
         final GridBagConstraints constraints = new GridBagConstraints();
 
