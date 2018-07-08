@@ -3,19 +3,13 @@ package org.wikipedia.api.wdq;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import org.apache.commons.compress.utils.IOUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
-import org.openstreetmap.josm.tools.HttpClient;
-import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wdq.json.SparqlResult;
 

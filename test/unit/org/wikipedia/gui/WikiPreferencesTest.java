@@ -2,13 +2,10 @@
 package org.wikipedia.gui;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.gui.preferences.PreferenceTabbedPane;
-import org.openstreetmap.josm.gui.preferences.server.ServerAccessPreference;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
 
 public class WikiPreferencesTest {

@@ -44,7 +44,6 @@ classes.dependsOn(copyToLib)
 
 test {
   useJUnitPlatform()
-  testLogging.showStandardStreams = true
   testLogging.exceptionFormat = 'full'
 }
 
@@ -81,6 +80,7 @@ tasks.withType(JavaCompile) {
     "-Xep:DefaultCharset:ERROR",
     "-Xep:StringEquality:ERROR",
     "-Xep:ConstantField:WARN",
+    "-Xep:FieldCanBeFinal:WARN",
     "-Xep:LambdaFunctionalInterface:WARN",
     "-Xep:MethodCanBeStatic:WARN",
     "-Xep:MultiVariableDeclaration:WARN",

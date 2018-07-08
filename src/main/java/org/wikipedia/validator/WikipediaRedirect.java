@@ -93,11 +93,11 @@ public class WikipediaRedirect extends BatchProcessedTagTest<WikipediaRedirect.T
      */
     private void checkBatch(final IWikipediaSite site, final List<Map.Entry<String, List<OsmPrimitive>>> batch) {
         try {
-            final QueryResult queryResult = ApiQueryClient.query(
+            final QueryResult.Query.Redirects redirects = ApiQueryClient.query(
                 WikipediaActionApiQuery.query(site, batch.stream().map(Map.Entry::getKey).collect(Collectors.toList()))
-            );
+            ).getQuery().getRedirects();
             for (Map.Entry<String, List<OsmPrimitive>> entry : batch) {
-                final String redirectedTitle = queryResult.getQuery().getRedirects().resolveRedirect(entry.getKey());
+                final String redirectedTitle = redirects.resolveRedirect(entry.getKey());
                 if (redirectedTitle != null && !redirectedTitle.equals(entry.getKey())) {
                     errors.add(
                         AllValidationTests.WIKIPEDIA_ARTICLE_REDIRECTS.getBuilder(this)

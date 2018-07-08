@@ -22,7 +22,7 @@ public abstract class BatchProcessedTagTest<T extends BatchProcessedTagTest.Test
         super(name, description);
     }
 
-    private List<T> primitivesForBatches = new ArrayList<>();
+    private final List<T> primitivesForBatches = new ArrayList<>();
 
     /**
      * Creates a companion object for the given primitive, on which the test can later continue to operate.

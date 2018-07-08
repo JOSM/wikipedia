@@ -31,8 +31,8 @@ class AllValidationTests {
     }
 
     static class ValidationTest<T extends Test> {
-        private Severity severity;
-        private int code;
+        private final Severity severity;
+        private final int code;
         ValidationTest(final Severity severity, final int code) {
             this.severity = severity;
             this.code = code;
