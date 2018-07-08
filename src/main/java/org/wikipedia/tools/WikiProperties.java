@@ -2,7 +2,9 @@
 package org.wikipedia.tools;
 
 
+import java.util.Arrays;
 import org.openstreetmap.josm.data.preferences.DoubleProperty;
+import org.openstreetmap.josm.data.preferences.ListProperty;
 import org.openstreetmap.josm.data.preferences.StringProperty;
 import org.openstreetmap.josm.tools.LanguageInfo;
 
@@ -10,7 +12,23 @@ public final class WikiProperties {
 
     public static final DoubleProperty WIKI_LAYER_MARKER_HEIGHT = new DoubleProperty("wikipedia.layer.marker_height", 30.0);
 
-    public static final StringProperty WIKIPEDIA_LANGUAGE = new StringProperty("wikipedia.lang", LanguageInfo.getJOSMLocaleCode().substring(0, 2));
+    private static final String JOSM_LOCALE = LanguageInfo.getJOSMLocaleCode();
+
+    public static final StringProperty WIKIPEDIA_LANGUAGE = new StringProperty(
+        "wikipedia.lang",
+        JOSM_LOCALE.substring(0, JOSM_LOCALE.indexOf('_') >= 1 ? JOSM_LOCALE.indexOf('_') : JOSM_LOCALE.length())
+    );
+
+    public static final ListProperty WIKIDATA_VALIDATOR_UNUSUAL_CLASSES = new ListProperty(
+        "wikipedia.validator.wikidata.unusual-classes",
+        Arrays.asList(
+            "Q36774", /* web page (includes e.g. disambiguation pages) */
+            "Q215627", /* person (included by "abstract object") */
+            "Q729", /* animal */
+            "Q8253", /* fiction */
+            "Q7184903" /* abstract object (includes e.g. taxons or brands) */
+        )
+    );
 
     private WikiProperties() {
         // Private constructor to avoid instantiation

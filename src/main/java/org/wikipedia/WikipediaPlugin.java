@@ -21,6 +21,7 @@ import org.wikipedia.gui.WikiPreferences;
 import org.wikipedia.gui.WikidataItemSearchDialog;
 import org.wikipedia.gui.WikidataTagCellRenderer;
 import org.wikipedia.gui.WikipediaToggleDialog;
+import org.wikipedia.validator.UnusualWikidataClasses;
 import org.wikipedia.validator.WikidataItemExists;
 import org.wikipedia.validator.WikipediaAgainstWikidata;
 import org.wikipedia.validator.WikipediaRedirect;
@@ -49,6 +50,7 @@ public final class WikipediaPlugin extends Plugin {
         OsmValidator.addTest(WikidataItemExists.class);
         OsmValidator.addTest(WikipediaAgainstWikidata.class);
         OsmValidator.addTest(WikipediaRedirect.class);
+        OsmValidator.addTest(UnusualWikidataClasses.class);
     }
 
     public static String getVersionInfo() {
