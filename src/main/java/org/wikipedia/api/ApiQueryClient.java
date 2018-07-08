@@ -51,7 +51,7 @@ public final class ApiQueryClient {
                     );
                 } catch (IOException e) {
                     if (cachedValue == null) {
-                        throw wrapReadDecodeJsonExceptions(e);
+                        throw wrapReadDecodeJsonExceptions(e, query.getApiName());
                     }
                     // If there's an expired cache entry, continue using it
                     Logging.log(Level.INFO, "Failed to update the cached API response. Falling back to the cached response.", e);
@@ -66,7 +66,7 @@ public final class ApiQueryClient {
         try {
             return query.getSchema().getMapper().readValue(stream, query.getSchema().getSchemaClass());
         } catch (IOException e) {
-            throw wrapReadDecodeJsonExceptions(e);
+            throw wrapReadDecodeJsonExceptions(e, query.getApiName());
         }
     }
 
@@ -79,6 +79,7 @@ public final class ApiQueryClient {
                 // i18n: {0} is the API name, {1} is the name of the exception, {2} is the message of the exception.
                 // i18n: Typical values would be: {0}="Wikidata Action API" {1}="UnknownHostException" {2}="www.wikidata.org"
                 "Could not connect to the {0}, probably a network issue or the website is currently offline ({1}: {2})",
+                query.getApiName(),
                 e.getClass().getSimpleName(),
                 e.getLocalizedMessage()
             ), e);
@@ -88,6 +89,7 @@ public final class ApiQueryClient {
                 // i18n: {0} is the API name, {1} is the response code, {2} is the response message.
                 // i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not Found"
                 "The {0} responded with an unexpected response code: {1} {2}",
+                query.getApiName(),
                 response.getResponseCode(),
                 response.getResponseMessage()
             ));
@@ -113,7 +115,7 @@ public final class ApiQueryClient {
         return response.getContent();
     }
 
-    private static IOException wrapReadDecodeJsonExceptions(final IOException exception) {
+    private static IOException wrapReadDecodeJsonExceptions(final IOException exception, final String apiName) {
         final IOException wrapper;
         if (exception instanceof JsonParseException || exception instanceof JsonMappingException) {
             wrapper = new IOException(I18n.tr("The JSON response from the Wikidata Action API can't be decoded!"), exception);
@@ -121,6 +123,7 @@ public final class ApiQueryClient {
             wrapper = new IOException(I18n.tr(
                 // i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is the message that exception provides
                 "When reading the JSON response from the {0}, an error occured! ({1}: {2})",
+                apiName,
                 exception.getClass().getSimpleName(),
                 exception.getLocalizedMessage()
             ), exception);

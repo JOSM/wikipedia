@@ -3,7 +3,6 @@ package org.wikipedia.api.wdq.json;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import java.security.cert.CollectionCertStoreParameters;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
