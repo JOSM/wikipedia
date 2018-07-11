@@ -4,6 +4,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.Stream;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
@@ -11,6 +12,7 @@ import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.api.wdq.json.SparqlResult;
 import org.wikipedia.tools.RegexUtil;
+import org.wikipedia.tools.WikiProperties;
 
 public class WdqApiQuery<T> extends ApiQuery<T> {
     private static final String[] TICKET_KEYWORDS = {"wikidata", "QueryService"};
@@ -37,22 +39,28 @@ public class WdqApiQuery<T> extends ApiQuery<T> {
     }
 
     /**
-     * @param items the items for which we check if they are instances of {@code x}
-     *     or instances of any subclass of {@code x}.
-     * @param x the Q-ID of an item, for which the query checks if the provided items are instances of it,
+     * @param items the items for which we check if they are instances of one of the items provided by {@code classes}
+     *     or instances of any subclass of the items provided by {@code classes}.
+     * @param classes the Q-IDs of items, for which the query checks if the provided items are instances of it,
      *     or instances of subclasses of it.
      * @return the API query
      */
-    public static WdqApiQuery<SparqlResult> findInstancesOfXOrOfSubclass(final Collection<String> items, final String x) {
+    public static WdqApiQuery<SparqlResult> findInstancesOfClassesOrTheirSubclasses(final Collection<String> items, final Collection<String> classes) {
         Objects.requireNonNull(items);
-        Objects.requireNonNull(x);
-        if (items.size() <= 0 || !items.stream().allMatch(RegexUtil::isValidQId) || !RegexUtil.isValidQId(x)) {
-            throw new IllegalArgumentException("All arguments for the 'is instance of X or of subclass' check must be valid Q-IDs!");
+        Objects.requireNonNull(classes);
+        if (items.size() >= 1 && classes.size() >= 1 && Stream.concat(items.stream(), classes.stream()).allMatch(RegexUtil::isValidQId)) {
+            return new WdqApiQuery<>(
+                ApiUrl.url("https://query.wikidata.org/sparql"),
+                "format=json&query=" + Utils.encodeUrl(String.format(
+                    "SELECT DISTINCT ?item ?itemLabel ?classes ?classesLabel WHERE { VALUES ?item { wd:%s }. VALUES ?classes { wd:%s }. ?item wdt:P31/wdt:P279* ?supertype. ?supertype wdt:P279* ?classes. SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s\" }. }",
+                    String.join(" wd:", items),
+                    String.join(" wd:", classes),
+                    WikiProperties.WIKIPEDIA_LANGUAGE.get()
+                )),
+                SparqlResult.SCHEMA
+            );
+        } else {
+            throw new IllegalArgumentException("All arguments for the 'is instance of classes or their subclasses' check must be one or more valid Q-IDs!");
         }
-        return new WdqApiQuery<>(
-            ApiUrl.url("https://query.wikidata.org/sparql"),
-            "format=json&query=" + Utils.encodeUrl(String.format("SELECT DISTINCT ?item WHERE { VALUES ?item { wd:%s } ?item wdt:P31/wdt:P279* wd:%s. }", String.join(" wd:", items), x)),
-            SparqlResult.SCHEMA
-        );
     }
 }

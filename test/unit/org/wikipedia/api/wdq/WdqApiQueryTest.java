@@ -6,7 +6,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
@@ -63,24 +65,16 @@ public class WdqApiQueryTest {
 
     @Test
     public void test() throws IOException {
-        final SparqlResult bridgeResult = ApiQueryClient.query(WdqApiQuery.findInstancesOfXOrOfSubclass(MIXED_LIST, BRIDGE_CLASS));
-        bridgeResult.getRows().forEach(row -> assertEquals(1, row.size()));
-        for (final String bridge : BRIDGE_LIST) {
-            assertEquals("Bridge " + bridge + " not found in the result!", 1, bridgeResult.getRows().stream().filter(it -> ("http://www.wikidata.org/entity/" + bridge).equals(it.get(0).getValue())).count());
-        }
-        assertEquals(BRIDGE_LIST.size(), bridgeResult.size());
-        assertTrue(bridgeResult.getRows().stream().allMatch(row -> "uri".equals(row.get(0).getType())));
+        testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Arrays.asList(BRIDGE_CLASS, BUILDING_CLASS), MIXED_LIST);
+        testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Collections.singletonList(BRIDGE_CLASS), BRIDGE_LIST);
+        testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Collections.singletonList(BUILDING_CLASS), BUILDING_LIST);
+    }
 
-        final SparqlResult buildingResult = ApiQueryClient.query(WdqApiQuery.findInstancesOfXOrOfSubclass(MIXED_LIST, BUILDING_CLASS));
-        buildingResult.getRows().forEach(row -> assertEquals(1, row.size()));
-        for (final String building : BUILDING_LIST) {
-            assertEquals(
-                "Building " + building + " not found in the result!",
-                1,
-                buildingResult.getRows().stream().filter(row -> ("http://www.wikidata.org/entity/" + building).equals(row.get(0).getValue())).count()
-            );
+    private void testFindInstancesOfClassesOrTheirSubclasses(final Collection<String> itemList, final Collection<String> classesList, final Collection<String> expectedResultList) throws IOException {
+        final SparqlResult result = ApiQueryClient.query(WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(itemList, classesList));
+        for (final String expectedEntry : expectedResultList) {
+            assertEquals("Entry " + expectedEntry + " not found in the result!", 1, result.getRows().stream().filter(row -> ("http://www.wikidata.org/entity/" + expectedEntry).equals(row.get(0).getValue())).count());
         }
-        assertEquals(BUILDING_LIST.size(), buildingResult.size());
-        assertTrue(buildingResult.getRows().stream().allMatch(row -> "uri".equals(row.get(0).getType())));
+        assertEquals(expectedResultList.size(), result.size());
     }
 }

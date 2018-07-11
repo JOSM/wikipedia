@@ -1,10 +1,13 @@
 package org.wikipedia.validator;
 
 import static org.wikipedia.validator.AllValidationTests.SEE_OTHER_CATEGORY_VALIDATOR_ERRORS;
+import static org.wikipedia.validator.AllValidationTests.VALIDATOR_MESSAGE_MARKER;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
@@ -41,45 +44,50 @@ public class UnusualWikidataClasses extends BatchProcessedTagTest<UnusualWikidat
 
     @Override
     protected void check(List<TestCompanion> allPrimitives) {
-        ListUtil.processInBatches(allPrimitives, 50, batch -> {
-            for (final String forbiddenType : WikiProperties.WIKIDATA_VALIDATOR_UNUSUAL_CLASSES.get()) {
+        ListUtil.processInBatches(
+            // group the same wikidata values to reduce number of queries
+            new ArrayList<>(allPrimitives.stream().collect(Collectors.groupingBy(it -> it.wikidataValue)).entrySet()),
+            50,
+            batch -> {
                 try {
-                    checkBatch(batch, forbiddenType);
+                    final SparqlResult result = ApiQueryClient.query(WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(
+                        batch.stream().map(Map.Entry::getKey).collect(Collectors.toList()),
+                        WikiProperties.WIKIDATA_VALIDATOR_UNUSUAL_CLASSES.get()
+                    ));
+                    for (final List<SparqlResult.Results.Entry> row : result.getRows()) {
+                        final String itemUrl = row.get(0).getValue();
+                        final String itemQId = itemUrl.substring(itemUrl.lastIndexOf('/') >= 0 ? itemUrl.lastIndexOf('/') + 1 : 0);
+                        final String classUrl = row.get(2).getValue();
+                        final String classQId = classUrl.substring(itemUrl.lastIndexOf('/') >= 0 ? itemUrl.lastIndexOf('/') + 1 : 0);
+
+                        final Collection<OsmPrimitive> primitives = batch.stream()
+                            .filter(it -> itemQId.equals(it.getKey()))
+                            .flatMap(it -> it.getValue().stream().map(BatchProcessedTagTest.TestCompanion::getPrimitive))
+                            .collect(Collectors.toList());
+                        if (primitives.size() >= 1) {
+                            errors.add(
+                                AllValidationTests.WIKIDATA_TAG_HAS_UNUSUAL_TYPE.getBuilder(this)
+                                    .message(AllValidationTests.VALIDATOR_MESSAGE_MARKER + I18n.tr("Wikidata value is of unusual type for the wikidata=* tag on OSM objects"),
+                                        I18n.marktr("{0} is an instance of {1} (or any subclass thereof)"),
+                                        row.get(1).getValue() + " (" + itemQId + ")",
+                                        row.get(3).getValue() + " (" + classQId + ")"
+                                    )
+                                    .primitives(primitives)
+                                    .build()
+                            );
+                        }
+                    }
                 } catch (IOException e) {
                     errors.add(
                         AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
-                            .primitives(batch.stream().map(BatchProcessedTagTest.TestCompanion::getPrimitive).collect(Collectors.toList()))
-                            .message(AllValidationTests.VALIDATOR_MESSAGE_MARKER + e.getMessage())
+                            .primitives(batch.stream().flatMap(it -> it.getValue().stream().map(BatchProcessedTagTest.TestCompanion::getPrimitive)).collect(Collectors.toList()))
+                            .message(VALIDATOR_MESSAGE_MARKER + e.getMessage())
                             .build()
                     );
+                    finalNotification = NETWORK_FAILED_NOTIFICATION;
                 }
             }
-        });
-    }
-
-    private void checkBatch(final Collection<TestCompanion> batch, final String forbiddenType) throws IOException {
-        final SparqlResult result = ApiQueryClient.query(WdqApiQuery.findInstancesOfXOrOfSubclass(batch.stream().map(it -> it.wikidataValue).collect(Collectors.toList()), forbiddenType));
-        for (List<SparqlResult.Results.Entry> row : result.getRows()) {
-            final String entityURL = row.get(0).getValue();
-            final String qID = entityURL.substring(entityURL.lastIndexOf('/') >= 0 ? entityURL.lastIndexOf('/') + 1 : 0);
-            final Collection<OsmPrimitive> primitives = batch.stream()
-                .filter(it -> qID.equals(it.wikidataValue))
-                .map(BatchProcessedTagTest.TestCompanion::getPrimitive)
-                .collect(Collectors.toList());
-            if (primitives.size() >= 1) {
-                errors.add(
-                    AllValidationTests.WIKIDATA_TAG_HAS_UNUSUAL_TYPE.getBuilder(this)
-                        .primitives(primitives)
-                        .message(
-                            "Wikidata value is of unusual type for the wikidata=* tag on OSM objects",
-                            I18n.marktr("{0} is an instance of {1} (or any subclass thereof)"),
-                            qID,
-                            forbiddenType
-                        )
-                        .build()
-                );
-            }
-        }
+        );
     }
 
     static class TestCompanion extends BatchProcessedTagTest.TestCompanion {
