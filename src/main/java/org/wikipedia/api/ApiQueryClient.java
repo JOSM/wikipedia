@@ -45,10 +45,7 @@ public final class ApiQueryClient {
                     final String remoteResponse = new String(IOUtils.toByteArray(getInputStreamForQuery(query)), StandardCharsets.UTF_8);
                     Caches.API_RESPONSES.put(query.getCacheKey(), remoteResponse);
                     Logging.info("Successfully updated API cache for " + query.getCacheKey());
-                    return query.getSchema().getMapper().readValue(
-                        new ByteArrayInputStream(remoteResponse.getBytes(StandardCharsets.UTF_8)),
-                        query.getSchema().getSchemaClass()
-                    );
+                    return query.deserialize(new ByteArrayInputStream(remoteResponse.getBytes(StandardCharsets.UTF_8)));
                 } catch (IOException e) {
                     if (cachedValue == null) {
                         throw wrapReadDecodeJsonExceptions(e, query.getApiName());
@@ -64,7 +61,7 @@ public final class ApiQueryClient {
         }
 
         try {
-            return query.getSchema().getMapper().readValue(stream, query.getSchema().getSchemaClass());
+            return query.deserialize(stream);
         } catch (IOException e) {
             throw wrapReadDecodeJsonExceptions(e, query.getApiName());
         }

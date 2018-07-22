@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.wikipedia.api.SerializationSchema;
 
 public final class WbgetentitiesResult {
@@ -138,7 +137,7 @@ public final class WbgetentitiesResult {
         private final String id;
         private final String type;
         private final Map<String, Sitelink> sitelinks = new HashMap<>();
-        private final Set<Label> labels = new HashSet<>();
+        private final Map<String, String> labels = new HashMap<>();
 
         @JsonCreator
         public Entity(
@@ -153,7 +152,7 @@ public final class WbgetentitiesResult {
                 this.sitelinks.putAll(sitelinks);
             }
             if (labels != null) {
-                this.labels.addAll(labels.values());
+                labels.values().forEach(label -> this.labels.put(label.getLanguage(), label.getValue()));
             }
         }
 
@@ -165,8 +164,8 @@ public final class WbgetentitiesResult {
             return type;
         }
 
-        public Collection<Label> getLabels() {
-            return labels;
+        public Map<String, String> getLabels() {
+            return Collections.unmodifiableMap(labels);
         }
 
         public Collection<Sitelink> getSitelinks() {

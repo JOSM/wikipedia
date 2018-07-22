@@ -3,6 +3,9 @@ package org.wikipedia.api.wikidata_action;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
@@ -17,19 +20,24 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     private static final String FORMAT_PARAMS = "format=json&utf8=1&formatversion=1";
     private static final String[] TICKET_KEYWORDS = {"wikidata", "ActionAPI"};
 
-    private final String query;
+    private final String queryString;
 
     private WikidataActionApiQuery(final String query, final SerializationSchema<T> schema, final long cacheExpiryTime) {
         super(defaultUrl, schema, cacheExpiryTime);
-        this.query = query;
+        this.queryString = query;
     }
 
     private WikidataActionApiQuery(final String query, final SerializationSchema<T> schema) {
         this(query, schema, -1);
     }
 
-    public String getQuery() {
-        return query;
+    private <S> WikidataActionApiQuery(final String queryString, final SerializationSchema<S> schema, final Function<S, T> converter) {
+        super(defaultUrl, schema, -1, converter);
+        this.queryString = queryString;
+    }
+
+    public String getQueryString() {
+        return queryString;
     }
 
     public static WikidataActionApiQuery<SitematrixResult> sitematrix() {
@@ -68,16 +76,20 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         );
     }
 
-    public static WikidataActionApiQuery<WbgetentitiesResult> wbgetentitiesLabels(final String qId) {
+    public static WikidataActionApiQuery<Map<String, String>> wbgetentitiesLabels(final String qId) {
         if (!RegexUtil.isValidQId(qId)) {
             throw new IllegalArgumentException("Invalid Q-ID: " + qId);
         }
-        return new WikidataActionApiQuery<>(FORMAT_PARAMS + "&action=wbgetentities&props=labels&ids=" + qId, WbgetentitiesResult.SCHEMA);
+        return new WikidataActionApiQuery<>(
+            FORMAT_PARAMS + "&action=wbgetentities&props=labels&ids=" + qId,
+            WbgetentitiesResult.SCHEMA,
+            result -> result.getEntities().values().stream().findFirst().map(WbgetentitiesResult.Entity::getLabels).orElse(new HashMap<>())
+        );
     }
 
     @Override
     public String getCacheKey() {
-        return getUrl().toString() + '?' + getQuery();
+        return getUrl().toString() + '?' + getQueryString();
     }
 
     @Override
@@ -91,7 +103,7 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
             .setAccept("application/json")
             .setHeader("Content-Type", "text/plain; charset=utf-8")
             .setHeader("User-Agent", getUserAgent(TICKET_KEYWORDS))
-            .setReasonForRequest(getQuery().replace('&', ' '))
-            .setRequestBody(getQuery().getBytes(StandardCharsets.UTF_8));
+            .setReasonForRequest(getQueryString().replace('&', ' '))
+            .setRequestBody(getQueryString().getBytes(StandardCharsets.UTF_8));
     }
 }

@@ -74,11 +74,11 @@ public class WikidataActionApiQueryTest {
     public void testWbgetentitiesQuery() {
         assertEquals(
             "format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1",
-            WikidataActionApiQuery.wbgetentities(Collections.singletonList("Q1")).getQuery()
+            WikidataActionApiQuery.wbgetentities(Collections.singletonList("Q1")).getQueryString()
         );
         assertEquals(
             "format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1%7CQ13%7CQ24%7CQ20150617%7CQ42%7CQ12345",
-            WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q13", "Q24", "Q20150617", "Q42", "Q12345")).getQuery()
+            WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q13", "Q24", "Q20150617", "Q42", "Q12345")).getQueryString()
         );
     }
 
@@ -163,17 +163,13 @@ public class WikidataActionApiQueryTest {
             )
         );
 
-        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
-        assertEquals(1, result.getEntities().size());
-        assertEquals(138, result.getEntities().entrySet().iterator().next().getValue().getLabels().size());
-        assertEquals(0, result.getEntities().entrySet().iterator().next().getValue().getSitelinks().size());
-        assertEquals("Q42", result.getEntities().entrySet().iterator().next().getValue().getId());
-        assertEquals("item", result.getEntities().entrySet().iterator().next().getValue().getType());
+        final Map<String, String> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
+        assertEquals(138, result.size());
 
-        assertEquals("Douglas Adams", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "en".equals(it.getLanguage())).findAny().get().getValue());
-        assertEquals("Дуглас Адамс", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "ru".equals(it.getLanguage())).findAny().get().getValue());
-        assertEquals("더글러스 애덤스", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "ko".equals(it.getLanguage())).findAny().get().getValue());
-        assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "tcy".equals(it.getLanguage())).findAny().get().getValue());
+        assertEquals("Douglas Adams", result.get("en"));
+        assertEquals("Дуглас Адамс", result.get("ru"));
+        assertEquals("더글러스 애덤스", result.get("ko"));
+        assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.get("tcy"));
 
         verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels&ids=Q42")));
     }

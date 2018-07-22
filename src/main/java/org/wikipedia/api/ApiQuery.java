@@ -1,23 +1,34 @@
 package org.wikipedia.api;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.function.Function;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaPlugin;
 
 public abstract class ApiQuery<T> {
-    private final SerializationSchema<T> schema;
     private final URL url;
     private final long cacheExpiryTime;
+    private final IOExceptionFunction<InputStream, T> deserializeFunc;
 
-    protected ApiQuery(final URL url, final SerializationSchema<T> schema, final long cacheExpiryTime) {
-        this.schema = schema;
+    protected <S> ApiQuery(final URL url, final SerializationSchema<S> schema, final long cacheExpiryTime, final Function<S, T> resultConverter) {
         this.url = url;
+        this.deserializeFunc = stream -> resultConverter.apply(schema.getMapper().readValue(stream, schema.getSchemaClass()));
         if (cacheExpiryTime >= 1) {
             this.cacheExpiryTime = cacheExpiryTime;
         } else {
             this.cacheExpiryTime = -1;
         }
+    }
+
+    protected ApiQuery(final URL url, final SerializationSchema<T> schema, final long cacheExpiryTime) {
+        this(url, schema, cacheExpiryTime, it -> it);
+    }
+
+    protected ApiQuery(final URL url, final SerializationSchema<T> schema) {
+        this(url, schema, -1);
     }
 
     /**
@@ -41,11 +52,8 @@ public abstract class ApiQuery<T> {
 
     public abstract HttpClient getHttpClient();
 
-    /**
-     * @return the schema that is used to get from the JSON encoded response to its Java representation
-     */
-    public final SerializationSchema<T> getSchema() {
-        return schema;
+    public final T deserialize(final InputStream stream) throws IOException {
+        return deserializeFunc.apply(stream);
     }
 
     /**
@@ -67,4 +75,8 @@ public abstract class ApiQuery<T> {
         return result + Utils.encodeUrl(" " + String.join(" ", keywords));
     }
 
+    @FunctionalInterface
+    private interface IOExceptionFunction<T, R> {
+        R apply(T t) throws IOException;
+    }
 }

@@ -19,7 +19,7 @@ public class WdqApiQuery<T> extends ApiQuery<T> {
     private final String queryString;
 
     public WdqApiQuery(final URL url, final String queryString, final SerializationSchema<T> schema) {
-        super(url, schema, -1);
+        super(url, schema);
         this.queryString = Objects.requireNonNull(queryString);
     }
 
