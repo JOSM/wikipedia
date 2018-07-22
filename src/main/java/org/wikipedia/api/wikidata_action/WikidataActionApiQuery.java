@@ -8,8 +8,8 @@ import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.SerializationSchema;
-import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
+import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.tools.RegexUtil;
 
 public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
@@ -66,6 +66,13 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
             "&titles=" + Utils.encodeUrl(String.join("|", titles)),
             WbgetentitiesResult.SCHEMA
         );
+    }
+
+    public static WikidataActionApiQuery<WbgetentitiesResult> wbgetentitiesLabels(final String qId) {
+        if (!RegexUtil.isValidQId(qId)) {
+            throw new IllegalArgumentException("Invalid Q-ID: " + qId);
+        }
+        return new WikidataActionApiQuery<>(FORMAT_PARAMS + "&action=wbgetentities&props=labels&ids=" + qId, WbgetentitiesResult.SCHEMA);
     }
 
     @Override

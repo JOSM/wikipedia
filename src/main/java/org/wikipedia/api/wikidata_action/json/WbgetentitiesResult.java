@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.wikipedia.api.SerializationSchema;
 
 public final class WbgetentitiesResult {
@@ -136,17 +138,22 @@ public final class WbgetentitiesResult {
         private final String id;
         private final String type;
         private final Map<String, Sitelink> sitelinks = new HashMap<>();
+        private final Set<Label> labels = new HashSet<>();
 
         @JsonCreator
         public Entity(
             @JsonProperty("id") final String id,
             @JsonProperty("type") final String type,
-            @JsonProperty("sitelinks") final Map<String, Sitelink> sitelinks
+            @JsonProperty("sitelinks") final Map<String, Sitelink> sitelinks,
+            @JsonProperty("labels") final Map<String, Label> labels
         ) {
             this.id = id;
             this.type = type;
             if (sitelinks != null) {
                 this.sitelinks.putAll(sitelinks);
+            }
+            if (labels != null) {
+                this.labels.addAll(labels.values());
             }
         }
 
@@ -158,6 +165,10 @@ public final class WbgetentitiesResult {
             return type;
         }
 
+        public Collection<Label> getLabels() {
+            return labels;
+        }
+
         public Collection<Sitelink> getSitelinks() {
             return Collections.unmodifiableCollection(sitelinks.values());
         }
@@ -165,6 +176,25 @@ public final class WbgetentitiesResult {
         @Override
         public void addTo(final String key, final WbgetentitiesResult result) {
             result.entities.put(key, this);
+        }
+
+        public static final class Label {
+            private final String language;
+            private final String value;
+
+            @JsonCreator
+            public Label(@JsonProperty("language") final String language, @JsonProperty("value") final String value) {
+                this.language = language;
+                this.value = value;
+            }
+
+            public String getLanguage() {
+                return language;
+            }
+
+            public String getValue() {
+                return value;
+            }
         }
 
         public static final class Sitelink {

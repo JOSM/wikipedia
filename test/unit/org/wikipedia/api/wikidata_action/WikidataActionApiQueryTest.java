@@ -151,6 +151,33 @@ public class WikidataActionApiQueryTest {
         verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=enwiki&sitefilter=enwiki&titles=United+States%7Cmissing-article%7CGreat+Britain%7CAnother+missing+article")));
     }
 
+    @Test
+    public void testWikidataItemLabelQuery() throws IOException, URISyntaxException {
+        stubFor(post("/")
+            .withHeader("Accept", equalTo("application/json"))
+            .willReturn(
+                aResponse()
+                    .withStatus(200)
+                    .withHeader("Content-Type", "application/json")
+                    .withBody(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/labels_Q42.json"))
+            )
+        );
+
+        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
+        assertEquals(1, result.getEntities().size());
+        assertEquals(138, result.getEntities().entrySet().iterator().next().getValue().getLabels().size());
+        assertEquals(0, result.getEntities().entrySet().iterator().next().getValue().getSitelinks().size());
+        assertEquals("Q42", result.getEntities().entrySet().iterator().next().getValue().getId());
+        assertEquals("item", result.getEntities().entrySet().iterator().next().getValue().getType());
+
+        assertEquals("Douglas Adams", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "en".equals(it.getLanguage())).findAny().get().getValue());
+        assertEquals("Дуглас Адамс", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "ru".equals(it.getLanguage())).findAny().get().getValue());
+        assertEquals("더글러스 애덤스", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "ko".equals(it.getLanguage())).findAny().get().getValue());
+        assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.getEntities().entrySet().iterator().next().getValue().getLabels().stream().filter(it -> "tcy".equals(it.getLanguage())).findAny().get().getValue());
+
+        verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels&ids=Q42")));
+    }
+
     /**
      * Sets {@link WikidataActionApiQuery#defaultUrl} to the supplied URL
      * @param url the new URL
