@@ -8,7 +8,7 @@ import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.SerializationSchema;
-import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.tools.RegexUtil;
 
@@ -40,7 +40,7 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         );
     }
 
-    public static WikidataActionApiQuery<CheckEntityExistsResult> wbgetentities(final Collection<String> qIds) {
+    public static WikidataActionApiQuery<WbgetentitiesResult> wbgetentities(final Collection<String> qIds) {
         if (qIds.size() < 1) {
             throw new IllegalArgumentException("You must supply at least one Q-ID to construct a checkEntityExists URL.");
         }
@@ -49,11 +49,11 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         }
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=wbgetentities&sites=&props=&ids=" + Utils.encodeUrl(String.join("|", qIds)),
-            CheckEntityExistsResult.SCHEMA
+            WbgetentitiesResult.SCHEMA
         );
     }
 
-    public static WikidataActionApiQuery<CheckEntityExistsResult> wbgetentities(final String siteId, final Collection<String> titles) {
+    public static WikidataActionApiQuery<WbgetentitiesResult> wbgetentities(final String siteId, final Collection<String> titles) {
         if (siteId == null || titles == null || titles.size() <= 0) {
             throw new IllegalArgumentException("The site ID and titles must be present!");
         }
@@ -64,7 +64,7 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
             FORMAT_PARAMS + "&action=wbgetentities&props=sitelinks&sites=" + siteId + // defines the language of the titles
             "&sitefilter=" + siteId + // defines for which languages sitelinks should be returned
             "&titles=" + Utils.encodeUrl(String.join("|", titles)),
-            CheckEntityExistsResult.SCHEMA
+            WbgetentitiesResult.SCHEMA
         );
     }
 

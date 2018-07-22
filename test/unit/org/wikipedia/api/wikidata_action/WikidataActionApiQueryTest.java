@@ -28,7 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
 import org.wikipedia.api.ApiQueryClient;
-import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.testutils.ResourceFileLoader;
 
 public class WikidataActionApiQueryTest {
@@ -95,16 +95,16 @@ public class WikidataActionApiQueryTest {
             )
         );
 
-        final CheckEntityExistsResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("dewiki", Collections.singletonList("Berlin")));
+        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("dewiki", Collections.singletonList("Berlin")));
 
         assertEquals(1, result.getSuccess());
         assertEquals(0, result.getMissingEntities().size());
         assertEquals(1, result.getEntities().size());
-        final Map.Entry<String, CheckEntityExistsResult.Entity> entityEntry = result.getEntities().entrySet().iterator().next();
+        final Map.Entry<String, WbgetentitiesResult.Entity> entityEntry = result.getEntities().entrySet().iterator().next();
         assertEquals("Q64", entityEntry.getKey());
         assertEquals("item", entityEntry.getValue().getType());
         assertEquals("Q64", entityEntry.getValue().getId());
-        final Collection<CheckEntityExistsResult.Entity.Sitelink> sitelinks = entityEntry.getValue().getSitelinks();
+        final Collection<WbgetentitiesResult.Entity.Sitelink> sitelinks = entityEntry.getValue().getSitelinks();
         assertEquals(1, sitelinks.size());
         assertEquals("dewiki", sitelinks.iterator().next().getSite());
         assertEquals("Berlin", sitelinks.iterator().next().getTitle());
@@ -124,7 +124,7 @@ public class WikidataActionApiQueryTest {
             )
         );
 
-        final CheckEntityExistsResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("enwiki", Arrays.asList("United States", "missing-article", "Great Britain", "Another missing article")));
+        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("enwiki", Arrays.asList("United States", "missing-article", "Great Britain", "Another missing article")));
 
         assertEquals(2, result.getEntities().size());
         assertEquals(2, result.getMissingEntities().size());
@@ -141,10 +141,10 @@ public class WikidataActionApiQueryTest {
         assertEquals("enwiki", result.getEntities().get("Q23666").getSitelinks().iterator().next().getSite());
         assertEquals("Great Britain", result.getEntities().get("Q23666").getSitelinks().iterator().next().getTitle());
 
-        final CheckEntityExistsResult.MissingEntity missing1 = result.getMissingEntities().stream().filter(it -> "missing-article".equals(it.getTitle())).findFirst().orElse(null);
+        final WbgetentitiesResult.MissingEntity missing1 = result.getMissingEntities().stream().filter(it -> "missing-article".equals(it.getTitle())).findFirst().orElse(null);
         assertNull(missing1.getId());
         assertEquals("enwiki", missing1.getSite());
-        final CheckEntityExistsResult.MissingEntity missing2 = result.getMissingEntities().stream().filter(it -> "Another missing article".equals(it.getTitle())).findFirst().orElse(null);
+        final WbgetentitiesResult.MissingEntity missing2 = result.getMissingEntities().stream().filter(it -> "Another missing article".equals(it.getTitle())).findFirst().orElse(null);
         assertNull(missing2.getId());
         assertEquals("enwiki", missing2.getSite());
 

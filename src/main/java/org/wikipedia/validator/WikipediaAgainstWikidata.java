@@ -17,7 +17,7 @@ import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
-import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.RegexUtil;
 
@@ -66,7 +66,7 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
 
     private void checkBatch(final String language, final List<TestCompanion> primitiveBatch) {
         try {
-            final Map<String, CheckEntityExistsResult.Entity.Sitelink> sitelinks = ApiQueryClient
+            final Map<String, WbgetentitiesResult.Entity.Sitelink> sitelinks = ApiQueryClient
                 .query(WikidataActionApiQuery.wbgetentities(
                     language + "wiki",
                     primitiveBatch.stream().map(it -> it.title).collect(Collectors.toList())

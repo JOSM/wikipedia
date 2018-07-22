@@ -20,14 +20,14 @@ import java.util.List;
 import java.util.Map;
 import org.wikipedia.api.SerializationSchema;
 
-public final class CheckEntityExistsResult {
-    public static final SerializationSchema<CheckEntityExistsResult> SCHEMA = new SerializationSchema<>(
-        CheckEntityExistsResult.class,
+public final class WbgetentitiesResult {
+    public static final SerializationSchema<WbgetentitiesResult> SCHEMA = new SerializationSchema<>(
+        WbgetentitiesResult.class,
         it -> {
             it.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
             it.registerModule(new SimpleModule().addDeserializer(
-                CheckEntityExistsResult.AbstractEntity.class,
-                new CheckEntityExistsResult.AbstractEntity.Deserializer(it)
+                WbgetentitiesResult.AbstractEntity.class,
+                new WbgetentitiesResult.AbstractEntity.Deserializer(it)
             ));
         }
     );
@@ -37,7 +37,7 @@ public final class CheckEntityExistsResult {
     private final List<MissingEntity> missingEntities = new ArrayList<>();
 
     @JsonCreator
-    public CheckEntityExistsResult(@JsonProperty("success") final int success, @JsonProperty("entities") final Map<String, AbstractEntity> entities) {
+    public WbgetentitiesResult(@JsonProperty("success") final int success, @JsonProperty("entities") final Map<String, AbstractEntity> entities) {
         this.success = success;
         for (final Map.Entry<String, AbstractEntity> entry : entities.entrySet()) {
             entry.getValue().addTo(entry.getKey(), this);
@@ -72,12 +72,12 @@ public final class CheckEntityExistsResult {
      */
     public interface AbstractEntity {
         /**
-         * Adds this entity to the entity lists/maps of {@link CheckEntityExistsResult}, depending on the implementing
+         * Adds this entity to the entity lists/maps of {@link WbgetentitiesResult}, depending on the implementing
          * class it can vary to which list or map the entity is added.
          * @param key the key to which the entity is associated in the JSON
          * @param result the object to which the entity should be added
          */
-        void addTo(final String key, CheckEntityExistsResult result);
+        void addTo(final String key, WbgetentitiesResult result);
 
         class Deserializer extends StdDeserializer<AbstractEntity> {
             private final ObjectMapper mapper;
@@ -127,7 +127,7 @@ public final class CheckEntityExistsResult {
         }
 
         @Override
-        public void addTo(final String key, final CheckEntityExistsResult result) {
+        public void addTo(final String key, final WbgetentitiesResult result) {
             result.missingEntities.add(this);
         }
     }
@@ -163,7 +163,7 @@ public final class CheckEntityExistsResult {
         }
 
         @Override
-        public void addTo(final String key, final CheckEntityExistsResult result) {
+        public void addTo(final String key, final WbgetentitiesResult result) {
             result.entities.put(key, this);
         }
 

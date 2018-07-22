@@ -38,7 +38,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
-import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
@@ -295,7 +295,7 @@ public final class WikipediaApp {
                 .getEntities().values()
                 .stream()
                 .filter(it -> RegexUtil.isValidQId(it.getId()) && it.getSitelinks().size() >= 1)
-                .collect(Collectors.toMap(it -> it.getSitelinks().iterator().next().getTitle(), CheckEntityExistsResult.Entity::getId));
+                .collect(Collectors.toMap(it -> it.getSitelinks().iterator().next().getTitle(), WbgetentitiesResult.Entity::getId));
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

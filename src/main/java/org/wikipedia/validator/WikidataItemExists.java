@@ -15,7 +15,7 @@ import org.openstreetmap.josm.tools.I18n;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
-import org.wikipedia.api.wikidata_action.json.CheckEntityExistsResult;
+import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.RegexUtil;
 
@@ -43,7 +43,7 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
     protected void check(List<TestCompanion> allPrimitives) {
         ListUtil.processInBatches(allPrimitives, BATCH_SIZE, primitiveBatch -> {
             try {
-                final CheckEntityExistsResult entityQueryResult = ApiQueryClient.query(
+                final WbgetentitiesResult entityQueryResult = ApiQueryClient.query(
                     WikidataActionApiQuery.wbgetentities(primitiveBatch.stream().map(tc -> tc.wikidataId).collect(Collectors.toList()))
                 );
                 if (entityQueryResult.getSuccess() != 1) {
@@ -69,12 +69,12 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
     }
 
     /**
-     * Checks an {@link OsmPrimitive} against a given {@link CheckEntityExistsResult}.
+     * Checks an {@link OsmPrimitive} against a given {@link WbgetentitiesResult}.
      * @param tc the test companion for the {@link OsmPrimitive}
      * @param entityQueryResult the result from the Wikidata Action API
      */
-    private void check(final TestCompanion tc, final CheckEntityExistsResult entityQueryResult) {
-        final CheckEntityExistsResult.Entity entity = entityQueryResult.getEntities().get(tc.wikidataId);
+    private void check(final TestCompanion tc, final WbgetentitiesResult entityQueryResult) {
+        final WbgetentitiesResult.Entity entity = entityQueryResult.getEntities().get(tc.wikidataId);
         if (entityQueryResult.getMissingEntities().stream().anyMatch(it -> tc.wikidataId.equals(it.getId()))) {
             errors.add(
                 AllValidationTests.WIKIDATA_ITEM_DOES_NOT_EXIST.getBuilder(this)
