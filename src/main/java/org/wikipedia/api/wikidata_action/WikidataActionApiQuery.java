@@ -12,6 +12,7 @@ import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
+import org.wikipedia.api.wikidata_action.json.WbgetclaimsResult;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.tools.RegexUtil;
 
@@ -84,6 +85,16 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
             FORMAT_PARAMS + "&action=wbgetentities&props=labels&ids=" + qId,
             WbgetentitiesResult.SCHEMA,
             result -> result.getEntities().values().stream().findFirst().map(WbgetentitiesResult.Entity::getLabels).orElse(new HashMap<>())
+        );
+    }
+
+    public static WikidataActionApiQuery<WbgetclaimsResult> wbgetclaims(final String qId) {
+        if (!RegexUtil.isValidQId(qId)) {
+            throw new IllegalArgumentException("Invalid Q-ID: " + qId);
+        }
+        return new WikidataActionApiQuery<>(
+            FORMAT_PARAMS + "&action=wbgetclaims&props=&entity=" + qId,
+            WbgetclaimsResult.SCHEMA
         );
     }
 

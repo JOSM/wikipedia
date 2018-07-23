@@ -44,7 +44,13 @@ public class WikidataActionApiQueryTest extends AbstractWikidataActionApiTest {
 
     @Test
     public void testApiName() {
+        assertEquals("Wikidata Action API", WikidataActionApiQuery.wbgetclaims("Q1").getApiName());
         assertEquals("Wikidata Action API", WikidataActionApiQuery.sitematrix().getApiName());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWbgetclaims_invalidQid() {
+        WikidataActionApiQuery.wbgetclaims("123");
     }
 
     @Test

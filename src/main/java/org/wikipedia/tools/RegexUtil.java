@@ -4,6 +4,7 @@ package org.wikipedia.tools;
 import java.util.regex.Pattern;
 
 public class RegexUtil {
+    private static final Pattern PROPERTY_ID_PATTERN = Pattern.compile("^P[1-9][0-9]*$");
     private static final Pattern Q_ID_PATTERN = Pattern.compile("^Q[1-9][0-9]*$");
     private static final Pattern SITE_ID_PATTERN = Pattern.compile("^[a-z][a-z][a-z]?wiki$");
     public static final Pattern WIKIPEDIA_TAG_VALUE_PATTERN = Pattern.compile("([a-z][a-z][a-z]?):(.+)");
@@ -12,6 +13,10 @@ public class RegexUtil {
 
     private RegexUtil() {
         // Private constructor to avoid instantiation
+    }
+
+    public static boolean isValidPropertyId(final String value) {
+        return value != null && PROPERTY_ID_PATTERN.matcher(value).matches();
     }
 
     public static boolean isValidQId(final String value) {
