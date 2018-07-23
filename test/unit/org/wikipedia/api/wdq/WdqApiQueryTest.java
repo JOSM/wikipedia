@@ -1,14 +1,12 @@
 package org.wikipedia.api.wdq;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
@@ -70,7 +68,7 @@ public class WdqApiQueryTest {
         testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Collections.singletonList(BUILDING_CLASS), BUILDING_LIST);
     }
 
-    private void testFindInstancesOfClassesOrTheirSubclasses(final Collection<String> itemList, final Collection<String> classesList, final Collection<String> expectedResultList) throws IOException {
+    private static void testFindInstancesOfClassesOrTheirSubclasses(final Collection<String> itemList, final Collection<String> classesList, final Collection<String> expectedResultList) throws IOException {
         final SparqlResult result = ApiQueryClient.query(WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(itemList, classesList));
         for (final String expectedEntry : expectedResultList) {
             assertEquals("Entry " + expectedEntry + " not found in the result!", 1, result.getRows().stream().filter(row -> ("http://www.wikidata.org/entity/" + expectedEntry).equals(row.get(0).getValue())).count());

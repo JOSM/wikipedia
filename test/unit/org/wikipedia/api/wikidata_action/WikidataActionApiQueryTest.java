@@ -1,61 +1,28 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.api.wikidata_action;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static com.github.tomakehurst.wiremock.client.WireMock.verify;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class WikidataActionApiQueryTest {
-
-    @Rule
-    public WireMockRule wmRule = new WireMockRule(wireMockConfig().dynamicPort());
-
-    @Rule
-    public JOSMTestRules josmRule = new JOSMTestRules().preferences();
-
-    private URL oldDefaultUrl = null;
-
-    @Before
-    public void before() throws MalformedURLException {
-        oldDefaultUrl = setApiUrl(new URL("http://localhost:" + wmRule.port()));
-    }
-
-    @After
-    public void after() {
-        setApiUrl(oldDefaultUrl);
-    }
+public class WikidataActionApiQueryTest extends AbstractWikidataActionApiTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testWbgetentities_nonQId() {
         WikidataActionApiQuery.wbgetentities(Collections.singletonList("X1"));
     }
     @Test(expected = IllegalArgumentException.class)
+
     public void testCheckEntityExists_nonQId2() {
         WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q2", "X1"));
     }
@@ -68,6 +35,16 @@ public class WikidataActionApiQueryTest {
     @Test(expected = IllegalArgumentException.class)
     public void testWbgetentities_emptyIdList() {
         WikidataActionApiQuery.wbgetentities(Collections.emptyList());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWbgetentitiesLabels_invalidQid() {
+        WikidataActionApiQuery.wbgetentitiesLabels("X1");
+    }
+
+    @Test
+    public void testApiName() {
+        assertEquals("Wikidata Action API", WikidataActionApiQuery.sitematrix().getApiName());
     }
 
     @Test
@@ -84,16 +61,7 @@ public class WikidataActionApiQueryTest {
 
     @Test
     public void testWikidataForArticles1() throws IOException, URISyntaxException {
-
-        stubFor(post("/")
-            .withHeader("Accept", equalTo("application/json"))
-            .willReturn(
-                aResponse()
-                    .withStatus(200)
-                    .withHeader("Content-Type", "application/json")
-                    .withBody(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/dewiki_Berlin.json"))
-            )
-        );
+        simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/dewiki_Berlin.json"));
 
         final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("dewiki", Collections.singletonList("Berlin")));
 
@@ -109,20 +77,12 @@ public class WikidataActionApiQueryTest {
         assertEquals("dewiki", sitelinks.iterator().next().getSite());
         assertEquals("Berlin", sitelinks.iterator().next().getTitle());
 
-        verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=dewiki&sitefilter=dewiki&titles=Berlin")));
+        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=dewiki&sitefilter=dewiki&titles=Berlin");
     }
 
     @Test
     public void testWikidataForArticles2() throws IOException, URISyntaxException {
-        stubFor(post("/")
-            .withHeader("Accept", equalTo("application/json"))
-            .willReturn(
-                aResponse()
-                    .withStatus(200)
-                    .withHeader("Content-Type", "application/json")
-                    .withBody(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/enwiki_2entities2missing.json"))
-            )
-        );
+        simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/enwiki_2entities2missing.json"));
 
         final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("enwiki", Arrays.asList("United States", "missing-article", "Great Britain", "Another missing article")));
 
@@ -148,20 +108,12 @@ public class WikidataActionApiQueryTest {
         assertNull(missing2.getId());
         assertEquals("enwiki", missing2.getSite());
 
-        verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=enwiki&sitefilter=enwiki&titles=United+States%7Cmissing-article%7CGreat+Britain%7CAnother+missing+article")));
+        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=enwiki&sitefilter=enwiki&titles=United+States%7Cmissing-article%7CGreat+Britain%7CAnother+missing+article");
     }
 
     @Test
     public void testWikidataItemLabelQuery() throws IOException, URISyntaxException {
-        stubFor(post("/")
-            .withHeader("Accept", equalTo("application/json"))
-            .willReturn(
-                aResponse()
-                    .withStatus(200)
-                    .withHeader("Content-Type", "application/json")
-                    .withBody(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/labels_Q42.json"))
-            )
-        );
+        simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/labels_Q42.json"));
 
         final Map<String, String> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
         assertEquals(138, result.size());
@@ -171,18 +123,7 @@ public class WikidataActionApiQueryTest {
         assertEquals("더글러스 애덤스", result.get("ko"));
         assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.get("tcy"));
 
-        verify(postRequestedFor(urlEqualTo("/")).withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels&ids=Q42")));
-    }
-
-    /**
-     * Sets {@link WikidataActionApiQuery#defaultUrl} to the supplied URL
-     * @param url the new URL
-     * @return the URL to which {@link WikidataActionApiQuery#defaultUrl} was set before
-     */
-    public static URL setApiUrl(final URL url) {
-        final URL prevURL = WikidataActionApiQuery.defaultUrl;
-        WikidataActionApiQuery.defaultUrl = url;
-        return prevURL;
+        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels&ids=Q42");
     }
 
 }
