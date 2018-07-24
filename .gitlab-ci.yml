@@ -68,8 +68,8 @@ upload to transifex:
 release:
   stage: deploy
   environment:
-    name: pages branch
-    url: https://gitlab.com/JOSM/wikipedia/tree/pages
+    name: pages branch (dist directory)
+    url: https://gitlab.com/JOSM/wikipedia/tree/pages/dist
   script:
   - &clone_pages_branch |
     echo "$SSH_PRIVATE_DEPLOY_KEY" > ~/.ssh/id_rsa
@@ -99,13 +99,13 @@ release:
 publish master update site:
   stage: deploy
   environment:
-    name: master update site
-    url: https://josm.gitlab.io/wikipedia/snapshot/master/update-site
+    name: pages branch (snapshot update site)
+    url: https://gitlab.com/JOSM/wikipedia/tree/pages
   script:
   - *clone_pages_branch
   - |
     commitHash=`git rev-parse HEAD`
-    commitMessage="Make latest commit available via JOSM update site (master@$commitHash)"
+    commitMessage="Make latest commit from master available via JOSM update site ($commitHash)"
   - |
     rm -vrf pages/snapshot/master
     mkdir -pv pages/snapshot/master
