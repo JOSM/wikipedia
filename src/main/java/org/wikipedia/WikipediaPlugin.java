@@ -18,6 +18,7 @@ import org.wikipedia.actions.WikipediaAddNamesAction;
 import org.wikipedia.actions.WikipediaCopyTemplate;
 import org.wikipedia.gui.SophoxDownloadReader;
 import org.wikipedia.gui.WikiPreferences;
+import org.wikipedia.gui.WikidataInfoToggleDialog;
 import org.wikipedia.gui.WikidataItemSearchDialog;
 import org.wikipedia.gui.WikidataTagCellRenderer;
 import org.wikipedia.gui.WikipediaToggleDialog;
@@ -64,7 +65,9 @@ public final class WikipediaPlugin extends Plugin {
     @Override
     public void mapFrameInitialized(MapFrame oldFrame, MapFrame newFrame) {
         if (newFrame != null) {
-            newFrame.addToggleDialog(new WikipediaToggleDialog());
+            final WikipediaToggleDialog wikiDialog = new WikipediaToggleDialog();
+            newFrame.addToggleDialog(wikiDialog);
+            newFrame.addToggleDialog(new WikidataInfoToggleDialog(wikiDialog));
             newFrame.propertiesDialog.addCustomPropertiesCellRenderer(new WikidataTagCellRenderer());
         }
     }

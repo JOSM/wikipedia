@@ -13,6 +13,7 @@ import org.wikipedia.data.WikipediaSite;
 public final class OsmPrimitiveUtil {
     private static final Pattern WIKIPEDIA_PATTERN = Pattern.compile("(.+):(.+)");
     public static final String TAG_NAME_WIKIPEDIA = "wikipedia";
+    private static final String TAG_NAME_WIKIDATA = "wikidata";
 
     private OsmPrimitiveUtil() {
         // Private constructor to avoid instantiation
@@ -42,5 +43,10 @@ public final class OsmPrimitiveUtil {
             }
         }
         return Optional.empty();
+    }
+
+    public static Optional<String> getWikidataValue(final OsmPrimitive primitive) {
+        final String wikidataValue = primitive.get(TAG_NAME_WIKIDATA);
+        return Optional.ofNullable(RegexUtil.isValidQId(wikidataValue) ? wikidataValue : null);
     }
 }
