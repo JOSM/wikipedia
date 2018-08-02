@@ -1,4 +1,4 @@
-image: registry.gitlab.com/josm/wikipedia/java8:latest
+image: registry.gitlab.com/josm/docker-library/openjdk-8-josmplugin:latest
 
 before_script:
 - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -19,7 +19,16 @@ assemble:
   - ./gradlew assemble
   artifacts:
     paths:
-    - build
+    - build/
+
+assemble with java 10:
+  stage: build
+  image: registry.gitlab.com/josm/docker-library/openjdk-10-josmplugin:latest
+  script:
+  - ./gradlew assemble --stacktrace
+  artifacts:
+    paths:
+    - build/
 
 
 ##############
@@ -33,16 +42,30 @@ build:
   artifacts:
     paths:
     - build
+  dependencies:
+  - assemble
 
 compile against min JOSM:
   stage: test
   script:
   - ./gradlew compileJava_minJosm
+  dependencies:
+  - assemble
 
 compile against latest JOSM:
   stage: test
   script:
   - ./gradlew compileJava_latestJosm
+  dependencies:
+  - assemble
+
+build with java 10:
+  stage: test
+  image: registry.gitlab.com/josm/docker-library/openjdk-10-josmplugin:latest
+  script:
+  - ./gradlew build
+  dependencies:
+  - assemble with java 10
 
 
 ################

@@ -6,5 +6,5 @@ file_filter = src/main/po/<lang>.po
 source_file = build/i18n/josm-plugin_wikipedia.pot
 source_lang = en
 type = PO
-minimum_perc=50
+minimum_perc=40
 lang_map = ca@valencia: ca-valencia

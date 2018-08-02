@@ -5,6 +5,18 @@ import java.time.Instant
 import org.openstreetmap.josm.gradle.plugin.task.GeneratePluginList
 import com.github.spotbugs.SpotBugsTask
 
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "net.ltgt.gradle:gradle-errorprone-javacplugin-plugin:0.3"
+    classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.16"
+  }
+}
+
 plugins {
   id "java"
   id "eclipse"
@@ -12,9 +24,30 @@ plugins {
   id "pmd"
   id "com.github.ben-manes.versions" version "0.20.0"
   id "com.github.spotbugs" version "1.6.2"
-  id "net.ltgt.errorprone" version "0.0.16"
   id "org.openstreetmap.josm" version "0.5.0"
 }
+
+if (JavaVersion.current().java9Compatible) {
+  apply plugin: "net.ltgt.errorprone-javacplugin"
+} else {
+  apply plugin: "net.ltgt.errorprone"
+  tasks.withType(JavaCompile) {
+    options.compilerArgs += [
+      "-Xep:DefaultCharset:ERROR",
+      "-Xep:StringEquality:ERROR",
+      "-Xep:ConstantField:WARN",
+      "-Xep:FieldCanBeFinal:WARN",
+      "-Xep:LambdaFunctionalInterface:WARN",
+      "-Xep:MethodCanBeStatic:WARN",
+      "-Xep:MultiVariableDeclaration:WARN",
+      "-Xep:PrivateConstructorForUtilityClass:WARN",
+      "-Xep:RemoveUnusedImports:WARN",
+      "-Xep:UngroupedOverloads:WARN",
+      "-Xep:WildcardImport:WARN"
+    ]
+  }
+}
+
 def versions = [
     errorprone: "2.3.1",
     jacoco: "0.8.1",
@@ -75,20 +108,8 @@ josm {
   }
 }
 
-// Set up ErrorProne
 tasks.withType(JavaCompile) {
   options.compilerArgs += [
-    "-Xep:DefaultCharset:ERROR",
-    "-Xep:StringEquality:ERROR",
-    "-Xep:ConstantField:WARN",
-    "-Xep:FieldCanBeFinal:WARN",
-    "-Xep:LambdaFunctionalInterface:WARN",
-    "-Xep:MethodCanBeStatic:WARN",
-    "-Xep:MultiVariableDeclaration:WARN",
-    "-Xep:PrivateConstructorForUtilityClass:WARN",
-    "-Xep:RemoveUnusedImports:WARN",
-    "-Xep:UngroupedOverloads:WARN",
-    "-Xep:WildcardImport:WARN",
     "-Xlint:all",
     "-Xlint:-serial",
   ]
