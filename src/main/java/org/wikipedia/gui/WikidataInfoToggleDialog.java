@@ -145,7 +145,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
      */
     @Override
     public void setTitle(final String qID) {
-        super.setTitle(qID == null ? I18n.tr("Wikidata info") : I18n.tr("Wikidata info: {0}", qID));
+        super.setTitle(qID == null ? I18n.tr("Wikidata Info") : I18n.tr("Wikidata Info: {0}", qID));
     }
 
     /**
