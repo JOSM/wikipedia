@@ -68,7 +68,7 @@ upload to transifex:
 release:
   stage: deploy
   environment:
-    name: pages branch (dist directory)
+    name: pages branch / dist directory
     url: https://gitlab.com/JOSM/wikipedia/tree/pages/dist
   script:
   - &clone_pages_branch |
@@ -99,7 +99,7 @@ release:
 publish master update site:
   stage: deploy
   environment:
-    name: pages branch (snapshot update site)
+    name: pages branch / snapshot update site
     url: https://gitlab.com/JOSM/wikipedia/tree/pages
   script:
   - *clone_pages_branch
