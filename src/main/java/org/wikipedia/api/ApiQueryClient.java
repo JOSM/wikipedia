@@ -115,7 +115,7 @@ public final class ApiQueryClient {
     private static IOException wrapReadDecodeJsonExceptions(final IOException exception, final String apiName) {
         final IOException wrapper;
         if (exception instanceof JsonParseException || exception instanceof JsonMappingException) {
-            wrapper = new IOException(I18n.tr("The JSON response from the Wikidata Action API can't be decoded!"), exception);
+            wrapper = new IOException(I18n.tr("The JSON response from the Wikidata Action API can''t be decoded!"), exception);
         } else {
             wrapper = new IOException(I18n.tr(
                 // i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is the message that exception provides
