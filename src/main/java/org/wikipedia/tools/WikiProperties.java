@@ -1,7 +1,6 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.tools;
 
-
 import java.util.Arrays;
 import org.openstreetmap.josm.data.preferences.DoubleProperty;
 import org.openstreetmap.josm.data.preferences.ListProperty;
@@ -23,10 +22,14 @@ public final class WikiProperties {
         "wikipedia.validator.wikidata.unusual-classes",
         Arrays.asList(
             "Q36774", /* web page (includes e.g. disambiguation pages) */
-            "Q215627", /* person (included by "abstract object") */
+            "Q215627", /* person */
             "Q729", /* animal */
             "Q8253", /* fiction */
-            "Q7184903" /* abstract object (includes e.g. taxons or brands) */
+            "Q16521", /* taxon */
+            "Q167270", /* brand */
+            "Q507619", /* chain store */
+            "Q12139612", /* list */
+            "Q732577" /* publication */
         )
     );
 
