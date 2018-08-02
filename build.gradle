@@ -12,15 +12,15 @@ plugins {
   id "pmd"
   id "com.github.ben-manes.versions" version "0.20.0"
   id "com.github.spotbugs" version "1.6.2"
-  id "net.ltgt.errorprone" version "0.0.14"
+  id "net.ltgt.errorprone" version "0.0.16"
   id "org.openstreetmap.josm" version "0.5.0"
 }
 def versions = [
     errorprone: "2.3.1",
     jacoco: "0.8.1",
     junit: "5.2.0",
-    pmd: "6.3.0",
-    spotbugs: "3.1.5",
+    pmd: "6.6.0",
+    spotbugs: "3.1.6",
 ]
 
 repositories {
@@ -35,6 +35,7 @@ dependencies {
   testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
   testImplementation("com.github.tomakehurst:wiremock:2.18.0")
+  testImplementation("org.awaitility:awaitility:3.1.2")
 }
 task copyToLib(type: Sync) {
   from(configurations.packIntoJar)
