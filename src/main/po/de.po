@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.0-15-gd945333\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 23:03+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: German (https://www.transifex.com/josm/teams/2544/de/)\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, java-format
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' ist als Sprachkürzel nicht erlaubt!"
 
 #, java-format
 msgid "({0} items, processing batch {1} of {2})"
@@ -52,20 +56,27 @@ msgstr "In lokalem Datensatz verknüpft"
 msgid "Available via WIWOSM server"
 msgstr "Auf WIWOSM-Server verfügbar"
 
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr ""
+"Die Website {0} konnte nicht im Browser geöffnet werden! Fehlermeldung: {1}"
+
 msgid "Cancel"
 msgstr "Abbrechen"
 
-msgid "Category"
-msgstr "Kategorie"
+msgid "Change wikipedia tag?"
+msgstr "Wikipedia-Tag ändern?"
+
+msgid "Check wikipedia=* is interwiki link of wikidata=*"
+msgstr "Überprüfen, dass wikipedia=* ein Interwiki-Link von wikidata=* ist"
+
+msgid "Check wikipedia=* is not a redirect"
+msgstr "Überprüfen, dass wikipedia=* keine Weiterleitung ist"
 
 msgid "Clipboard"
 msgstr "Zwischenablage"
 
 msgid "Contacting Server..."
 msgstr "Kontaktaufnahme mit Server…"
-
-msgid "Coordinates"
-msgstr "Koordinaten"
 
 #, java-format
 msgid ""
@@ -85,6 +96,28 @@ msgstr ""
 "Nicht für alle wikipedia=* Tags konnte geprüft werden, ob sie zum wikidata=*"
 " Tag passen."
 
+msgid ""
+"Could not check for all wikipedia=* tags if they redirect to another lemma."
+msgstr ""
+"Die Überprüfung, ob wikipedia=* Tags zu anderen Lemmata weiterleiten, ist "
+"fehlgeschlagen."
+
+msgid "Could not check for unusual classes in wikidata=* tags."
+msgstr ""
+"Überprüfung auf ungewöhnliche Typen in wikidata=* Tags ist fehlgeschlagen."
+
+#. i18n: {0} is the API name, {1} is the name of the exception, {2} is the
+#. message of the exception.
+#. i18n: Typical values would be: {0}="Wikidata Action API"
+#. {1}="UnknownHostException" {2}="www.wikidata.org"
+#, java-format
+msgid ""
+"Could not connect to the {0}, probably a network issue or the website is "
+"currently offline ({1}: {2})"
+msgstr ""
+"Konnte nicht mit {0} verbinden, wahrscheinlich ein Netzwerkfehler oder die "
+"Website ist momentan offline ({1}: {2})"
+
 msgid "Could not validate all wikidata=* tags over the internet."
 msgstr ""
 "Nicht alle wikidata=* Tags konnten über das Internet validiert werden."
@@ -99,23 +132,30 @@ msgstr ""
 "Doppelklick auf einen Eintrag führt eine Suche nach Objekten anhand des "
 "Artikelnamens durch (und zentriert die Ansicht)"
 
+#, java-format
+msgid "Download all elements from one of {0} sources"
+msgstr "Lade alle Elemente aus einer von {0} Quellen herunter"
+
+msgid "Download elements"
+msgstr "Elemente herunterladen"
+
 msgid "Download from Sophox API"
 msgstr "Von der Sophox-API herunterladen"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Verweise herunterladen (Eltern-Relationen)"
 
 msgid "Download relation members"
 msgstr "Relationselemente herunterladen"
 
+#. I18n: {0} is the error message returned by the API
+#, java-format
+msgid "Downloading entries with geo coordinates failed: {0}"
+msgstr ""
+"Das Herunterladen von Einträgen mit Geo-Koordinaten ist gescheitert: {0}"
+
 msgid "Edit selected snippet"
 msgstr "Ausgewähltes Schnipsel bearbeiten"
-
-msgid "Enter the Wikipedia language"
-msgstr "Geben Sie die Wikipedia-Sprache ein"
 
 msgid "Error"
 msgstr "Fehler"
@@ -155,6 +195,13 @@ msgstr[0] "{0} Wikidata-Kennung für Sprache ''{1}'' wird abgerufen"
 msgstr[1] "{0} Wikidata-Kennungen für Sprache ''{1}'' werden abgerufen"
 
 msgid ""
+"Find OSM objects linked with wikidata items of a class that is untypical for"
+" OSM"
+msgstr ""
+"Finde OSM-Objekte, die mit Wikidata-Einträgen verknüpft sind, deren Typ für "
+"OSM ungewöhnlich ist"
+
+msgid ""
 "Find places of education at least 2km, and at most 3km from the center of "
 "the selection"
 msgstr ""
@@ -176,11 +223,20 @@ msgstr "Eintrag {0} fehlt"
 msgid "Item {0} redirects to {1}"
 msgstr "Eintrag {0} leitet auf {1} weiter"
 
-msgid "Language"
-msgstr "Sprache"
+msgid "Labels"
+msgstr "Bezeichnungen"
+
+msgid "Links"
+msgstr "Links"
 
 msgid "Load category"
 msgstr "Kategorie laden"
+
+msgid ""
+"Make sure that the wikipedia=* article is not redirecting to another lemma"
+msgstr ""
+"Stelle sicher, dass der Artikel im wikipedia=* Tag nicht zu einem anderen "
+"Lemma weiterleitet"
 
 msgid ""
 "Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
@@ -189,15 +245,32 @@ msgstr ""
 "Stelle sicher, dass der Wikidata-Eintrag für die Q-ID im wikidata=* Tag "
 "wirklich existiert"
 
+msgid ""
+"Makes sure that the wikipedia=* article is connected to the wikidata=* item"
+msgstr ""
+"Stellt sicher, dass der wikipedia=* Artikel mit dem wikidata=* Objekt "
+"verknüpft ist"
+
+#, java-format
+msgid "More than one OSM object is selected: {0}"
+msgstr "Mehr als ein OSM-Objekt ist ausgewählt: {0}"
+
 #, java-format
 msgid "No Wikidata ID found for: {0}"
 msgstr "Keine Wikidata-Kennung gefunden für: {0}"
+
+msgid "No Wikidata item is selected!"
+msgstr "Kein Wikidata-Eintrag ist ausgewählt!"
 
 msgid "Not linked yet"
 msgstr "Noch nicht verknüpft"
 
 msgid "Open Article"
 msgstr "Artikel öffnen"
+
+#, java-format
+msgid "Open item {0} in browser"
+msgstr "Öffne Element {0} im Browser"
 
 msgid "Opens the Wikipedia article of the selected item in a browser"
 msgstr "Wikipedia-Artikel des markierten Eintrags im Browser öffnen"
@@ -223,6 +296,9 @@ msgstr "Wikidata-Einträge suchen"
 msgid "Search Wikipedia category"
 msgstr "Wikipedia-Kategorie durchsuchen"
 
+msgid "See the validator messages of the category ''Other'' for more details."
+msgstr "Siehe Prüfergebnisse der Kategorie ''Andere'' für nähere Details."
+
 msgid "Select if the members of a relation should be downloaded as well"
 msgstr ""
 "Wählen Sie aus, ob die Mitglieder einer Relation ebenfalls heruntergeladen "
@@ -235,47 +311,48 @@ msgstr ""
 "Wählen Sie aus, ob Verweise auf das Objekt ebenfalls heruntergeladen werden "
 "sollen, d.h. Eltern-Relationen und für Punkte zusätzlich die Linien"
 
-msgid "Server: "
-msgstr "Server: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Legt die Standardsprache für Wikipedia-Artikel fest"
+
+#, java-format
+msgid ""
+"Should the wikipedia tag be replaced with the redirect target? Make sure the meaning of the tag remains the same!\n"
+"\n"
+"Before: wikipedia={0}:{1}\n"
+"After: wikipedia={0}:{2}"
+msgstr ""
+"Soll der Wikipedia-Tag durch das Weiterleitungsziel ersetzt werden? Überprüfe, ob die Bedeutung des Tags dabei gleichbleibt!\n"
+"\n"
+"Vorher: wikipedia={0}:{1}\n"
+"Nachher: wikipedia={0}:{2}"
+
+msgid "Show properties of the selected Wikidata item"
+msgstr "Zeige Eigenschaften des ausgewählten Wikidata-Eintrags"
 
 msgid "Show/hide Sophox snippet list"
 msgstr "Zeige/Verstecke die Sophox Schnipsel-Liste"
 
+msgid "Sophox server"
+msgstr "Sophox-Server"
+
+msgid "Statements"
+msgstr "Aussagen"
+
 msgid "Target key: "
 msgstr "Zielschlüssel: "
 
-msgid "The JSON response from the Wikidata Action API can't be read!"
-msgstr ""
-"Die JSON-Antwort vom Wikidata Action API kann nicht eingelesen werden!"
+#. I18n: {0} is the API name
+#, java-format
+msgid "The JSON response from the {0} can''t be decoded!"
+msgstr "Die JSON-Antwort von {0} kann nicht verarbeitet werden!"
 
 msgid "The Wikidata Action API did not respond with all requested entities!"
 msgstr ""
 "Die Wikidata Action API hat nicht alle Objekte zurückgeliefert, die "
 "angefragt wurden!"
 
-#, java-format
-msgid ""
-"The Wikidata Action API reported a query failure for URL {0} ({1}). This is "
-"a programming error, please report to the Wikipedia plugin."
-msgstr ""
-"Das Wikidata Action API hat eine fehlgeschlagene Anfrage an den URL {0} "
-"gemeldet ({1}). Das ist ein Programmierfehler, bitte melden Sie den Fehler "
-"an das Wikidata-Plugin."
-
 msgid "The Wikidata Action API reports a failed query!"
 msgstr "Das Wikidata Action API meldet eine fehlgeschlagene Anfrage!"
-
-#. i18n: {0} is the response code, {1} is the response message. Typical values
-#. would be: {0}=404 {1}="Not Found"
-#, java-format
-msgid ""
-"The Wikidata Action API responded with an unexpected response code: {0} {1}"
-msgstr ""
-"Die Wikidata Action API hat mit einem unerwarteten Antwortcode geantwortet: "
-"{0} {1}"
 
 msgid ""
 "The Wikidata item does not exist! Replace the wikidata=* tag with an "
@@ -287,16 +364,73 @@ msgstr ""
 msgid "The Wikidata item is a redirect"
 msgstr "Der Wikidata-Eintrag ist eine Weiterleitung"
 
+msgid "The Wikipedia/Wikidata layer"
+msgstr "Die Wikipedia/Wikidata-Ebene"
+
+#, java-format
+msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
+msgstr "Der Wert ''{0}'' ist für das Tag wikipedia=* nicht erlaubt"
+
+#. I18n: {0}  is the API name, {1} is the query, normally as URL. {2} is the
+#. error message returned from the API
 #, java-format
 msgid ""
-"When reading the JSON response from the Wikidata Action API, an error "
-"occured! ({0}: {1})"
+"The {0} reported an invalid query for {1} ({2}). This is a programming "
+"error, please report to the Wikipedia plugin."
 msgstr ""
-"Beim Lesen der JSON-Antwort von der Wikidata Action API ist ein Fehler "
-"aufgetreten! ({0}: {1})"
+"Das {0} hat {1} als ungültige Anfrage zurückgewiesen ({2}). Das ist ein "
+"Programmierfehler, bitte melden Sie diesen an das Wikipedia-Plugin."
 
-msgid "Wikidata"
-msgstr "Wikidata"
+#. i18n: {0} is the API name, {1} is the response code, {2} is the response
+#. message.
+#. i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not
+#. Found"
+#, java-format
+msgid "The {0} responded with an unexpected response code: {1} {2}"
+msgstr "Das {0} hat mit einem unerwarteten Antwortcode geantwortet: {1} {2}"
+
+#, java-format
+msgid "There is no Wikipedia site for language ''{0}''!"
+msgstr "Es gibt für das Sprachkürzel ''{0}'' keine Wikipedia-Website!"
+
+msgid ""
+"This check queries Wikidata to find those OSM objects that are linked to "
+"wikidata items of a type, which should not occur in OSM data (at least not "
+"as the main wikidata tag)"
+msgstr ""
+"Diese Prüfung fragt Wikidata ab, um diejenigen OSM-Objekte zu finden, die "
+"mit Wikidata-Einträgen verknüpft sind, welche üblicherweise nicht in den "
+"OSM-Daten auftauchen sollten (zumindest nicht als Haupttag wikidata=*)"
+
+msgid "Toggle the layer displaying Wikipedia articles or Wikidata items"
+msgstr ""
+"Blende die Ebene ein bzw. aus, die Wikipedia-Artikel und Wikidata-Einträge "
+"anzeigt"
+
+msgid ""
+"Turn on the informational level validator messages in the preferences to see"
+" more details."
+msgstr ""
+"Schalte in den Einstellungen die unwichtigen Prüfergebnisse ein, um nähere "
+"Details zu sehen."
+
+#. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
+#. the message that exception provides
+#, java-format
+msgid ""
+"When reading the JSON response from the {0}, an error occured! ({1}: {2})"
+msgstr ""
+"Beim Lesen der JSON-Antwort von {0} ist ein Fehler aufgetreten! ({1}: {2})"
+
+msgid "Wiki layer"
+msgstr "Wiki-Ebene"
+
+msgid "Wikidata Info"
+msgstr "Wikidata-Info"
+
+#, java-format
+msgid "Wikidata Info: {0}"
+msgstr "Wikidata-Info: {0}"
 
 msgid "Wikidata item and Wikipedia article do not match!"
 msgstr "Der Wikidata-Eintrag und der Wikipedia-Artikel passen nicht zusammen!"
@@ -307,11 +441,34 @@ msgstr ""
 "Der Wikidata-Eintrag {0} ist nicht mit dem Wikipedia-Artikel {1} ({2}) "
 "verknüpft"
 
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+OSM Server"
+msgid "Wikidata items in viewport"
+msgstr "Wikidata-Einträge in der aktuellen Ansicht"
+
+msgid ""
+"Wikidata value is of unusual type for the wikidata=* tag on OSM objects"
+msgstr ""
+"Der Wikidata-Wert hat einen ungewöhnlichen Typ für das wikidata=* Tag von "
+"OSM-Objekten"
 
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#, java-format
+msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
+msgstr "Wikipedia-Artikel ''{0}'' leitet auf ''{1}'' weiter"
+
+msgid "Wikipedia article is a redirect"
+msgstr "Wikipedia-Artikel ist eine Weiterleitung"
+
+#, java-format
+msgid "Wikipedia articles in viewport (for language {0})"
+msgstr "Wikipedia-Artikel im sichtbaren Bereich (für Sprache {0})"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia-Sprachvariante"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "Der Wikipedia-Tag hat ein ungültiges Format!"
 
 msgid "Your saved queries:"
 msgstr "Ihre gespeicherten Abfragen:"
@@ -323,12 +480,18 @@ msgstr "Auf Auswahl zoomen"
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
+msgid "all Wikipedia articles in Category"
+msgstr "alle Wikipedia-Artikel in Kategorie"
+
 msgid "clipboard"
 msgstr "Zwischenablage"
 
 #. add entries to list model
 msgid "coordinates"
 msgstr "Koordinaten"
+
+msgid "has no Q-ID"
+msgstr "hat keine Q-ID"
 
 msgid "help"
 msgstr "Hilfe"
@@ -341,10 +504,14 @@ msgid "{0} (malformed site URL)"
 msgstr "{0} (ungültiger Website-URL)"
 
 #, java-format
+msgid "{0} is an instance of {1} (or any subclass thereof)"
+msgstr "{0} ist ein Exemplar von {1} (oder einer Unterklasse davon)"
+
+#, java-format
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} ist keine gültige Wikidata-ID"
 
-#. Plugin description for project
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

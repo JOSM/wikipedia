@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Indonesian (https://www.transifex.com/josm/teams/2544/id/)\n"
 "MIME-Version: 1.0\n"
@@ -51,17 +51,11 @@ msgstr "Tersedia melalui server WIWOSM"
 msgid "Cancel"
 msgstr "Batalkan"
 
-msgid "Category"
-msgstr "Kategori"
-
 msgid "Clipboard"
 msgstr "Clipboard"
 
 msgid "Contacting Server..."
 msgstr "Memanggil Server..."
-
-msgid "Coordinates"
-msgstr "Koordinat"
 
 #, java-format
 msgid ""
@@ -87,9 +81,6 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Download dari API Sophox"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Download acuan (parent relations)"
 
@@ -98,9 +89,6 @@ msgstr "Download anggota relasi"
 
 msgid "Edit selected snippet"
 msgstr "Edit snippet terpilih"
-
-msgid "Enter the Wikipedia language"
-msgstr "Masukkan bahasa Wikipedia"
 
 msgid "Error"
 msgstr "Kesalahan"
@@ -143,9 +131,6 @@ msgid ""
 msgstr ""
 "Cari tempat pendidikan paling sedikit 2km, dan paling jauh 3km dari pusat "
 "dari seleksibelu"
-
-msgid "Language"
-msgstr "Bahasa"
 
 msgid "Load category"
 msgstr "Muat kategori"
@@ -193,9 +178,6 @@ msgstr ""
 "Pilih jika referrensi dari objek harus diunduh contohnya parent relations "
 "dan untuk node/titik, sebagai tambahan, parent ways"
 
-msgid "Server: "
-msgstr "Server: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Menetapkan bahasa standar untuk artikel Wikipedia"
 
@@ -204,12 +186,6 @@ msgstr "Munculkan/hilangkan daftar potongan Sophox"
 
 msgid "Target key: "
 msgstr "Target key: "
-
-msgid "Wikidata"
-msgstr "Wikidata"
-
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+server OSM"
 
 msgid "Wikipedia"
 msgstr "Wikipedia"
@@ -230,7 +206,7 @@ msgstr "koordinat"
 msgid "help"
 msgstr "Bantuan"
 
-#. Plugin description for project
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr "Menyederhanakan tautan objek OSM ke artikel Wikipedia dan Wikidata"

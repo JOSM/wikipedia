@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.0-15-gd945333\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 23:03+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Asturian (https://www.transifex.com/josm/teams/2544/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -48,17 +48,11 @@ msgstr "Disponible vía sirvidor WIWOSM"
 msgid "Cancel"
 msgstr "Encaboxar"
 
-msgid "Category"
-msgstr "Categoría"
-
 msgid "Clipboard"
 msgstr "Cartafueyu"
 
 msgid "Contacting Server..."
 msgstr "Coneutando col sirvidor..."
-
-msgid "Coordinates"
-msgstr "Coordenaes"
 
 #, java-format
 msgid ""
@@ -82,17 +76,11 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Descargar dende la API de Sophox"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Descargar referencies (rellaciones padre)"
 
 msgid "Download relation members"
 msgstr "Descargar los miembros de la rellación"
-
-msgid "Enter the Wikipedia language"
-msgstr "Escribe la llingua de Wikipedia"
 
 msgid "Error"
 msgstr "Error"
@@ -149,9 +137,6 @@ msgstr "Falta l'elementu {0}"
 msgid "Item {0} redirects to {1}"
 msgstr "L'elementu {0} redirixe a {1}"
 
-msgid "Language"
-msgstr "Idioma"
-
 msgid "Load category"
 msgstr "Cargar categoría"
 
@@ -201,17 +186,8 @@ msgstr ""
 "Seleicionar si les referencies del oxetu tienen de descargase tamién; esto "
 "ye, les rellaciones padre y pa los nodios, amás, les víes padre"
 
-msgid "Server: "
-msgstr "Sirvidor: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Establez l''idioma predetermináu pa los artículos de Wikipedia"
-
-msgid "Wikidata"
-msgstr "Wikidata"
-
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+sirvidor OSM"
 
 msgid "Wikipedia"
 msgstr "Wikipedia"
@@ -236,7 +212,7 @@ msgstr "ayuda"
 msgid "{0} (malformed site URL)"
 msgstr "{0} (URL del sitiu mal escrita)"
 
-#. Plugin description for project
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

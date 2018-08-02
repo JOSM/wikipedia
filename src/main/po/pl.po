@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Polish (https://www.transifex.com/josm/teams/2544/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -51,17 +51,11 @@ msgstr "Dostępne przez serwer WIWOSM"
 msgid "Cancel"
 msgstr "Anuluj"
 
-msgid "Category"
-msgstr "Kategoria"
-
 msgid "Clipboard"
 msgstr "Schowek"
 
 msgid "Contacting Server..."
 msgstr "Łączenie z serwerem..."
-
-msgid "Coordinates"
-msgstr "Współrzędne"
 
 #, java-format
 msgid "Copy {0} template"
@@ -70,9 +64,9 @@ msgstr "Kopiuj {0} szablon"
 msgid "Delete selected snippet"
 msgstr "Usuwa zaznaczoną wstawkę"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
+msgid "Download from Sophox API"
+msgstr "Pobieranie z API Sophox"
+
 msgid "Download referrers (parent relations)"
 msgstr "Pobranie obiektów nadrzędnych (relacji)"
 
@@ -81,9 +75,6 @@ msgstr "Pobranie członków relacji"
 
 msgid "Edit selected snippet"
 msgstr "Modyfikuje zaznaczoną wstawkę"
-
-msgid "Enter the Wikipedia language"
-msgstr "Wprowadź język Wikipedii"
 
 msgid "Error"
 msgstr "Błąd"
@@ -121,8 +112,17 @@ msgstr[1] "Pobieranie {0} Wikidata ID dla języka „{1}”"
 msgstr[2] "Pobieranie {0} Wikidata ID dla języka „{1}”"
 msgstr[3] "Pobieranie {0} Wikidata ID dla języka „{1}”"
 
-msgid "Language"
-msgstr "Język"
+#, java-format
+msgid "Item {0} does not exist!"
+msgstr "Element {0} nie istnieje!"
+
+#, java-format
+msgid "Item {0} is missing"
+msgstr "Brakuje elementu {0}"
+
+#, java-format
+msgid "Item {0} redirects to {1}"
+msgstr "Element {0} przekierowuje do {1}"
 
 msgid "Load category"
 msgstr "Wczytaj kategorię"
@@ -166,20 +166,19 @@ msgid ""
 msgstr ""
 "Pobiera obiekty z odniesieniami do tego obiektu (np. relacje, węzły i linie)"
 
-msgid "Server: "
-msgstr "Serwer: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Ustawia domyślny język dla artykułów Wikipedii"
 
 msgid "Target key: "
 msgstr "Klucz docelowy: "
 
-msgid "Wikidata"
-msgstr "Wikidata"
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "Element Wikidata i artykuł Wikipedii nie pasują do siebie!"
 
-msgid "Wikidata+OSM server"
-msgstr "Wikidata + serwer OSM"
+#, java-format
+msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
+msgstr ""
+"Element Wikidata {0} nie jest powiązany z artykułem Wikipedii {1} ({2})"
 
 msgid "Wikipedia"
 msgstr "Wikipedia"
@@ -190,6 +189,10 @@ msgstr "Twoje zapisane zapytania:"
 msgid "Zoom to selection"
 msgstr "Przybliż do zaznaczenia"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
+msgid "[Wiki] "
+msgstr "[Wiki] "
+
 msgid "clipboard"
 msgstr "schowek"
 
@@ -199,3 +202,17 @@ msgstr "współrzędne"
 
 msgid "help"
 msgstr "pomoc"
+
+msgid "wikidata=* item exists"
+msgstr "Obiekt wikidata=* istnieje"
+
+#, java-format
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} nie jest prawidłowym identyfikatorem Wikidata"
+
+#. Plugin description for wikipedia
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Upraszcza odnoszenie obiektów OSM do artykułów na Wikipedii i serwisu "
+"Wikidata"

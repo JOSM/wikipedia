@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: French (https://www.transifex.com/josm/teams/2544/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -51,17 +51,11 @@ msgstr "Disponible via le serveur WIWOSM"
 msgid "Cancel"
 msgstr "Annuler"
 
-msgid "Category"
-msgstr "Catégorie"
-
 msgid "Clipboard"
 msgstr "Presse-papiers"
 
 msgid "Contacting Server..."
 msgstr "Connexion au serveur…"
-
-msgid "Coordinates"
-msgstr "Coordonnées"
 
 #, java-format
 msgid ""
@@ -88,9 +82,6 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Télécharger à partir de l’API Sophox"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Télécharger les référents (relations parentes)"
 
@@ -99,9 +90,6 @@ msgstr "Télécharger les membres"
 
 msgid "Edit selected snippet"
 msgstr "Edite la requête sélectionnée"
-
-msgid "Enter the Wikipedia language"
-msgstr "Entrez la langue Wikipédia"
 
 msgid "Error"
 msgstr "Erreur"
@@ -145,9 +133,6 @@ msgid ""
 msgstr ""
 "Trouver les lieux d éducation à au moins 2km et au plus 3km du centre de la "
 "sélection"
-
-msgid "Language"
-msgstr "Langue :"
 
 msgid "Load category"
 msgstr "Charger la catégorie"
@@ -200,9 +185,6 @@ msgstr ""
 "Sélectionnez si les référents de l’objet doivent également être téléchargés,"
 " c’est-à-dire les relations parentes, et pour les nœuds, les chemins parents"
 
-msgid "Server: "
-msgstr "Serveur: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Définit la langue par défaut pour les articles de Wikipédia"
 
@@ -211,12 +193,6 @@ msgstr "Afficher/masquer la liste des extraits Sophox"
 
 msgid "Target key: "
 msgstr "Clé cible: "
-
-msgid "Wikidata"
-msgstr "Wikidata"
-
-msgid "Wikidata+OSM server"
-msgstr "Serveur Wikidata + OSM"
 
 msgid "Wikipedia"
 msgstr "Wikipédia"
@@ -237,7 +213,7 @@ msgstr "coordonnées"
 msgid "help"
 msgstr "Aide"
 
-#. Plugin description for project
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

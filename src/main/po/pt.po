@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Portuguese (https://www.transifex.com/josm/teams/2544/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, java-format
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' é um código de idioma inválido!"
+
+#, java-format
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} itens, a processar o lote {1} de {2})"
 
 msgid "Add Tag"
 msgstr "Adicionar Etiqueta"
@@ -51,17 +59,14 @@ msgstr "Disponível pelo servidor WIWOSM (Wikipedia where in OSM)"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Category"
-msgstr "Categoria"
+msgid "Change wikipedia tag?"
+msgstr "Alterar a etiqueta wikipedia?"
 
 msgid "Clipboard"
 msgstr "Área de transferência"
 
 msgid "Contacting Server..."
 msgstr "A contactar o servidor..."
-
-msgid "Coordinates"
-msgstr "Coordenadas"
 
 #, java-format
 msgid ""
@@ -84,23 +89,30 @@ msgstr ""
 "Faça clique duplo num item para procurar objetos no mapa com o nome do "
 "artigo da Wikipédia."
 
+#, java-format
+msgid "Download all elements from one of {0} sources"
+msgstr "Descarregar todos os elementos de uma das {0} fontes"
+
+msgid "Download elements"
+msgstr "Descarregar elementos"
+
 msgid "Download from Sophox API"
 msgstr "Descarregar da API Sophox"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Descarregar referentes (relações-pai)"
 
 msgid "Download relation members"
 msgstr "Descarregar os membros da relação"
 
+#. I18n: {0} is the error message returned by the API
+#, java-format
+msgid "Downloading entries with geo coordinates failed: {0}"
+msgstr ""
+"Ocorreu um erro ao descarregar as entradas com coordenadas geográficas: {0}"
+
 msgid "Edit selected snippet"
 msgstr "Editar consulta selecionada"
-
-msgid "Enter the Wikipedia language"
-msgstr "Introduza o código do idioma da Wikipédia a pesquisar"
 
 msgid "Error"
 msgstr "Erro"
@@ -145,8 +157,17 @@ msgid ""
 "the selection"
 msgstr "Encontrar escolas à distância entre 2km a 3km do centro da seleção"
 
-msgid "Language"
-msgstr "Língua"
+#, java-format
+msgid "Item {0} does not exist!"
+msgstr "O item {0} não existe!"
+
+#, java-format
+msgid "Item {0} is missing"
+msgstr "O item {0} está em falta"
+
+#, java-format
+msgid "Item {0} redirects to {1}"
+msgstr "O item {0} redireciona para {1}"
 
 msgid "Load category"
 msgstr "Carregar categoria"
@@ -188,6 +209,11 @@ msgstr "Procurar por itens Wikidata"
 msgid "Search Wikipedia category"
 msgstr "Procurar categoria da Wikipédia"
 
+msgid "See the validator messages of the category ''Other'' for more details."
+msgstr ""
+"Para mais informações veja as mensagens do verificador na categoria "
+"\"Outros\"."
+
 msgid "Select if the members of a relation should be downloaded as well"
 msgstr "Selecione se os membros da relação devem ser também descarregados"
 
@@ -198,32 +224,42 @@ msgstr ""
 "Selecionar caso os referentes do objeto também devam ser descarregados, isto"
 " é, relações pai e para nós, adicionalmente, linhas pai"
 
-msgid "Server: "
-msgstr "Servidor: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Permite alterar o idioma da Wikipédia a ser pesquisada"
 
 msgid "Show/hide Sophox snippet list"
 msgstr "Mostrar/ocultar lista de consultas gravadas"
 
+msgid "Sophox server"
+msgstr "Servidor Sophox"
+
 msgid "Target key: "
 msgstr "Chave da etiqueta a usar: "
 
-msgid "Wikidata"
-msgstr "Wikidata"
-
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+servidor OSM"
+msgid "Wiki layer"
+msgstr "Camada wiki"
 
 msgid "Wikipedia"
 msgstr "Wikipédia"
+
+msgid "Wikipedia language"
+msgstr "Idioma  Wikipédia"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "A etiqueta wikipedia está num formato inválido!"
 
 msgid "Your saved queries:"
 msgstr "Consultas Overpass gravadas:"
 
 msgid "Zoom to selection"
 msgstr "Enquadrar elementos selecionados"
+
+#. i18n: Prefix for the validator messages. Note the space at the end!
+msgid "[Wiki] "
+msgstr "[Wiki] "
+
+msgid "all Wikipedia articles in Category"
+msgstr "todos os artigos da Wikipédia na Categoria"
 
 msgid "clipboard"
 msgstr "área de transferência"

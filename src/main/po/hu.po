@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Hungarian (https://www.transifex.com/josm/teams/2544/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -51,17 +51,11 @@ msgstr "Elérhető WIWOSM szerveren keresztül"
 msgid "Cancel"
 msgstr "Mégse"
 
-msgid "Category"
-msgstr "Kategória"
-
 msgid "Clipboard"
 msgstr "Vágólap"
 
 msgid "Contacting Server..."
 msgstr "Kapcsolódás a szerverhez…"
-
-msgid "Coordinates"
-msgstr "Koordináták"
 
 #, java-format
 msgid ""
@@ -88,9 +82,6 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Letöltés a Sophox API-ról"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Hivatkozók (szülő kapcsolatok) letöltése"
 
@@ -99,9 +90,6 @@ msgstr "Kapcsolat tagjainak letöltése"
 
 msgid "Edit selected snippet"
 msgstr "A kijelölt kódtöredék szerkesztése"
-
-msgid "Enter the Wikipedia language"
-msgstr "Wikipedia nyelv megadása"
 
 msgid "Error"
 msgstr "Hiba"
@@ -136,8 +124,8 @@ msgstr "Wikidata ID-k lekérése"
 #, java-format
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
-msgstr[0] "{0} Wikidata ID lekérése a \"{1}\" nyelvhez"
-msgstr[1] "{0} Wikidata ID lekérése a \"{1}\" nyelvhez"
+msgstr[0] "{0} Wikidata ID lekérése a(z) „{1}” nyelvhez"
+msgstr[1] "{0} Wikidata ID lekérése a(z) „{1}” nyelvhez"
 
 msgid ""
 "Find places of education at least 2km, and at most 3km from the center of "
@@ -145,9 +133,6 @@ msgid ""
 msgstr ""
 "Oktatási intézmény keresése a kijelölés közepétől legalább 2 km és "
 "legfeljebb 3 km távolságra"
-
-msgid "Language"
-msgstr "Nyelv"
 
 msgid "Load category"
 msgstr "Kategória betöltése"
@@ -190,9 +175,6 @@ msgstr ""
 "Jelöld be, ha a hivatkozókat, például a szülő kapcsolatokat, utakat is le "
 "kell tölteni a pontokhoz"
 
-msgid "Server: "
-msgstr "Szerver: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Megadja az alapértelmezett nyelvet a Wikipédia cikkekhez"
 
@@ -201,12 +183,6 @@ msgstr "A Sophox-kódtöredéklista megjelenítése/elrejtése"
 
 msgid "Target key: "
 msgstr "Cél kulcs: "
-
-msgid "Wikidata"
-msgstr "Wikidata"
-
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+OSM szerver"
 
 msgid "Wikipedia"
 msgstr "Wikipédia"
@@ -231,7 +207,7 @@ msgstr "súgó"
 msgid "{0} (malformed site URL)"
 msgstr "{0} (helytelen alakú webhely URL)"
 
-#. Plugin description for project
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

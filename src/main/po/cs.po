@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Czech (https://www.transifex.com/josm/teams/2544/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -50,17 +50,11 @@ msgstr "Dostupné pomocí serveru WIWOSM"
 msgid "Cancel"
 msgstr "Zrušit"
 
-msgid "Category"
-msgstr "Kategorie"
-
 msgid "Clipboard"
 msgstr "Schránka"
 
 msgid "Contacting Server..."
 msgstr "Připojování k serveru..."
-
-msgid "Coordinates"
-msgstr "Souřadnice"
 
 #, java-format
 msgid ""
@@ -87,9 +81,6 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Stáhnout z API Sophox"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Stáhnout odkazující objekty (rodičovské relace)"
 
@@ -98,9 +89,6 @@ msgstr "Stáhnout členy relace"
 
 msgid "Edit selected snippet"
 msgstr "Upravit vybraný dotaz"
-
-msgid "Enter the Wikipedia language"
-msgstr "Zadejte jazyk Wikipedie"
 
 msgid "Error"
 msgstr "Chyba"
@@ -144,9 +132,6 @@ msgid ""
 "Find places of education at least 2km, and at most 3km from the center of "
 "the selection"
 msgstr "Najít místa vzdělávání nejméně 2 km a nejvíce 3 km od středu výběru"
-
-msgid "Language"
-msgstr "Jazyk"
 
 msgid "Load category"
 msgstr "Načíst kategorii"
@@ -197,9 +182,6 @@ msgstr ""
 "Zvolte, pokud mají být staženy také odkazující objekty, t. j. rodičovské "
 "relace a pro uzly navíc rodičovské cesty."
 
-msgid "Server: "
-msgstr "Server: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Nastaví výchozí jazyk pro články Wikipedie"
 
@@ -208,12 +190,6 @@ msgstr "Zobrazit/skrýt seznam kousků kódu Sophox"
 
 msgid "Target key: "
 msgstr "Cílový klíč: "
-
-msgid "Wikidata"
-msgstr "Wikidata"
-
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+OSM server"
 
 msgid "Wikipedia"
 msgstr "Wikipedie"
@@ -234,7 +210,7 @@ msgstr "souřadnice"
 msgid "help"
 msgstr "nápověda"
 
-#. Plugin description for project
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

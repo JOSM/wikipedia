@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Dutch (https://www.transifex.com/josm/teams/2544/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -51,17 +51,11 @@ msgstr "Beschikbaar via server WIWOSM"
 msgid "Cancel"
 msgstr "Annuleren"
 
-msgid "Category"
-msgstr "Categorie"
-
 msgid "Clipboard"
 msgstr "Klembord"
 
 msgid "Contacting Server..."
 msgstr "Met server verbinden..."
-
-msgid "Coordinates"
-msgstr "Coördinaten"
 
 #, java-format
 msgid ""
@@ -88,9 +82,6 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Downloaden van Sophox API"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Download verwijzers (ouderrelaties)"
 
@@ -99,9 +90,6 @@ msgstr "Downloaden van leden van relatie"
 
 msgid "Edit selected snippet"
 msgstr "Geselecteerde snipper bewerken"
-
-msgid "Enter the Wikipedia language"
-msgstr "Voer de taal van Wikipedia in"
 
 msgid "Error"
 msgstr "Fout"
@@ -145,9 +133,6 @@ msgid ""
 msgstr ""
 "Zoek naar plaatsen voor onderwijs op ten minste 2 km afstand en ten hoogste "
 "3 km van het centrum van de selectie"
-
-msgid "Language"
-msgstr "Taal"
 
 msgid "Load category"
 msgstr "Categorie laden"
@@ -198,9 +183,6 @@ msgstr ""
 "Selecteer dit als de objecten die naar het object verwijzen ook moeten "
 "worden gedownload, dat zijn ouderrelaties en voor knopen ook nog ouderwegen"
 
-msgid "Server: "
-msgstr "Server: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Stelt de standaardtaal in voor de artikelen van Wikipedia"
 
@@ -209,12 +191,6 @@ msgstr "Sophox snipperlijst tonen/verbergen"
 
 msgid "Target key: "
 msgstr "Doel sleutel: "
-
-msgid "Wikidata"
-msgstr "Wikidata"
-
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+OSM server"
 
 msgid "Wikipedia"
 msgstr "Wikipedia"
@@ -235,7 +211,7 @@ msgstr "coördinaten"
 msgid "help"
 msgstr "help"
 
-#. Plugin description for project
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

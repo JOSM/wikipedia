@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.0-15-gd945333\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 23:03+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/josm/teams/2544/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#, java-format
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' 是非法的語言代碼！"
+
+#, java-format
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} 項目，處理 batch {1} of {2})"
 
 msgid "Add Tag"
 msgstr "新增標籤"
@@ -49,8 +57,14 @@ msgstr "可透過 WIWOSM 伺服器利用"
 msgid "Cancel"
 msgstr "取消"
 
-msgid "Category"
-msgstr "分類"
+msgid "Change wikipedia tag?"
+msgstr "變更維基百科標籤？"
+
+msgid "Check wikipedia=* is interwiki link of wikidata=*"
+msgstr "檢查 wikipedia=* 是否有內部 wiki 連結到 wikidata=*"
+
+msgid "Check wikipedia=* is not a redirect"
+msgstr "檢查 wikipedia=* 是否不是重定向"
 
 msgid "Clipboard"
 msgstr "剪貼簿"
@@ -58,12 +72,26 @@ msgstr "剪貼簿"
 msgid "Contacting Server..."
 msgstr "正在連接伺服器..."
 
-msgid "Coordinates"
-msgstr "坐標"
+#, java-format
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr "複製 {0} 模板到系統剪貼簿，並且用第一個選擇的節點當範例"
 
 #, java-format
 msgid "Copy {0} template"
 msgstr "複製 {0} 模板"
+
+msgid ""
+"Could not check for all wikipedia=* tags if they match the wikidata=* tag."
+msgstr "無法檢查所有 wikipedia=* 標籤是否符合 wikidata=* 標籤。"
+
+msgid ""
+"Could not check for all wikipedia=* tags if they redirect to another lemma."
+msgstr "無法檢查所有 wikipedia=* 標籤，因為已經重定向到其他地方。"
+
+msgid "Could not check for unusual classes in wikidata=* tags."
+msgstr "無法檢查 wikidata=* 標籤不尋常類型。"
 
 msgid "Delete selected snippet"
 msgstr "刪除選擇的文字片段"
@@ -76,9 +104,6 @@ msgstr "點撃兩下以條目名稱 (和中心坐標) 搜索物件"
 msgid "Download from Sophox API"
 msgstr "從 Sophox API 下載"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "下載參照 (上層關聯)"
 
@@ -87,9 +112,6 @@ msgstr "下載關聯成員"
 
 msgid "Edit selected snippet"
 msgstr "編輯選擇的文字片段"
-
-msgid "Enter the Wikipedia language"
-msgstr "輸入維基百科語言"
 
 msgid "Error"
 msgstr "錯誤"
@@ -123,9 +145,6 @@ msgstr "取得維基數據ID"
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
 msgstr[0] "取得 {0} 語言 ''{1}''  的維基數據ID"
-
-msgid "Language"
-msgstr "語言"
 
 msgid "Load category"
 msgstr "載入分類"
@@ -166,9 +185,6 @@ msgstr "搜尋維基百科分類"
 msgid "Select if the members of a relation should be downloaded as well"
 msgstr "如果關聯的成員也要下載請選擇"
 
-msgid "Server: "
-msgstr "伺服器： "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "設定維基百科的預設語言版本"
 
@@ -178,11 +194,12 @@ msgstr "顯示/隱藏 Sophox 片段清單"
 msgid "Target key: "
 msgstr "目標連結 "
 
-msgid "Wikidata"
-msgstr "維基數據"
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "維基數據項目和維基百科條目對不上！"
 
-msgid "Wikidata+OSM server"
-msgstr "Wikidata+OSM 伺服器"
+#, java-format
+msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
+msgstr "維基數據項目 {0} 與維基百科條目 {1} ({2}) 沒有關聯"
 
 msgid "Wikipedia"
 msgstr "維基百科"
@@ -204,10 +221,24 @@ msgstr "剪貼簿"
 msgid "coordinates"
 msgstr "座標"
 
+msgid "has no Q-ID"
+msgstr "沒有 Q-ID"
+
 msgid "help"
 msgstr "說明"
 
-#. Plugin description for project
+msgid "wikidata=* item exists"
+msgstr "存在 wikidata=* 項目"
+
+#, java-format
+msgid "{0} (malformed site URL)"
+msgstr "{0} (異常網站網址)"
+
+#, java-format
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} 不是有效的 Wikidata-ID"
+
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr "簡化連結OSM物件到維基百科條目和維基數據項目"

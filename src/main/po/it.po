@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia b8a4867\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-13 04:07+0000\n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Italian (https://www.transifex.com/josm/teams/2544/it/)\n"
 "MIME-Version: 1.0\n"
@@ -51,17 +51,11 @@ msgstr "Disponibile tramite server WIWOSM"
 msgid "Cancel"
 msgstr "Annulla"
 
-msgid "Category"
-msgstr "Categoria"
-
 msgid "Clipboard"
 msgstr "Appunti"
 
 msgid "Contacting Server..."
 msgstr "Connessione al server in corso..."
-
-msgid "Coordinates"
-msgstr "Coordinate"
 
 #, java-format
 msgid ""
@@ -74,6 +68,9 @@ msgstr ""
 #, java-format
 msgid "Copy {0} template"
 msgstr "Copia {0} modello"
+
+msgid "Could not validate all wikidata=* tags over the internet."
+msgstr "Impossibile convalidare tutte le etichette wikidata=* su internet."
 
 msgid "Delete selected snippet"
 msgstr "Cancella il programma selezionato"
@@ -88,9 +85,6 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Scarica dalle API di Sophox"
 
-#. TODO: Once new core is widely avialable, replace:
-#. Main.pref.getBoolean --> Config.getPref().getBoolean
-#. Main.pref.put --> Config.getPref().putBoolean
 msgid "Download referrers (parent relations)"
 msgstr "Scarica oggetti collegati (relazioni padre)"
 
@@ -99,9 +93,6 @@ msgstr "Scarica i membri della relazione"
 
 msgid "Edit selected snippet"
 msgstr "Modifica il programma selezionato"
-
-msgid "Enter the Wikipedia language"
-msgstr "Inserire la lingua di Wikipedia"
 
 msgid "Error"
 msgstr "Errore"
@@ -150,11 +141,30 @@ msgstr ""
 "Trova luoghi di istruzione ad almeno 2 km e al massimo 3 km dal centro della"
 " selezione"
 
-msgid "Language"
-msgstr "Lingua"
+msgid "Invalid Q-ID! Cannot exist on Wikidata."
+msgstr "Q-ID non valido! Non può esistere in Wikidata."
+
+#, java-format
+msgid "Item {0} does not exist!"
+msgstr "L’elemento {0} non esiste!"
+
+#, java-format
+msgid "Item {0} is missing"
+msgstr "L’elemento {0} è mancante"
+
+#, java-format
+msgid "Item {0} redirects to {1}"
+msgstr "L’elemento {0} punta a {1}"
 
 msgid "Load category"
 msgstr "Carica categoria"
+
+msgid ""
+"Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
+"exists"
+msgstr ""
+"Controllare che l’elemento Wikidata corrispondente al valore dell’etichetta "
+"wikidata=* esista realmente"
 
 #, java-format
 msgid "No Wikidata ID found for: {0}"
@@ -194,6 +204,11 @@ msgstr "Cerca elementi Wikidata"
 msgid "Search Wikipedia category"
 msgstr "Cerca categoria Wikipedia"
 
+msgid "See the validator messages of the category ''Other'' for more details."
+msgstr ""
+"Per ulteriori dettagli vedi i messaggi del validatore nella categoria "
+"“Altro”."
+
 msgid "Select if the members of a relation should be downloaded as well"
 msgstr ""
 "Selezionare se devono essere scaricati anche i membri di una relazione"
@@ -206,9 +221,6 @@ msgstr ""
 "all''oggetto, es. relazioni padre e per i nodi, in aggiunta, i percorsi "
 "padre"
 
-msgid "Server: "
-msgstr "Server: "
-
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Imposta la lingua predefinita per gli articoli di Wikipedia"
 
@@ -218,11 +230,19 @@ msgstr "Mostra/nascondi la lista dei programmi Sophox"
 msgid "Target key: "
 msgstr "Chiave di destinazione: "
 
-msgid "Wikidata"
-msgstr "Wikidata"
+msgid "The Wikidata Action API did not respond with all requested entities!"
+msgstr ""
+"Le API Action di Wikidata non hanno risposto con tutte le entità richieste!"
 
-msgid "Wikidata+OSM server"
-msgstr "Wikidata + server OSM"
+msgid "The Wikidata Action API reports a failed query!"
+msgstr "Le API Action di Wikidata segnalano una richiesta fallita!"
+
+msgid ""
+"The Wikidata item does not exist! Replace the wikidata=* tag with an "
+"existing Wikidata item or remove the Wikidata tag."
+msgstr ""
+"L’elemento Wikidiata non esiste! Sostituisci l’etichetta wikidata=* con un "
+"elemento esistente di Wikidata oppure rimuovi l’etichetta Wikidata."
 
 msgid "Wikipedia"
 msgstr "Wikipedia"
@@ -232,6 +252,10 @@ msgstr "Le tue richieste salvate:"
 
 msgid "Zoom to selection"
 msgstr "Ingrandisci visuale sulla selezione"
+
+#. i18n: Prefix for the validator messages. Note the space at the end!
+msgid "[Wiki] "
+msgstr "[Wiki] "
 
 msgid "clipboard"
 msgstr "appunti"
@@ -247,7 +271,11 @@ msgstr "aiuto"
 msgid "{0} (malformed site URL)"
 msgstr "{0} (indirizzo web errato)"
 
-#. Plugin description for project
+#, java-format
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} non è un valido ID di Wikidata"
+
+#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

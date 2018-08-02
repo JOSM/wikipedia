@@ -1,0 +1,324 @@
+# Translations for the JOSM plugin 'wikipedia' (el)
+# Copyright (C) 2018 
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-08-02 18:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Greek (https://www.transifex.com/josm/teams/2544/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, java-format
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' είναι ένας παράνομος κωδικός γλώσσας!"
+
+#, java-format
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} αντικείμενα, επεξεργασία ομάδας {1} από {2})"
+
+msgid "Add Tag"
+msgstr "Προσθήκη Ετικέτας"
+
+msgid "Add Wikidata"
+msgstr "Προσθήκη Wikidata"
+
+#, java-format
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Προσθήκη Wikidata για γλώσσα ''{0}''"
+
+msgid "Add names from Wikipedia"
+msgstr "Προσθήκη ονομάτων από την Βικιπαίδεια"
+
+msgid "Add new snippet"
+msgstr "Προσθήκη νέου αποσπάσματος"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Προσθήκη μιας ετικέτας ''βικιπαίδεια'' που αντιστοιχεί σε αυτό το άρθρο στα "
+"επιλεγμένα αντικείμενα"
+
+#. I18n: object/s from dataset contain link to Wikipedia article
+msgid "Available in local dataset"
+msgstr "Διαθέσιμο σε τοπικό σύνολο δεδομένων"
+
+#. I18n: WIWOSM server already links Wikipedia article to object/s
+msgid "Available via WIWOSM server"
+msgstr "Διαθέσιμο μέσω του διακομιστή WIWOSM"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Change wikipedia tag?"
+msgstr "Αλλαγή της ετικέτας wikipedia;"
+
+msgid "Check wikipedia=* is not a redirect"
+msgstr "Ελέγξτε την wikipedia=* δεν είναι ανακατεύθυνση"
+
+msgid "Clipboard"
+msgstr "Πρόχειρο"
+
+msgid "Contacting Server..."
+msgstr "Επικοινωνία με τον Διακομιστή..."
+
+msgid ""
+"Could not check for all wikipedia=* tags if they match the wikidata=* tag."
+msgstr ""
+"Αδύνατη η επαλήθευση για όλες τις ετικέτες wikipedia=* αν ταιριάζουν με την "
+"ετικέτα wikidata=*."
+
+msgid ""
+"Could not check for all wikipedia=* tags if they redirect to another lemma."
+msgstr ""
+"Αδύνατη η επαλήθευση για όλες τις ετικέτες wikipedia=* αν ανακατευθύνονται "
+"σε άλλο λήμμα."
+
+msgid "Could not validate all wikidata=* tags over the internet."
+msgstr "Αδύνατη η επικύρωση όλων των ετικετών wikidata=* μέσω του διαδικτύου."
+
+msgid "Delete selected snippet"
+msgstr "Διαγραφή επιλεγμένου αποσπάσματος"
+
+#, java-format
+msgid "Download all elements from one of {0} sources"
+msgstr "Λήψη όλων των στοιχείων από μία από τις {0} πηγές"
+
+msgid "Download elements"
+msgstr "Λήψη στοιχείων"
+
+msgid "Download from Sophox API"
+msgstr "Λήψη από το Sophox API"
+
+msgid "Download relation members"
+msgstr "Λήψη μελών της συσχέτισης"
+
+msgid "Edit selected snippet"
+msgstr "Επεξεργασία επιλεγμένου αποσπάσματος"
+
+msgid "Error"
+msgstr "Σφάλμα"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Λήψη το ID του Wikidata"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Λήψη το ID του Wikidata χρησιμοποιώντας την ετικέτα \"βικιπαίδεια\""
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Λήψη άρθρων Βικιπαίδειας με συντεταγμένες"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Λήψη μιας λίστας όλων των άρθρων Βικιπαίδειας μιας κατηγορίας"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Λήψη όλων των συντεταγμένων από τη Wikidata στην τρέχουσα προβολή"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Λήψη όλων των συντεταγμένων από τη Wikidata στην τρέχουσα προβολή"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Βρείτε χώρους εκπαίδευσης τουλάχιστον 2χλμ, και το πολύ 3χλμ από το κέντρο "
+"της επιλογής"
+
+msgid "Invalid Q-ID! Cannot exist on Wikidata."
+msgstr "Άκυρο Q-ID! Δεν μπορεί να υπάρχει στο Wikidata."
+
+#, java-format
+msgid "Item {0} does not exist!"
+msgstr "Το στοιχείο {0} δεν υπάρχει!"
+
+#, java-format
+msgid "Item {0} is missing"
+msgstr "Το στοιχείο {0} λείπει!"
+
+#, java-format
+msgid "Item {0} redirects to {1}"
+msgstr "Το στοιχείο {0} ανακατευθύνεται στο {1}"
+
+msgid "Load category"
+msgstr "Φόρτωση κατηγορίας"
+
+msgid ""
+"Make sure that the wikipedia=* article is not redirecting to another lemma"
+msgstr ""
+"Βεβαιωθείτε ότι το άρθρο wikipedia=* δεν ανακατευθύνεται σε άλλο λήμμα"
+
+msgid ""
+"Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
+"exists"
+msgstr ""
+"Βεβαιωθείτε ότι το στοιχείο Wikidata για το Q-ID στην ετικέτα wikidata=* "
+"υπάρχει πραγματικά"
+
+msgid ""
+"Makes sure that the wikipedia=* article is connected to the wikidata=* item"
+msgstr ""
+"Βεβαιώνεται ότι το άρθρο wikipedia=* είναι συνδεδεμένο με το στοιχείο "
+"wikidata=*"
+
+#, java-format
+msgid "No Wikidata ID found for: {0}"
+msgstr "Δεν βρέθηκε το ID του Wikidata για: {0}"
+
+msgid "Not linked yet"
+msgstr "Δεν έχει συνδεθεί ακόμα"
+
+msgid "Open Article"
+msgstr "Άνοιγμα Άρθρου"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr ""
+"Ανοίγει το άρθρο της Wikipedia του επιλεγμένου στοιχείου σε ένα πρόγραμμα "
+"περιήγησης"
+
+msgid "Overwrite key"
+msgstr "Πλήκτρο αντικατάστασης"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Επικολά άρθρα Wikipedia από το πρόχειρο του συστήματος"
+
+msgid "Please select a download area first."
+msgstr "Επιλέξτε πρώτα μια περιοχή λήψης."
+
+msgid "Search Wikidata items"
+msgstr "Αναζήτηση στοιχείων του Wikidata"
+
+msgid "Search Wikipedia category"
+msgstr "Αναζήτηση κατηγορίας Βικιπαίδεια"
+
+msgid "See the validator messages of the category ''Other'' for more details."
+msgstr ""
+"Δείτε τα μηνύματα επικύρωσης της κατηγορίας ''Άλλα'' για περισσότερες "
+"λεπτομέρειες."
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Επιλέξτε αν θα πρέπει να ληφθούν επίσης και τα μέλη μιας συσχέτισης"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Ορίζει την προεπιλεγμένη γλώσσα για τα άρθρα της Wikipedia"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Εμφάνιση/απόκρυψη λίστας αποσπασμάτων Sophox"
+
+msgid "Sophox server"
+msgstr "Διακομιστής Sophox"
+
+msgid "The Wikidata Action API did not respond with all requested entities!"
+msgstr ""
+"Το Wikidata Action API δεν ανταποκρίθηκε με όλους τους αιτούμενους φορείς!"
+
+msgid "The Wikidata Action API reports a failed query!"
+msgstr "Το Wikidata Action API αναφέρει ένα αποτυχημένο ερώτημα!"
+
+msgid ""
+"The Wikidata item does not exist! Replace the wikidata=* tag with an "
+"existing Wikidata item or remove the Wikidata tag."
+msgstr ""
+"Το στοιχείο του Wikidata δεν υπάρχει! Αντικαταστήστε την ετικέτα wikidata=* "
+"με ένα υπάρχον στοιχείο του Wikidata ή αφαιρέστε την ετικέτα του Wikidata."
+
+msgid "The Wikidata item is a redirect"
+msgstr "Το στοιχείο Wikidata είναι μια ανακατεύθυνση"
+
+msgid "The Wikipedia/Wikidata layer"
+msgstr "Το επίπεδο της Wikipedia/Wikidata"
+
+#, java-format
+msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
+msgstr "Η τιμή ''{0}'' δεν επιτρέπεται για την ετικέτα wikipedia=*"
+
+#, java-format
+msgid "There is no Wikipedia site for language ''{0}''!"
+msgstr "Δεν υπάρχει ιστότοπος Wikipedia για τη γλώσσα ''{0}''!"
+
+msgid "Toggle the layer displaying Wikipedia articles or Wikidata items"
+msgstr ""
+"Εναλλαγή του επιπέδου που εμφανίζει άρθρα Wikipedia ή αντικείμενα Wikidata"
+
+msgid ""
+"Turn on the informational level validator messages in the preferences to see"
+" more details."
+msgstr ""
+"Ενεργοποίηση των μηνυμάτων επικύρωσης πληροφοριακού επιπέδου στις "
+"προτιμήσεις για να δείτε περισσότερες λεπτομέρειες."
+
+msgid "Wiki layer"
+msgstr "Επίπεδο Wiki"
+
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "Το στοιχείο της Wikidata και το άρθρο της Βικιπαίδεια δεν ταιριάζουν!"
+
+#, java-format
+msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
+msgstr ""
+"Το στοιχείο {0} του Wikidata δεν σχετίζεται με το άρθρο της Βικιπαίδεια {1} "
+"({2})"
+
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+#, java-format
+msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
+msgstr "Το άρθρο της Wikipedia ''{0}'' ανακατευθύνεται στο ''{1}''"
+
+msgid "Wikipedia article is a redirect"
+msgstr "Το άρθρο της Wikipedia είναι μία ανακατεύθυνση"
+
+msgid "Wikipedia language"
+msgstr "Γλώσσα Wikipedia"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "Η ετικέτα της Wikipedia έχει μη έγκυρη μορφή!"
+
+msgid "Your saved queries:"
+msgstr "Τα αποθηκευμένα σας ερωτήματα:"
+
+msgid "Zoom to selection"
+msgstr "Εστίαση στην επιλογή"
+
+#. i18n: Prefix for the validator messages. Note the space at the end!
+msgid "[Wiki] "
+msgstr "[Wiki] "
+
+msgid "all Wikipedia articles in Category"
+msgstr "όλα τα άρθρα της Wikipedia στην Κατηγορία"
+
+msgid "clipboard"
+msgstr "πρόχειρο"
+
+#. add entries to list model
+msgid "coordinates"
+msgstr "συντεταγμένες"
+
+msgid "has no Q-ID"
+msgstr "δεν έχει Q-ID"
+
+msgid "help"
+msgstr "βοήθεια"
+
+msgid "wikidata=* item exists"
+msgstr "wikidata=* το στοιχείο υπάρχει"
+
+#, java-format
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "Το {0} δεν είναι έγκυρο ID του Wikidata"
+
+#. Plugin description for wikipedia
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Απλοποίηση σύνδεσης αντικειμένων OSM με άρθρα Wikipedia και αντικείμενα του "
+"Wikidata"
