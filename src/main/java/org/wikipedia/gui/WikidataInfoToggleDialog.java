@@ -60,12 +60,13 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
     private final JPanel linkTab = new JPanel();
     private final JButton webLinkButton = new JButton();
 
-    private final DataSelectionListener selectionListener = it -> updateSelection();
+    private final DataSelectionListener selectionListener = it -> updateDisplayedItem();
     private final DataSetListener datasetListener = new DataSetListenerAdapter(it -> {
         if (it.getType() == AbstractDatasetChangedEvent.DatasetEventType.TAGS_CHANGED) {
-            updateSelection();
+            updateDisplayedItem();
         }
     });
+    private String displayedItem;
 
     public WikidataInfoToggleDialog(final WikipediaToggleDialog wikiDialog) {
         super(
@@ -123,7 +124,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
         tabs.add(I18n.tr("Links"), linkTab);
 
         // Set up listeners
-        this.wikiDialog.list.addListSelectionListener(event -> updateSelection());
+        this.wikiDialog.list.addListSelectionListener(event -> updateDisplayedItem());
         MainApplication.getLayerManager().addAndFireActiveLayerChangeListener(event -> {
             System.out.println("Fire active layer change");
             final DataSet previous = event.getPreviousDataSet();
@@ -137,7 +138,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
                 current.addDataSetListener(datasetListener);
             }
         });
-        updateSelection();
+        updateDisplayedItem();
     }
 
     /**
@@ -152,8 +153,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
      * Whenever it is possible that the content of the info panel should be updated, call this method.
      * It checks for the currently selected items in the active dataset and in the Wikidata list. The panel is updated.
      */
-    private void updateSelection() {
-        mainPanel.removeAll();
+    private void updateDisplayedItem() {
         final DataSet dataset = MainApplication.getLayerManager().getActiveDataSet();
         final Map<String, Integer> wdTagsInDataset =
             dataset == null
@@ -164,30 +164,32 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
                 .map(Optional::get)
                 .collect(Collectors.groupingBy(it -> it, Collectors.summingInt(it -> 1)));
         if (wdTagsInDataset.isEmpty()) {
+            // No OSM objects with valid wikidata=* tags are selected
             final WikipediaEntry entry = this.wikiDialog.list.getSelectedValue();
             if (entry instanceof WikidataEntry) {
-                setTitle(entry.article);
-                nameLabel.setText(((WikidataEntry) entry).label);
-                descriptionLabel.setText(((WikidataEntry) entry).description);
-                qidLabel.setText(entry.article);
-                mainPanel.add(new JScrollPane(infoPanel));
+                displayItem(entry.article, ((WikidataEntry) entry).label, ((WikidataEntry) entry).description);
             } else {
-                setTitle(null);
-                messageLabel.setText(I18n.tr("No Wikidata item is selected!"));
-                mainPanel.add(messagePanel);
+                displayMessage(null, I18n.tr("No Wikidata item is selected!"));
             }
         } else if (wdTagsInDataset.size() >= 2) {
+            // More than one OSM object with valid wikidata=* tag is selected
             final String itemList = wdTagsInDataset.entrySet().stream().map(it -> it.getKey() + " (" + it.getValue() + "×)").collect(Collectors.joining(", "));
-            setTitle(itemList);
-            messageLabel.setText(I18n.tr("More than one OSM object is selected: {0}", itemList));
-            mainPanel.add(messagePanel);
+            displayMessage(itemList, I18n.tr("More than one OSM object is selected: {0}", itemList));
         } else { // size == 1
+            // An OSM object or multiple OSM objects with exactly one valid wikidata=* tag (multiple tags with same value count as one)
             final String qId = wdTagsInDataset.keySet().iterator().next();
+            displayItem(qId, EMPTY_STRING, EMPTY_STRING);
+        }
+    }
+
+    private void displayItem(final String qId, final String label, final String description) {
+        if (qId != null && !qId.equals(getDisplayedItem())) {
+            mainPanel.removeAll();
             setTitle(qId);
-            nameLabel.setText(EMPTY_STRING);
-            descriptionLabel.setText(EMPTY_STRING);
-            qidLabel.setText(qId);
-            mainPanel.add(new JScrollPane(infoPanel));
+            nameLabel.setText(label);
+            descriptionLabel.setText(description);
+            setDisplayedItem(qId);
+
             webLinkButton.setAction(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -199,8 +201,30 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
                 }
             });
             webLinkButton.setText(I18n.tr("Open item {0} in browser", qId));
+
+            mainPanel.add(new JScrollPane(infoPanel));
+            mainPanel.revalidate();
+            mainPanel.repaint();
         }
+    }
+
+    private void displayMessage(final String title, final String message) {
+        mainPanel.removeAll();
+        setTitle(title);
+        setDisplayedItem(null);
+        messageLabel.setText(message);
+        mainPanel.add(messagePanel);
         mainPanel.revalidate();
         mainPanel.repaint();
+    }
+
+    private void setDisplayedItem(final String qId) {
+        this.displayedItem = qId;
+        setTitle(qId);
+        qidLabel.setText(qId);
+    }
+
+    private String getDisplayedItem() {
+        return displayedItem;
     }
 }
