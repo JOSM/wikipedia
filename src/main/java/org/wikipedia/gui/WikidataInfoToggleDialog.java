@@ -55,7 +55,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
     private final JPanel infoPanel = new JPanel(new BorderLayout());
 
     private final JTabbedPane tabs = new JTabbedPane();
-    private final JPanel labelTab = new JPanel();
+    private final WikidataInfoLabelPanel labelTab = new WikidataInfoLabelPanel();
     private final JPanel statementTab = new JPanel();
     private final JPanel linkTab = new JPanel();
     private final JButton webLinkButton = new JButton();
@@ -189,6 +189,9 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
             nameLabel.setText(label);
             descriptionLabel.setText(description);
             setDisplayedItem(qId);
+
+            labelTab.clear();
+            labelTab.downloadLabelsFor(qId);
 
             webLinkButton.setAction(new AbstractAction() {
                 @Override
