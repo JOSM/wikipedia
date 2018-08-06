@@ -14,15 +14,10 @@ public class ApiUrlTest {
         ApiUrl.url("malformedURL");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testMalformedMultipartUrl() {
-        ApiUrl.url("malformed", "Multipart", "U", "R", "L");
-    }
-
     @Test
     public void testUrl() throws MalformedURLException {
         assertEquals(new URL("https://example.org"), ApiUrl.url("https://example.org"));
-        assertEquals(new URL("https://example.org/abc"), ApiUrl.url("https://example.org/", "abc"));
-        assertEquals(new URL("https://example.org/abc/def/ghi/jkl/mno"), ApiUrl.url("https://example.org/", "abc/", "def/", "ghi/", "jkl/", "mno"));
+        assertEquals(new URL("https://example.org/abc"), ApiUrl.url("https://example.org/abc"));
+        assertEquals(new URL("https://example.org/abc/def/ghi/jkl/mno"), ApiUrl.url("https://example.org/abc/def/ghi/jkl/mno"));
     }
 }

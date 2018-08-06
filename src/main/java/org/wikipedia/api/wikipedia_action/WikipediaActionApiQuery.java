@@ -20,7 +20,7 @@ public class WikipediaActionApiQuery<T> extends ApiQuery<T> {
     private final String queryString;
 
     private WikipediaActionApiQuery(final IWikipediaSite site, final String queryString, SerializationSchema<T> schema) {
-        super(ApiUrl.url(site.getSite().getUrl(), "/w/api.php"), schema);
+        super(ApiUrl.url(site.getSite().getUrl() + "/w/api.php"), schema);
         this.queryString = Objects.requireNonNull(queryString);
     }
 
