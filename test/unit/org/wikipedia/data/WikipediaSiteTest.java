@@ -6,11 +6,11 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import org.junit.Test;
-import org.wikipedia.api.wikidata_action.AbstractWikidataActionApiTest;
+import org.wikipedia.api.wikidata_action.WikidataActionApiTestAbstract;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQueryTest;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class WikipediaSiteTest extends AbstractWikidataActionApiTest {
+public class WikipediaSiteTest extends WikidataActionApiTestAbstract {
 
     @Test
     public void testSites() throws IOException, URISyntaxException {

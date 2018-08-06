@@ -15,7 +15,7 @@ import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class WikidataActionApiQueryTest extends AbstractWikidataActionApiTest {
+public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
 
     @Test(expected = IllegalArgumentException.class)
     public void testWbgetentities_nonQId() {

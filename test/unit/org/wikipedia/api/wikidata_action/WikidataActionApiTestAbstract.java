@@ -18,7 +18,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
 
-public abstract class AbstractWikidataActionApiTest {
+// Name must not end in "Test", so "Abstract" put at the end.
+public abstract class WikidataActionApiTestAbstract {
     @Rule
     public WireMockRule wmRule = new WireMockRule(wireMockConfig().dynamicPort());
 

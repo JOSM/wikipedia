@@ -12,7 +12,7 @@ import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.WbgetclaimsResult;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class WbgetclaimsTest extends AbstractWikidataActionApiTest {
+public class WbgetclaimsTest extends WikidataActionApiTestAbstract {
 
     @Test
     public void test() throws IOException, URISyntaxException {
