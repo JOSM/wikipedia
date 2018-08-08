@@ -10,7 +10,7 @@ public final class Caches {
     public static final CacheAccess<String, String> API_RESPONSES = JCSCacheManager.getCache(
         "api",
         1,
-        1_000,
+        10_000,
         new File(Config.getDirs().getCacheDirectory(false), "plugin/wikipedia").getAbsolutePath()
     );
 

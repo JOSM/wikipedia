@@ -5,10 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.Collections;
 import java.util.Map;
@@ -20,7 +17,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import org.openstreetmap.josm.data.osm.DataSelectionListener;
 import org.openstreetmap.josm.data.osm.DataSet;
@@ -30,7 +26,6 @@ import org.openstreetmap.josm.data.osm.event.DataSetListenerAdapter;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
-import org.openstreetmap.josm.tools.GBC;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.OpenBrowser;
 import org.wikipedia.WikipediaPlugin;
@@ -38,6 +33,9 @@ import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.OsmPrimitiveUtil;
 
+/**
+ * Toggle dialog that displays infos about the currently selected Wikidata item.
+ */
 public class WikidataInfoToggleDialog extends ToggleDialog {
     private static final Logger L = Logger.getLogger(WikidataInfoToggleDialog.class.getName());
     private static final String EMPTY_STRING = "";
@@ -56,7 +54,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
 
     private final JTabbedPane tabs = new JTabbedPane();
     private final WikidataInfoLabelPanel labelTab = new WikidataInfoLabelPanel();
-    private final JPanel statementTab = new JPanel();
+    private final WikidataInfoClaimPanel statementTab = new WikidataInfoClaimPanel();
     private final JPanel linkTab = new JPanel();
     private final JButton webLinkButton = new JButton();
 
@@ -98,25 +96,6 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
         infoPanel.add(basicInfoPanel, BorderLayout.NORTH);
         infoPanel.add(tabs, BorderLayout.CENTER);
 
-        // Set up statement tab
-        statementTab.setLayout(new GridBagLayout());
-        final GridBagConstraints constraints = new GridBagConstraints();
-        constraints.anchor = GridBagConstraints.NORTH;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.insets = new Insets(1, 1, 1, 1);
-        constraints.fill = GridBagConstraints.BOTH;
-        // At the moment only dummy content
-        constraints.weightx = 1;
-        statementTab.add(new StatementPanel("instance of", "example", "dummy content"), constraints);
-        constraints.gridy++;
-        statementTab.add(new StatementPanel("start date", "42"), constraints);
-        constraints.gridy++;
-        statementTab.add(new StatementPanel("architect", "John Doe"), constraints);
-        constraints.gridy++;
-        constraints.weighty = 1;
-        statementTab.add(GBC.glue(0, 0), constraints);
-
         linkTab.add(webLinkButton);
 
         tabs.add(I18n.tr("Statements"), statementTab);
@@ -126,7 +105,6 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
         // Set up listeners
         this.wikiDialog.list.addListSelectionListener(event -> updateDisplayedItem());
         MainApplication.getLayerManager().addAndFireActiveLayerChangeListener(event -> {
-            System.out.println("Fire active layer change");
             final DataSet previous = event.getPreviousDataSet();
             final DataSet current = event.getSource().getActiveDataSet();
             if (previous != null) {
@@ -173,7 +151,9 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
             }
         } else if (wdTagsInDataset.size() >= 2) {
             // More than one OSM object with valid wikidata=* tag is selected
-            final String itemList = wdTagsInDataset.entrySet().stream().map(it -> it.getKey() + " (" + it.getValue() + "×)").collect(Collectors.joining(", "));
+            final String itemList = wdTagsInDataset.entrySet().stream()
+                .map(it -> it.getKey() + " (" + it.getValue() + "×)")
+                .collect(Collectors.joining(", "));
             displayMessage(itemList, I18n.tr("More than one OSM object is selected: {0}", itemList));
         } else { // size == 1
             // An OSM object or multiple OSM objects with exactly one valid wikidata=* tag (multiple tags with same value count as one)
@@ -182,7 +162,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
         }
     }
 
-    private void displayItem(final String qId, final String label, final String description) {
+    private synchronized void displayItem(final String qId, final String label, final String description) {
         if (qId != null && !qId.equals(getDisplayedItem())) {
             mainPanel.removeAll();
             setTitle(qId);
@@ -190,8 +170,9 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
             descriptionLabel.setText(description);
             setDisplayedItem(qId);
 
-            labelTab.clear();
             labelTab.downloadLabelsFor(qId);
+
+            statementTab.downloadStatementsFor(qId);
 
             webLinkButton.setAction(new AbstractAction() {
                 @Override
@@ -199,19 +180,21 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
                     final String uri = "https://www.wikidata.org/wiki/" + qId;
                     final String error = OpenBrowser.displayUrl(uri);
                     if (error != null) {
-                        new Notification(I18n.tr("Can't open website {0} in browser! Error message: {1}", uri, error)).setIcon(WikipediaPlugin.W_IMAGE.get()).show();
+                        new Notification(I18n.tr("Can't open website {0} in browser! Error message: {1}", uri, error))
+                            .setIcon(WikipediaPlugin.W_IMAGE.get())
+                            .show();
                     }
                 }
             });
             webLinkButton.setText(I18n.tr("Open item {0} in browser", qId));
 
-            mainPanel.add(new JScrollPane(infoPanel));
+            mainPanel.add(infoPanel);
             mainPanel.revalidate();
             mainPanel.repaint();
         }
     }
 
-    private void displayMessage(final String title, final String message) {
+    private synchronized void displayMessage(final String title, final String message) {
         mainPanel.removeAll();
         setTitle(title);
         setDisplayedItem(null);
