@@ -3,6 +3,7 @@ package org.wikipedia.gui;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
+import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 
 /**
  * Panel displaying the labels for a Wikidata item
@@ -59,7 +61,7 @@ class WikidataInfoLabelPanel extends JPanel {
     private static class LabelTableModel extends AbstractTableModel {
         private final WikidataInfoLabelPanel parent;
         private String qIdBeingDownloaded;
-        private final List<Pair<String, String>> valueMap = new ArrayList<>();
+        private final List<Pair<WbgetentitiesResult.Entity.Label, String>> valueMap = new ArrayList<>();
 
         LabelTableModel(final WikidataInfoLabelPanel parent) {
             this.parent = parent;
@@ -77,14 +79,14 @@ class WikidataInfoLabelPanel extends JPanel {
 
             new Thread(() -> {
                 try {
-                    final Map<String, String> newValues = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels(qId));
+                    final Map<String, WbgetentitiesResult.Entity.Label> newValues = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels(qId));
                     synchronized (valueMap) {
                         if (qIdBeingDownloaded != null && qIdBeingDownloaded.equals(qId)) {
                             valueMap.clear();
                             valueMap.addAll(
                                 newValues.entrySet().stream()
-                                    .map(it -> Pair.create(it.getKey(), it.getValue()))
-                                    .sorted((x, y) -> x.a.compareTo(y.a))
+                                    .map(it -> Pair.create(it.getValue(), it.getKey()))
+                                    .sorted(Comparator.comparing(it -> it.a.getLangCode()))
                                     .collect(Collectors.toList())
                             );
                         }

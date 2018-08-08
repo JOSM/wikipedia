@@ -136,7 +136,7 @@ public final class WbgetentitiesResult {
         private final String id;
         private final String type;
         private final Map<String, Sitelink> sitelinks = new HashMap<>();
-        private final Map<String, String> labels = new HashMap<>();
+        private final Map<String, Label> labels = new HashMap<>();
 
         @JsonCreator
         public Entity(
@@ -151,7 +151,7 @@ public final class WbgetentitiesResult {
                 this.sitelinks.putAll(sitelinks);
             }
             if (labels != null) {
-                labels.values().forEach(label -> this.labels.put(label.getLanguage(), label.getValue()));
+                labels.values().forEach(label -> this.labels.put(label.getLangCode(), label));
             }
         }
 
@@ -163,7 +163,7 @@ public final class WbgetentitiesResult {
             return type;
         }
 
-        public Map<String, String> getLabels() {
+        public Map<String, Label> getLabels() {
             return Collections.unmodifiableMap(labels);
         }
 
@@ -186,7 +186,7 @@ public final class WbgetentitiesResult {
                 this.value = value;
             }
 
-            public String getLanguage() {
+            public String getLangCode() {
                 return language;
             }
 

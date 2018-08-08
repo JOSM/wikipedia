@@ -36,7 +36,7 @@ public final class SitematrixResult {
 
     @JsonCreator
     public SitematrixResult(@JsonProperty("sitematrix") final Sitematrix sitematrix) {
-        this.sitematrix = sitematrix;
+        this.sitematrix = Objects.requireNonNull(sitematrix);
     }
 
     public Sitematrix getSitematrix() {

@@ -121,13 +121,13 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
     public void testWikidataItemLabelQuery() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/labels_Q42.json"));
 
-        final Map<String, String> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
+        final Map<String, WbgetentitiesResult.Entity.Label> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
         assertEquals(138, result.size());
 
-        assertEquals("Douglas Adams", result.get("en"));
-        assertEquals("Дуглас Адамс", result.get("ru"));
-        assertEquals("더글러스 애덤스", result.get("ko"));
-        assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.get("tcy"));
+        assertEquals("Douglas Adams", result.get("en").getValue());
+        assertEquals("Дуглас Адамс", result.get("ru").getValue());
+        assertEquals("더글러스 애덤스", result.get("ko").getValue());
+        assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.get("tcy").getValue());
 
         simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels&ids=Q42");
     }

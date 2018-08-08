@@ -122,9 +122,9 @@ public final class WbgetclaimsResult {
                 return property;
             }
 
-            static interface DataValue {
+            public interface DataValue {
 
-                static class Deserializer extends CustomDeserializer<DataValue> {
+                class Deserializer extends CustomDeserializer<DataValue> {
                     Deserializer(ObjectMapper mapper) {
                         super(mapper);
                     }
@@ -139,6 +139,7 @@ public final class WbgetclaimsResult {
                             case "quantity": return mapper.treeToValue(nodeValue, QuantityValue.class);
                             case "globecoordinate": return mapper.treeToValue(nodeValue, GlobecoordinateValue.class);
                             case "time": return mapper.treeToValue(nodeValue, TimeValue.class);
+                            case "monolingualtext": return mapper.treeToValue(nodeValue, MonolingualTextValue.class);
                             default:
                                 Logging.warn("Unknown type: " + type.textValue());
                         }
@@ -150,7 +151,7 @@ public final class WbgetclaimsResult {
             static class GlobecoordinateValue implements DataValue {
                 private final double latitude;
                 private final double longitude;
-                private final double altitude;
+                private final Double altitude;
                 private final double precision;
                 private final String globe;
 
@@ -158,7 +159,7 @@ public final class WbgetclaimsResult {
                 GlobecoordinateValue(
                     @JsonProperty("latitude") final double latitude,
                     @JsonProperty("longitude") final double longitude,
-                    @JsonProperty("altitude") final double altitude,
+                    @JsonProperty("altitude") final Double altitude,
                     @JsonProperty("precision") final double precision,
                     @JsonProperty("globe") final String globe
                 ) {
@@ -169,8 +170,13 @@ public final class WbgetclaimsResult {
                     this.globe = globe;
                 }
 
-                public LatLon toLatLon() {
+                private LatLon toLatLon() {
                     return new LatLon(latitude, longitude);
+                }
+
+                @Override
+                public String toString() {
+                    return toLatLon().toDisplayString();
                 }
             }
 
@@ -199,6 +205,11 @@ public final class WbgetclaimsResult {
                     this.precision = precision;
                     this.calendarModel = calendarModel;
                 }
+
+                @Override
+                public String toString() {
+                    return time;
+                }
             }
 
             static class QuantityValue implements DataValue {
@@ -219,6 +230,11 @@ public final class WbgetclaimsResult {
                     this.lowerBound = lowerBound;
                     this.upperBound = upperBound;
                 }
+
+                @Override
+                public String toString() {
+                    return amount + " " + unit;
+                }
             }
 
             static class ItemValue implements DataValue {
@@ -230,12 +246,38 @@ public final class WbgetclaimsResult {
                     this.entityType = entityType;
                     this.id = id;
                 }
+
+                @Override
+                public String toString() {
+                    return id + " (" + entityType + ")";
+                }
             }
 
             static class StringValue implements DataValue {
                 private final String value;
-                StringValue(String value) {
+                StringValue(final String value) {
                     this.value = value;
+                }
+
+                @Override
+                public String toString() {
+                    return value;
+                }
+            }
+
+            static class MonolingualTextValue implements DataValue {
+                private final String langCode;
+                private final String text;
+
+                @JsonCreator
+                MonolingualTextValue(@JsonProperty("language") final String langCode, @JsonProperty("text") final String text) {
+                    this.langCode = langCode;
+                    this.text = text;
+                }
+
+                @Override
+                public String toString() {
+                    return text + " (" + langCode + ")";
                 }
             }
         }

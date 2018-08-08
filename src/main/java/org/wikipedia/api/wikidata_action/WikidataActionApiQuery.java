@@ -5,17 +5,23 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.SerializationSchema;
+import org.wikipedia.api.wikidata_action.json.QueryResult;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikidata_action.json.WbgetclaimsResult;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.tools.RegexUtil;
 
+/**
+ * Utility class for getting queries against the Wikidata Action API
+ * @param <T> the type which is returned as a result of the query
+ */
 public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     static URL defaultUrl = ApiUrl.url("https://www.wikidata.org/w/api.php");
     private static final String FORMAT_PARAMS = "format=json&utf8=1&formatversion=1";
@@ -23,29 +29,60 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
 
     private final String queryString;
 
-    private WikidataActionApiQuery(final String query, final SerializationSchema<T> schema, final long cacheExpiryTime) {
-        super(defaultUrl, schema, cacheExpiryTime);
-        this.queryString = query;
+    /**
+     * Convenience constructor
+     * @see #WikidataActionApiQuery(String, SerializationSchema, long, Function)
+     */
+    private WikidataActionApiQuery(final String queryString, final SerializationSchema<T> schema) {
+        this(queryString, schema, -1, it -> it);
     }
 
-    private WikidataActionApiQuery(final String query, final SerializationSchema<T> schema) {
-        this(query, schema, -1);
-    }
-
+    /**
+     * Convenience constructor
+     * @see #WikidataActionApiQuery(String, SerializationSchema, long, Function)
+     */
     private <S> WikidataActionApiQuery(final String queryString, final SerializationSchema<S> schema, final Function<S, T> converter) {
-        super(defaultUrl, schema, -1, converter);
+        this(queryString, schema, -1, converter);
+    }
+
+    /**
+     * A query against the Wikidata Action API
+     * @param queryString the query string containing the arguments of this query
+     * @param schema the {@link SerializationSchema} that defines how deserialization of the response is handled
+     * @param cacheExpiryTime the number of milliseconds for which the response will stay in the cache
+     * @param converter a function that maps the
+     * @param <S> the type to which the {@link SerializationSchema} deserializes
+     */
+    private <S> WikidataActionApiQuery(final String queryString, final SerializationSchema<S> schema, final long cacheExpiryTime, final Function<S, T> converter) {
+        super(defaultUrl, schema, cacheExpiryTime, converter);
         this.queryString = queryString;
     }
 
-    public String getQueryString() {
+    String getQueryString() {
         return queryString;
     }
 
-    public static WikidataActionApiQuery<SitematrixResult> sitematrix() {
+    /**
+     * @return a query for all wikimedia sites
+     */
+    public static WikidataActionApiQuery<SitematrixResult.Sitematrix> sitematrix() {
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=sitematrix",
             SitematrixResult.SCHEMA,
-            2_592_000_000L // = 1000*60*60*24*30 = number of ms in 30 days
+            TimeUnit.DAYS.toMillis(30),
+            SitematrixResult::getSitematrix
+        );
+    }
+
+    /**
+     * @return a query for all languages that are used in Wikidata (e.g. for labels)
+     */
+    public static WikidataActionApiQuery<Map<String, String>> queryLanguages() {
+        return new WikidataActionApiQuery<>(
+          FORMAT_PARAMS + "&action=query&meta=siteinfo&siprop=languages",
+          QueryResult.SCHEMA,
+          TimeUnit.DAYS.toMillis(30),
+          QueryResult::getLangMap
         );
     }
 
@@ -77,13 +114,14 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         );
     }
 
-    public static WikidataActionApiQuery<Map<String, String>> wbgetentitiesLabels(final String qId) {
+    public static WikidataActionApiQuery<Map<String, WbgetentitiesResult.Entity.Label>> wbgetentitiesLabels(final String qId) {
         if (!RegexUtil.isValidQId(qId)) {
             throw new IllegalArgumentException("Invalid Q-ID: " + qId);
         }
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=wbgetentities&props=labels&ids=" + qId,
             WbgetentitiesResult.SCHEMA,
+            TimeUnit.MINUTES.toMillis(5),
             result -> result.getEntities().values().stream().findFirst().map(WbgetentitiesResult.Entity::getLabels).orElse(new HashMap<>())
         );
     }

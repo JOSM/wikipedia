@@ -24,8 +24,8 @@ public class WikipediaSite implements IWikipediaSite {
      */
     public WikipediaSite(final String langCode) throws IOException, IllegalArgumentException {
         Objects.requireNonNull(langCode);
-        final SitematrixResult sitematrix = ApiQueryClient.query(WikidataActionApiQuery.sitematrix());
-        language = sitematrix.getSitematrix().getLanguages().stream()
+        final SitematrixResult.Sitematrix sitematrix = ApiQueryClient.query(WikidataActionApiQuery.sitematrix());
+        language = sitematrix.getLanguages().stream()
             .filter(it -> langCode.equals(it.getCode()))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException(I18n.tr("''{0}'' is an illegal language code!", langCode)));
