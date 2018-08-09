@@ -55,8 +55,7 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
     private final JTabbedPane tabs = new JTabbedPane();
     private final WikidataInfoLabelPanel labelTab = new WikidataInfoLabelPanel();
     private final WikidataInfoClaimPanel statementTab = new WikidataInfoClaimPanel();
-    private final JPanel linkTab = new JPanel();
-    private final JButton webLinkButton = new JButton();
+    private final WikidataInfoSitelinkPanel linkTab = new WikidataInfoSitelinkPanel();
 
     private final DataSelectionListener selectionListener = it -> updateDisplayedItem();
     private final DataSetListener datasetListener = new DataSetListenerAdapter(it -> {
@@ -96,8 +95,6 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
         infoPanel.add(basicInfoPanel, BorderLayout.NORTH);
         infoPanel.add(tabs, BorderLayout.CENTER);
 
-        linkTab.add(webLinkButton);
-
         tabs.add(I18n.tr("Statements"), statementTab);
         tabs.add(I18n.tr("Labels"), labelTab);
         tabs.add(I18n.tr("Links"), linkTab);
@@ -132,6 +129,9 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
      * It checks for the currently selected items in the active dataset and in the Wikidata list. The panel is updated.
      */
     private void updateDisplayedItem() {
+        if (!isShowing()) {
+            return;
+        }
         final DataSet dataset = MainApplication.getLayerManager().getActiveDataSet();
         final Map<String, Integer> wdTagsInDataset =
             dataset == null
@@ -171,22 +171,8 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
             setDisplayedItem(qId);
 
             labelTab.downloadLabelsFor(qId);
-
             statementTab.downloadStatementsFor(qId);
-
-            webLinkButton.setAction(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    final String uri = "https://www.wikidata.org/wiki/" + qId;
-                    final String error = OpenBrowser.displayUrl(uri);
-                    if (error != null) {
-                        new Notification(I18n.tr("Can't open website {0} in browser! Error message: {1}", uri, error))
-                            .setIcon(WikipediaPlugin.W_IMAGE.get())
-                            .show();
-                    }
-                }
-            });
-            webLinkButton.setText(I18n.tr("Open item {0} in browser", qId));
+            linkTab.downloadSitelinksFor(qId);
 
             mainPanel.add(infoPanel);
             mainPanel.revalidate();
@@ -212,5 +198,11 @@ public class WikidataInfoToggleDialog extends ToggleDialog {
 
     private String getDisplayedItem() {
         return displayedItem;
+    }
+
+    @Override
+    protected void stateChanged() {
+        super.stateChanged();
+        updateDisplayedItem();
     }
 }
