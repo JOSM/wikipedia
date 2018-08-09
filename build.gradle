@@ -56,7 +56,6 @@ repositories {
   jcenter()
 }
 dependencies {
-  packIntoJar("com.fasterxml.jackson.core:jackson-databind:2.9.5")
   errorprone("com.google.errorprone:error_prone_core:${versions.errorprone}")
   testImplementation("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
@@ -66,6 +65,14 @@ dependencies {
   testImplementation("com.github.tomakehurst:wiremock:2.18.0")
   testImplementation("org.awaitility:awaitility:3.1.2")
 }
+
+def ivyModule = new XmlParser().parse(new File("$projectDir/ivy.xml"))
+logger.info("Dependencies from ivy.xml (added to configuration `packIntoJar`):")
+ivyModule.dependencies.dependency.each {
+  logger.info("* ${it.@org}:${it.@name}:${it.@rev}")
+  project.dependencies.packIntoJar("${it.@org}:${it.@name}:${it.@rev}")
+}
+
 task copyToLib(type: Sync) {
   from(configurations.packIntoJar)
   into(file("$projectDir/lib"))
