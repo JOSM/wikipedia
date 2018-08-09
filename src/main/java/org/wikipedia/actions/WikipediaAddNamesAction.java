@@ -13,9 +13,13 @@ import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
+import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.io.remotecontrol.AddTagsDialog;
+import org.openstreetmap.josm.tools.I18n;
+import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
 import org.wikipedia.WikipediaApp;
+import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.data.WikipediaEntry;
 
 public class WikipediaAddNamesAction extends JosmAction {
@@ -29,15 +33,21 @@ public class WikipediaAddNamesAction extends JosmAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         final WikipediaEntry wp = WikipediaEntry.parseTag("wikipedia", getWikipediaValue());
-        List<String[]> tags = new ArrayList<>();
-        WikipediaApp.forLanguage(wp.lang).getInterwikiArticles(wp.article).stream()
+        if (wp == null) {
+            new Notification(I18n.tr("Could not add names. Wikipedia tag is not recognized!"))
+                .setIcon(WikipediaPlugin.W_IMAGE.setMaxSize(ImageProvider.ImageSizes.LARGEICON).get())
+                .show();
+        } else {
+            List<String[]> tags = new ArrayList<>();
+            WikipediaApp.forLanguage(wp.lang).getInterwikiArticles(wp.article).stream()
                 .filter(this::useWikipediaLangArticle)
                 .map(i -> new String[]{"name:" + i.lang, i.article})
                 .forEach(tags::add);
-        if (Logging.isDebugEnabled()) {
-        	Logging.debug(tags.toString());
+            if (Logging.isDebugEnabled()) {
+                Logging.debug(tags.toString());
+            }
+            AddTagsDialog.addTags(tags.toArray(new String[tags.size()][]), "Wikipedia", getLayerManager().getEditDataSet().getSelected());
         }
-        AddTagsDialog.addTags(tags.toArray(new String[tags.size()][]), "Wikipedia", getLayerManager().getEditDataSet().getSelected());
     }
 
     private boolean useWikipediaLangArticle(WikipediaEntry i) {
