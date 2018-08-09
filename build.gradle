@@ -73,12 +73,6 @@ ivyModule.dependencies.dependency.each {
   project.dependencies.packIntoJar("${it.@org}:${it.@name}:${it.@rev}")
 }
 
-task copyToLib(type: Sync) {
-  from(configurations.packIntoJar)
-  into(file("$projectDir/lib"))
-}
-classes.dependsOn(copyToLib)
-
 test {
   useJUnitPlatform()
   testLogging.exceptionFormat = 'full'
