@@ -17,6 +17,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Stream;
 import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.tools.RegexUtil;
 
@@ -57,6 +60,12 @@ public final class SitematrixResult {
 
         public Collection<Site> getSpecialSites() {
             return Collections.unmodifiableCollection(specialSites);
+        }
+
+        public Optional<Site> getSiteForDbname(final String dbname) {
+            return Stream.concat(languages.stream().flatMap(it -> it.getSites().stream()), specialSites.stream())
+                .filter(it -> dbname != null && dbname.equals(it.getDbName()))
+                .findFirst();
         }
 
         public static class Deserializer extends StdDeserializer<Sitematrix> {
@@ -102,6 +111,7 @@ public final class SitematrixResult {
                 this.name = name;
                 if (sites != null) {
                     this.sites.addAll(sites);
+                    this.sites.forEach(it -> it.language = this);
                 }
             }
 
@@ -124,18 +134,22 @@ public final class SitematrixResult {
             private final boolean closed;
             private final String code;
             private final String dbName;
+            private final String siteName;
             private final String url;
+            private Language language;
 
             @JsonCreator
             public Site(
                 @JsonProperty("url") final String url,
                 @JsonProperty("dbname") final String dbName,
                 @JsonProperty("code") final String code,
-                @JsonProperty("closed") final String closed
+                @JsonProperty("closed") final String closed,
+                @JsonProperty("sitename") final String siteName
             ) {
                 this.closed = closed != null;
                 this.code = code;
                 this.dbName = dbName;
+                this.siteName = siteName;
                 this.url = url;
             }
 
@@ -152,6 +166,14 @@ public final class SitematrixResult {
              */
             public String getDbName() {
                 return dbName;
+            }
+
+            public Language getLanguage() {
+                return language;
+            }
+
+            public String getSiteName() {
+                return siteName;
             }
 
             public String getUrl() {

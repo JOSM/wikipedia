@@ -3,6 +3,7 @@ package org.wikipedia.api.wikidata_action;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -121,18 +122,33 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=wbgetentities&props=labels&ids=" + qId,
             WbgetentitiesResult.SCHEMA,
-            TimeUnit.MINUTES.toMillis(5),
+            TimeUnit.MINUTES.toMillis(10),
             result -> result.getEntities().values().stream().findFirst().map(WbgetentitiesResult.Entity::getLabels).orElse(new HashMap<>())
         );
     }
 
-    public static WikidataActionApiQuery<WbgetclaimsResult> wbgetclaims(final String qId) {
+    public static WikidataActionApiQuery<Collection<WbgetentitiesResult.Entity.Sitelink>> wbgetentitiesSitelinks(final String qId) {
+        RegexUtil.requireValidQId(qId);
+        return new WikidataActionApiQuery<>(
+            FORMAT_PARAMS + "&action=wbgetentities&props=sitelinks&ids=" + qId,
+            WbgetentitiesResult.SCHEMA,
+            TimeUnit.MINUTES.toMillis(10),
+            result -> result.getEntities().values().stream()
+                .findFirst()
+                .map(WbgetentitiesResult.Entity::getSitelinks)
+                .orElse(Collections.emptyList())
+        );
+    }
+
+    public static WikidataActionApiQuery<Collection<WbgetclaimsResult.Claim>> wbgetclaims(final String qId) {
         if (!RegexUtil.isValidQId(qId)) {
             throw new IllegalArgumentException("Invalid Q-ID: " + qId);
         }
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=wbgetclaims&props=&entity=" + qId,
-            WbgetclaimsResult.SCHEMA
+            WbgetclaimsResult.SCHEMA,
+            TimeUnit.MINUTES.toMillis(10),
+            WbgetclaimsResult::getClaims
         );
     }
 

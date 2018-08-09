@@ -23,6 +23,12 @@ public class RegexUtil {
         return value != null && Q_ID_PATTERN.matcher(value).matches();
     }
 
+    public static void requireValidQId(final String value) {
+        if (!isValidQId(value)) {
+            throw new IllegalArgumentException("Q-ID is invalid!");
+        }
+    }
+
     /**
      * Validates that a given string matches "[a-z]{2,3}wiki".
      * This has to be improved in the future to exactly allow only existing site IDs and allow other wikimedia sites
