@@ -73,7 +73,7 @@ public class WikipediaActionApiQueryTest {
 
         @Override
         public SitematrixResult.Sitematrix.Site getSite() {
-            return new SitematrixResult.Sitematrix.Site("http://localhost:" + wmRule.port(), "dbname", "code", "false");
+            return new SitematrixResult.Sitematrix.Site("http://localhost:" + wmRule.port(), "dbname", "code", "false", "Wikipedia");
         }
 
         @Override
