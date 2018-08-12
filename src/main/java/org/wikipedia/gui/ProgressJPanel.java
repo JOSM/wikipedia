@@ -5,25 +5,25 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class ProgressJPanel extends JPanel {
-    private final JProgressBar PROGRESS_BAR = new JProgressBar();
+    private final JProgressBar progressBar = new JProgressBar();
 
     ProgressJPanel() {
         setLayout(new BorderLayout());
-        PROGRESS_BAR.setStringPainted(true);
+        progressBar.setStringPainted(true);
     }
 
     protected synchronized void showProgress(final String message) {
-        if (!isAncestorOf(PROGRESS_BAR)) {
-            add(PROGRESS_BAR, BorderLayout.NORTH);
+        if (!isAncestorOf(progressBar)) {
+            add(progressBar, BorderLayout.NORTH);
         }
-        PROGRESS_BAR.setIndeterminate(true);
-        PROGRESS_BAR.setString(message);
+        progressBar.setIndeterminate(true);
+        progressBar.setString(message);
         revalidate();
         repaint();
     }
 
     protected synchronized void hideProgress() {
-        remove(PROGRESS_BAR);
+        remove(progressBar);
         revalidate();
         repaint();
     }
