@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.wikipedia.api.SerializationSchema;
 
 public final class WbgetentitiesResult {
@@ -135,23 +136,38 @@ public final class WbgetentitiesResult {
     public static final class Entity implements AbstractEntity {
         private final String id;
         private final String type;
+        private final Map<String, Collection<String>> aliases;
         private final Map<String, Sitelink> sitelinks = new HashMap<>();
-        private final Map<String, Label> labels = new HashMap<>();
+        private final Map<String, String> descriptions;
+        private final Map<String, String> labels;
 
         @JsonCreator
         public Entity(
             @JsonProperty("id") final String id,
             @JsonProperty("type") final String type,
-            @JsonProperty("sitelinks") final Map<String, Sitelink> sitelinks,
-            @JsonProperty("labels") final Map<String, Label> labels
+            @JsonProperty("aliases") final Map<String, Collection<Label>> aliases,
+            @JsonProperty("descriptions") final Map<String, Label> descriptions,
+            @JsonProperty("labels") final Map<String, Label> labels,
+            @JsonProperty("sitelinks") final Map<String, Sitelink> sitelinks
         ) {
             this.id = id;
             this.type = type;
             if (sitelinks != null) {
                 this.sitelinks.putAll(sitelinks);
             }
+
+            this.aliases = new HashMap<>(aliases == null ? 0 : aliases.size());
+            this.descriptions = new HashMap<>(descriptions == null ? 0 : descriptions.size());
+            this.labels = new HashMap<>(labels == null ? 0 : labels.size());
+
+            if (aliases != null) {
+                aliases.forEach((lang, alias) -> this.aliases.put(lang, alias.stream().map(Label::getValue).collect(Collectors.toList())));
+            }
+            if (descriptions != null) {
+                descriptions.values().forEach(description -> this.descriptions.put(description.getLangCode(), description.getValue()));
+            }
             if (labels != null) {
-                labels.values().forEach(label -> this.labels.put(label.getLangCode(), label));
+                labels.values().forEach(label -> this.labels.put(label.getLangCode(), label.getValue()));
             }
         }
 
@@ -163,7 +179,15 @@ public final class WbgetentitiesResult {
             return type;
         }
 
-        public Map<String, Label> getLabels() {
+        public Map<String, Collection<String>> getAliases() {
+            return Collections.unmodifiableMap(aliases);
+        }
+
+        public Map<String, String> getDescriptions() {
+            return Collections.unmodifiableMap(descriptions);
+        }
+
+        public Map<String, String> getLabels() {
             return Collections.unmodifiableMap(labels);
         }
 

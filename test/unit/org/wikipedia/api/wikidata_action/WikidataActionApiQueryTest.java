@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import org.junit.Test;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
@@ -121,15 +122,15 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
     public void testWikidataItemLabelQuery() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/labels_Q42.json"));
 
-        final Map<String, WbgetentitiesResult.Entity.Label> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
-        assertEquals(138, result.size());
+        final Optional<WbgetentitiesResult.Entity> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));
+        assertEquals(138, result.get().getLabels().size());
 
-        assertEquals("Douglas Adams", result.get("en").getValue());
-        assertEquals("Дуглас Адамс", result.get("ru").getValue());
-        assertEquals("더글러스 애덤스", result.get("ko").getValue());
-        assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.get("tcy").getValue());
+        assertEquals("Douglas Adams", result.get().getLabels().get("en"));
+        assertEquals("Дуглас Адамс", result.get().getLabels().get("ru"));
+        assertEquals("더글러스 애덤스", result.get().getLabels().get("ko"));
+        assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.get().getLabels().get("tcy"));
 
-        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels&ids=Q42");
+        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels|descriptions|aliases&ids=Q42");
     }
 
 }

@@ -3,11 +3,15 @@ package org.wikipedia.gui;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -38,7 +42,7 @@ class WikidataInfoLabelPanel extends ProgressJPanel {
     private static class LabelTableModel extends AbstractTableModel {
         private final WikidataInfoLabelPanel parent;
         private String qIdBeingDownloaded;
-        private final List<Pair<WbgetentitiesResult.Entity.Label, String>> valueMap = new ArrayList<>();
+        private final List<TableRow> rows = new ArrayList<>();
 
         LabelTableModel(final WikidataInfoLabelPanel parent) {
             this.parent = parent;
@@ -50,26 +54,37 @@ class WikidataInfoLabelPanel extends ProgressJPanel {
             new Thread(() -> {
                 try {
                     parent.showProgress(I18n.tr("Download labels for {0}…", qId));
-                    valueMap.clear();
+                    rows.clear();
                     parent.table.revalidate();
                     parent.revalidate();
                     parent.repaint();
-                    final Map<String, WbgetentitiesResult.Entity.Label> newValues = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels(qId));
+                    final Optional<WbgetentitiesResult.Entity> currentEntity = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels(qId));
                     final Map<String, String> languages = new HashMap<>();
                     try {
                         languages.putAll(ApiQueryClient.query(WikidataActionApiQuery.queryLanguages()));
                     } catch (IOException e) {
                         Logging.warn("Could not download language names! Only the language codes are displayed.", e);
                     }
-                    synchronized (valueMap) {
+                    synchronized (rows) {
                         if (qIdBeingDownloaded != null && qIdBeingDownloaded.equals(qId)) {
-                            valueMap.clear();
-                            valueMap.addAll(
-                                newValues.values().stream()
-                                    .map(it -> Pair.create(it, languages.containsKey(it.getLangCode()) ? languages.get(it.getLangCode()) : it.getLangCode()))
-                                    .sorted(Comparator.comparing(it -> it.a.getLangCode()))
-                                    .collect(Collectors.toList())
-                            );
+                            rows.clear();
+                            currentEntity.ifPresent(entity -> {
+                                final Map<String, String> labels = entity.getLabels();
+                                final Map<String, String> descriptions = entity.getDescriptions();
+                                final Map<String, Collection<String>> aliases = entity.getAliases();
+                                final Set<String> langCodes = new HashSet<>(labels.keySet());
+                                langCodes.addAll(descriptions.keySet());
+                                langCodes.addAll(aliases.keySet());
+                                langCodes.stream().sorted().forEach(langCode -> {
+                                    this.rows.add(new TableRow(
+                                        langCode,
+                                        languages.get(langCode),
+                                        labels.get(langCode),
+                                        descriptions.get(langCode),
+                                        aliases.get(langCode)
+                                    ));
+                                });
+                            });
                             parent.table.revalidate();
                         }
                     }
@@ -82,21 +97,23 @@ class WikidataInfoLabelPanel extends ProgressJPanel {
 
         @Override
         public int getRowCount() {
-            return valueMap.size();
+            return rows.size();
         }
 
         @Override
         public int getColumnCount() {
-            return 3;
+            return 5;
         }
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             switch (columnIndex) {
-                case 0: return valueMap.get(rowIndex).a.getLangCode();
-                case 1: return valueMap.get(rowIndex).b;
-                case 2:
-                default: return valueMap.get(rowIndex).a.getValue();
+                case 0: return rows.get(rowIndex).langCode;
+                case 1: return rows.get(rowIndex).language;
+                case 2: return rows.get(rowIndex).label;
+                case 3: return rows.get(rowIndex).description;
+                case 4:
+                default: return String.join(", ", rows.get(rowIndex).aliases);
             }
         }
 
@@ -105,14 +122,32 @@ class WikidataInfoLabelPanel extends ProgressJPanel {
             switch (column) {
                 case 0: return I18n.tr("language code");
                 case 1: return I18n.tr("language");
-                case 2:
-                default: return I18n.tr("label");
+                case 2: return I18n.tr("label");
+                case 3: return I18n.tr("description");
+                case 4:
+                default: return I18n.tr("aliases");
             }
         }
 
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return columnIndex == 3;
+            return columnIndex >= 3;
+        }
+
+        private static class TableRow {
+            private final String langCode;
+            private final String language;
+            private final String label;
+            private final String description;
+            private final Collection<String> aliases;
+
+            TableRow(final String langCode, final String language, final String label, final String description, final Collection<String> aliases) {
+                this.langCode = Objects.requireNonNull(langCode);
+                this.language = language == null ? langCode : language;
+                this.label = label == null ? "" : label;
+                this.description = description == null ? "" : description;
+                this.aliases = aliases == null ? new ArrayList<>() : aliases;
+            }
         }
     }
 }

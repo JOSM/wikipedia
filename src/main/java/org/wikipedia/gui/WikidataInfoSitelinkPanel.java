@@ -1,11 +1,9 @@
 package org.wikipedia.gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Optional;
@@ -18,12 +16,12 @@ import org.openstreetmap.josm.tools.GBC;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.OpenBrowser;
+import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
-import org.wikipedia.data.WikipediaSite;
 
 public class WikidataInfoSitelinkPanel extends ProgressJPanel {
 
@@ -61,7 +59,7 @@ public class WikidataInfoSitelinkPanel extends ProgressJPanel {
                                     linkButton.setAction(new AbstractAction() {
                                         @Override
                                         public void actionPerformed(ActionEvent e) {
-                                            final String uri = s.getUrl() + "/w/index.php?title=" + URLEncoder.encode(sitelink.getTitle());
+                                            final String uri = s.getUrl() + "/w/index.php?title=" + Utils.encodeUrl(sitelink.getTitle());
                                             final String error = OpenBrowser.displayUrl(uri);
                                             if (error != null) {
                                                 new Notification(I18n.tr("Can't open website {0} in browser! Error message: {1}", uri, error))

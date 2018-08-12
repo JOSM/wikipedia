@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.openstreetmap.josm.tools.HttpClient;
@@ -115,15 +116,15 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         );
     }
 
-    public static WikidataActionApiQuery<Map<String, WbgetentitiesResult.Entity.Label>> wbgetentitiesLabels(final String qId) {
+    public static WikidataActionApiQuery<Optional<WbgetentitiesResult.Entity>> wbgetentitiesLabels(final String qId) {
         if (!RegexUtil.isValidQId(qId)) {
             throw new IllegalArgumentException("Invalid Q-ID: " + qId);
         }
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetentities&props=labels&ids=" + qId,
+            FORMAT_PARAMS + "&action=wbgetentities&props=labels|descriptions|aliases&ids=" + qId,
             WbgetentitiesResult.SCHEMA,
             TimeUnit.MINUTES.toMillis(10),
-            result -> result.getEntities().values().stream().findFirst().map(WbgetentitiesResult.Entity::getLabels).orElse(new HashMap<>())
+            result -> result.getEntities().values().stream().findFirst()
         );
     }
 

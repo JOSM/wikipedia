@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Stream;
 import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.tools.RegexUtil;
