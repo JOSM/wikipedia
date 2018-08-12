@@ -73,7 +73,11 @@ public class WikiLayer extends Layer implements ListDataListener {
 
     @Override
     public Object getInfoComponent() {
-        return MessageFormat.format("{0} elements with coordinates, {1} elements with missing coordinates are not displayed", wikiDialog.model.getSize(), Collections.list(wikiDialog.model.elements()).stream().filter(it -> it.coordinate == null).count());
+        return MessageFormat.format(
+            "{0} elements with coordinates, {1} elements with missing coordinates are not displayed",
+            wikiDialog.model.getSize(),
+            Collections.list(wikiDialog.model.elements()).stream().filter(it -> it.coordinate == null).count()
+        );
     }
 
     @Override
@@ -83,7 +87,10 @@ public class WikiLayer extends Layer implements ListDataListener {
 
     @Override
     public void mergeFrom(Layer from) {
-        throw new UnsupportedOperationException(MessageFormat.format("Layer of type {0} is not mergable!", WikiLayer.class.getSimpleName()));
+        throw new UnsupportedOperationException(MessageFormat.format(
+            "Layer of type {0} is not mergable!",
+            WikiLayer.class.getSimpleName()
+        ));
     }
 
     @Override
@@ -117,7 +124,9 @@ public class WikiLayer extends Layer implements ListDataListener {
             .map(it -> mv.getPoint(it.coordinate))
             .collect(new WikiLayerClusteringCollector(getMarkerWidth(), getMarkerHeight()));
         paintWikiMarkers(g, entriesInBbox, false);
-        paintWikiMarkers(g, selectedEntries.stream().map(it -> Collections.singleton(mv.getPoint(it.coordinate))).collect(Collectors.toList()), true);
+        paintWikiMarkers(g, selectedEntries.stream()
+            .map(it -> Collections.singleton(mv.getPoint(it.coordinate)))
+            .collect(Collectors.toList()), true);
     }
 
     private static void paintWikiMarkers(final Graphics2D g, final Collection<Collection<Point>> clusters, final boolean selected) {
@@ -129,7 +138,15 @@ public class WikiLayer extends Layer implements ListDataListener {
                 final Point point = cluster.iterator().next();
                 final Path2D path = new Path2D.Double();
                 path.moveTo(point.getX(), point.getY());
-                path.append(new Arc2D.Double(point.getX() - markerHeight / 3, point.getY() - markerHeight, markerHeight / 3 * 2, markerHeight / 3 * 2, -30, 240.0, Arc2D.OPEN), true);
+                path.append(new Arc2D.Double(
+                    point.getX() - markerHeight / 3,
+                    point.getY() - markerHeight,
+                    markerHeight / 3 * 2,
+                    markerHeight / 3 * 2,
+                    -30,
+                    240.0,
+                    Arc2D.OPEN
+                ), true);
                 path.closePath();
 
                 g.setColor(selected ? MARKER_FILL_SELECTED_COLOR : MARKER_FILL_COLOR);
@@ -141,7 +158,12 @@ public class WikiLayer extends Layer implements ListDataListener {
                 OptionalDouble avgY = cluster.stream().mapToDouble(Point::getY).average();
                 avgX.ifPresent(x -> avgY.ifPresent(y -> {
                     g.setColor(selected ? MARKER_STROKE_SELECTED_COLOR : MARKER_STROKE_COLOR);
-                    final Ellipse2D ellipse = new Ellipse2D.Double(x - getMarkerHeight() / 2, y - getMarkerHeight() / 2, getMarkerHeight(), getMarkerHeight());
+                    final Ellipse2D ellipse = new Ellipse2D.Double(
+                        x - getMarkerHeight() / 2,
+                        y - getMarkerHeight() / 2,
+                        getMarkerHeight(),
+                        getMarkerHeight()
+                    );
                     g.fill(ellipse);
                     g.setColor(selected ? MARKER_FILL_SELECTED_COLOR : MARKER_FILL_COLOR);
                     g.draw(ellipse);

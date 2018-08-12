@@ -4,10 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 class StatementPanel extends JPanel {
@@ -26,6 +30,7 @@ class StatementPanel extends JPanel {
         propertyLabel.setFont(propertyLabel.getFont().deriveFont(Font.BOLD));
         propertyLabel.setForeground(Color.BLACK);
         propertyLabel.setBackground(new Color(0xeaecf0));
+        propertyLabel.setHorizontalAlignment(JLabel.CENTER);
         propertyLabel.setOpaque(true);
         propertyLabel.setHorizontalAlignment(JLabel.TRAILING);
         setBackground(new Color(0xeaecf0));
@@ -34,8 +39,7 @@ class StatementPanel extends JPanel {
         constraints.weightx = 0;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.BOTH;
-        constraints.ipadx = 20;
-        constraints.ipady = constraints.ipadx / 2;
+        constraints.insets = new Insets(5, 5, 5, 5);
         constraints.gridx = 0;
         constraints.gridy = 0;
         add(propertyLabel, constraints);
@@ -46,6 +50,8 @@ class StatementPanel extends JPanel {
     }
 
     private synchronized void setValueNames(final String[] valueNames) {
+        final Border padding = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+        constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 1;
         constraints.weightx = 1;
         for (int i = 0; i < Math.max(valueNames.length, valueLabels.size()); i++) {
@@ -59,6 +65,7 @@ class StatementPanel extends JPanel {
                 currentLabel.setBackground(Color.WHITE);
                 currentLabel.setForeground(Color.BLACK);
                 currentLabel.setOpaque(true);
+                currentLabel.setBorder(padding);
                 valueLabels.add(currentLabel);
                 constraints.gridy = i;
                 add(currentLabel, constraints);
