@@ -25,6 +25,7 @@ import javax.swing.SwingWorker;
 import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.search.SearchAction;
 import org.openstreetmap.josm.command.ChangePropertyCommand;
+import org.openstreetmap.josm.data.UndoRedoHandler;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
@@ -335,7 +336,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
             ChangePropertyCommand cmd = new ChangePropertyCommand(
                     selected,
                     tag.getKey(), tag.getValue());
-            MainApplication.undoRedo.add(cmd);
+            UndoRedoHandler.getInstance().add(cmd);
             MainApplication.worker.execute(new FetchWikidataAction.Fetcher(selected));
         }
     }
