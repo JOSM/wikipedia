@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-39-g3f2fba9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-02 18:39+0000\n"
+"POT-Creation-Date: 2018-08-12 15:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: German (https://www.transifex.com/josm/teams/2544/de/)\n"
 "MIME-Version: 1.0\n"
@@ -90,6 +90,10 @@ msgstr ""
 msgid "Copy {0} template"
 msgstr "{0}-Vorlage kopieren"
 
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr ""
+"Konnte die Namen nicht hinzufügen. Das Tag wikipedia=* wird nicht erkannt!"
+
 msgid ""
 "Could not check for all wikipedia=* tags if they match the wikidata=* tag."
 msgstr ""
@@ -142,11 +146,23 @@ msgstr "Elemente herunterladen"
 msgid "Download from Sophox API"
 msgstr "Von der Sophox-API herunterladen"
 
+#, java-format
+msgid "Download labels for {0}…"
+msgstr "Lade Bezeichnungen für {0} herunter…"
+
 msgid "Download referrers (parent relations)"
 msgstr "Verweise herunterladen (Eltern-Relationen)"
 
 msgid "Download relation members"
 msgstr "Relationselemente herunterladen"
+
+#, java-format
+msgid "Download sitelinks for {0}…"
+msgstr "Lade verlinkte Seiten für {0} herunter…"
+
+#, java-format
+msgid "Download statements for {0}…"
+msgstr "Lade Aussagen für {0} herunter…"
 
 #. I18n: {0} is the error message returned by the API
 #, java-format
@@ -159,6 +175,19 @@ msgstr "Ausgewähltes Schnipsel bearbeiten"
 
 msgid "Error"
 msgstr "Fehler"
+
+#, java-format
+msgid "Failed to download labels for {0}!"
+msgstr "Fehler beim Herunterladen der Bezeichnungen für {0}!"
+
+#, java-format
+msgid "Failed to download sitelinks for Wikidata item {0}!"
+msgstr ""
+"Fehler beim Herunterladen der verlinkten Seiten für Wikidata-Eintrag {0}!"
+
+#, java-format
+msgid "Failed to download statements for Wikidata item {0}!"
+msgstr "Fehler beim Herunterladen der Aussagen für den Wikidata-Eintrag {0}!"
 
 msgid "Fetch Wikidata IDs"
 msgstr "Wikidata-Kennungen abrufen"
@@ -267,10 +296,6 @@ msgstr "Noch nicht verknüpft"
 
 msgid "Open Article"
 msgstr "Artikel öffnen"
-
-#, java-format
-msgid "Open item {0} in browser"
-msgstr "Öffne Element {0} im Browser"
 
 msgid "Opens the Wikipedia article of the selected item in a browser"
 msgstr "Wikipedia-Artikel des markierten Eintrags im Browser öffnen"
@@ -414,6 +439,10 @@ msgstr ""
 "Schalte in den Einstellungen die unwichtigen Prüfergebnisse ein, um nähere "
 "Details zu sehen."
 
+#. nullable
+msgid "Unknown datatype!"
+msgstr "Unbekannter Datentyp"
+
 #. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
 #. the message that exception provides
 #, java-format
@@ -480,6 +509,9 @@ msgstr "Auf Auswahl zoomen"
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
+msgid "aliases"
+msgstr "auch bekannt als"
+
 msgid "all Wikipedia articles in Category"
 msgstr "alle Wikipedia-Artikel in Kategorie"
 
@@ -490,11 +522,23 @@ msgstr "Zwischenablage"
 msgid "coordinates"
 msgstr "Koordinaten"
 
+msgid "description"
+msgstr "Beschreibung"
+
 msgid "has no Q-ID"
 msgstr "hat keine Q-ID"
 
 msgid "help"
 msgstr "Hilfe"
+
+msgid "label"
+msgstr "Bezeichnung"
+
+msgid "language"
+msgstr "Sprache"
+
+msgid "language code"
+msgstr "Sprachcode"
 
 msgid "wikidata=* item exists"
 msgstr "Der Eintrag für wikidata=* existiert"

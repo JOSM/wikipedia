@@ -263,7 +263,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     class PasteWikipediaArticlesAction extends AbstractAction {
 
         PasteWikipediaArticlesAction() {
-            super(tr("Clipboard"));
+            super(tr("Paste Wikipedia articles"));
             new ImageProvider("paste").getResource().attachImageIcon(this, true);
             putValue(SHORT_DESCRIPTION, tr("Pastes Wikipedia articles from the system clipboard"));
         }

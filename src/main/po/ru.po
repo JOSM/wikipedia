@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.0.2-39-g3f2fba9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-02 18:39+0000\n"
+"POT-Creation-Date: 2018-08-12 15:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Russian (https://www.transifex.com/josm/teams/2544/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,9 @@ msgstr "Доступно в локальном наборе данных"
 #. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Доступно через WIWOSM сервер"
+
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr "Не удается открыть веб-сайт {0} в браузере! Сообщение об ошибке: {1}"
 
 msgid "Cancel"
 msgstr "Отменить"
@@ -217,6 +220,9 @@ msgstr "Элемент {0} отсутствует"
 msgid "Item {0} redirects to {1}"
 msgstr "Элемент {0} перенаправляет к {1}"
 
+msgid "Links"
+msgstr "Ссылки"
+
 msgid "Load category"
 msgstr "Загрузка категории"
 
@@ -236,8 +242,15 @@ msgid ""
 msgstr "Проверяет, что статья wikipedia=* соединена с элементом wikidata=*"
 
 #, java-format
+msgid "More than one OSM object is selected: {0}"
+msgstr "Выбрано больше чем один объект OSM: {0}"
+
+#, java-format
 msgid "No Wikidata ID found for: {0}"
 msgstr "Не найден идентификатор Викиданных для: {0}"
+
+msgid "No Wikidata item is selected!"
+msgstr "Не выбран элемент Викиданных!"
 
 msgid "Not linked yet"
 msgstr "Ссылка ещё не создана"
@@ -299,6 +312,9 @@ msgstr ""
 "До: wikipedia={0}:{1}\n"
 "После: wikipedia={0}:{2}"
 
+msgid "Show properties of the selected Wikidata item"
+msgstr "Показать свойства выбранного элемента Викиданных"
+
 msgid "Show/hide Sophox snippet list"
 msgstr "Показать/скрыть список фрагментов запросов Sophox"
 
@@ -307,6 +323,11 @@ msgstr "Сервер Sophox"
 
 msgid "Target key: "
 msgstr "Целевой ключ: "
+
+#. I18n: {0} is the API name
+#, java-format
+msgid "The JSON response from the {0} can''t be decoded!"
+msgstr "Ответ JSON от {0} не может быть расшифрован!"
 
 msgid "The Wikidata Action API did not respond with all requested entities!"
 msgstr "Ответ Wikidata Action API содержит не все запрошенные сущности!"
@@ -381,6 +402,13 @@ msgstr "При чтении JSON-ответа от {0} произошла оши
 
 msgid "Wiki layer"
 msgstr "Слой Wiki"
+
+msgid "Wikidata Info"
+msgstr "Информация о Викиданных"
+
+#, java-format
+msgid "Wikidata Info: {0}"
+msgstr "Информация о Викиданных: {0}"
 
 msgid "Wikidata item and Wikipedia article do not match!"
 msgstr "Элемент Викиданных и статья Википедии не соответствуют друг другу!"
