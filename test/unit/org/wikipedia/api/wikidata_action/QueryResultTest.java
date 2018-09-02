@@ -1,17 +1,15 @@
 package org.wikipedia.api.wikidata_action;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
-import org.wikipedia.api.ApiQueryClient;
-import org.wikipedia.testutils.ResourceFileLoader;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import org.junit.Test;
+import org.wikipedia.api.ApiQueryClient;
+import org.wikipedia.testutils.ResourceFileLoader;
 
 public class QueryResultTest extends WikidataActionApiTestAbstract {
     @Test

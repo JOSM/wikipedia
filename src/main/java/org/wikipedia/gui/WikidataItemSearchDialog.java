@@ -17,7 +17,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.Tag;
@@ -40,7 +39,7 @@ public final class WikidataItemSearchDialog extends ExtendedDialog {
     private static final WikidataItemSearchDialog INSTANCE = new WikidataItemSearchDialog();
 
     private WikidataItemSearchDialog() {
-        super(Main.parent, tr("Search Wikidata items"), tr("Add Tag"), tr("Cancel"));
+        super(MainApplication.getMainFrame(), tr("Search Wikidata items"), tr("Add Tag"), tr("Cancel"));
         this.selector = new Selector();
         this.selector.setDblClickListener(e -> buttonAction(0, null));
         this.targetKey = new AutoCompletingComboBox();

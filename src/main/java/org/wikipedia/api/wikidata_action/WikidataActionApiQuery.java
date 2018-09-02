@@ -32,6 +32,8 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
 
     /**
      * Convenience constructor
+     * @param queryString the query string containing the arguments of this query
+     * @param schema the {@link SerializationSchema} that defines how deserialization of the response is handled
      * @see #WikidataActionApiQuery(String, SerializationSchema, long, Function)
      */
     private WikidataActionApiQuery(final String queryString, final SerializationSchema<T> schema) {
@@ -40,6 +42,9 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
 
     /**
      * Convenience constructor
+     * @param queryString the query string containing the arguments of this query
+     * @param schema the {@link SerializationSchema} that defines how deserialization of the response is handled
+     * @param converter a function that maps the
      * @see #WikidataActionApiQuery(String, SerializationSchema, long, Function)
      */
     private <S> WikidataActionApiQuery(final String queryString, final SerializationSchema<S> schema, final Function<S, T> converter) {

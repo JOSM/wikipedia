@@ -20,20 +20,19 @@ public class AllValidationTestsTest {
 
     @Test
     public void testValidationTestFields() throws IllegalAccessException {
-        AllValidationTests.ValidationTest<WikidataItemExists> test = AllValidationTests.INVALID_QID;
         final Field[] fields = AllValidationTests.class.getDeclaredFields();
         for (Field field : fields) {
             if ((field.getModifiers() & Modifier.PRIVATE) == 0) {
                 final Object fieldValue = field.get(null);
                 if (fieldValue instanceof AllValidationTests.ValidationTest) {
                     System.out.print("Check validation test " + field.getName());
-                    testValidationTestField((AllValidationTests.ValidationTest) fieldValue);
+                    testValidationTestField((AllValidationTests.ValidationTest<?>) fieldValue);
                 }
             }
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private static void testValidationTestField(final AllValidationTests.ValidationTest validationTest) {
         final TestError te = validationTest
             .getBuilder(new org.openstreetmap.josm.data.validation.Test("DummyTest"))

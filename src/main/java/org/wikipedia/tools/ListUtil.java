@@ -18,6 +18,7 @@ public final class ListUtil {
      * @param fullList the list that should be split into batches
      * @param maxBatchSize the maximum size of one batch
      * @param processBatch the consumer that is run on each batch
+     * @param updateProgress progress updater
      * @param <T> the type of the list elements
      */
     public static <T> void processInBatches(final List<T> fullList, int maxBatchSize, final Consumer<List<T>> processBatch, final BiConsumer<Integer, Integer> updateProgress) {

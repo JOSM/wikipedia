@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javax.swing.JMenuItem;
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.data.Preferences;
 import org.openstreetmap.josm.data.StructUtils;
@@ -19,6 +18,7 @@ import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.MainMenu;
 import org.openstreetmap.josm.gui.datatransfer.ClipboardUtils;
+import org.openstreetmap.josm.spi.preferences.Config;
 
 public class WikipediaCopyTemplate {
 
@@ -30,7 +30,7 @@ public class WikipediaCopyTemplate {
     );
 
     private static final List<CoordCopyTemplateEntry> TEMPLATE_ENTRIES =
-            StructUtils.getListOfStructs(Main.pref, "wikipedia.copytemplates", DEFAULT_TEMPLATES, CoordCopyTemplateEntry.class);
+            StructUtils.getListOfStructs(Config.getPref(), "wikipedia.copytemplates", DEFAULT_TEMPLATES, CoordCopyTemplateEntry.class);
 
     public WikipediaCopyTemplate() {
         JosmAction previous = MainApplication.getMenu().copyCoordinates;

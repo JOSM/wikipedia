@@ -16,6 +16,7 @@ import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.command.ChangePropertyCommand;
 import org.openstreetmap.josm.command.Command;
 import org.openstreetmap.josm.command.SequenceCommand;
+import org.openstreetmap.josm.data.UndoRedoHandler;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.ConditionalOptionPaneUtil;
@@ -97,7 +98,7 @@ public class FetchWikidataAction extends JosmAction {
         @Override
         protected void finish() {
             if (!canceled && !commands.isEmpty()) {
-                MainApplication.undoRedo.add(commands.size() == 1 ? commands.get(0) : new SequenceCommand(tr("Add Wikidata"), commands));
+                UndoRedoHandler.getInstance().add(commands.size() == 1 ? commands.get(0) : new SequenceCommand(tr("Add Wikidata"), commands));
             }
             if (!canceled && !notFound.isEmpty()) {
                 new Notification(tr("No Wikidata ID found for: {0}", Utils.joinAsHtmlUnorderedList(notFound)))

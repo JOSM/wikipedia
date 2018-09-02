@@ -22,9 +22,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingWorker;
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.search.SearchAction;
 import org.openstreetmap.josm.command.ChangePropertyCommand;
+import org.openstreetmap.josm.data.UndoRedoHandler;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
@@ -41,6 +41,7 @@ import org.openstreetmap.josm.gui.SideButton;
 import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeEvent;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeListener;
+import org.openstreetmap.josm.spi.preferences.Config;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
@@ -254,7 +255,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
                 @Override
                 List<WikipediaEntry> getEntries() {
                     return WikipediaApp.forLanguage(WikiProperties.WIKIPEDIA_LANGUAGE.get())
-                            .getEntriesFromCategory(category, Main.pref.getInt("wikipedia.depth", 3));
+                            .getEntriesFromCategory(category, Config.getPref().getInt("wikipedia.depth", 3));
                 }
             }.execute();
         }
@@ -335,7 +336,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
             ChangePropertyCommand cmd = new ChangePropertyCommand(
                     selected,
                     tag.getKey(), tag.getValue());
-            MainApplication.undoRedo.add(cmd);
+            UndoRedoHandler.getInstance().add(cmd);
             MainApplication.worker.execute(new FetchWikidataAction.Fetcher(selected));
         }
     }
@@ -367,7 +368,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     protected void updateWikipediaArticles() {
         final String language = getLanguageOfFirstItem();
         articles.clear();
-        if (Main.main != null && MainApplication.getLayerManager().getEditDataSet() != null) {
+        if (MainApplication.getLayerManager().getEditDataSet() != null) {
             MainApplication.getLayerManager().getEditDataSet().allPrimitives().stream()
                     .flatMap(p -> WikipediaApp.forLanguage(language).getWikipediaArticles(p))
                     .forEach(articles::add);

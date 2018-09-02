@@ -9,10 +9,10 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.data.osm.DefaultNameFormatter;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.ConditionalOptionPaneUtil;
+import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.util.GuiHelper;
 import org.openstreetmap.josm.tools.AlphanumComparator;
 import org.openstreetmap.josm.tools.Utils;
@@ -35,7 +35,7 @@ public final class GuiUtils {
             return true;
         }
         final Boolean r = GuiHelper.runInEDTAndWaitAndReturn(() ->
-                ConditionalOptionPaneUtil.showConfirmationDialog(PREF_OVERWRITE, Main.parent,
+                ConditionalOptionPaneUtil.showConfirmationDialog(PREF_OVERWRITE, MainApplication.getMainFrame(),
                         trn(
                                 "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?",
                                 "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?", existingValues.size(),

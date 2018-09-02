@@ -46,7 +46,7 @@ public class WikipediaActionApiQuery<T> extends ApiQuery<T> {
     public static WikipediaActionApiQuery<QueryResult> query(final IWikipediaSite site, final Collection<String> titles) {
         Objects.requireNonNull(site);
         Objects.requireNonNull(titles);
-        return new WikipediaActionApiQuery<QueryResult>(
+        return new WikipediaActionApiQuery<>(
             site,
             FORMAT_PARAMS +
                 "&action=query&redirects=1&titles=" +

@@ -11,7 +11,7 @@ import org.openstreetmap.josm.testutils.JOSMTestRules;
 public class WikiPreferencesTest {
 
     @Rule
-    public JOSMTestRules test = new JOSMTestRules().platform();
+    public JOSMTestRules test = new JOSMTestRules();
 
     @Test
     public void testAddGui() {

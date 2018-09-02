@@ -9,12 +9,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.io.remotecontrol.AddTagsDialog;
+import org.openstreetmap.josm.spi.preferences.Config;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
@@ -51,9 +51,9 @@ public class WikipediaAddNamesAction extends JosmAction {
     }
 
     private boolean useWikipediaLangArticle(WikipediaEntry i) {
-        return (!Main.pref.getBoolean("wikipedia.filter-iso-languages", true)
+        return (!Config.getPref().getBoolean("wikipedia.filter-iso-languages", true)
                 || Arrays.asList(Locale.getISOLanguages()).contains(i.lang))
-                && (!Main.pref.getBoolean("wikipedia.filter-same-names", true)
+                && (!Config.getPref().getBoolean("wikipedia.filter-same-names", true)
                 || !i.article.equals(getLayerManager().getEditDataSet().getSelected().iterator().next().get("name")));
     }
 

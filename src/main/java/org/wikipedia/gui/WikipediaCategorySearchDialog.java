@@ -7,8 +7,8 @@ import java.awt.Dimension;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.gui.ExtendedDialog;
+import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.util.GuiHelper;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.tools.WikiProperties;
@@ -19,7 +19,7 @@ final class WikipediaCategorySearchDialog extends ExtendedDialog {
     private static final WikipediaCategorySearchDialog INSTANCE = new WikipediaCategorySearchDialog();
 
     private WikipediaCategorySearchDialog() {
-        super(Main.parent, tr("Search Wikipedia category"), new String[]{tr("Load category"), tr("Cancel")});
+        super(MainApplication.getMainFrame(), tr("Search Wikipedia category"), new String[]{tr("Load category"), tr("Cancel")});
         this.selector = new Selector();
         this.selector.setDblClickListener(e -> buttonAction(0, null));
 

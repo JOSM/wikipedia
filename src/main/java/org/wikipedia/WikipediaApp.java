@@ -236,7 +236,7 @@ public final class WikipediaApp {
     public Map<String, String> getWikidataForArticles(Collection<String> articles) {
         final Map<String, String> result = new HashMap<>();
         // maximum of 50 titles
-        ListUtil.processInBatches(new ArrayList<String>(articles), 50, batch -> {
+        ListUtil.processInBatches(new ArrayList<>(articles), 50, batch -> {
             result.putAll(resolveWikidataItems(batch));
         });
         return result;
