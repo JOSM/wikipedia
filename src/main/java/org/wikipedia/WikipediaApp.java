@@ -216,6 +216,10 @@ public final class WikipediaApp {
         }
     }
 
+    public boolean hasWikipediaTag(final OsmPrimitive p) {
+        return p.hasKey("wikidata", "wikipedia", "wikipedia:" + wikipediaLang);
+    }
+
     public Stream<String> getWikipediaArticles(final OsmPrimitive p) {
         if ("wikidata".equals(wikipediaLang)) {
             return Stream.of(p.get("wikidata")).filter(Objects::nonNull);

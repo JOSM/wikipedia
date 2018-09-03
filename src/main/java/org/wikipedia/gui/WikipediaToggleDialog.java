@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,7 @@ import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.data.osm.event.AbstractDatasetChangedEvent;
+import org.openstreetmap.josm.data.osm.event.AbstractDatasetChangedEvent.DatasetEventType;
 import org.openstreetmap.josm.data.osm.event.DataSetListenerAdapter;
 import org.openstreetmap.josm.data.osm.event.DatasetEventManager;
 import org.openstreetmap.josm.data.osm.event.DatasetEventManager.FireMode;
@@ -139,25 +141,25 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     };
 
     private void updateTitle() {
-        final String lang = getLanguageOfFirstItem();
+        final WikipediaApp app = newWikipediaApp();
         try {
-            final URL url = new URL(WikipediaApp.forLanguage(lang).getSiteUrl());
+            final URL url = new URL(app.getSiteUrl());
             if (titleContext == null) {
                 setTitle(url.getHost());
             } else {
                 setTitle(url.getHost() + ": " + titleContext);
             }
         } catch (MalformedURLException e) {
-            Logging.warn("The site URL {0} is malformed!", WikipediaApp.forLanguage(lang).getSiteUrl());
+            Logging.warn("The site URL {0} is malformed!", app.getSiteUrl());
             setTitle(tr("{0} (malformed site URL)"));
         }
     }
 
-    private String getLanguageOfFirstItem() {
+    private WikipediaApp newWikipediaApp() {
         try {
-            return list.getModel().getElementAt(0).lang;
+            return WikipediaApp.forLanguage(list.getModel().getElementAt(0).lang);
         } catch (ArrayIndexOutOfBoundsException ignore) {
-            return WikiProperties.WIKIPEDIA_LANGUAGE.get();
+            return WikipediaApp.forLanguage(WikiProperties.WIKIPEDIA_LANGUAGE.get());
         }
     }
 
@@ -366,11 +368,11 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     }
 
     protected void updateWikipediaArticles() {
-        final String language = getLanguageOfFirstItem();
+        final WikipediaApp app = newWikipediaApp();
         articles.clear();
         if (MainApplication.getLayerManager().getEditDataSet() != null) {
             MainApplication.getLayerManager().getEditDataSet().allPrimitives().stream()
-                    .flatMap(p -> WikipediaApp.forLanguage(language).getWikipediaArticles(p))
+                    .flatMap(app::getWikipediaArticles)
                     .forEach(articles::add);
         }
     }
@@ -404,6 +406,18 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
     @Override
     public void processDatasetEvent(AbstractDatasetChangedEvent event) {
+        final Set<DatasetEventType> typesToProcess = EnumSet.of(
+            DatasetEventType.DATA_CHANGED,
+            DatasetEventType.PRIMITIVES_ADDED,
+            DatasetEventType.PRIMITIVES_REMOVED,
+            DatasetEventType.TAGS_CHANGED);
+        if (!typesToProcess.contains(event.getType())) {
+            return;
+        }
+        final WikipediaApp app = newWikipediaApp();
+        if (event.getPrimitives().stream().noneMatch(app::hasWikipediaTag)) {
+            return;
+        }
         updateWikipediaArticles();
         list.repaint();
     }
