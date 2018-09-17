@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.0-3-g687142d\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-02 18:39+0000\n"
+"POT-Creation-Date: 2018-09-03 23:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Portuguese (https://www.transifex.com/josm/teams/2544/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -56,14 +56,16 @@ msgstr "Já aplicado num objeto no mapa local"
 msgid "Available via WIWOSM server"
 msgstr "Disponível pelo servidor WIWOSM (Wikipedia where in OSM)"
 
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr ""
+"Não é possível abrir o site {0} no navegador de Internet! Mensagem de erro: "
+"{1}"
+
 msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Change wikipedia tag?"
 msgstr "Alterar a etiqueta wikipedia?"
-
-msgid "Clipboard"
-msgstr "Área de transferência"
 
 msgid "Contacting Server..."
 msgstr "A contactar o servidor..."
@@ -78,6 +80,10 @@ msgstr ""
 #, java-format
 msgid "Copy {0} template"
 msgstr "Copiar predefinição {0}"
+
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr ""
+"Não foi possível adicionar os nomes. A etiqueta Wikipedia não é reconhecida!"
 
 msgid "Delete selected snippet"
 msgstr "Eliminar consulta"
@@ -98,6 +104,10 @@ msgstr "Descarregar elementos"
 
 msgid "Download from Sophox API"
 msgstr "Descarregar da API Sophox"
+
+#, java-format
+msgid "Download labels for {0}…"
+msgstr "Descarregar etiquetas para {0}…"
 
 msgid "Download referrers (parent relations)"
 msgstr "Descarregar referentes (relações-pai)"
@@ -168,6 +178,9 @@ msgstr "O item {0} está em falta"
 #, java-format
 msgid "Item {0} redirects to {1}"
 msgstr "O item {0} redireciona para {1}"
+
+msgid "Labels"
+msgstr "Etiquetas"
 
 msgid "Load category"
 msgstr "Carregar categoria"
