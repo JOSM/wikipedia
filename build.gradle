@@ -1,5 +1,5 @@
 import com.github.spotbugs.SpotBugsTask
-import net.ltgt.gradle.errorprone.javacplugin.CheckSeverity
+import net.ltgt.gradle.errorprone.CheckSeverity
 import org.openstreetmap.josm.gradle.plugin.task.GeneratePluginList
 
 import java.nio.file.Files
@@ -13,50 +13,44 @@ plugins {
   id "jacoco"
   id "pmd"
   id "com.github.ben-manes.versions" version "0.20.0"
-  id "com.github.spotbugs" version "1.6.2"
+  id "com.github.spotbugs" version "1.6.3"
   id "org.openstreetmap.josm" version "0.5.0"
-  id "net.ltgt.errorprone" version "0.0.16" apply(false)
-  id "net.ltgt.errorprone-javacplugin" version "0.3" apply(false)
+  id "net.ltgt.errorprone" version "0.6"
 }
 
 // Set up Errorprone
-def errorproneChecks = [
-  "DefaultCharset": CheckSeverity.ERROR,
-  "StringEquality": CheckSeverity.ERROR,
-  "ConstantField":  CheckSeverity.WARN,
-  "FieldCanBeFinal": CheckSeverity.WARN,
-  "LambdaFunctionalInterface": CheckSeverity.WARN,
-  "MethodCanBeStatic": CheckSeverity.WARN,
-  "MultiVariableDeclaration": CheckSeverity.WARN,
-  "PrivateConstructorForUtilityClass": CheckSeverity.WARN,
-  "UngroupedOverloads": CheckSeverity.WARN,
-  "WildcardImport": CheckSeverity.WARN
-]
-if (JavaVersion.current().java9Compatible) {
-  apply plugin: "net.ltgt.errorprone-javacplugin"
-  // TODO: add the errorprone checks
-} else {
-  apply plugin: "net.ltgt.errorprone"
-  tasks.withType(JavaCompile) {
-    errorproneChecks.forEach { name, severity ->
-      options.compilerArgs.add("-Xep:$name:$severity")
-    }
+tasks.withType(JavaCompile).configureEach {
+  options.errorprone {
+    check("DefaultCharset", CheckSeverity.ERROR)
+    check("StringEquality", CheckSeverity.ERROR)
+    check("ConstantField",  CheckSeverity.WARN)
+    check("FieldCanBeFinal", CheckSeverity.WARN)
+    check("LambdaFunctionalInterface", CheckSeverity.WARN)
+    check("MethodCanBeStatic", CheckSeverity.WARN)
+    check("MultiVariableDeclaration", CheckSeverity.WARN)
+    check("PrivateConstructorForUtilityClass", CheckSeverity.WARN)
+    check("UngroupedOverloads", CheckSeverity.WARN)
+    check("WildcardImport", CheckSeverity.WARN)
   }
 }
 
 def versions = [
     errorprone: "2.3.1",
     jacoco: "0.8.1",
-    junit: "5.2.0",
+    junit: "5.3.1",
     pmd: "6.6.0",
-    spotbugs: "3.1.6",
+    spotbugs: "3.1.7",
 ]
 
 repositories {
   jcenter()
 }
 dependencies {
+  if (!JavaVersion.current().isJava9Compatible()) {
+    errorproneJavac("com.google.errorprone:javac:9+181-r4173-1")
+  }
   errorprone("com.google.errorprone:error_prone_core:${versions.errorprone}")
+
   testImplementation("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
   testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
