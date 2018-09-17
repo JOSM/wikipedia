@@ -19,7 +19,7 @@ final class WikipediaCategorySearchDialog extends ExtendedDialog {
     private static final WikipediaCategorySearchDialog INSTANCE = new WikipediaCategorySearchDialog();
 
     private WikipediaCategorySearchDialog() {
-        super(MainApplication.getMainFrame(), tr("Search Wikipedia category"), new String[]{tr("Load category"), tr("Cancel")});
+        super(MainApplication.getMainFrame(), tr("Search Wikipedia category"), tr("Load category"), tr("Cancel"));
         this.selector = new Selector();
         this.selector.setDblClickListener(e -> buttonAction(0, null));
 

@@ -2,7 +2,9 @@
 package org.wikipedia.tools;
 
 import java.util.Arrays;
+import org.openstreetmap.josm.data.preferences.BooleanProperty;
 import org.openstreetmap.josm.data.preferences.DoubleProperty;
+import org.openstreetmap.josm.data.preferences.IntegerProperty;
 import org.openstreetmap.josm.data.preferences.ListProperty;
 import org.openstreetmap.josm.data.preferences.StringProperty;
 import org.openstreetmap.josm.tools.LanguageInfo;
@@ -32,6 +34,12 @@ public final class WikiProperties {
             "Q732577" /* publication */
         )
     );
+
+    public static final IntegerProperty WIKIPEDIA_DEPTH = new IntegerProperty("wikipedia.depth", 3);
+
+    public static final BooleanProperty FILTER_ISO_LANGUAGES = new BooleanProperty("wikipedia.filter-iso-languages", true);
+
+    public static final BooleanProperty FILTER_SAME_NAMES = new BooleanProperty("wikipedia.filter-same-names", true);
 
     private WikiProperties() {
         // Private constructor to avoid instantiation

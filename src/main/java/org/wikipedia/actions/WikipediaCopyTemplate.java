@@ -18,19 +18,18 @@ import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.MainMenu;
 import org.openstreetmap.josm.gui.datatransfer.ClipboardUtils;
-import org.openstreetmap.josm.spi.preferences.Config;
 
 public class WikipediaCopyTemplate {
 
     private static final List<CoordCopyTemplateEntry> DEFAULT_TEMPLATES = Arrays.asList(
-            new CoordCopyTemplateEntry("{{Coordinate}}", "wikipedia-coordinate", "{{Coordinate|NS={lat}|EW={lon}|type=landmark|region=}}"),
-            new CoordCopyTemplateEntry("{{Coord}}", "wikipedia-coord", "{{Coord|{lat}|{lon}}}"),
-            new CoordCopyTemplateEntry("{{Location dec}}", "wikipedia-location-dec", "{{Location dec|{lat}|{lon}}}"),
-            new CoordCopyTemplateEntry("{{Object location dec}}", "wikipedia-object-location-dec", "{{Object location dec|{lat}|{lon}}}")
+        new CoordCopyTemplateEntry("{{Coordinate}}", "wikipedia-coordinate", "{{Coordinate|NS={lat}|EW={lon}|type=landmark|region=}}"),
+        new CoordCopyTemplateEntry("{{Coord}}", "wikipedia-coord", "{{Coord|{lat}|{lon}}}"),
+        new CoordCopyTemplateEntry("{{Location dec}}", "wikipedia-location-dec", "{{Location dec|{lat}|{lon}}}"),
+        new CoordCopyTemplateEntry("{{Object location dec}}", "wikipedia-object-location-dec", "{{Object location dec|{lat}|{lon}}}")
     );
 
     private static final List<CoordCopyTemplateEntry> TEMPLATE_ENTRIES =
-            StructUtils.getListOfStructs(Config.getPref(), "wikipedia.copytemplates", DEFAULT_TEMPLATES, CoordCopyTemplateEntry.class);
+        StructUtils.getListOfStructs(Preferences.main(), "wikipedia.copytemplates", DEFAULT_TEMPLATES, CoordCopyTemplateEntry.class);
 
     public WikipediaCopyTemplate() {
         JosmAction previous = MainApplication.getMenu().copyCoordinates;

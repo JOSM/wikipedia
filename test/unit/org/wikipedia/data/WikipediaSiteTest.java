@@ -6,8 +6,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import org.junit.Test;
-import org.wikipedia.api.wikidata_action.WikidataActionApiTestAbstract;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQueryTest;
+import org.wikipedia.api.wikidata_action.WikidataActionApiTestAbstract;
 import org.wikipedia.testutils.ResourceFileLoader;
 
 public class WikipediaSiteTest extends WikidataActionApiTestAbstract {

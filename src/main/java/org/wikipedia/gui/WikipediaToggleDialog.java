@@ -43,7 +43,6 @@ import org.openstreetmap.josm.gui.SideButton;
 import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeEvent;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeListener;
-import org.openstreetmap.josm.spi.preferences.Config;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
@@ -256,8 +255,9 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
             new UpdateWikipediaArticlesSwingWorker() {
                 @Override
                 List<WikipediaEntry> getEntries() {
-                    return WikipediaApp.forLanguage(WikiProperties.WIKIPEDIA_LANGUAGE.get())
-                            .getEntriesFromCategory(category, Config.getPref().getInt("wikipedia.depth", 3));
+                    return WikipediaApp
+                        .forLanguage(WikiProperties.WIKIPEDIA_LANGUAGE.get())
+                        .getEntriesFromCategory(category, WikiProperties.WIKIPEDIA_DEPTH.get());
                 }
             }.execute();
         }
@@ -370,10 +370,11 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     protected void updateWikipediaArticles() {
         final WikipediaApp app = newWikipediaApp();
         articles.clear();
-        if (MainApplication.getLayerManager().getEditDataSet() != null) {
-            MainApplication.getLayerManager().getEditDataSet().allPrimitives().stream()
-                    .flatMap(app::getWikipediaArticles)
-                    .forEach(articles::add);
+        final DataSet editDataset = MainApplication.getLayerManager().getEditDataSet();
+        if (editDataset != null) {
+            editDataset.allPrimitives().stream()
+                .flatMap(app::getWikipediaArticles)
+                .forEach(articles::add);
         }
     }
 

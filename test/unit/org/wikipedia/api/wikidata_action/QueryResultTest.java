@@ -6,7 +6,6 @@ import static org.junit.Assert.assertFalse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Map;
-
 import org.junit.Test;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.testutils.ResourceFileLoader;

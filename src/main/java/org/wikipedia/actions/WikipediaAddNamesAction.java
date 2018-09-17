@@ -4,23 +4,23 @@ package org.wikipedia.actions;
 import static org.openstreetmap.josm.tools.I18n.tr;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.io.remotecontrol.AddTagsDialog;
-import org.openstreetmap.josm.spi.preferences.Config;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.data.WikipediaEntry;
+import org.wikipedia.tools.WikiProperties;
 
 public class WikipediaAddNamesAction extends JosmAction {
 
@@ -38,11 +38,10 @@ public class WikipediaAddNamesAction extends JosmAction {
                 .setIcon(WikipediaPlugin.W_IMAGE.setMaxSize(ImageProvider.ImageSizes.LARGEICON).get())
                 .show();
         } else {
-            List<String[]> tags = new ArrayList<>();
-            WikipediaApp.forLanguage(wp.lang).getInterwikiArticles(wp.article).stream()
+            List<String[]> tags = WikipediaApp.forLanguage(wp.lang).getInterwikiArticles(wp.article).stream()
                 .filter(this::useWikipediaLangArticle)
                 .map(i -> new String[]{"name:" + i.lang, i.article})
-                .forEach(tags::add);
+                .collect(Collectors.toList());
             if (Logging.isDebugEnabled()) {
                 Logging.debug(tags.toString());
             }
@@ -51,19 +50,17 @@ public class WikipediaAddNamesAction extends JosmAction {
     }
 
     private boolean useWikipediaLangArticle(WikipediaEntry i) {
-        return (!Config.getPref().getBoolean("wikipedia.filter-iso-languages", true)
-                || Arrays.asList(Locale.getISOLanguages()).contains(i.lang))
-                && (!Config.getPref().getBoolean("wikipedia.filter-same-names", true)
-                || !i.article.equals(getLayerManager().getEditDataSet().getSelected().iterator().next().get("name")));
+        return
+            (!WikiProperties.FILTER_ISO_LANGUAGES.get() || Arrays.asList(Locale.getISOLanguages()).contains(i.lang)) &&
+            (!WikiProperties.FILTER_SAME_NAMES.get() || !i.article.equals(getLayerManager().getEditDataSet().getSelected().iterator().next().get("name")));
     }
 
     private String getWikipediaValue() {
-        DataSet ds = getLayerManager().getEditDataSet();
+        final DataSet ds = getLayerManager().getEditDataSet();
         if (ds == null || ds.getSelected() == null || ds.getSelected().size() != 1) {
             return null;
-        } else {
-            return ds.getSelected().iterator().next().get("wikipedia");
         }
+        return ds.getSelected().iterator().next().get("wikipedia");
     }
 
     @Override
