@@ -12,13 +12,17 @@ abstract class WikiSearchTextResultListPanel<T> extends SearchTextResultListPane
             Executors.newSingleThreadScheduledExecutor(Utils.newThreadFactory("wikipedia-search-%d", Thread.NORM_PRIORITY)));
 
     public T getSelectedItem() {
-        final T selected = lsResult.getSelectedValue();
-        if (selected != null) {
-            return selected;
-        } else if (!lsResultModel.isEmpty()) {
-            return lsResultModel.getElementAt(0);
-        } else {
-            return null;
+        synchronized (lsResultModel) {
+            final int idx = lsResult.getSelectedIndex();
+            final T selected = idx < lsResultModel.getSize() && idx >= 0 ? lsResultModel.getElementAt(idx) : null;
+
+            if (selected != null) {
+                return selected;
+            } else if (!lsResultModel.isEmpty()) {
+                return lsResultModel.getElementAt(0);
+            } else {
+                return null;
+            }
         }
     }
 }
