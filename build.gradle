@@ -4,8 +4,6 @@ import org.openstreetmap.josm.gradle.plugin.task.GeneratePluginList
 
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.time.Duration
-import java.time.Instant
 
 plugins {
   id "java"
@@ -13,8 +11,8 @@ plugins {
   id "jacoco"
   id "pmd"
   id "com.github.ben-manes.versions" version "0.20.0"
-  id "com.github.spotbugs" version "1.6.3"
-  id "org.openstreetmap.josm" version "0.5.0"
+  id "com.github.spotbugs" version "1.6.4"
+  id "org.openstreetmap.josm" version "0.5.3"
   id "net.ltgt.errorprone" version "0.6"
 }
 
@@ -35,11 +33,11 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 def versions = [
-    errorprone: "2.3.1",
-    jacoco: "0.8.1",
-    junit: "5.3.1",
-    pmd: "6.6.0",
-    spotbugs: "3.1.7",
+  errorprone: "2.3.2",
+  jacoco: "0.8.2",
+  junit: "5.3.1",
+  pmd: "6.6.0",
+  spotbugs: "3.1.7",
 ]
 
 repositories {
@@ -56,14 +54,15 @@ dependencies {
   testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
   testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation("com.github.tomakehurst:wiremock:2.18.0")
+  testImplementation("com.github.tomakehurst:wiremock:2.19.0")
   testImplementation("org.awaitility:awaitility:3.1.2")
 }
 
+// Add dependencies from ivy.xml
 def ivyModule = new XmlParser().parse(new File("$projectDir/ivy.xml"))
 logger.info("Dependencies from ivy.xml (added to configuration `packIntoJar`):")
 ivyModule.dependencies.dependency.each {
-  logger.info("* ${it.@org}:${it.@name}:${it.@rev}")
+  logger.info("  * ${it.@org}:${it.@name}:${it.@rev}")
   project.dependencies.packIntoJar("${it.@org}:${it.@name}:${it.@rev}")
 }
 
@@ -157,27 +156,5 @@ task generateSnapshotUpdateSite(type: GeneratePluginList) {
       }
     }
     it.addPlugin("$archivesBaseName-dev.jar", project.josm.manifest.createJosmPluginJarManifest(), new URL(pluginDownloadUrl))
-  }
-}
-
-// Show task duration and skipped tasks
-gradle.taskGraph.beforeTask {
-  it.ext.startTime = Instant.now()
-}
-gradle.taskGraph.afterTask {
-  if (!it.getState().skipped) {
-    it.logger.lifecycle(String.format("\n  🏁 Finished after %.3f seconds.", Duration.between(it.ext.startTime as Instant, Instant.now()).toMillis() / 1e3))
-  }
-}
-gradle.buildFinished {
-  def wereTasksSkipped = false
-  tasks.forEach {
-    if (it.state.skipped) {
-      if (!wereTasksSkipped) {
-        it.logger.lifecycle("\nSkipped tasks:")
-        wereTasksSkipped = true
-      }
-      it.logger.lifecycle("⏭️  :${it.name} (${it.state.skipMessage})")
-    }
   }
 }
