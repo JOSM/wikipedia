@@ -15,10 +15,11 @@ import org.wikipedia.tools.RegexUtil;
 import org.wikipedia.tools.WikiProperties;
 
 public class WdqApiQuery<T> extends ApiQuery<T> {
+    private static String baseUrl = "https://query.wikidata.org/sparql";
     private static final String[] TICKET_KEYWORDS = {"wikidata", "QueryService"};
     private final String queryString;
 
-    public WdqApiQuery(final URL url, final String queryString, final SerializationSchema<T> schema) {
+    private WdqApiQuery(final URL url, final String queryString, final SerializationSchema<T> schema) {
         super(url, schema);
         this.queryString = Objects.requireNonNull(queryString);
     }
@@ -48,9 +49,9 @@ public class WdqApiQuery<T> extends ApiQuery<T> {
     public static WdqApiQuery<SparqlResult> findInstancesOfClassesOrTheirSubclasses(final Collection<String> items, final Collection<String> classes) {
         Objects.requireNonNull(items);
         Objects.requireNonNull(classes);
-        if (items.size() >= 1 && classes.size() >= 1 && Stream.concat(items.stream(), classes.stream()).allMatch(RegexUtil::isValidQId)) {
+        if (!items.isEmpty() && !classes.isEmpty() && Stream.concat(items.stream(), classes.stream()).allMatch(RegexUtil::isValidQId)) {
             return new WdqApiQuery<>(
-                ApiUrl.url("https://query.wikidata.org/sparql"),
+                ApiUrl.url(baseUrl),
                 "format=json&query=" + Utils.encodeUrl(String.format(
                     "SELECT DISTINCT ?item ?itemLabel ?classes ?classesLabel WHERE { VALUES ?item { wd:%s }. VALUES ?classes { wd:%s }. ?item wdt:P31/wdt:P279* ?supertype. ?supertype wdt:P279* ?classes. SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s\" }. }",
                     String.join(" wd:", items),

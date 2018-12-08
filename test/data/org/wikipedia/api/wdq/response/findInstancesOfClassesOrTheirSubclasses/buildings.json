@@ -1,0 +1,140 @@
+{
+  "head" : {
+    "vars" : [ "item", "itemLabel", "classes", "classesLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q507939"
+      },
+      "itemLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "世界一號"
+      },
+      "classesLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "建筑物"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q48435"
+      },
+      "itemLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "圣家堂"
+      },
+      "classesLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "建筑物"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q201013"
+      },
+      "itemLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "斯瓦尔巴全球种子库"
+      },
+      "classesLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "建筑物"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q379080"
+      },
+      "itemLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "耶稣堡"
+      },
+      "classesLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "建筑物"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3368242"
+      },
+      "itemLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "烏德勒支聖馬丁主教座堂塔樓"
+      },
+      "classesLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "建筑物"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q18712428"
+      },
+      "itemLabel" : {
+        "type" : "literal",
+        "value" : "Q18712428"
+      },
+      "classesLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "建筑物"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q494895"
+      },
+      "itemLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "樂天世界塔"
+      },
+      "classesLabel" : {
+        "xml:lang" : "zh",
+        "type" : "literal",
+        "value" : "建筑物"
+      }
+    } ]
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "head" : {
+    "vars" : [ "item", "itemLabel", "classes", "classesLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q52505"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Puente de Rialto"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q54495"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente de la bahía de Sídney"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q201013"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Bóveda Global de Semillas de Svalbard"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "edificio"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q99236"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Viaducto de Millau"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q459086"
+      },
+      "itemLabel" : {
+        "type" : "literal",
+        "value" : "Q459086"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3368242"
+      },
+      "itemLabel" : {
+        "type" : "literal",
+        "value" : "Q3368242"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "edificio"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q18109819"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Puente Duge"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q494895"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Lotte World Tower"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "edificio"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q48435"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Templo Expiatorio de la Sagrada Familia"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "edificio"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q83125"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Puente de la Torre"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q379080"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Fuerte Jesús"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "edificio"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q18712428"
+      },
+      "itemLabel" : {
+        "type" : "literal",
+        "value" : "Q18712428"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "edificio"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q507939"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "World One"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "edificio"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5459867"
+      },
+      "itemLabel" : {
+        "type" : "literal",
+        "value" : "Q5459867"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q44440"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Puente Golden Gate"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q805835"
+      },
+      "itemLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "Puente Baluarte Bicentenario"
+      },
+      "classesLabel" : {
+        "xml:lang" : "es",
+        "type" : "literal",
+        "value" : "puente"
+      }
+    } ]
+  }
+}

@@ -1,24 +1,37 @@
 package org.wikipedia.api.wdq;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.verify;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.openstreetmap.josm.TestUtils;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wdq.json.SparqlResult;
+import org.wikipedia.testutils.ResourceFileLoader;
 
 public class WdqApiQueryTest {
 
-    // TODO: Mock API responses with WireMock
-
-    @Rule
-    public JOSMTestRules josmRules = new JOSMTestRules().preferences().timeout(30_000);
+    private static final String URL_PATH = "/sparql";
 
     private static final List<String> BRIDGE_LIST = Arrays.asList(
         "Q99236", /* Millau viaduct */
@@ -61,11 +74,70 @@ public class WdqApiQueryTest {
     private static final String BRIDGE_CLASS = "Q12280";
     private static final String BUILDING_CLASS = "Q41176";
 
+    @Rule
+    public JOSMTestRules josmRules = new JOSMTestRules().preferences().timeout(30_000);
+
+    @Rule
+    public WireMockRule wmRule = new WireMockRule(wireMockConfig().dynamicPort());
+
+    @Before
+    public void setUp() throws ReflectiveOperationException {
+        TestUtils.setPrivateStaticField(WdqApiQuery.class, "baseUrl", "http://localhost:" + wmRule.port() + URL_PATH);
+    }
+
     @Test
-    public void test() throws IOException {
+    public void testMixed() throws IOException, URISyntaxException {
+        stubWithFileContent("mixed.json");
         testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Arrays.asList(BRIDGE_CLASS, BUILDING_CLASS), MIXED_LIST);
+        verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ12280+wd%3AQ41176+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22de%22+%7D.+%7D");
+    }
+
+    @Test
+    public void testBridges() throws IOException, URISyntaxException {
+        stubWithFileContent("bridges.json");
         testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Collections.singletonList(BRIDGE_CLASS), BRIDGE_LIST);
+        verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ12280+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22de%22+%7D.+%7D");
+    }
+
+    @Test
+    public void testBuildings() throws IOException, URISyntaxException {
+        stubWithFileContent("buildings.json");
         testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Collections.singletonList(BUILDING_CLASS), BUILDING_LIST);
+        verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ41176+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22de%22+%7D.+%7D");
+    }
+
+    @Test
+    public void testIllegalArguments() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(new ArrayList<>(), Collections.singletonList("Q1"));
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(Collections.singletonList("Q1"), Collections.emptyList());
+        });
+        assertThrows(NullPointerException.class, () -> {
+            WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(null, Collections.singletonList("Q1"));
+        });
+        assertThrows(NullPointerException.class, () -> {
+            WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(Collections.singletonList("Q1"), null);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            WdqApiQuery.findInstancesOfClassesOrTheirSubclasses(Collections.singletonList("X1"), Collections.singletonList(""));
+        });
+    }
+
+    private void stubWithFileContent(final String filename) throws IOException, URISyntaxException {
+        stubFor(post(URL_PATH)
+            .withHeader("Content-Type", equalTo("application/x-www-form-urlencoded"))
+            .willReturn(
+                aResponse()
+                    .withStatus(200)
+                    .withBody(ResourceFileLoader.getResourceBytes(WdqApiQueryTest.class, "response/findInstancesOfClassesOrTheirSubclasses/" + filename))
+            )
+        );
+    }
+
+    private void verifyOneRequestTo(final String urlPattern) {
+        verify(1, postRequestedFor(urlEqualTo(URL_PATH)).withRequestBody(new EqualToPattern(urlPattern)));
     }
 
     private static void testFindInstancesOfClassesOrTheirSubclasses(final Collection<String> itemList, final Collection<String> classesList, final Collection<String> expectedResultList) throws IOException {

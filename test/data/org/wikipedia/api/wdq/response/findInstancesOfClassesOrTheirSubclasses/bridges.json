@@ -1,0 +1,178 @@
+{
+  "head" : {
+    "vars" : [ "item", "itemLabel", "classes", "classesLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q54495"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Sydney Harbour Bridge"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q99236"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Viaduc de Millau"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q83125"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Tower Bridge"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q18109819"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Beipanjiang-Brücke"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q459086"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Jungfernbrücke"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5459867"
+      },
+      "itemLabel" : {
+        "type" : "literal",
+        "value" : "Q5459867"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q44440"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Golden Gate Bridge"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q805835"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Baluarte-Brücke"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    }, {
+      "classes" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12280"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q52505"
+      },
+      "itemLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Rialtobrücke"
+      },
+      "classesLabel" : {
+        "xml:lang" : "de",
+        "type" : "literal",
+        "value" : "Brücke"
+      }
+    } ]
+  }
+}
