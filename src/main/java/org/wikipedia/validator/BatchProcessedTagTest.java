@@ -72,7 +72,7 @@ public abstract class BatchProcessedTagTest<T extends BatchProcessedTagTest.Test
         }
     }
 
-    static abstract class TestCompanion {
+    abstract static class TestCompanion {
         private final OsmPrimitive primitive;
 
         TestCompanion(final OsmPrimitive primitive) {

@@ -24,6 +24,7 @@ import org.wikipedia.api.wikipedia_action.json.QueryResult;
 import org.wikipedia.data.IWikipediaSite;
 import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.OsmPrimitiveUtil;
+import org.wikipedia.tools.OsmTagConstants;
 
 public class WikipediaRedirect extends BatchProcessedTagTest<WikipediaRedirect.TestCompanion> {
 
@@ -41,7 +42,7 @@ public class WikipediaRedirect extends BatchProcessedTagTest<WikipediaRedirect.T
 
     @Override
     protected TestCompanion prepareTestCompanion(OsmPrimitive primitive) {
-        final String plainWikipediaValue = primitive.get(OsmPrimitiveUtil.TAG_NAME_WIKIPEDIA);
+        final String plainWikipediaValue = primitive.get(OsmTagConstants.Key.WIKIPEDIA);
         final Optional<Pair<IWikipediaSite, String>> companion = OsmPrimitiveUtil.getWikipediaValue(primitive);
         if (plainWikipediaValue != null && !companion.isPresent()) {
             errors.add(
@@ -120,7 +121,7 @@ public class WikipediaRedirect extends BatchProcessedTagTest<WikipediaRedirect.T
                                 if (optionPaneResult == JOptionPane.YES_OPTION) {
                                     return new ChangePropertyCommand(
                                         entry.getValue(),
-                                        OsmPrimitiveUtil.TAG_NAME_WIKIPEDIA,
+                                        OsmTagConstants.Key.WIKIPEDIA,
                                         site.getLanguageCode() + ':' + redirectedTitle
                                     );
                                 }

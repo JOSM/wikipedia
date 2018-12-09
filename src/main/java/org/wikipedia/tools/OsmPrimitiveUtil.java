@@ -12,8 +12,6 @@ import org.wikipedia.data.WikipediaSite;
 
 public final class OsmPrimitiveUtil {
     private static final Pattern WIKIPEDIA_PATTERN = Pattern.compile("(.+):(.+)");
-    public static final String TAG_NAME_WIKIPEDIA = "wikipedia";
-    private static final String TAG_NAME_WIKIDATA = "wikidata";
 
     private OsmPrimitiveUtil() {
         // Private constructor to avoid instantiation
@@ -28,7 +26,7 @@ public final class OsmPrimitiveUtil {
      * or if the Wikipedia language does not exist or is closed
      */
     public static Optional<Pair<IWikipediaSite, String>> getWikipediaValue(final OsmPrimitive primitive) {
-        final String tagValue = primitive.get(TAG_NAME_WIKIPEDIA);
+        final String tagValue = primitive.get(OsmTagConstants.Key.WIKIPEDIA);
         if (tagValue != null) {
             final Matcher matcher = WIKIPEDIA_PATTERN.matcher(tagValue);
             if (matcher.matches()) {
@@ -46,7 +44,7 @@ public final class OsmPrimitiveUtil {
     }
 
     public static Optional<String> getWikidataValue(final OsmPrimitive primitive) {
-        final String wikidataValue = primitive.get(TAG_NAME_WIKIDATA);
+        final String wikidataValue = primitive.get(OsmTagConstants.Key.WIKIDATA);
         return Optional.ofNullable(RegexUtil.isValidQId(wikidataValue) ? wikidataValue : null);
     }
 }

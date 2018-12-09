@@ -112,6 +112,14 @@ public final class ApiQueryClient {
         return response.getContent();
     }
 
+    /**
+     * Wraps the given exception given as parameter into a new {@link IOException}.
+     * That new exception has a message already translated via {@link I18n#tr(String, Object...)}.
+     * The exception given as parameter is used as cause for the newly created exception.
+     * @param exception the exception that should be wrapped
+     * @param apiName the name of the API, reading from which caused the exception to occur
+     * @return the new exception that wraps the one given as parameter
+     */
     private static IOException wrapReadDecodeJsonExceptions(final IOException exception, final String apiName) {
         final IOException wrapper;
         if (exception instanceof JsonParseException || exception instanceof JsonMappingException) {

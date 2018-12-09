@@ -48,8 +48,14 @@ public abstract class ApiQuery<T> {
         return url.toString();
     }
 
+    /**
+     * @return a (preferably short) name that identifies the API for which the query is designed.
+     */
     public abstract String getApiName();
 
+    /**
+     * @return for each call a new instance of a {@link HttpClient} ready to execute the query
+     */
     public abstract HttpClient getHttpClient();
 
     public final T deserialize(final InputStream stream) throws IOException {
