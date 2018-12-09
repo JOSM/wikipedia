@@ -25,11 +25,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openstreetmap.josm.TestUtils;
 import org.openstreetmap.josm.testutils.JOSMTestRules;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wdq.json.SparqlResult;
 import org.wikipedia.testutils.ResourceFileLoader;
+import org.wikipedia.tools.WikiProperties;
 
 public class WdqApiQueryTest {
 
@@ -90,13 +90,15 @@ public class WdqApiQueryTest {
     @Test
     public void testMixed() throws IOException, URISyntaxException {
         stubWithFileContent("mixed.json");
+        WikiProperties.WIKIPEDIA_LANGUAGE.put("es");
         testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Arrays.asList(BRIDGE_CLASS, BUILDING_CLASS), MIXED_LIST);
-        verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ12280+wd%3AQ41176+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22de%22+%7D.+%7D");
+        verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ12280+wd%3AQ41176+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22es%22+%7D.+%7D");
     }
 
     @Test
     public void testBridges() throws IOException, URISyntaxException {
         stubWithFileContent("bridges.json");
+        WikiProperties.WIKIPEDIA_LANGUAGE.put("de");
         testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Collections.singletonList(BRIDGE_CLASS), BRIDGE_LIST);
         verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ12280+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22de%22+%7D.+%7D");
     }
@@ -104,8 +106,9 @@ public class WdqApiQueryTest {
     @Test
     public void testBuildings() throws IOException, URISyntaxException {
         stubWithFileContent("buildings.json");
+        WikiProperties.WIKIPEDIA_LANGUAGE.put("zh");
         testFindInstancesOfClassesOrTheirSubclasses(MIXED_LIST, Collections.singletonList(BUILDING_CLASS), BUILDING_LIST);
-        verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ41176+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22de%22+%7D.+%7D");
+        verifyOneRequestTo("format=json&query=SELECT+DISTINCT+%3Fitem+%3FitemLabel+%3Fclasses+%3FclassesLabel+WHERE+%7B+VALUES+%3Fitem+%7B+wd%3AQ99236+wd%3AQ48435+wd%3AQ44440+wd%3AQ18712428+wd%3AQ494895+wd%3AQ83125+wd%3AQ54495+wd%3AQ459086+wd%3AQ507939+wd%3AQ52505+wd%3AQ201013+wd%3AQ18109819+wd%3AQ805835+wd%3AQ5459867+wd%3AQ379080+wd%3AQ3368242+%7D.+VALUES+%3Fclasses+%7B+wd%3AQ41176+%7D.+%3Fitem+wdt%3AP31%2Fwdt%3AP279*+%3Fsupertype.+%3Fsupertype+wdt%3AP279*+%3Fclasses.+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22zh%22+%7D.+%7D");
     }
 
     @Test
