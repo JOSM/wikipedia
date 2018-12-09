@@ -14,7 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -81,8 +83,8 @@ public class WdqApiQueryTest {
     public WireMockRule wmRule = new WireMockRule(wireMockConfig().dynamicPort());
 
     @Before
-    public void setUp() throws ReflectiveOperationException {
-        TestUtils.setPrivateStaticField(WdqApiQuery.class, "baseUrl", "http://localhost:" + wmRule.port() + URL_PATH);
+    public void setUp() throws MalformedURLException {
+        WdqApiQuery.setBaseUrl(new URL("http://localhost:" + wmRule.port() + URL_PATH));
     }
 
     @Test
