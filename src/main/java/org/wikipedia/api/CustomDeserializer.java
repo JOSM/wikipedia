@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public abstract class CustomDeserializer<T> extends StdDeserializer<T> {
-    private final ObjectMapper mapper;
+    protected final ObjectMapper mapper;
 
     protected CustomDeserializer(final ObjectMapper mapper) {
         super((Class<?>) null);
@@ -18,9 +18,9 @@ public abstract class CustomDeserializer<T> extends StdDeserializer<T> {
     }
 
     @Override
-    public final T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        return deserialize(p.getCodec().readTree(p), mapper);
+    public final T deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        return deserialize(p.getCodec().readTree(p));
     }
 
-    public abstract T deserialize(final JsonNode node, final ObjectMapper mapper) throws JsonProcessingException;
+    public abstract T deserialize(final JsonNode node) throws JsonProcessingException;
 }

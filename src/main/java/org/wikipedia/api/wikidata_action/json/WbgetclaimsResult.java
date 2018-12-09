@@ -130,7 +130,7 @@ public final class WbgetclaimsResult {
                     }
 
                     @Override
-                    public DataValue deserialize(JsonNode node, ObjectMapper mapper) throws JsonProcessingException {
+                    public DataValue deserialize(final JsonNode node) throws JsonProcessingException {
                         final JsonNode type = node.get("type");
                         final JsonNode nodeValue = node.get("value");
                         switch (type.textValue()) {
