@@ -127,7 +127,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testTicket13991() throws Exception {
+    public void testTicket13991() {
         final Map<String, String> map = WikipediaApp.forLanguage("en")
                 .getWikidataForArticles(Stream.iterate("London", x -> x).limit(100).collect(Collectors.toList()));
         assertThat(map, is(Collections.singletonMap("London", "Q84")));
