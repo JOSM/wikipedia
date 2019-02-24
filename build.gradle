@@ -9,6 +9,7 @@ plugins {
   id "java"
   id "eclipse"
   id "jacoco"
+  id "maven-publish"
   id "pmd"
   id "com.github.ben-manes.versions" version "0.20.0"
   id "com.github.spotbugs" version "1.6.10"
@@ -156,5 +157,35 @@ task generateSnapshotUpdateSite(type: GeneratePluginList) {
       }
     }
     it.addPlugin("$archivesBaseName-dev.jar", project.josm.manifest.createJosmPluginJarManifest(), new URL(pluginDownloadUrl))
+  }
+}
+
+project.afterEvaluate {
+  publishing {
+    publications {
+      plugin(MavenPublication) {
+        groupId = "org.openstreetmap.josm.plugins"
+        artifactId = archivesBaseName
+        version = project.version
+
+        from components.java
+      }
+    }
+  }
+}
+
+def ciJobToken = System.getenv("CI_JOB_TOKEN")
+def projectId = System.getenv("CI_PROJECT_ID")
+if (ciJobToken != null && projectId!= null) {
+  publishing.repositories.maven {
+    url = "https://gitlab.com/api/v4/projects/$projectId/packages/maven"
+    name = "gitlab"
+    credentials(HttpHeaderCredentials.class) {
+      name = "Job-Token"
+      value = ciJobToken
+    }
+    authentication {
+      create("auth", HttpHeaderAuthentication.class)
+    }
   }
 }
