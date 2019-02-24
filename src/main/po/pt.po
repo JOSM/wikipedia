@@ -1,15 +1,14 @@
 # Translations for the JOSM plugin 'wikipedia' (pt)
-# Copyright (C) 2018 
+# Copyright (C) 2018
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.0-3-g687142d\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-03 23:10+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Portuguese (https://www.transifex.com/josm/teams/2544/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +16,9 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#, java-format
 msgid "''{0}'' is an illegal language code!"
 msgstr "''{0}'' é um código de idioma inválido!"
 
-#, java-format
 msgid "({0} items, processing batch {1} of {2})"
 msgstr "({0} itens, a processar o lote {1} de {2})"
 
@@ -31,7 +28,6 @@ msgstr "Adicionar Etiqueta"
 msgid "Add Wikidata"
 msgstr "Adicionar Wikidata"
 
-#, java-format
 msgid "Add Wikidata for language ''{0}''"
 msgstr "Adicionar Wikidata para o idioma ''{0}''"
 
@@ -48,11 +44,9 @@ msgstr ""
 "Adiciona aos objetos selecionados a etiqueta  ''wikipedia'' com a página "
 "correspondente"
 
-#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Já aplicado num objeto no mapa local"
 
-#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Disponível pelo servidor WIWOSM (Wikipedia where in OSM)"
 
@@ -70,14 +64,12 @@ msgstr "Alterar a etiqueta wikipedia?"
 msgid "Contacting Server..."
 msgstr "A contactar o servidor..."
 
-#, java-format
 msgid ""
 "Copies the {0} template to the system clipboard instantiated with the "
 "coordinates of the first selected node"
 msgstr ""
 "Copia a predefinição {0} que esteja presente no primeiro nó selecionado."
 
-#, java-format
 msgid "Copy {0} template"
 msgstr "Copiar predefinição {0}"
 
@@ -95,7 +87,6 @@ msgstr ""
 "Faça clique duplo num item para procurar objetos no mapa com o nome do "
 "artigo da Wikipédia."
 
-#, java-format
 msgid "Download all elements from one of {0} sources"
 msgstr "Descarregar todos os elementos de uma das {0} fontes"
 
@@ -105,7 +96,6 @@ msgstr "Descarregar elementos"
 msgid "Download from Sophox API"
 msgstr "Descarregar da API Sophox"
 
-#, java-format
 msgid "Download labels for {0}…"
 msgstr "Descarregar etiquetas para {0}…"
 
@@ -115,8 +105,6 @@ msgstr "Descarregar referentes (relações-pai)"
 msgid "Download relation members"
 msgstr "Descarregar os membros da relação"
 
-#. I18n: {0} is the error message returned by the API
-#, java-format
 msgid "Downloading entries with geo coordinates failed: {0}"
 msgstr ""
 "Ocorreu um erro ao descarregar as entradas com coordenadas geográficas: {0}"
@@ -156,7 +144,6 @@ msgstr ""
 msgid "Fetching Wikidata IDs"
 msgstr "A Obter IDs Wikidata"
 
-#, java-format
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
 msgstr[0] "A obter {0} ID Wikidata para o idioma ''{1}''"
@@ -167,15 +154,12 @@ msgid ""
 "the selection"
 msgstr "Encontrar escolas à distância entre 2km a 3km do centro da seleção"
 
-#, java-format
 msgid "Item {0} does not exist!"
 msgstr "O item {0} não existe!"
 
-#, java-format
 msgid "Item {0} is missing"
 msgstr "O item {0} está em falta"
 
-#, java-format
 msgid "Item {0} redirects to {1}"
 msgstr "O item {0} redireciona para {1}"
 
@@ -185,9 +169,14 @@ msgstr "Etiquetas"
 msgid "Load category"
 msgstr "Carregar categoria"
 
-#, java-format
+msgid "More than one OSM object is selected: {0}"
+msgstr "Está selecionado mais do que um objeto OSM: {0}"
+
 msgid "No Wikidata ID found for: {0}"
 msgstr "Não foi encontrado nenhum ID Wikidata para: {0}"
+
+msgid "No Wikidata item is selected!"
+msgstr "Não está nenhum item Wikidata selecionado!"
 
 msgid "Not linked yet"
 msgstr "Nenhum objeto no mapa local com esta etiqueta da Wikipédia"
@@ -199,7 +188,6 @@ msgid "Opens the Wikipedia article of the selected item in a browser"
 msgstr ""
 "Abre a página da Wikipédia da entrada selecionada no navegador de Internet"
 
-#, java-format
 msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
 msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
 msgstr[0] ""
@@ -209,6 +197,9 @@ msgstr[1] ""
 
 msgid "Overwrite key"
 msgstr "Substituir chave"
+
+msgid "Paste Wikipedia articles"
+msgstr "Colar artigos Wikipédia"
 
 msgid "Pastes Wikipedia articles from the system clipboard"
 msgstr "Cola páginas da Wikipédia copiadas"
@@ -240,6 +231,9 @@ msgstr ""
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Permite alterar o idioma da Wikipédia a ser pesquisada"
 
+msgid "Show properties of the selected Wikidata item"
+msgstr "Mostrar propriedades do item Wikidata selecionado"
+
 msgid "Show/hide Sophox snippet list"
 msgstr "Mostrar/ocultar lista de consultas gravadas"
 
@@ -249,11 +243,35 @@ msgstr "Servidor Sophox"
 msgid "Target key: "
 msgstr "Chave da etiqueta a usar: "
 
+msgid "The Wikidata item is a redirect"
+msgstr "O item Wikidata é um redirecionamento"
+
+msgid "The Wikipedia/Wikidata layer"
+msgstr "A camada Wikipédia/Wikidata"
+
+msgid "There is no Wikipedia site for language ''{0}''!"
+msgstr "Não existe um site para o idioma ''{0}'' da Wikipédia!"
+
+msgid "Unknown datatype!"
+msgstr "Tipo de dados desconhecido!"
+
 msgid "Wiki layer"
 msgstr "Camada wiki"
 
+msgid "Wikidata Info"
+msgstr "Info Wikidata"
+
+msgid "Wikidata Info: {0}"
+msgstr "Info Wikidata: {0}"
+
 msgid "Wikipedia"
 msgstr "Wikipédia"
+
+msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
+msgstr "O artigo da Wikipédia ''{0}'' redireciona para ''{1}''"
+
+msgid "Wikipedia article is a redirect"
+msgstr "O artigo da Wikipédia é um redirecionamento"
 
 msgid "Wikipedia language"
 msgstr "Idioma  Wikipédia"
@@ -267,7 +285,6 @@ msgstr "Consultas Overpass gravadas:"
 msgid "Zoom to selection"
 msgstr "Enquadrar elementos selecionados"
 
-#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
@@ -277,9 +294,26 @@ msgstr "todos os artigos da Wikipédia na Categoria"
 msgid "clipboard"
 msgstr "área de transferência"
 
-#. add entries to list model
 msgid "coordinates"
 msgstr "coordenadas"
 
+msgid "description"
+msgstr "descrição"
+
 msgid "help"
 msgstr "ajuda"
+
+msgid "label"
+msgstr "etiqueta"
+
+msgid "language"
+msgstr "idioma"
+
+msgid "language code"
+msgstr "código de idioma"
+
+msgid "wikidata=* item exists"
+msgstr "O item wikidata=* existe"
+
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} não é um Wikidata-ID válido"

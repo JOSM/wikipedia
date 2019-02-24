@@ -1,15 +1,14 @@
 # Translations for the JOSM plugin 'wikipedia' (da)
-# Copyright (C) 2018 
+# Copyright (C) 2018
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-02 18:39+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Danish (https://www.transifex.com/josm/teams/2544/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +22,6 @@ msgstr "Tilføj tag"
 msgid "Add Wikidata"
 msgstr "Tilføj Wikidata"
 
-#, java-format
 msgid "Add Wikidata for language ''{0}''"
 msgstr "Tilføj Wikidata for sprog ''{0}''"
 
@@ -40,24 +38,18 @@ msgstr ""
 "Tilføjer et \"wikipedia\" tag svarende til denne artikel til de markerede "
 "objekter"
 
-#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Til rådighed i lokalt datasæt"
 
-#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Til rådighed via WIWOSM server"
 
 msgid "Cancel"
 msgstr "Annuller"
 
-msgid "Clipboard"
-msgstr "Udklipsholder"
-
 msgid "Contacting Server..."
 msgstr "Forbinder til server..."
 
-#, java-format
 msgid ""
 "Copies the {0} template to the system clipboard instantiated with the "
 "coordinates of the first selected node"
@@ -65,7 +57,6 @@ msgstr ""
 "Kopier {0} skabelonen til systemets udklipsholder instantieret med "
 "koordinaterne for det første valgte punkt"
 
-#, java-format
 msgid "Copy {0} template"
 msgstr "Kopier {0} skabelon"
 
@@ -119,7 +110,6 @@ msgstr "Henter interwiki links fra Wikipedia for at tilføje flere navne tags"
 msgid "Fetching Wikidata IDs"
 msgstr "Henter Wikidata ID''er"
 
-#, java-format
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
 msgstr[0] "Henter {0} Wikidata ID for sprog ''{1}''"
@@ -134,7 +124,6 @@ msgstr ""
 msgid "Load category"
 msgstr "Indlæs kategori"
 
-#, java-format
 msgid "No Wikidata ID found for: {0}"
 msgstr "Ingen Wikidata ID fundet for: {0}"
 
@@ -147,7 +136,6 @@ msgstr "Åbn artikel"
 msgid "Opens the Wikipedia article of the selected item in a browser"
 msgstr "Åbner Wikipedia-artiklen for det markerede objekt i en browser"
 
-#, java-format
 msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
 msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
 msgstr[0] "Overskriv ''{0}'' tag {1} fra {2} med ny værdi ''{3}''?"
@@ -199,18 +187,15 @@ msgstr "Zoom til markering"
 msgid "clipboard"
 msgstr "udklipsholder"
 
-#. add entries to list model
 msgid "coordinates"
 msgstr "koordinater"
 
 msgid "help"
 msgstr "hjælp"
 
-#, java-format
 msgid "{0} (malformed site URL)"
 msgstr "{0} (forkert formateret web URL)"
 
-#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

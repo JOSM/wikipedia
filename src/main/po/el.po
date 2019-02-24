@@ -1,15 +1,14 @@
 # Translations for the JOSM plugin 'wikipedia' (el)
-# Copyright (C) 2018 
+# Copyright (C) 2018
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-02 18:39+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Greek (https://www.transifex.com/josm/teams/2544/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +16,9 @@ msgstr ""
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#, java-format
 msgid "''{0}'' is an illegal language code!"
 msgstr "''{0}'' είναι ένας παράνομος κωδικός γλώσσας!"
 
-#, java-format
 msgid "({0} items, processing batch {1} of {2})"
 msgstr "({0} αντικείμενα, επεξεργασία ομάδας {1} από {2})"
 
@@ -31,7 +28,6 @@ msgstr "Προσθήκη Ετικέτας"
 msgid "Add Wikidata"
 msgstr "Προσθήκη Wikidata"
 
-#, java-format
 msgid "Add Wikidata for language ''{0}''"
 msgstr "Προσθήκη Wikidata για γλώσσα ''{0}''"
 
@@ -48,13 +44,16 @@ msgstr ""
 "Προσθήκη μιας ετικέτας ''βικιπαίδεια'' που αντιστοιχεί σε αυτό το άρθρο στα "
 "επιλεγμένα αντικείμενα"
 
-#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Διαθέσιμο σε τοπικό σύνολο δεδομένων"
 
-#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Διαθέσιμο μέσω του διακομιστή WIWOSM"
+
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr ""
+"Αδύνατη η πρόσβαση στον ιστότοπο {0} στο πρόγραμμα περιήγησης! Μήνυμα "
+"σφάλματος: {1}"
 
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -65,11 +64,15 @@ msgstr "Αλλαγή της ετικέτας wikipedia;"
 msgid "Check wikipedia=* is not a redirect"
 msgstr "Ελέγξτε την wikipedia=* δεν είναι ανακατεύθυνση"
 
-msgid "Clipboard"
-msgstr "Πρόχειρο"
-
 msgid "Contacting Server..."
 msgstr "Επικοινωνία με τον Διακομιστή..."
+
+msgid "Copy {0} template"
+msgstr "Αντιγράψτε το πρότυπο {0}"
+
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr ""
+"Δεν ήταν δυνατή η προσθήκη ονομάτων. Η ετικέτα Wikipedia δεν αναγνωρίζεται!"
 
 msgid ""
 "Could not check for all wikipedia=* tags if they match the wikidata=* tag."
@@ -89,7 +92,6 @@ msgstr "Αδύνατη η επικύρωση όλων των ετικετών wi
 msgid "Delete selected snippet"
 msgstr "Διαγραφή επιλεγμένου αποσπάσματος"
 
-#, java-format
 msgid "Download all elements from one of {0} sources"
 msgstr "Λήψη όλων των στοιχείων από μία από τις {0} πηγές"
 
@@ -98,6 +100,9 @@ msgstr "Λήψη στοιχείων"
 
 msgid "Download from Sophox API"
 msgstr "Λήψη από το Sophox API"
+
+msgid "Download referrers (parent relations)"
+msgstr "Λήψη παραπομπών (γονικών σχέσεων)"
 
 msgid "Download relation members"
 msgstr "Λήψη μελών της συσχέτισης"
@@ -136,17 +141,17 @@ msgstr ""
 msgid "Invalid Q-ID! Cannot exist on Wikidata."
 msgstr "Άκυρο Q-ID! Δεν μπορεί να υπάρχει στο Wikidata."
 
-#, java-format
 msgid "Item {0} does not exist!"
 msgstr "Το στοιχείο {0} δεν υπάρχει!"
 
-#, java-format
 msgid "Item {0} is missing"
 msgstr "Το στοιχείο {0} λείπει!"
 
-#, java-format
 msgid "Item {0} redirects to {1}"
 msgstr "Το στοιχείο {0} ανακατευθύνεται στο {1}"
+
+msgid "Links"
+msgstr "Σύνδεσμοι"
 
 msgid "Load category"
 msgstr "Φόρτωση κατηγορίας"
@@ -169,7 +174,6 @@ msgstr ""
 "Βεβαιώνεται ότι το άρθρο wikipedia=* είναι συνδεδεμένο με το στοιχείο "
 "wikidata=*"
 
-#, java-format
 msgid "No Wikidata ID found for: {0}"
 msgstr "Δεν βρέθηκε το ID του Wikidata για: {0}"
 
@@ -207,6 +211,14 @@ msgstr ""
 msgid "Select if the members of a relation should be downloaded as well"
 msgstr "Επιλέξτε αν θα πρέπει να ληφθούν επίσης και τα μέλη μιας συσχέτισης"
 
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Επιλέξτε εάν οι γονικές σχέσεις του αντικειμένου πρέπει να μεταφορτωθούν "
+"επίσης, δηλαδή οι γονικές σχέσεις και για κόμβους, επιπρόσθετα, γονικές "
+"διαδρομές"
+
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Ορίζει την προεπιλεγμένη γλώσσα για τα άρθρα της Wikipedia"
 
@@ -236,11 +248,9 @@ msgstr "Το στοιχείο Wikidata είναι μια ανακατεύθυν�
 msgid "The Wikipedia/Wikidata layer"
 msgstr "Το επίπεδο της Wikipedia/Wikidata"
 
-#, java-format
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "Η τιμή ''{0}'' δεν επιτρέπεται για την ετικέτα wikipedia=*"
 
-#, java-format
 msgid "There is no Wikipedia site for language ''{0}''!"
 msgstr "Δεν υπάρχει ιστότοπος Wikipedia για τη γλώσσα ''{0}''!"
 
@@ -261,7 +271,6 @@ msgstr "Επίπεδο Wiki"
 msgid "Wikidata item and Wikipedia article do not match!"
 msgstr "Το στοιχείο της Wikidata και το άρθρο της Βικιπαίδεια δεν ταιριάζουν!"
 
-#, java-format
 msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
 msgstr ""
 "Το στοιχείο {0} του Wikidata δεν σχετίζεται με το άρθρο της Βικιπαίδεια {1} "
@@ -270,7 +279,6 @@ msgstr ""
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#, java-format
 msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
 msgstr "Το άρθρο της Wikipedia ''{0}'' ανακατευθύνεται στο ''{1}''"
 
@@ -289,9 +297,11 @@ msgstr "Τα αποθηκευμένα σας ερωτήματα:"
 msgid "Zoom to selection"
 msgstr "Εστίαση στην επιλογή"
 
-#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
+
+msgid "aliases"
+msgstr "ψευδώνυμα"
 
 msgid "all Wikipedia articles in Category"
 msgstr "όλα τα άρθρα της Wikipedia στην Κατηγορία"
@@ -299,9 +309,11 @@ msgstr "όλα τα άρθρα της Wikipedia στην Κατηγορία"
 msgid "clipboard"
 msgstr "πρόχειρο"
 
-#. add entries to list model
 msgid "coordinates"
 msgstr "συντεταγμένες"
+
+msgid "description"
+msgstr "Περιγραφή"
 
 msgid "has no Q-ID"
 msgstr "δεν έχει Q-ID"
@@ -309,14 +321,18 @@ msgstr "δεν έχει Q-ID"
 msgid "help"
 msgstr "βοήθεια"
 
+msgid "language"
+msgstr "Γλώσσα "
+
+msgid "language code"
+msgstr "κωδικός γλώσσας"
+
 msgid "wikidata=* item exists"
 msgstr "wikidata=* το στοιχείο υπάρχει"
 
-#, java-format
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "Το {0} δεν είναι έγκυρο ID του Wikidata"
 
-#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

@@ -1,15 +1,14 @@
 # Translations for the JOSM plugin 'wikipedia' (pt_BR)
-# Copyright (C) 2018 
+# Copyright (C) 2018
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.0-3-g687142d\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-03 23:10+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/josm/teams/2544/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +22,6 @@ msgstr "Adicionar Etiqueta"
 msgid "Add Wikidata"
 msgstr "Adicionar Wikidata"
 
-#, java-format
 msgid "Add Wikidata for language ''{0}''"
 msgstr "Adicionar Wikidata para a língua ''{0}''"
 
@@ -40,11 +38,9 @@ msgstr ""
 "Adiciona uma etiqueta ''wikipedia'' correspondente a este artigo aos objetos"
 " selecionados"
 
-#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Disponível na base local"
 
-#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Disponível via servidor WIWOSM"
 
@@ -57,7 +53,6 @@ msgstr "Cancelar"
 msgid "Contacting Server..."
 msgstr "Acessando Servidor..."
 
-#, java-format
 msgid ""
 "Copies the {0} template to the system clipboard instantiated with the "
 "coordinates of the first selected node"
@@ -65,7 +60,6 @@ msgstr ""
 "Copia o template {0} para a área de transferência do sistema instanciado com"
 " as coordenadas do primeiro nó selecionado"
 
-#, java-format
 msgid "Copy {0} template"
 msgstr "Copiar template {0}"
 
@@ -97,11 +91,9 @@ msgstr "Editar o código selecionado"
 msgid "Error"
 msgstr "Erro"
 
-#, java-format
 msgid "Failed to download labels for {0}!"
 msgstr "Falhou ao baixar rótulos para {0}!"
 
-#, java-format
 msgid "Failed to download statements for Wikidata item {0}!"
 msgstr "Falha ao baixar instruções para o item Wikidata {0}!"
 
@@ -131,17 +123,14 @@ msgstr ""
 msgid "Fetching Wikidata IDs"
 msgstr "Buscando Wikidata IDs"
 
-#, java-format
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
 msgstr[0] "Buscando {0} Wikidata ID para o idioma ''{1}''"
 msgstr[1] "Buscando {0} Wikidata IDs para o idioma ''{1}''"
 
-#, java-format
 msgid "Item {0} does not exist!"
 msgstr "Item {0} não existe!"
 
-#, java-format
 msgid "Item {0} is missing"
 msgstr "Item {0} ausente"
 
@@ -151,7 +140,6 @@ msgstr "Rótulos"
 msgid "Load category"
 msgstr "Carregar categoria"
 
-#, java-format
 msgid "No Wikidata ID found for: {0}"
 msgstr "Nenhuma wikidata ID encontrada para: {0}"
 
@@ -192,11 +180,9 @@ msgstr ""
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Define o idioma padrão para os artigos da Wikipédia"
 
-#, java-format
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "O valor \"{0}\" não é permitido para a tag wikipedia=* "
 
-#. nullable
 msgid "Unknown datatype!"
 msgstr "Tipo de dado desconhecido!"
 
@@ -215,7 +201,6 @@ msgstr "Zoom para seleção"
 msgid "clipboard"
 msgstr "área de transferência"
 
-#. add entries to list model
 msgid "coordinates"
 msgstr "coordenadas"
 
@@ -231,11 +216,9 @@ msgstr "rótulo"
 msgid "language"
 msgstr "idioma"
 
-#, java-format
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} não é um Wikidata-ID válido"
 
-#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

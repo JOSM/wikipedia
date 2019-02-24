@@ -1,15 +1,14 @@
 # Translations for the JOSM plugin 'wikipedia' (zh_TW)
-# Copyright (C) 2018 
+# Copyright (C) 2018
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-39-g3f2fba9\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-12 15:39+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/josm/teams/2544/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +16,9 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#, java-format
 msgid "''{0}'' is an illegal language code!"
 msgstr "''{0}'' 是非法的語言代碼！"
 
-#, java-format
 msgid "({0} items, processing batch {1} of {2})"
 msgstr "({0} 項目，處理 batch {1} of {2})"
 
@@ -31,7 +28,6 @@ msgstr "新增標籤"
 msgid "Add Wikidata"
 msgstr "添加維基數據"
 
-#, java-format
 msgid "Add Wikidata for language ''{0}''"
 msgstr "為語言添加 {0} 的維基數據"
 
@@ -46,13 +42,14 @@ msgid ""
 "objects"
 msgstr "添加與本文對應的維基百科「標籤」至已選擇物件"
 
-#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "可供本地數據資料庫利用"
 
-#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "可透過 WIWOSM 伺服器利用"
+
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr "無法用瀏覽器開啟網站  {0}！錯誤訊息：{1}"
 
 msgid "Cancel"
 msgstr "取消"
@@ -66,19 +63,14 @@ msgstr "檢查 wikipedia=* 是否有內部 wiki 連結到 wikidata=*"
 msgid "Check wikipedia=* is not a redirect"
 msgstr "檢查 wikipedia=* 是否不是重定向"
 
-msgid "Clipboard"
-msgstr "剪貼簿"
-
 msgid "Contacting Server..."
 msgstr "正在連接伺服器..."
 
-#, java-format
 msgid ""
 "Copies the {0} template to the system clipboard instantiated with the "
 "coordinates of the first selected node"
 msgstr "複製 {0} 模板到系統剪貼簿，並且用第一個選擇的節點當範例"
 
-#, java-format
 msgid "Copy {0} template"
 msgstr "複製 {0} 模板"
 
@@ -96,11 +88,6 @@ msgstr "無法檢查所有 wikipedia=* 標籤，因為已經重定向到其他�
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "無法檢查 wikidata=* 標籤不尋常類型。"
 
-#. i18n: {0} is the API name, {1} is the name of the exception, {2} is the
-#. message of the exception.
-#. i18n: Typical values would be: {0}="Wikidata Action API"
-#. {1}="UnknownHostException" {2}="www.wikidata.org"
-#, java-format
 msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
@@ -117,7 +104,6 @@ msgid ""
 "coordinate)"
 msgstr "點撃兩下以條目名稱 (和中心坐標) 搜索物件"
 
-#, java-format
 msgid "Download all elements from one of {0} sources"
 msgstr "下載從 {0} 來源之一的所有物件"
 
@@ -127,7 +113,6 @@ msgstr "下載物件"
 msgid "Download from Sophox API"
 msgstr "從 Sophox API 下載"
 
-#, java-format
 msgid "Download labels for {0}…"
 msgstr "下載 {0} 的名稱..."
 
@@ -137,16 +122,12 @@ msgstr "下載參照 (上層關聯)"
 msgid "Download relation members"
 msgstr "下載關聯成員"
 
-#, java-format
 msgid "Download sitelinks for {0}…"
 msgstr "下載 {0}  的網站連結..."
 
-#, java-format
 msgid "Download statements for {0}…"
 msgstr "下載 {0} 的陳述..."
 
-#. I18n: {0} is the error message returned by the API
-#, java-format
 msgid "Downloading entries with geo coordinates failed: {0}"
 msgstr "下載物件的地理經緯度失敗：{0}"
 
@@ -156,15 +137,12 @@ msgstr "編輯選擇的文字片段"
 msgid "Error"
 msgstr "錯誤"
 
-#, java-format
 msgid "Failed to download labels for {0}!"
 msgstr "下載 {0} 的名稱失敗！"
 
-#, java-format
 msgid "Failed to download sitelinks for Wikidata item {0}!"
 msgstr "下載維基數據物件 {0} 網站連結失敗！"
 
-#, java-format
 msgid "Failed to download statements for Wikidata item {0}!"
 msgstr "下載維基數據物件 {0} 陳述失敗！"
 
@@ -193,16 +171,29 @@ msgstr "從維基百科內部連結增加名稱標籤"
 msgid "Fetching Wikidata IDs"
 msgstr "取得維基數據ID"
 
-#, java-format
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
 msgstr[0] "取得 {0} 語言 ''{1}''  的維基數據ID"
 
-#, java-format
+msgid ""
+"Find OSM objects linked with wikidata items of a class that is untypical for"
+" OSM"
+msgstr "尋找連結維基數據物件的 OSM 物件，在 OSM 上分類有不尋常的狀況"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr "從選擇區域的中心，最近 2 公里，最遠 3 公里的教育機構"
+
+msgid "Invalid Q-ID! Cannot exist on Wikidata."
+msgstr "無效 Q-ID！在維基數據並不存在。"
+
+msgid "Item {0} does not exist!"
+msgstr "物件 {0} 並不存在！"
+
 msgid "Item {0} is missing"
 msgstr "缺少物件 {0}"
 
-#, java-format
 msgid "Item {0} redirects to {1}"
 msgstr "物件 {0} 重定向至 {1}"
 
@@ -215,7 +206,27 @@ msgstr "連結"
 msgid "Load category"
 msgstr "載入分類"
 
-#, java-format
+msgid ""
+"Make sure that the wikipedia=* article is not redirecting to another lemma"
+msgstr "確認 wikipedia=* 條目並沒有重定向至其他論點"
+
+msgid ""
+"Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
+"exists"
+msgstr "確認維基數據項目的 Q-ID 在 wikidata=* 標籤確實存在"
+
+msgid ""
+"Makes sure that the wikipedia=* article is connected to the wikidata=* item"
+msgstr "確認 wikipedia=* 條目有連結到 wikidata=* 項目"
+
+msgid "More than one OSM object is selected: {0}"
+msgstr "有多餘一個 OSM 物件被選取：{0}"
+
+msgid ""
+"Move wikidata=* tags to tag brand:wikidata=*, when the value points to a "
+"brand"
+msgstr "當數值指向品牌時，移動 wikidata=* 標籤到 brand:wikidata=* 標籤。"
+
 msgid "No Wikidata ID found for: {0}"
 msgstr "找不到: {0} 的維基數據ID"
 
@@ -231,13 +242,15 @@ msgstr "開啟條目"
 msgid "Opens the Wikipedia article of the selected item in a browser"
 msgstr "在瀏覽器内開啟所選項目的維基百科條目"
 
-#, java-format
 msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
 msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
 msgstr[0] "自 {2} 以 ''{3}'' 這個值去覆蓋 ''{0}'' 標籤 {1} 嗎？"
 
 msgid "Overwrite key"
 msgstr "覆寫鍵值"
+
+msgid "Paste Wikipedia articles"
+msgstr "貼上維基百科條目"
 
 msgid "Pastes Wikipedia articles from the system clipboard"
 msgstr "從系統剪貼簿貼上維基百科條目"
@@ -251,6 +264,9 @@ msgstr "搜尋維基數據項目"
 msgid "Search Wikipedia category"
 msgstr "搜尋維基百科分類"
 
+msgid "See the validator messages of the category ''Other'' for more details."
+msgstr "請看“其他”分類的驗證器訊息來看更多細節。"
+
 msgid "Select if the members of a relation should be downloaded as well"
 msgstr "如果關聯的成員也要下載請選擇"
 
@@ -262,7 +278,6 @@ msgstr "選擇相依物件也要下載，例如，父關係，以及對節點來
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "設定維基百科的預設語言版本"
 
-#, java-format
 msgid ""
 "Should the wikipedia tag be replaced with the redirect target? Make sure the meaning of the tag remains the same!\n"
 "\n"
@@ -289,8 +304,6 @@ msgstr "陳述"
 msgid "Target key: "
 msgstr "目標連結 "
 
-#. I18n: {0} is the API name
-#, java-format
 msgid "The JSON response from the {0} can''t be decoded!"
 msgstr "從 {0} 回應的 JSON 無法被解碼！"
 
@@ -311,27 +324,20 @@ msgstr "維基數據項目是重定向"
 msgid "The Wikipedia/Wikidata layer"
 msgstr "維基百科/維基數據圖層"
 
-#, java-format
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "數值 ''{0}'' 並是被允許的 wikipedia=* 標籤"
 
-#. I18n: {0}  is the API name, {1} is the query, normally as URL. {2} is the
-#. error message returned from the API
-#, java-format
+msgid "The value of tag brand:wikidata=* has an invalid format!"
+msgstr "brand:wikidata=* 標籤數值並不是有效的格式！"
+
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
 "error, please report to the Wikipedia plugin."
 msgstr "{0} 回報無效的檢索 {1} ({2})，這是程式錯誤，請回報給 Ｗikipedia 套件。"
 
-#. i18n: {0} is the API name, {1} is the response code, {2} is the response
-#. message.
-#. i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not
-#. Found"
-#, java-format
 msgid "The {0} responded with an unexpected response code: {1} {2}"
 msgstr "{0} 回應未預期的回應代碼：{1} {2}"
 
-#, java-format
 msgid "There is no Wikipedia site for language ''{0}''!"
 msgstr "''{0}'' 語言沒有維基百科網站！"
 
@@ -350,13 +356,9 @@ msgid ""
 " more details."
 msgstr "在設定選開啟資訊階層驗證器訊息看更多細即。"
 
-#. nullable
 msgid "Unknown datatype!"
 msgstr "未知資料型態！"
 
-#. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
-#. the message that exception provides
-#, java-format
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
 msgstr "當讀取從 {0} 回應的 JSON 時，有錯誤發生了！({1}: {2})"
@@ -367,14 +369,12 @@ msgstr "Wiki 圖層"
 msgid "Wikidata Info"
 msgstr "維基數據資訊"
 
-#, java-format
 msgid "Wikidata Info: {0}"
 msgstr "維基數據資訊：{0}"
 
 msgid "Wikidata item and Wikipedia article do not match!"
 msgstr "維基數據項目和維基百科條目對不上！"
 
-#, java-format
 msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
 msgstr "維基數據項目 {0} 與維基百科條目 {1} ({2}) 沒有關聯"
 
@@ -388,14 +388,12 @@ msgstr "維基數據數值是 OSM 物件 wikidata=* 標籤上不常見的類型"
 msgid "Wikipedia"
 msgstr "維基百科"
 
-#, java-format
 msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
 msgstr "維基百科條目 \"{0}\" 重定向至 \"{1}\""
 
 msgid "Wikipedia article is a redirect"
 msgstr "維基百科條目是重定向"
 
-#, java-format
 msgid "Wikipedia articles in viewport (for language {0})"
 msgstr "視野內維基百科條目 (語言 {0})"
 
@@ -411,9 +409,11 @@ msgstr "你儲存的檢索："
 msgid "Zoom to selection"
 msgstr "縮放至選擇區域"
 
-#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
+
+msgid "aliases"
+msgstr "別名"
 
 msgid "all Wikipedia articles in Category"
 msgstr "分類内所有維基百科條目"
@@ -421,9 +421,11 @@ msgstr "分類内所有維基百科條目"
 msgid "clipboard"
 msgstr "剪貼簿"
 
-#. add entries to list model
 msgid "coordinates"
 msgstr "座標"
+
+msgid "description"
+msgstr "描述"
 
 msgid "has no Q-ID"
 msgstr "沒有 Q-ID"
@@ -443,19 +445,15 @@ msgstr "語言代碼"
 msgid "wikidata=* item exists"
 msgstr "存在 wikidata=* 項目"
 
-#, java-format
 msgid "{0} (malformed site URL)"
 msgstr "{0} (異常網站網址)"
 
-#, java-format
 msgid "{0} is an instance of {1} (or any subclass thereof)"
 msgstr "{0} 是 {1}（或其任何子類）的實例"
 
-#, java-format
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} 不是有效的 Wikidata-ID"
 
-#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr "簡化連結OSM物件到維基百科條目和維基數據項目"

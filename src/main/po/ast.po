@@ -1,15 +1,14 @@
 # Translations for the JOSM plugin 'wikipedia' (ast)
-# Copyright (C) 2018 
+# Copyright (C) 2018
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-02 18:39+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Asturian (https://www.transifex.com/josm/teams/2544/ast/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,44 +16,52 @@ msgstr ""
 "Language: ast\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' ye un códigu d'idioma illegal"
+
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} elementos, procesando'l llote {1} de {2})"
+
 msgid "Add Tag"
-msgstr "Añedir etiqueta"
+msgstr "Añadir etiqueta"
 
 msgid "Add Wikidata"
 msgstr "Añadir Wikidata"
 
-#, java-format
 msgid "Add Wikidata for language ''{0}''"
 msgstr "Añadir Wikidata pal idioma ''{0}''"
 
 msgid "Add names from Wikipedia"
-msgstr "Añedir nomes dende Wikipedia"
+msgstr "Añadir nomes dende Wikipedia"
 
 msgid ""
 "Adds a ''wikipedia'' tag corresponding to this article to the selected "
 "objects"
 msgstr ""
-"Añede una etiqueta ''wikipedia'' correspondiente a esti artículu pa los "
+"Añade una etiqueta ''wikipedia'' correspondiente a esti artículu pa los "
 "oxetos escoyíos"
 
-#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Disponible nel conxuntu de datos llocal"
 
-#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Disponible vía sirvidor WIWOSM"
 
 msgid "Cancel"
 msgstr "Encaboxar"
 
-msgid "Clipboard"
-msgstr "Cartafueyu"
+msgid "Change wikipedia tag?"
+msgstr "¿Camudar la etiqueta wikipedia?"
+
+msgid "Check wikipedia=* is interwiki link of wikidata=*"
+msgstr "Comprobar que wikipedia=* ye un enllaz interwiki de wikidata=*"
+
+msgid "Check wikipedia=* is not a redirect"
+msgstr "Comprobar que wikipedia=* nun ye una redireición"
 
 msgid "Contacting Server..."
 msgstr "Coneutando col sirvidor..."
 
-#, java-format
 msgid ""
 "Copies the {0} template to the system clipboard instantiated with the "
 "coordinates of the first selected node"
@@ -62,7 +69,6 @@ msgstr ""
 "Copia la plantía {0} al cartafueyu del sistema como instancia coles "
 "coordenaes del primer nodiu seleicionáu"
 
-#, java-format
 msgid "Copy {0} template"
 msgstr "Copiar plantía {0}"
 
@@ -73,8 +79,17 @@ msgstr ""
 "Doble clic nel elementu pa buscar oxetos col nome del artículu (y centru de "
 "coordenaes)"
 
+msgid "Download all elements from one of {0} sources"
+msgstr "Descargar tolos elementos d'una de {0} fontes"
+
+msgid "Download elements"
+msgstr "Descargar elementos"
+
 msgid "Download from Sophox API"
 msgstr "Descargar dende la API de Sophox"
+
+msgid "Download labels for {0}…"
+msgstr "Descargar etiquetes pa {0}…"
 
 msgid "Download referrers (parent relations)"
 msgstr "Descargar referencies (rellaciones padre)"
@@ -112,7 +127,6 @@ msgstr ""
 msgid "Fetching Wikidata IDs"
 msgstr "Llogrando les ID dende Wikidata"
 
-#, java-format
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
 msgstr[0] "Llogrando {0} ID de Wikidata pa la llingua ''{1}''"
@@ -125,24 +139,29 @@ msgstr ""
 "Alcontrar centros educativos que tean a una distancia ente 2km y 3km del "
 "centru de la seleición"
 
-#, java-format
 msgid "Item {0} does not exist!"
 msgstr "L'elementu {0} nun esiste"
 
-#, java-format
 msgid "Item {0} is missing"
 msgstr "Falta l'elementu {0}"
 
-#, java-format
 msgid "Item {0} redirects to {1}"
 msgstr "L'elementu {0} redirixe a {1}"
+
+msgid "Labels"
+msgstr "Etiquetes"
+
+msgid "Links"
+msgstr "Enllaces"
 
 msgid "Load category"
 msgstr "Cargar categoría"
 
-#, java-format
 msgid "No Wikidata ID found for: {0}"
 msgstr "Nun s'alcontró nenguna ID de Wikidata pa: {0}"
+
+msgid "No Wikidata item is selected!"
+msgstr "Nun se seleicionó nengún elementu de Wikidata"
 
 msgid "Not linked yet"
 msgstr "Ensin enllazar entá"
@@ -153,7 +172,6 @@ msgstr "Abrir artículu"
 msgid "Opens the Wikipedia article of the selected item in a browser"
 msgstr "Abre l''artículu de Wikipedia del elementu escoyíu nun navegador"
 
-#, java-format
 msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
 msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
 msgstr[0] "¿Sustituir ''{0}'' etiqueta {1} dende {2} col nuevu valor ''{3}''?"
@@ -162,6 +180,9 @@ msgstr[1] ""
 
 msgid "Overwrite key"
 msgstr "Sustituir clave"
+
+msgid "Paste Wikipedia articles"
+msgstr "Apegar artículos de Wikipedia"
 
 msgid "Pastes Wikipedia articles from the system clipboard"
 msgstr "Pegar artículos de la Wikipedia dende''l cartafueyu del sistema"
@@ -198,21 +219,45 @@ msgstr "Consultes guardaes:"
 msgid "Zoom to selection"
 msgstr "Averar a la escoyeta"
 
+msgid "[Wiki] "
+msgstr "[Wiki] "
+
+msgid "aliases"
+msgstr "alcuños"
+
 msgid "clipboard"
 msgstr "cartafueyu"
 
-#. add entries to list model
 msgid "coordinates"
 msgstr "coordenaes"
+
+msgid "description"
+msgstr "descripción"
+
+msgid "has no Q-ID"
+msgstr "nun tien Q-ID"
 
 msgid "help"
 msgstr "ayuda"
 
-#, java-format
+msgid "label"
+msgstr "etiqueta"
+
+msgid "language"
+msgstr "idioma"
+
+msgid "language code"
+msgstr "códigu d'idioma"
+
+msgid "wikidata=* item exists"
+msgstr "l'elementu wikidata=* existe"
+
 msgid "{0} (malformed site URL)"
 msgstr "{0} (URL del sitiu mal escrita)"
 
-#. Plugin description for wikipedia
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} nun ye una ID de Wikidata válida"
+
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

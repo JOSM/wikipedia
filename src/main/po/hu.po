@@ -1,15 +1,14 @@
 # Translations for the JOSM plugin 'wikipedia' (hu)
-# Copyright (C) 2018 
+# Copyright (C) 2018
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.0.2-22-g0edc4dd\n"
+"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-02 18:39+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Hungarian (https://www.transifex.com/josm/teams/2544/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +22,6 @@ msgstr "Címke hozzáadása"
 msgid "Add Wikidata"
 msgstr "Wikidata hozzáadása"
 
-#, java-format
 msgid "Add Wikidata for language ''{0}''"
 msgstr "Wikidata hozzáadása \"{0}\" nyelvhez"
 
@@ -40,24 +38,18 @@ msgstr ""
 "A kijelölt objektumhoz hozzáad egy ennek a cikknek megfelelő <wikipedia> "
 "címkét"
 
-#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "A helyi adathalmazban elérhető"
 
-#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Elérhető WIWOSM szerveren keresztül"
 
 msgid "Cancel"
 msgstr "Mégse"
 
-msgid "Clipboard"
-msgstr "Vágólap"
-
 msgid "Contacting Server..."
 msgstr "Kapcsolódás a szerverhez…"
 
-#, java-format
 msgid ""
 "Copies the {0} template to the system clipboard instantiated with the "
 "coordinates of the first selected node"
@@ -65,7 +57,6 @@ msgstr ""
 "A vágólapra másolja a(z) {0} sablont, kitöltve az első kijelölt pont "
 "koordinátáival"
 
-#, java-format
 msgid "Copy {0} template"
 msgstr "{0} sablon másolása"
 
@@ -82,17 +73,26 @@ msgstr ""
 msgid "Download from Sophox API"
 msgstr "Letöltés a Sophox API-ról"
 
+msgid "Download labels for {0}…"
+msgstr "Címkék letöltése ehhez: {0}…"
+
 msgid "Download referrers (parent relations)"
 msgstr "Hivatkozók (szülő kapcsolatok) letöltése"
 
 msgid "Download relation members"
 msgstr "Kapcsolat tagjainak letöltése"
 
+msgid "Download sitelinks for {0}…"
+msgstr "Oldalhivatkozások letöltése ehhez: {0}…"
+
 msgid "Edit selected snippet"
 msgstr "A kijelölt kódtöredék szerkesztése"
 
 msgid "Error"
 msgstr "Hiba"
+
+msgid "Failed to download labels for {0}!"
+msgstr "A(z) {0} címkéinek letöltése meghiúsult!"
 
 msgid "Fetch Wikidata IDs"
 msgstr "Wikidata ID-k lekérése"
@@ -121,7 +121,6 @@ msgstr ""
 msgid "Fetching Wikidata IDs"
 msgstr "Wikidata ID-k lekérése"
 
-#, java-format
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
 msgstr[0] "{0} Wikidata ID lekérése a(z) „{1}” nyelvhez"
@@ -137,7 +136,6 @@ msgstr ""
 msgid "Load category"
 msgstr "Kategória betöltése"
 
-#, java-format
 msgid "No Wikidata ID found for: {0}"
 msgstr "Nem található Wikidata ID ehhez: {0}"
 
@@ -196,18 +194,15 @@ msgstr "Nagyítás a kijelölésre"
 msgid "clipboard"
 msgstr "Vágólap"
 
-#. add entries to list model
 msgid "coordinates"
 msgstr "koordináták"
 
 msgid "help"
 msgstr "súgó"
 
-#, java-format
 msgid "{0} (malformed site URL)"
 msgstr "{0} (helytelen alakú webhely URL)"
 
-#. Plugin description for wikipedia
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""
