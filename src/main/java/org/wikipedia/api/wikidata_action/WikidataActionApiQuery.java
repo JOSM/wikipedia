@@ -171,7 +171,7 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     public HttpClient getHttpClient() {
         return HttpClient.create(getUrl(), "POST")
             .setAccept("application/json")
-            .setHeader("Content-Type", "text/plain; charset=utf-8")
+            .setHeader("Content-Type", "application/x-www-form-urlencoded")
             .setHeader("User-Agent", getUserAgent(TICKET_KEYWORDS))
             .setReasonForRequest(getQueryString().replace('&', ' '))
             .setRequestBody(getQueryString().getBytes(StandardCharsets.UTF_8));
