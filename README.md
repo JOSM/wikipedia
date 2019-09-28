@@ -18,6 +18,10 @@ To use this plugin, [install JOSM](https://josm.openstreetmap.de/wiki/Download) 
 - **Translations** are managed [at Transifex](https://www.transifex.com/josm/josm/josm-plugin_wikipedia)  
   [![translation status](https://www.transifex.com/projects/p/josm/resource/josm-plugin_wikipedia/chart/image_png/)](https://www.transifex.com/josm/josm/josm-plugin_wikipedia)
 
+## Documentation for developers
+
+- In [Translation.md](./docs/Translation.md) the translation workflow is documented
+
 ## Authors
 
 - Simon Legner (simon04)
