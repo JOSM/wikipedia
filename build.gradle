@@ -1,9 +1,5 @@
 import com.github.spotbugs.SpotBugsTask
 import net.ltgt.gradle.errorprone.CheckSeverity
-import org.openstreetmap.josm.gradle.plugin.task.GeneratePluginList
-
-import java.nio.file.Files
-import java.nio.file.Paths
 
 plugins {
   id "java"
@@ -90,7 +86,7 @@ tasks.processResources {
 archivesBaseName = "wikipedia"
 josm {
   manifest {
-    oldVersionDownloadLink 13927, "v1.1.0", new URL("https://github.com/JOSM/wikipedia/releases/download/v1.1.0/wikipedia.jar")
+    oldVersionDownloadLink 13927, "v1.1.0", new URL("http://josm.gitlab.io/wikipedia/dist/v1.1.0/wikipedia.jar")
     oldVersionDownloadLink 13597, "v1.0.1", new URL("https://github.com/JOSM/wikipedia/releases/download/v1.0.1/wikipedia.jar")
     oldVersionDownloadLink 12900, "34109", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=34113")
     oldVersionDownloadLink 12878, "33635", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=33636")
@@ -139,24 +135,6 @@ tasks.withType(SpotBugsTask) {
   reports {
     xml.enabled = false
     html.enabled = true
-  }
-}
-
-task generateSnapshotUpdateSite(type: GeneratePluginList) {
-  dependsOn(tasks.processResources)
-
-  outputFile = new File(project.buildDir, "snapshot-update-site")
-  versionSuffix = {a -> ""}
-  doFirst {
-    def pluginDownloadUrl = "https://josm.gitlab.io/$archivesBaseName/snapshot/master/${archivesBaseName}.jar"
-    it.iconBase64Provider = {
-      def file = new File(sourceSets.main.resources.srcDirs[0], it)
-      if (file.exists()) {
-        def contentType = file.name.endsWith(".svg") ? "svg+xml" : "png"
-        return "data:image/" + contentType + ";base64," + Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(file.toURI())));
-      }
-    }
-    it.addPlugin("$archivesBaseName-dev.jar", project.josm.manifest.createJosmPluginJarManifest(), new URL(pluginDownloadUrl))
   }
 }
 
