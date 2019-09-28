@@ -1,13 +1,13 @@
 # Translations for the JOSM plugin 'wikipedia' (ast)
-# Copyright (C) 2018
+# Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
+"Project-Id-Version: josm-plugin_wikipedia 1.1.1-15-g7d371af\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"POT-Creation-Date: 2019-02-24 22:49+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Asturian (https://www.transifex.com/josm/teams/2544/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -34,6 +34,9 @@ msgstr "Añadir Wikidata pal idioma ''{0}''"
 msgid "Add names from Wikipedia"
 msgstr "Añadir nomes dende Wikipedia"
 
+msgid "Add new snippet"
+msgstr "Amestar un nuevu fragmentu"
+
 msgid ""
 "Adds a ''wikipedia'' tag corresponding to this article to the selected "
 "objects"
@@ -46,6 +49,9 @@ msgstr "Disponible nel conxuntu de datos llocal"
 
 msgid "Available via WIWOSM server"
 msgstr "Disponible vía sirvidor WIWOSM"
+
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr "Nun pué abrise'l sitiu web {0} nel restolador. Mensaxe d'error: {1}"
 
 msgid "Cancel"
 msgstr "Encaboxar"
@@ -210,8 +216,17 @@ msgstr ""
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Establez l''idioma predetermináu pa los artículos de Wikipedia"
 
+msgid "There is no Wikipedia site for language ''{0}''!"
+msgstr "La llingua ''{0}'' nun tien nengún sitiu de Wikipedia"
+
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+msgid "Wikipedia language"
+msgstr "Llingua de Wikipedia"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "La etiqueta Wikipedia tien un formatu inválidu"
 
 msgid "Your saved queries:"
 msgstr "Consultes guardaes:"
@@ -224,6 +239,9 @@ msgstr "[Wiki] "
 
 msgid "aliases"
 msgstr "alcuños"
+
+msgid "all Wikipedia articles in Category"
+msgstr "tolos artículos de Wikipedia de la Categoría"
 
 msgid "clipboard"
 msgstr "cartafueyu"

@@ -1,0 +1,9 @@
+pluginManagement {
+  repositories {
+      maven {
+        url '../../gradle-josm-plugin/build/maven'
+      }
+      gradlePluginPortal()
+  }
+}
+enableFeaturePreview("STABLE_PUBLISHING")

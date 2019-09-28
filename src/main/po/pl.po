@@ -1,13 +1,13 @@
 # Translations for the JOSM plugin 'wikipedia' (pl)
-# Copyright (C) 2018
+# Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
+"Project-Id-Version: josm-plugin_wikipedia 1.1.1-15-g7d371af\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"POT-Creation-Date: 2019-02-24 22:49+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Polish (https://www.transifex.com/josm/teams/2544/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -243,6 +243,13 @@ msgstr ""
 msgid "More than one OSM object is selected: {0}"
 msgstr "Wybrano więcej niż jeden obiekt OSM: {0}"
 
+msgid ""
+"Move wikidata=* tags to tag brand:wikidata=*, when the value points to a "
+"brand"
+msgstr ""
+"Przenieś znaczniki wikidata=* do znacznika brand:wikidata=*, gdy wartość "
+"wskazuje na markę"
+
 msgid "No Wikidata ID found for: {0}"
 msgstr "Nie znaleziono Wikidata ID dla: {0}"
 
@@ -353,6 +360,9 @@ msgstr "Warstwa Wikipedia/Wikidata"
 
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "Wartość ''{0}'' jest niedozwolona dla tagu wikipedia=*"
+
+msgid "The value of tag brand:wikidata=* has an invalid format!"
+msgstr "Wartość znacznika brand:wikidata=* ma niepoprawny format!"
 
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "

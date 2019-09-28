@@ -1,4 +1,4 @@
-# Translations for the JOSM plugin 'wikipedia' (zh_TW)
+# Translations for the JOSM plugin 'wikipedia' (zh_CN)
 # Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -9,274 +9,274 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-24 22:49+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/josm/teams/2544/zh_TW/)\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/josm/teams/2544/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "''{0}'' is an illegal language code!"
-msgstr "「{0}」是非法的語言代碼！"
+msgstr "“{0}”是非法的语言代码！"
 
 msgid "({0} items, processing batch {1} of {2})"
-msgstr "（{0} 項，處理批次 {1}/{2}）"
+msgstr "（{0} 项，处理批次 {1}/{2}）"
 
 msgid "Add Tag"
-msgstr "新增標籤"
+msgstr "添加标签"
 
 msgid "Add Wikidata"
-msgstr "新增維基數據"
+msgstr "添加 Wikidata"
 
 msgid "Add Wikidata for language ''{0}''"
-msgstr "為語言 {0} 添加維基數據"
+msgstr "添加语言“{0}”的 Wikidata"
 
 msgid "Add names from Wikipedia"
-msgstr "從維基百科加入名稱"
+msgstr "添加维基百科的名称"
 
 msgid "Add new snippet"
-msgstr "增加新的文字片段"
+msgstr "添加新片段"
 
 msgid ""
 "Adds a ''wikipedia'' tag corresponding to this article to the selected "
 "objects"
-msgstr "添加與本文對應的維基百科「標籤」至已選擇物件"
+msgstr "添加对应本文的“维基百科”标签到所选对象"
 
 msgid "Available in local dataset"
-msgstr "可供本地數據資料庫利用"
+msgstr "在本地数据中可用"
 
 msgid "Available via WIWOSM server"
-msgstr "可透過 WIWOSM 伺服器利用"
+msgstr "在 WIWOSM 服务器中可用"
 
 msgid "Can't open website {0} in browser! Error message: {1}"
-msgstr "無法用瀏覽器開啟網站 {0}！錯誤訊息：{1}"
+msgstr "无法用浏览器打开网站 {0}！错误消息：{1}"
 
 msgid "Cancel"
 msgstr "取消"
 
 msgid "Change wikipedia tag?"
-msgstr "是否變更維基百科標籤？"
+msgstr "是否更改维基百科标签？"
 
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
-msgstr "檢查 wikipedia=* 是 wikidata=* 提供的跨 wiki 連結"
+msgstr "检查 wikipedia=* 是 wikidata=* 提供的跨 wiki 链接"
 
 msgid "Check wikipedia=* is not a redirect"
-msgstr "檢查 wikipedia=* 不是重導向"
+msgstr "检查 wikipedia=* 不是重定向"
 
 msgid "Contacting Server..."
-msgstr "正在連接伺服器…"
+msgstr "正在连接服务器..."
 
 msgid ""
 "Copies the {0} template to the system clipboard instantiated with the "
 "coordinates of the first selected node"
-msgstr "複製 {0} 模板到系統剪貼簿，並且用第一個選擇的節點當範例"
+msgstr "复制 {0} 的模板到系统剪贴板，并以第一个选择节点的坐标填充"
 
 msgid "Copy {0} template"
-msgstr "複製 {0} 模板"
+msgstr "复制 {0} 个模板"
 
 msgid "Could not add names. Wikipedia tag is not recognized!"
-msgstr "無法新增名稱，無法識別維基百科標籤！"
+msgstr "无法添加名称，无法识别维基百科标签！"
 
 msgid ""
 "Could not check for all wikipedia=* tags if they match the wikidata=* tag."
-msgstr "無法檢查所有 wikipedia=* 標籤是否符合 wikidata=* 標籤。"
+msgstr "无法检查所有 wikipedia=* 标签是否符合 wikidata=* 标签。"
 
 msgid ""
 "Could not check for all wikipedia=* tags if they redirect to another lemma."
-msgstr "無法檢查所有 wikipedia=* 標籤是否重定向到其他地方。"
+msgstr "无法检查所有 wikipedia=* 标签是否重定向到其他地方。"
 
 msgid "Could not check for unusual classes in wikidata=* tags."
-msgstr "無法檢查 wikidata=* 標籤不尋常類型。"
+msgstr "无法检查 wikidata=* 标签不寻常类型。"
 
 msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
-msgstr "無法連線到 {0}，也許是網路問題或是網站斷線了（{1}：{2}）"
+msgstr "无法连接到 {0}，也许是网络问题或是网站断线了（{1}：{2}）"
 
 msgid "Could not validate all wikidata=* tags over the internet."
-msgstr "無法於線上驗證所有 wikidata=* 標籤。"
+msgstr "无法在线验证所有 wikidata=* 标签。"
 
 msgid "Delete selected snippet"
-msgstr "刪除選擇的文字"
+msgstr "删除选中的片段"
 
 msgid ""
 "Double click on item to search for object with article name (and center "
 "coordinate)"
-msgstr "點撃兩下以條目名稱 (與中心座標) 搜尋物件"
+msgstr "双击项目来搜索有文章名称的对象(和中心坐标)"
 
 msgid "Download all elements from one of {0} sources"
-msgstr "從 {0} 個來源之一下載所有物件"
+msgstr "从 {0} 个来源之一下载所有元素"
 
 msgid "Download elements"
-msgstr "下載物件"
+msgstr "下载元素"
 
 msgid "Download from Sophox API"
-msgstr "從 Sophox API 下載"
+msgstr "从 Sophox API 下载"
 
 msgid "Download labels for {0}…"
-msgstr "下載 {0} 的名稱…"
+msgstr "下载 {0} 的名称…"
 
 msgid "Download referrers (parent relations)"
-msgstr "下載參照 (上層關聯)"
+msgstr "下载参照者(父关系)"
 
 msgid "Download relation members"
-msgstr "下載關聯成員"
+msgstr "下载关系成员"
 
 msgid "Download sitelinks for {0}…"
-msgstr "下載 {0} 的網站連結…"
+msgstr "下载 {0} 的站点链接…"
 
 msgid "Download statements for {0}…"
-msgstr "下載 {0} 的陳述…"
+msgstr "下载 {0} 的陈述…"
 
 msgid "Downloading entries with geo coordinates failed: {0}"
-msgstr "下載物件的地理經緯度失敗：{0}"
+msgstr "下载对象的地理经纬度失败：{0}"
 
 msgid "Edit selected snippet"
-msgstr "編輯選擇的文字片段"
+msgstr "编辑选中的片段"
 
 msgid "Error"
-msgstr "錯誤"
+msgstr "错误"
 
 msgid "Failed to download labels for {0}!"
-msgstr "下載 {0} 的名稱失敗！"
+msgstr "下载 {0} 的名称失败！"
 
 msgid "Failed to download sitelinks for Wikidata item {0}!"
-msgstr "下載維基數據物件 {0} 網站連結失敗！"
+msgstr "下载维基数据对象 {0} 的站点链接失败！"
 
 msgid "Failed to download statements for Wikidata item {0}!"
-msgstr "下載維基數據物件 {0} 陳述失敗！"
+msgstr "下载维基数据对象 {0} 的陈述失败！"
 
 msgid "Fetch Wikidata IDs"
-msgstr "取得維基數據ID"
+msgstr "获取 Wikidata ID"
 
 msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
-msgstr "使用維基百科標籤取得維基數據ID"
+msgstr "使用维基百科标签获取维基数据ID"
 
 msgid "Fetch Wikipedia articles with coordinates"
-msgstr "獲取含有地理坐標的維基百科條目"
+msgstr "获取带坐标的维基百科文章"
 
 msgid "Fetches a list of all Wikipedia articles of a category"
-msgstr "取得分類内所有維基百科條目列表"
+msgstr "获取分类下所有维基百科的文章列表"
 
 msgid "Fetches all coordinates from Wikidata in the current view"
-msgstr "從維基數據取得所有目前檢視裡的所有座標"
+msgstr "从维基数据获取当前视图中的所有坐标"
 
 msgid "Fetches all coordinates from Wikipedia in the current view"
-msgstr "自維基百科取得目前檢視區域之坐標"
+msgstr "从维基百科获取所有当前视图中的坐标"
 
 msgid ""
 "Fetches interwiki links from Wikipedia in order to add several name tags"
-msgstr "從維基百科跨站連結增加名稱標籤"
+msgstr "从维基百科获取跨维基链接，以添加多个名称标签"
 
 msgid "Fetching Wikidata IDs"
-msgstr "取得維基數據ID"
+msgstr "正在获取 Wikidata ID"
 
 msgid "Fetching {0} Wikidata ID for language ''{1}''"
 msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
-msgstr[0] "取得 {0} 個語言「{1}」的維基數據ID"
+msgstr[0] "正在获取 {0} 个语言“{1}”的维基数据ID"
 
 msgid ""
 "Find OSM objects linked with wikidata items of a class that is untypical for"
 " OSM"
-msgstr "尋找連結維基數據物件的 OSM 物件，在 OSM 上分類有不尋常的狀況"
+msgstr "寻找链接维基数据项目的 OSM 对象中分类不寻常的"
 
 msgid ""
 "Find places of education at least 2km, and at most 3km from the center of "
 "the selection"
-msgstr "從選擇區域的中心，最近 2 公里，最遠 3 公里的教育機構"
+msgstr "从选择区域的中心，最近 2 公里，最远 3 公里的教育机构"
 
 msgid "Invalid Q-ID! Cannot exist on Wikidata."
-msgstr "無效 Q-ID！在維基數據並不存在。"
+msgstr "无效 Q-ID！在维基数据不会存在。"
 
 msgid "Item {0} does not exist!"
-msgstr "物件 {0} 並不存在！"
+msgstr "项 {0} 并不存在！"
 
 msgid "Item {0} is missing"
-msgstr "缺少物件 {0}"
+msgstr "缺少项 {0}"
 
 msgid "Item {0} redirects to {1}"
-msgstr "物件 {0} 重定向至 {1}"
+msgstr "项 {0} 重定向至 {1}"
 
 msgid "Labels"
-msgstr "名稱"
+msgstr "名称"
 
 msgid "Links"
-msgstr "連結"
+msgstr "链接"
 
 msgid "Load category"
-msgstr "載入分類"
+msgstr "加载分类"
 
 msgid ""
 "Make sure that the wikipedia=* article is not redirecting to another lemma"
-msgstr "確認 wikipedia=* 條目並沒有重定向至其他論點"
+msgstr "确认 wikipedia=* 条目并没有重定向至其他项目"
 
 msgid ""
 "Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
 "exists"
-msgstr "確認維基數據項目的 Q-ID 在 wikidata=* 標籤確實存在"
+msgstr "确认维基数据项目的 Q-ID 在 wikidata=* 标签确实存在"
 
 msgid ""
 "Makes sure that the wikipedia=* article is connected to the wikidata=* item"
-msgstr "確認 wikipedia=* 條目有連結到 wikidata=* 項目"
+msgstr "确认 wikipedia=* 所指的条目已链接到 wikidata=* 项目"
 
 msgid "More than one OSM object is selected: {0}"
-msgstr "有多餘一個 OSM 物件被選取：{0}"
+msgstr "选择了多于一个 OSM 对象：{0}"
 
 msgid ""
 "Move wikidata=* tags to tag brand:wikidata=*, when the value points to a "
 "brand"
-msgstr "當數值指向品牌時，移動 wikidata=* 標籤到 brand:wikidata=* 標籤。"
+msgstr "当数值指向品牌时，移动 wikidata=* 标签到 brand:wikidata=* 标签"
 
 msgid "No Wikidata ID found for: {0}"
-msgstr "找不到這些的維基數據ID：{0}"
+msgstr "找不到这些的维基数据ID：{0}"
 
 msgid "No Wikidata item is selected!"
-msgstr "尚未選取維基數據物件！"
+msgstr "尚未选取维基数据项！"
 
 msgid "Not linked yet"
-msgstr "尚未連結"
+msgstr "尚未链接"
 
 msgid "Open Article"
-msgstr "開啟條目"
+msgstr "打开文章"
 
 msgid "Opens the Wikipedia article of the selected item in a browser"
-msgstr "在瀏覽器内開啟所選項目的維基百科條目"
+msgstr "在浏览器中打开所选项目的维基百科文章"
 
 msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
 msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
-msgstr[0] "要把 {0} 個 {1} 標籤的值自「{2}」覆蓋爲「{3}」嗎？"
+msgstr[0] "要把 {0} 个 {1} 标签的值自“{2}”覆盖为“{3}”吗？"
 
 msgid "Overwrite key"
-msgstr "覆寫鍵值"
+msgstr "覆盖设定键"
 
 msgid "Paste Wikipedia articles"
-msgstr "貼上維基百科條目"
+msgstr "粘贴维基百科条目"
 
 msgid "Pastes Wikipedia articles from the system clipboard"
-msgstr "從系統剪貼簿貼上維基百科條目"
+msgstr "从系统剪贴板粘贴维基百科文章"
 
 msgid "Please select a download area first."
-msgstr "請先選擇下載區域。"
+msgstr "请先选择下载区域。"
 
 msgid "Search Wikidata items"
-msgstr "搜尋維基數據項目"
+msgstr "搜索维基数据项目"
 
 msgid "Search Wikipedia category"
-msgstr "搜尋維基百科分類"
+msgstr "搜索维基百科分类"
 
 msgid "See the validator messages of the category ''Other'' for more details."
-msgstr "請看“其他”分類的驗證器訊息來看更多細節。"
+msgstr "欲知更多细节，请读“其他”分类的验证器消息。"
 
 msgid "Select if the members of a relation should be downloaded as well"
-msgstr "如果關聯的成員也要下載請選擇"
+msgstr "如果一个关系的成员也应被下载，则选择"
 
 msgid ""
 "Select if the referrers of the object should be downloaded as well, "
 "i.e.,parent relations and for nodes, additionally, parent ways"
-msgstr "選擇相依物件也要下載，例如，父關係，以及對節點來說，特別是父路徑"
+msgstr "如果对象的参照者也应被下载(即父关系，还有节点的父路径)，则选择"
 
 msgid "Sets the default language for the Wikipedia articles"
-msgstr "設定維基百科的預設語言版本"
+msgstr "设置维基百科文章的默认语言"
 
 msgid ""
 "Should the wikipedia tag be replaced with the redirect target? Make sure the meaning of the tag remains the same!\n"
@@ -284,175 +284,175 @@ msgid ""
 "Before: wikipedia={0}:{1}\n"
 "After: wikipedia={0}:{2}"
 msgstr ""
-"維基百科的標籤應該被取代為重定向的目標嗎？請確認標籤仍維持原來意思！\n"
+"维基百科的标签应该换成重定向的目标吗？请确认标签仍维持原来意思！\n"
 "\n"
 "之前：wikipedia={0}:{1}\n"
-"之後：wikipedia={0}:{2}"
+"之后：wikipedia={0}:{2}"
 
 msgid "Show properties of the selected Wikidata item"
-msgstr "顯示選取的維基數據項目的屬性"
+msgstr "显示选取的维基数据项目的属性"
 
 msgid "Show/hide Sophox snippet list"
-msgstr "顯示/隱藏 Sophox 片段清單"
+msgstr "显示/隐藏 Sophox 片段列表"
 
 msgid "Sophox server"
-msgstr "Sophox 伺服器"
+msgstr "Sophox 服务器"
 
 msgid "Statements"
-msgstr "陳述"
+msgstr "陈述"
 
 msgid "Target key: "
-msgstr "目標連結 "
+msgstr "目标键："
 
 msgid "The JSON response from the {0} can''t be decoded!"
-msgstr "從 {0} 回應的 JSON 無法被解碼！"
+msgstr "从 {0} 回应的 JSON 无法解码！"
 
 msgid "The Wikidata Action API did not respond with all requested entities!"
-msgstr "Wikidata Action API 無法回應所有要求的實體！"
+msgstr "Wikidata Action API 无法回应所有要求的实体！"
 
 msgid "The Wikidata Action API reports a failed query!"
-msgstr "Wikidata Action API 回報失敗的檢索！"
+msgstr "Wikidata Action API 报告检索失败！"
 
 msgid ""
 "The Wikidata item does not exist! Replace the wikidata=* tag with an "
 "existing Wikidata item or remove the Wikidata tag."
-msgstr "維基數據項目並不存在！請用既有的維基數據項目取代 wikidata=* 標籤，或是移除維基數據標籤。"
+msgstr "维基数据项不存在！请用存在的维基数据项取代 wikidata=* 标签，或移除此标签。"
 
 msgid "The Wikidata item is a redirect"
-msgstr "維基數據項目是重定向"
+msgstr "维基数据项是重定向"
 
 msgid "The Wikipedia/Wikidata layer"
-msgstr "維基百科/維基數據圖層"
+msgstr "维基百科/维基数据图层"
 
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
-msgstr "數值「{0}」不是被允許的 wikipedia=* 標籤"
+msgstr "wikipedia=* 标签不允许使用数值“{0}”"
 
 msgid "The value of tag brand:wikidata=* has an invalid format!"
-msgstr "brand:wikidata=* 標籤數值並不是有效的格式！"
+msgstr "brand:wikidata=* 标签数值的格式无效！"
 
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
 "error, please report to the Wikipedia plugin."
-msgstr "{0} 回報無效的檢索 {1}（{2}）。這是程式錯誤，請回報給 Ｗikipedia 套件。"
+msgstr "{0} 报告了无效的检索 {1}（{2}）。这是程序错误，请报告给 Wikipedia 插件作者。"
 
 msgid "The {0} responded with an unexpected response code: {1} {2}"
-msgstr "{0} 回應未預期的回應代碼：{1} {2}"
+msgstr "{0} 回复了意外的响应代码：{1} {2}"
 
 msgid "There is no Wikipedia site for language ''{0}''!"
-msgstr "「{0}」語言沒有維基百科網站！"
+msgstr "没有“{0}”语言的维基百科网站！"
 
 msgid ""
 "This check queries Wikidata to find those OSM objects that are linked to "
 "wikidata items of a type, which should not occur in OSM data (at least not "
 "as the main wikidata tag)"
-msgstr "此操作檢索維基資料，以找到屬於不宜連結到維基資料（至少不是主要的 wikidata 標籤）型別的 OSM 物件"
+msgstr "此操作检索维基数据，以找到属于不宜链接到维基数据（至少不是主要的 wikidata 标签）类型的 OSM 对象"
 
 msgid "Toggle the layer displaying Wikipedia articles or Wikidata items"
-msgstr "開啟/關上顯示維基百科或是維基資料項的圖層"
+msgstr "打开/关闭显示维基百科或是维基数据项的图层"
 
 msgid ""
 "Turn on the informational level validator messages in the preferences to see"
 " more details."
-msgstr "在設定選開啟資訊（information）級的驗證器訊息以檢視更多細節。"
+msgstr "在设置选打开信息（information）级的验证器消息以查看更多细节。"
 
 msgid "Unknown datatype!"
-msgstr "未知資料型態！"
+msgstr "未知数据类型！"
 
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
-msgstr "當讀取從 {0} 回應的 JSON 時，有錯誤發生了！（{1}：{2}）"
+msgstr "当读取 {0} 回复的 JSON 时，有错误发生了！（{1}：{2}）"
 
 msgid "Wiki layer"
-msgstr "Wiki 圖層"
+msgstr "Wiki 图层"
 
 msgid "Wikidata Info"
-msgstr "維基數據資訊"
+msgstr "维基数据信息"
 
 msgid "Wikidata Info: {0}"
-msgstr "維基數據資訊：{0}"
+msgstr "维基数据信息：{0}"
 
 msgid "Wikidata item and Wikipedia article do not match!"
-msgstr "維基數據項目和維基百科條目對不上！"
+msgstr "维基数据项目和维基百科条目对不上！"
 
 msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
-msgstr "維基數據項目 {0} 與維基百科條目 {1} ({2}) 沒有關聯"
+msgstr "维基数据项目 {0} 与维基百科条目 {1}（{2}）没有关联"
 
 msgid "Wikidata items in viewport"
-msgstr "視野內維基數據物件"
+msgstr "视野内的维基数据对象"
 
 msgid ""
 "Wikidata value is of unusual type for the wikidata=* tag on OSM objects"
-msgstr "維基數據數值是 OSM 物件 wikidata=* 標籤上不常見的類型"
+msgstr "维基数据数值是 OSM 对象 wikidata=* 标签上不常见的类型"
 
 msgid "Wikipedia"
-msgstr "維基百科"
+msgstr "维基百科"
 
 msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
-msgstr "維基百科條目「{0}」重定向至「{1}」"
+msgstr "维基百科条目“{0}”重定向至“{1}”"
 
 msgid "Wikipedia article is a redirect"
-msgstr "維基百科條目是重定向"
+msgstr "维基百科条目是重定向"
 
 msgid "Wikipedia articles in viewport (for language {0})"
-msgstr "視野內維基百科條目 (語言 {0})"
+msgstr "视野内维基百科条目 (语言 {0})"
 
 msgid "Wikipedia language"
-msgstr "維基百科語言"
+msgstr "维基百科语言"
 
 msgid "Wikipedia tag has invalid format!"
-msgstr "維基百科標籤是無效的格式！"
+msgstr "维基百科标签是无效的格式！"
 
 msgid "Your saved queries:"
-msgstr "你儲存的檢索："
+msgstr "您已保存的查询："
 
 msgid "Zoom to selection"
-msgstr "縮放至選擇區域"
+msgstr "缩放至选择范围"
 
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
 msgid "aliases"
-msgstr "別名"
+msgstr "别名"
 
 msgid "all Wikipedia articles in Category"
-msgstr "分類内所有維基百科條目"
+msgstr "分类内所有维基百科条目"
 
 msgid "clipboard"
-msgstr "剪貼簿"
+msgstr "剪贴板"
 
 msgid "coordinates"
-msgstr "座標"
+msgstr "坐标"
 
 msgid "description"
 msgstr "描述"
 
 msgid "has no Q-ID"
-msgstr "沒有 Q-ID"
+msgstr "没有 Q-ID"
 
 msgid "help"
-msgstr "說明"
+msgstr "说明"
 
 msgid "label"
-msgstr "名稱"
+msgstr "名称"
 
 msgid "language"
-msgstr "語言"
+msgstr "语言"
 
 msgid "language code"
-msgstr "語言代碼"
+msgstr "语言代码"
 
 msgid "wikidata=* item exists"
-msgstr "存在 wikidata=* 項目"
+msgstr "存在 wikidata=* 项目"
 
 msgid "{0} (malformed site URL)"
-msgstr "{0}（異常網站網址）"
+msgstr "{0}（站点网址格式错误）"
 
 msgid "{0} is an instance of {1} (or any subclass thereof)"
-msgstr "{0} 是 {1}（或其任何子類）的實例"
+msgstr "{0} 是 {1}（或其任何子类）的实例"
 
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} 不是有效的 Wikidata-ID"
 
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
-msgstr "簡化連結OSM物件到維基百科條目和維基數據項目的過程"
+msgstr "简化 OSM 对象链接至维基百科条目和维基数据项目的过程"

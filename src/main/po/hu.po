@@ -1,13 +1,13 @@
 # Translations for the JOSM plugin 'wikipedia' (hu)
-# Copyright (C) 2018
+# Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
+"Project-Id-Version: josm-plugin_wikipedia 1.1.1-15-g7d371af\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"POT-Creation-Date: 2019-02-24 22:49+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Hungarian (https://www.transifex.com/josm/teams/2544/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' szabálytalan nyelvi kód"
+
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} tétel, végrehajtás alatt {1}, összesen {2})"
 
 msgid "Add Tag"
 msgstr "Címke hozzáadása"
@@ -44,8 +50,14 @@ msgstr "A helyi adathalmazban elérhető"
 msgid "Available via WIWOSM server"
 msgstr "Elérhető WIWOSM szerveren keresztül"
 
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr "{0} nem nyitható meg a böngészőben. Hibaüzenet: {1}"
+
 msgid "Cancel"
 msgstr "Mégse"
+
+msgid "Change wikipedia tag?"
+msgstr "Wikipédia címke módosítása?"
 
 msgid "Contacting Server..."
 msgstr "Kapcsolódás a szerverhez…"
@@ -69,6 +81,12 @@ msgid ""
 msgstr ""
 "Dupla kattintás az elemen a szócikkekre (és központi koordinátákra) való "
 "kereséshez"
+
+msgid "Download all elements from one of {0} sources"
+msgstr "Minden elem letöltése egy forrásból (összesen  {0} )"
+
+msgid "Download elements"
+msgstr "Elemek letöltése"
 
 msgid "Download from Sophox API"
 msgstr "Letöltés a Sophox API-ról"
@@ -133,11 +151,35 @@ msgstr ""
 "Oktatási intézmény keresése a kijelölés közepétől legalább 2 km és "
 "legfeljebb 3 km távolságra"
 
+msgid "Invalid Q-ID! Cannot exist on Wikidata."
+msgstr "Érvénytelen Q azonosító! Wikidatában nem található."
+
+msgid "Item {0} does not exist!"
+msgstr "A(z) ''{0}'' tétel nem létezik."
+
+msgid "Item {0} is missing"
+msgstr "A(z) ''{0}'' tétel hiányzik"
+
+msgid "Item {0} redirects to {1}"
+msgstr "{0} tétel egy átirányítás ide:  {1}"
+
+msgid "Labels"
+msgstr "Feliratok"
+
+msgid "Links"
+msgstr "Linkek"
+
 msgid "Load category"
 msgstr "Kategória betöltése"
 
+msgid "More than one OSM object is selected: {0}"
+msgstr "Több mint egy OSM objektum ki lett választva: {0}"
+
 msgid "No Wikidata ID found for: {0}"
 msgstr "Nem található Wikidata ID ehhez: {0}"
+
+msgid "No Wikidata item is selected!"
+msgstr "Nincs kiválasztva Wikidata tétel"
 
 msgid "Not linked yet"
 msgstr "Nincs még hivatkozás"
@@ -150,6 +192,9 @@ msgstr "Megnyitja böngészőben a kijelölt elemhez tartozó Wikipédia cikket"
 
 msgid "Overwrite key"
 msgstr "Kulcs felülírása"
+
+msgid "Paste Wikipedia articles"
+msgstr "Wikipédia szócikkek beszúrása"
 
 msgid "Pastes Wikipedia articles from the system clipboard"
 msgstr "Wikipédia cikkeket illeszt be a rendszer-vágólapról"
@@ -179,11 +224,73 @@ msgstr "Megadja az alapértelmezett nyelvet a Wikipédia cikkekhez"
 msgid "Show/hide Sophox snippet list"
 msgstr "A Sophox-kódtöredéklista megjelenítése/elrejtése"
 
+msgid "Sophox server"
+msgstr "Sophox szerver"
+
 msgid "Target key: "
 msgstr "Cél kulcs: "
 
+msgid "The JSON response from the {0} can''t be decoded!"
+msgstr "A JSON válasz nem dekódolható a következő helyről: {0}"
+
+msgid "The Wikidata Action API reports a failed query!"
+msgstr "A Wikidata Action API hibás kérést jelent!"
+
+msgid ""
+"The Wikidata item does not exist! Replace the wikidata=* tag with an "
+"existing Wikidata item or remove the Wikidata tag."
+msgstr ""
+"A Wikidata elem nem létezik! Cseréld le a wikidata=* címkét egy létező "
+"Wikidata elemre vagy távolítsd el a címkét."
+
+msgid "The Wikidata item is a redirect"
+msgstr "A Wikidata tétel egy átirányítás"
+
+msgid "The Wikipedia/Wikidata layer"
+msgstr "Wikipédia/Wikidata réteg"
+
+msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
+msgstr "''{0}'' érték nincs megengedve a wikipedia=* címke számára"
+
+msgid "The value of tag brand:wikidata=* has an invalid format!"
+msgstr "A brand:wikidata=* címke értéke érvénytelen formátumú"
+
+msgid "Unknown datatype!"
+msgstr "Ismeretlen adattípus"
+
+msgid "Wiki layer"
+msgstr "Wiki réteg"
+
+msgid "Wikidata Info"
+msgstr "Wikidata infó"
+
+msgid "Wikidata Info: {0}"
+msgstr "Wikidata infó: {0}"
+
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "A Wikidata tétel és a Wikipédia szócikk nem illik össze"
+
+msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
+msgstr ""
+"A Wikidata tétel  {0} és a Wikipédia szócikk  {1} ({2}) nem illik össze"
+
+msgid "Wikidata items in viewport"
+msgstr "Wikidata elemek a nézetben"
+
 msgid "Wikipedia"
 msgstr "Wikipédia"
+
+msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
+msgstr "A Wikipédia ''{0}''  cikk egy átirányítás ide:  ''{1}''"
+
+msgid "Wikipedia article is a redirect"
+msgstr "A Wikipédia cikk egy átirányítás"
+
+msgid "Wikipedia language"
+msgstr "Wikipédia nyelve"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "Wikipédia címke érvénytelen formátummal."
 
 msgid "Your saved queries:"
 msgstr "Az elmentett lekérdezéseid:"
@@ -191,17 +298,44 @@ msgstr "Az elmentett lekérdezéseid:"
 msgid "Zoom to selection"
 msgstr "Nagyítás a kijelölésre"
 
+msgid "[Wiki] "
+msgstr "[Wiki] "
+
+msgid "all Wikipedia articles in Category"
+msgstr "minden Wikipédia cikk a  kategóriában"
+
 msgid "clipboard"
 msgstr "Vágólap"
 
 msgid "coordinates"
 msgstr "koordináták"
 
+msgid "description"
+msgstr "leírás"
+
+msgid "has no Q-ID"
+msgstr "nincs Q azonosítója"
+
 msgid "help"
 msgstr "súgó"
 
+msgid "label"
+msgstr "felirat"
+
+msgid "language"
+msgstr "nyelv"
+
+msgid "language code"
+msgstr "nyelvi kód"
+
+msgid "wikidata=* item exists"
+msgstr "wikidata=* tétel létezik"
+
 msgid "{0} (malformed site URL)"
 msgstr "{0} (helytelen alakú webhely URL)"
+
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} nem egy érvényes Wikidata-ID"
 
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
