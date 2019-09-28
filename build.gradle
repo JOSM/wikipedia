@@ -7,10 +7,10 @@ plugins {
   id "jacoco"
   id "maven-publish"
   id "pmd"
-  id "com.github.ben-manes.versions" version "0.20.0"
-  id "com.github.spotbugs" version "1.6.10"
-  id "org.openstreetmap.josm" version "0.6.1"
-  id "net.ltgt.errorprone" version "0.7.1"
+  id "com.github.ben-manes.versions" version "0.25.0"
+  id "com.github.spotbugs" version "2.0.0"
+  id "org.openstreetmap.josm" version "0.6.2"
+  id "net.ltgt.errorprone" version "0.8.1"
 }
 
 // Set up Errorprone
@@ -32,9 +32,9 @@ tasks.withType(JavaCompile).configureEach {
 def versions = [
   errorprone: "2.3.3",
   jacoco: "0.8.2",
-  junit: "5.4.0",
+  junit: "5.5.2",
   pmd: "6.6.0",
-  spotbugs: "3.1.11",
+  spotbugs: "3.1.12",
 ]
 
 repositories {
@@ -51,8 +51,8 @@ dependencies {
   testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
   testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation("com.github.tomakehurst:wiremock:2.21.0")
-  testImplementation("org.awaitility:awaitility:3.1.6")
+  testImplementation("com.github.tomakehurst:wiremock:2.25.0")
+  testImplementation("org.awaitility:awaitility:4.0.1")
 }
 
 // Add dependencies from ivy.xml
@@ -93,6 +93,9 @@ josm {
   }
   i18n {
     pathTransformer = getPathTransformer("gitlab.com/JOSM/wikipedia/blob")
+  }
+  gitlab {
+    repository("gitlab.com", 6702380)
   }
 }
 
@@ -148,22 +151,6 @@ project.afterEvaluate {
 
         from components.java
       }
-    }
-  }
-}
-
-def ciJobToken = System.getenv("CI_JOB_TOKEN")
-def projectId = System.getenv("CI_PROJECT_ID")
-if (ciJobToken != null && projectId!= null) {
-  publishing.repositories.maven {
-    url = "https://gitlab.com/api/v4/projects/$projectId/packages/maven"
-    name = "gitlab"
-    credentials(HttpHeaderCredentials.class) {
-      name = "Job-Token"
-      value = ciJobToken
-    }
-    authentication {
-      create("auth", HttpHeaderAuthentication.class)
     }
   }
 }
