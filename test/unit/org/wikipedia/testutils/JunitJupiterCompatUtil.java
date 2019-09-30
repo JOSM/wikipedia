@@ -3,6 +3,11 @@ package org.wikipedia.testutils;
 import static org.junit.Assert.assertTrue;
 
 public class JunitJupiterCompatUtil {
+
+    private JunitJupiterCompatUtil() {
+        // Private constructor to avoid instantiation
+    }
+
     public static <T extends Throwable> void assertThrows(Class<T> expectedType, Runnable runnable) {
         boolean success = false;
         Throwable throwable = null;

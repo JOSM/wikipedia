@@ -102,7 +102,7 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof WikipediaEntry)) return false;
         final WikipediaEntry that = (WikipediaEntry) o;
         return Objects.equals(lang, that.lang) &&
                 Objects.equals(article, that.article);

@@ -31,7 +31,6 @@ import org.wikipedia.tools.OsmPrimitiveUtil;
  * Toggle dialog that displays infos about the currently selected Wikidata item.
  */
 public class WikidataInfoToggleDialog extends ToggleDialog {
-    private static final Logger L = Logger.getLogger(WikidataInfoToggleDialog.class.getName());
     private static final String EMPTY_STRING = "";
 
     private final WikipediaToggleDialog wikiDialog;

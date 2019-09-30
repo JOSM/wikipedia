@@ -130,7 +130,7 @@ public class WdqApiQueryTest {
         });
     }
 
-    private void stubWithFileContent(final String filename) throws IOException, URISyntaxException {
+    private static void stubWithFileContent(final String filename) throws IOException, URISyntaxException {
         stubFor(post(URL_PATH)
             .withHeader("Content-Type", equalTo("application/x-www-form-urlencoded"))
             .willReturn(
@@ -141,7 +141,7 @@ public class WdqApiQueryTest {
         );
     }
 
-    private void verifyOneRequestTo(final String urlPattern) {
+    private static void verifyOneRequestTo(final String urlPattern) {
         verify(1, postRequestedFor(urlEqualTo(URL_PATH)).withRequestBody(new EqualToPattern(urlPattern)));
     }
 

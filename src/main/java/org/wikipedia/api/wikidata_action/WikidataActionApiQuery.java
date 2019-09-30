@@ -109,12 +109,13 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         if (siteId == null || titles == null || titles.size() <= 0) {
             throw new IllegalArgumentException("The site ID and titles must be present!");
         }
-        if (!RegexUtil.isValidSiteId(siteId)) {
+        final String lowercaseSiteId = siteId.toLowerCase();
+        if (!RegexUtil.isValidSiteId(lowercaseSiteId)) {
             throw new IllegalArgumentException("The site ID is not given in the expected format!");
         }
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetentities&props=sitelinks&sites=" + siteId + // defines the language of the titles
-            "&sitefilter=" + siteId + // defines for which languages sitelinks should be returned
+            FORMAT_PARAMS + "&action=wbgetentities&props=sitelinks&sites=" + lowercaseSiteId + // defines the language of the titles
+            "&sitefilter=" + lowercaseSiteId + // defines for which languages sitelinks should be returned
             "&titles=" + Utils.encodeUrl(String.join("|", titles)),
             WbgetentitiesResult.SCHEMA
         );
