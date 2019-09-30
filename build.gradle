@@ -9,7 +9,7 @@ plugins {
   id "pmd"
   id "com.github.ben-manes.versions" version "0.25.0"
   id "com.github.spotbugs" version "2.0.0"
-  id "org.openstreetmap.josm" version "0.6.2"
+  id "org.openstreetmap.josm" version "0.6.3"
   id "net.ltgt.errorprone" version "0.8.1"
 }
 
@@ -93,9 +93,6 @@ josm {
   }
   i18n {
     pathTransformer = getPathTransformer("gitlab.com/JOSM/wikipedia/blob")
-  }
-  gitlab {
-    repository("gitlab.com", 6702380)
   }
 }
 

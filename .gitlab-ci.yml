@@ -160,7 +160,8 @@ publish to / GitLab.com packages:
     name: GitLab.com / JOSM-wikipedia packages
     url: https://gitlab.com/JOSM/wikipedia/-/packages
   script:
-  - ./gradlew publishPluginPublicationToGitlabRepository
+  - ./gradlew publishAllPublicationsToGitlabRepository
+  - ./gradlew releaseToGitlab
   dependencies:
   - build
   only:
