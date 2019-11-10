@@ -1,0 +1,61 @@
+Manifest-Version: 1.0
+Plugin-Description: Simplifies linking OSM objects to Wikipedia articl
+ es and Wikidata items
+uk_Plugin-Description: Спрощує створення посила�
+ �ь з обʼєктів OSM на статті у Вікіпедії �
+ �а на Вікідані
+da_Plugin-Description: Forenkler at knytte OSM objekter til Wikipedia 
+ artikler og Wikidata emner
+Plugin-Mainversion: 13597
+Gradle-Version: 4.7
+Plugin-Early: false
+12878_Plugin-Url: 33635;https://svn.openstreetmap.org/applications/edi
+ tors/josm/dist/wikipedia.jar?p=33636
+fr_Plugin-Description: Simplifie la liaison entre les éléments OSM e
+ t les articles Wikipedia ou les entrées Wikidata
+de_Plugin-Description: Vereinfacht das Verlinken von OSM-Objekten zu W
+ ikipedia-Artikeln und Wikidata-Einträgen
+id_Plugin-Description: Menyederhanakan tautan objek OSM ke artikel Wik
+ ipedia dan Wikidata
+Groovy-Version: 2.4.12
+it_Plugin-Description: Semplifica il collegamento di oggetti OSM con g
+ li articoli di Wikipedia e gli elementi di Wikidata
+en_GB_Plugin-Description: Simplifies linking OSM objects to Wikipedia 
+ articles and Wikidata items
+be_Plugin-Description: Спрашчае звязванне абʼек�
+ �аў OSM з артыкуламі Вікіпедыі і элемен�
+ �амі вікідадзеных
+Plugin-Class: org.wikipedia.WikipediaPlugin
+sk_Plugin-Description: Zjednodušuje prepojenie OSM objektov na člán
+ ky Wikipedie a položky Wikidata
+nl_Plugin-Description: Vereenvoudigt het koppelen van objecten van OSM
+  aan artikelen van Wikipedia en items van Wikidata
+Plugin-Canloadatruntime: true
+hu_Plugin-Description: Egyszerűsíti az OSM objektumok összekapcsol�
+ �sát Wikipédia cikkekkel és Wikidata elemekkel
+cs_Plugin-Description: Zjednodušuje spojování objektů OSM a člán
+ ků na Wikipedii a položek Wikidat
+zh_TW_Plugin-Description: 簡化連結OSM物件到維基百科條目�
+ �維基數據項目
+Author: simon04
+Plugin-Version: v1.0.0
+ast_Plugin-Description: Simplifica enllazar oxetos d''OSM con artícul
+ os de Wikipedia y elementos de Wikidata
+Plugin-Icon: images/dialogs/wikipedia.png
+Plugin-Link: https://josm.openstreetmap.de/wiki/Help/Plugin/Wikipedia
+ru_Plugin-Description: Упрощает связывание объе�
+ �тов OSM со статьями Википедии и элемен�
+ �ами Викиданных
+pt_BR_Plugin-Description: Simplifica vincular objetos do OSM a artigos
+  da Wikipedia e itens Wikidata
+zh_CN_Plugin-Description: 简化链接OSM对象至维基百科条目�
+ �维基数据项目
+en_Plugin-Description: Simplifies linking OSM objects to Wikipedia art
+ icles and Wikidata items
+es_Plugin-Description: Simplifica la vinculación de objetos de OSM a 
+ artículos de Wikipedia y elementos de Wikidata
+Created-By: 1.8.0_171 (Oracle Corporation)
+Plugin-Date: 2018-05-18T15:10:04+0000
+12900_Plugin-Url: 34109;https://svn.openstreetmap.org/applications/edi
+ tors/josm/dist/wikipedia.jar?p=34113
+

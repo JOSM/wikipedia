@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <link rel=stylesheet href="./bootstrap.min.css"/>
 <meta charset=utf8>
-<title>JOSM update site for dev-version of wikipedia plugin</title>
+<title>wikipedia JOSM plugin</title>
 <div class="container">
-  <h1 class="display-4 mt-5">JOSM update site for dev-version of the wikipedia plugin</h1>
+  <h1 class="mt-5"><code>wikipedia</code> JOSM plugin</h1>
+  <h2 class="mt-4">GitLab.com</h2>
+  <a class="btn btn-outline-primary" href="https://gitlab.com/JOSM/plugin/wikipedia">Repository</a>
+  <a class="btn btn-outline-primary" href="https://gitlab.com/JOSM/plugin/wikipedia/-/releases">Releases</a>
+  <a class="btn btn-outline-primary" href="https://gitlab.com/JOSM/plugin/wikipedia/-/releases">CI pipelines</a>
+  <a class="btn btn-outline-primary" href="https://gitlab.com/JOSM/plugin/wikipedia/-/packages">Maven artifacts</a>
+  <a class="btn btn-outline-primary" href="https://josm.gitlab.io/plugin/wikipedia/dist/latest/wikipedia.jar">Latest release artifact</a>
+  <p>The release artifacts can be used with the Maven repository URL <code>https://gitlab.com/api/v4/groups/JOSM/-/packages/maven</code></p>
+  <h2 class="mt-4">GitHub.com</h2>
+  <a class="btn btn-outline-primary" href="https://github.com/JOSM/wikipedia">Repository</a>
+  <a class="btn btn-outline-primary" href="https://github.com/JOSM/wikipedia/releases">Releases</a>
+  <h2 class="mt-4">JOSM website</h2>
+  <a href="https://josm.openstreetmap.de/wiki/Help/Plugin/Wikipedia">Wiki page</a>
+  <a class="btn btn-outline-primary" href="https://josm.openstreetmap.de/query?status=assigned&status=needinfo&status=new&status=reopened&component=Plugin+wikipedia&col=id&col=summary&col=status&col=component&col=type&col=priority&col=milestone&col=time&col=changetime&report=1&desc=1&order=changetime">Issue tracker</a>
 
-  <h2>How to install the plugin site</h2>
-  <p class="alert alert-info">Only do this, if you really need to try out the bleeding edge version of the wikipedia plugin. Otherwise you can install the latest released version <a href="https://josm.openstreetmap.de/wiki/Help/Preferences/Plugins">like any other JOSM plugin</a>.</p>
-  <p>Here is how you can install the current development version (not yet released, expect issues) of the <code>wikipedia</code> JOSM plugin:</p>
-
+  <h2 class="mt-4">How to install</h2>
   <ol>
-    <li>Open any JOSM instance in which you want to try out these development versions.</li>
-    <li>Go to the preferences (e.g. hit <code>F12</code>).</li>
-    <li>Make sure the checkbox <code>Expert mode</code> in the bottom left corner of the preferences dialog is checked.</li>
-    <li>Go to the <code>Plugins</code> tab. Click on <code>Configure…</code> in the bottom right corner.<br><img src="./add_update_site.png" alt="You should now see something like this"/></li>
-    <li>Then click on <code>Add</code> in the new dialog and enter the URL <code><a href="https://josm.gitlab.io/wikipedia/snapshot/master/update-site">https://josm.gitlab.io/wikipedia/snapshot/master/update-site</a></code> and confirm with <code>OK</code>.</li>
-    <li>Now when you click <code>Download list</code>, you have a new plugin in the plugin list: <code>wikipedia-dev</code>. You can install that and it will be updated like the "normal" JOSM plugins.</li>
+    <li>Open any JOSM instance (for installation instructions see <a href="https://josm.openstreetmap.de/wiki/Download">the JOSM wiki</a>).</li>
+    <li>Open the preferences (e.g. hit the <code>F12</code> key).</li>
+    <li>Go to the <img alt="Plugin tab icon" src="https://josm.openstreetmap.de/export/7668/josm/trunk/images/preferences/plugin.png"/> <code>Plugins</code> tab.</li>
+    <li>Click on <img alt="Download list icon" src="https://josm.openstreetmap.de/export/7668/josm/trunk/images/download.png"> <code>Download list</code> in the bottom left.</li>
+    <li>Find the <img alt="JOSM-wikipedia icon" src="https://gitlab.com/JOSM/plugin/wikipedia/raw/1bdde16f4deae2755a6d2bef4411c64da3414985/src/main/resources/images/dialogs/wikipedia.png"> <code>wikipedia</code> plugin in the list and check its checkbox (you can use the search box at the top to narrow down the list).</li>
+    <li>Now click the <code>OK</code> button of the preferences dialog and follow further instructions by JOSM (like restarting JOSM) if there are any.</li>
   </ol>
-
-  <p class="alert alert-info"><strong>Note:</strong> Please make sure that you don't have both the dev and the non-dev version (<code>wikipedia</code> and <code>wikipedia-dev</code>) installed at the same time! This would lead to conflicts.</p>
 
 </div>

@@ -4,7 +4,7 @@ pages:
   stage: deploy
   environment:
     name: pages site
-    url: https://josm.gitlab.io/wikipedia
+    url: https://josm.gitlab.io/plugin/wikipedia
   script:
   - mkdir .public
   - cp -r * .public
@@ -13,4 +13,4 @@ pages:
     paths:
     - public
   only:
-  - pages@JOSM/wikipedia
+  - pages@JOSM/plugin/wikipedia
