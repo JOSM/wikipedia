@@ -8,9 +8,9 @@ plugins {
   id "maven-publish"
   id "pmd"
   id "com.github.ben-manes.versions" version "0.25.0"
-  id "com.github.spotbugs" version "2.0.0"
-  id "org.openstreetmap.josm" version "0.6.3"
-  id "net.ltgt.errorprone" version "0.8.1"
+  id "com.github.spotbugs" version "2.0.1"
+  id "org.openstreetmap.josm" version "0.6.5"
+  id "net.ltgt.errorprone" version "1.1.1"
 }
 
 // Set up Errorprone
@@ -31,9 +31,9 @@ tasks.withType(JavaCompile).configureEach {
 
 def versions = [
   errorprone: "2.3.3",
-  jacoco: "0.8.2",
+  jacoco: "0.8.5",
   junit: "5.5.2",
-  pmd: "6.6.0",
+  pmd: "6.19.0",
   spotbugs: "3.1.12",
 ]
 
@@ -51,7 +51,7 @@ dependencies {
   testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
   testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation("com.github.tomakehurst:wiremock:2.25.0")
+  testImplementation("com.github.tomakehurst:wiremock:2.25.1")
   testImplementation("org.awaitility:awaitility:4.0.1")
 }
 
@@ -86,13 +86,13 @@ tasks.processResources {
 archivesBaseName = "wikipedia"
 josm {
   manifest {
-    oldVersionDownloadLink 13927, "v1.1.0", new URL("http://josm.gitlab.io/wikipedia/dist/v1.1.0/wikipedia.jar")
+    oldVersionDownloadLink 13927, "v1.1.0", new URL("https://josm.gitlab.io/plugin/wikipedia/dist/v1.1.0/wikipedia.jar")
     oldVersionDownloadLink 13597, "v1.0.1", new URL("https://github.com/JOSM/wikipedia/releases/download/v1.0.1/wikipedia.jar")
     oldVersionDownloadLink 12900, "34109", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=34113")
     oldVersionDownloadLink 12878, "33635", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=33636")
   }
   i18n {
-    pathTransformer = getPathTransformer("gitlab.com/JOSM/wikipedia/blob")
+    pathTransformer = getPathTransformer("gitlab.com/JOSM/plugin/wikipedia/blob")
   }
 }
 
@@ -135,19 +135,5 @@ tasks.withType(SpotBugsTask) {
   reports {
     xml.enabled = false
     html.enabled = true
-  }
-}
-
-project.afterEvaluate {
-  publishing {
-    publications {
-      plugin(MavenPublication) {
-        groupId = "org.openstreetmap.josm.plugins"
-        artifactId = archivesBaseName
-        version = project.version
-
-        from components.java
-      }
-    }
   }
 }

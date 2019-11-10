@@ -1,13 +1,10 @@
 image: registry.gitlab.com/josm/docker-library/openjdk-8-josmplugin:latest
 
-before_script:
-- export GRADLE_USER_HOME=`pwd`/.gradle
-
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
-
+stages:
+  - build
+  - test
+  - deploy
+  - release
 
 ###############
 # Build stage #
@@ -16,10 +13,12 @@ cache:
 assemble:
   stage: build
   script:
-  - ./gradlew assemble --stacktrace
+    - ./gradlew assemble --stacktrace
   artifacts:
     paths:
-    - build/
+      - build/
+  except:
+    - schedules
 
 assemble with java 11:
   stage: build
@@ -29,6 +28,8 @@ assemble with java 11:
   artifacts:
     paths:
       - build/
+  except:
+    - schedules
 
 assemble with java 12:
   stage: build
@@ -39,6 +40,8 @@ assemble with java 12:
     paths:
       - build/
   allow_failure: true
+  except:
+    - schedules
 
 assemble with java 13:
   stage: build
@@ -49,6 +52,8 @@ assemble with java 13:
     paths:
       - build/
   allow_failure: true
+  except:
+    - schedules
 
 
 ##############
@@ -58,26 +63,30 @@ assemble with java 13:
 build:
   stage: test
   script:
-  - ./gradlew build generatePot --stacktrace
+    - ./gradlew build generatePot --stacktrace
   artifacts:
     paths:
     - build
   dependencies:
-  - assemble
+    - assemble
 
-compile against min JOSM:
+min JOSM compile:
   stage: test
   script:
-  - ./gradlew compileJava_minJosm
+    - ./gradlew compileJava_minJosm --stacktrace
   dependencies:
-  - assemble
+    - assemble
+  except:
+    - schedules
 
-compile against latest JOSM:
+latest JOSM compile:
   stage: test
   script:
-  - ./gradlew compileJava_latestJosm
+    - ./gradlew compileJava_latestJosm --stacktrace
   dependencies:
-  - assemble
+    - assemble
+  only:
+    - schedules@JOSM/plugin/wikipedia
 
 build with java 11:
   stage: test
@@ -86,6 +95,8 @@ build with java 11:
     - ./gradlew build --stacktrace
   dependencies:
     - assemble with java 11
+  except:
+    - schedules
 
 build with java 12:
   stage: test
@@ -95,6 +106,8 @@ build with java 12:
   dependencies:
     - assemble with java 12
   allow_failure: true
+  except:
+    - schedules
 
 build with java 13:
   stage: test
@@ -104,6 +117,8 @@ build with java 13:
   dependencies:
     - assemble with java 13
   allow_failure: true
+  except:
+    - schedules
 
 
 ################
@@ -117,52 +132,77 @@ upload to transifex:
     name: transifex
     url: https://www.transifex.com/josm/josm/josm-plugin_wikipedia/
   script:
-  - TX_TOKEN="$TRANSIFEX_TOKEN" tx push -s --no-interactive
+    - TX_TOKEN="$TRANSIFEX_TOKEN" tx push -s --no-interactive
   dependencies:
-  - build
+    - build
   only:
-  - master@JOSM/wikipedia
+    - master@JOSM/plugin/wikipedia
+  except:
+    - schedules
 
-publish to / GitLab pages:
+push GitLab.com pages branch:
   stage: deploy
   environment:
-    name: pages branch / dist directory
-    url: https://gitlab.com/JOSM/wikipedia/tree/pages/dist
+    name: GitLab.com / pages branch
+    url: https://gitlab.com/JOSM/plugin/wikipedia/tree/pages/dist
   script:
-  - |
-    echo "$SSH_PRIVATE_DEPLOY_KEY" > ~/.ssh/id_rsa
-    chmod 600 ~/.ssh/id_rsa
-    git clone --depth 1 --branch pages git@gitlab.com:JOSM/wikipedia.git pages
-  - |
-    version=`git describe --always --dirty`
-    longVersion=`git describe --always --long --dirty`
-    commitMessage="Release version $longVersion"
-  - |
-    mkdir -pv "pages/dist/$version"
-    cp -v build/dist/* build/tmp/jar/MANIFEST.MF "pages/dist/$version"
-    rm -fv "pages/dist/latest"
-    ln -s "./$version" "pages/dist/latest"
-  - |
-    cd pages/
-    git config user.name "Deploy with GitLab CI"
-    git config user.email "incoming+JOSM/wikipedia@incoming.gitlab.com"
-    git stage .
-    git commit -a -m "$commitMessage"
-    git push origin pages
+    - |
+      base64 --decode "$SSH_PRIVATE_DEPLOY_KEY" > ~/.ssh/id_rsa
+      chmod 600 ~/.ssh/id_rsa
+      git clone --depth 1 --branch pages git@gitlab.com:JOSM/plugin/wikipedia.git pages
+    - |
+      version=`git describe --always --dirty`
+      longVersion=`git describe --always --long --dirty`
+      commitMessage="Release version $longVersion"
+    - |
+      mkdir -pv "pages/dist/$version"
+      cp -v build/dist/* build/tmp/jar/MANIFEST.MF "pages/dist/$version"
+      rm -fv "pages/dist/latest"
+      ln -s "./$version" "pages/dist/latest"
+    - |
+      cd pages/
+      git config user.name "Deploy with GitLab CI"
+      git config user.email "incoming+josm-plugin-wikipedia-6702380-issue-@incoming.gitlab.com"
+      git stage .
+      git commit -a -m "$commitMessage"
+      git push origin pages
   dependencies:
-  - build
+    - build
   only:
-  - tags@JOSM/wikipedia
+    - tags@JOSM/plugin/wikipedia
+  except:
+    - schedules
 
-publish to / GitLab.com packages:
+package to GitLab.com:
   stage: deploy
   environment:
-    name: GitLab.com / JOSM-wikipedia packages
-    url: https://gitlab.com/JOSM/wikipedia/-/packages
+    name: GitLab.com / Maven packages
+    url: https://gitlab.com/JOSM/plugin/wikipedia/-/packages
   script:
-  - ./gradlew publishAllPublicationsToGitlabRepository
-  - ./gradlew releaseToGitlab
+    - ./gradlew publishAllPublicationsToGitlabRepository
+    - ./gradlew releaseToGitlab
   dependencies:
-  - build
+    - build
   only:
-  - tags@JOSM/wikipedia
+    - tags@JOSM/plugin/wikipedia
+  except:
+    - schedules
+
+
+#################
+# Release stage #
+#################
+
+release to Gitlab.com:
+  stage: release
+  environment:
+    name: GitLab.com / Releases
+    url: https://gitlab.com/JOSM/plugin/wikipedia/-/releases
+  script:
+    - ./gradlew releaseToGitlab
+  dependencies:
+    - package to GitLab.com
+  only:
+    - tags@JOSM/plugin/wikipedia
+  except:
+    - schedules
