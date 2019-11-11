@@ -69,6 +69,8 @@ build:
     - build
   dependencies:
     - assemble
+  except:
+    - schedules
 
 min JOSM compile:
   stage: test
@@ -180,7 +182,6 @@ package to GitLab.com:
     url: https://gitlab.com/JOSM/plugin/wikipedia/-/packages
   script:
     - ./gradlew publishAllPublicationsToGitlabRepository
-    - ./gradlew releaseToGitlab
   dependencies:
     - build
   only:
