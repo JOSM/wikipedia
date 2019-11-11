@@ -1,4 +1,8 @@
-image: alpine:3.7
+image: alpine:3.10
+
+stages:
+  - deploy
+  - trigger
 
 pages:
   stage: deploy
@@ -14,3 +18,9 @@ pages:
     - public
   only:
   - pages@JOSM/plugin/wikipedia
+
+trigger update site:
+  stage: trigger
+  trigger: JOSM/josm.gitlab.io
+  only:
+    - pages@JOSM/plugin/wikipedia
