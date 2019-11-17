@@ -63,7 +63,7 @@ public class WikidataInfoSitelinkPanel extends ProgressJPanel {
                                             final String error = OpenBrowser.displayUrl(uri);
                                             if (error != null) {
                                                 new Notification(I18n.tr("Can't open website {0} in browser! Error message: {1}", uri, error))
-                                                    .setIcon(WikipediaPlugin.W_IMAGE.get())
+                                                    .setIcon(WikipediaPlugin.NOTIFICATION_ICON)
                                                     .show();
                                             }
                                         }
@@ -80,7 +80,7 @@ public class WikidataInfoSitelinkPanel extends ProgressJPanel {
                 }
             } catch (IOException e) {
                 new Notification(I18n.tr("Failed to download sitelinks for Wikidata item {0}!", qId))
-                    .setIcon(WikipediaPlugin.W_IMAGE.get())
+                    .setIcon(WikipediaPlugin.NOTIFICATION_ICON)
                     .show();
             }
             hideProgress();

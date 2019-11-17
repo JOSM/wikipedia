@@ -35,7 +35,7 @@ public class WikipediaAddNamesAction extends JosmAction {
         final WikipediaEntry wp = WikipediaEntry.parseTag("wikipedia", getWikipediaValue());
         if (wp == null) {
             new Notification(I18n.tr("Could not add names. Wikipedia tag is not recognized!"))
-                .setIcon(WikipediaPlugin.W_IMAGE.setMaxSize(ImageProvider.ImageSizes.LARGEICON).get())
+                .setIcon(WikipediaPlugin.NOTIFICATION_ICON)
                 .show();
         } else {
             List<String[]> tags = WikipediaApp.forLanguage(wp.lang).getInterwikiArticles(wp.article).stream()

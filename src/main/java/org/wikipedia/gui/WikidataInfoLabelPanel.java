@@ -87,7 +87,7 @@ class WikidataInfoLabelPanel extends ProgressJPanel {
                         }
                     }
                 } catch (IOException e) {
-                    new Notification(I18n.tr("Failed to download labels for {0}!", qId)).setIcon(WikipediaPlugin.W_IMAGE.get()).show();
+                    new Notification(I18n.tr("Failed to download labels for {0}!", qId)).setIcon(WikipediaPlugin.NOTIFICATION_ICON).show();
                 }
                 parent.hideProgress();
             }).start();

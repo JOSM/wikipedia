@@ -31,6 +31,8 @@ public final class WikipediaPlugin extends Plugin {
     public static final ImageIcon LOGO = ImageProvider.get("dialogs/wikipedia");
     public static final ImageProvider W_IMAGE = new ImageProvider("w");
 
+    public static final ImageIcon NOTIFICATION_ICON = W_IMAGE.setMaxSize(ImageProvider.ImageSizes.LARGEICON).get();
+
     private static String name;
     private static String versionInfo;
 

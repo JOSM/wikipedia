@@ -146,15 +146,15 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         );
     }
 
-    public static WikidataActionApiQuery<Collection<WbgetclaimsResult.Claim>> wbgetclaims(final String qId) {
+    public static WikidataActionApiQuery<Optional<Collection<WbgetclaimsResult.Claim>>> wbgetentitiesClaims(final String qId) {
         if (!RegexUtil.isValidQId(qId)) {
             throw new IllegalArgumentException("Invalid Q-ID: " + qId);
         }
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetclaims&props=&entity=" + qId,
-            WbgetclaimsResult.SCHEMA,
+            FORMAT_PARAMS + "&action=wbgetentities&props=claims&ids=" + qId,
+            WbgetentitiesResult.SCHEMA,
             TimeUnit.MINUTES.toMillis(10),
-            WbgetclaimsResult::getClaims
+            it -> Optional.ofNullable(it.getEntities().get(qId)).flatMap(WbgetentitiesResult.Entity::getClaims)
         );
     }
 

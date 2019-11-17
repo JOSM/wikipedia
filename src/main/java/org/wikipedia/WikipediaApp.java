@@ -111,7 +111,7 @@ public final class WikipediaApp {
                 if (errorInfo != null && errorInfo.length() >= 1) {
                     // I18n: {0} is the error message returned by the API
                     new Notification(I18n.tr("Downloading entries with geo coordinates failed: {0}", errorInfo))
-                        .setIcon(WikipediaPlugin.W_IMAGE.setMaxSize(ImageProvider.ImageSizes.DEFAULT).get())
+                        .setIcon(WikipediaPlugin.NOTIFICATION_ICON)
                         .show();
                 }
                 final List<WikipediaEntry> entries = X_PATH.evaluateNodes("//gs", doc).stream()

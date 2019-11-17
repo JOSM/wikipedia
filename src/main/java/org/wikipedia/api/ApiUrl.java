@@ -3,9 +3,12 @@ package org.wikipedia.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.MessageFormat;
+import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Logging;
 
 public class ApiUrl {
+
     private ApiUrl() {
         // Private constructor to avoid instantiation
     }
@@ -25,7 +28,8 @@ public class ApiUrl {
         try {
             return new URL(url);
         } catch (MalformedURLException e) {
-            final String message = String.format("The wikipedia plugin tries to construct a malformed URL!: %s", url);
+            // I18n: {0} is the URL that the plugin tries to construct
+            final String message = I18n.tr("The wikipedia plugin tries to construct a malformed URL!: {0}", url);
             Logging.log(Logging.LEVEL_ERROR, message, e);
             throw new IllegalArgumentException(message, e);
         }

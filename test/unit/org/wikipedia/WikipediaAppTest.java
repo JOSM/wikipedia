@@ -30,7 +30,7 @@ public class WikipediaAppTest {
      * Setup test.
      */
     @Rule
-    public JOSMTestRules rules = new JOSMTestRules().preferences();
+    public JOSMTestRules rules = new JOSMTestRules().preferences().timeout(20_000);
 
     @Test
     public void testMediawikiLocale() throws Exception {

@@ -18,17 +18,24 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.wikipedia.api.SerializationSchema;
 
 public final class WbgetentitiesResult {
     public static final SerializationSchema<WbgetentitiesResult> SCHEMA = new SerializationSchema<>(
         WbgetentitiesResult.class,
-        it -> {
-            it.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            it.registerModule(new SimpleModule().addDeserializer(
+        mapper -> {
+            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            mapper.registerModule(new SimpleModule().addDeserializer(
                 WbgetentitiesResult.AbstractEntity.class,
-                new WbgetentitiesResult.AbstractEntity.Deserializer(it)
+                new WbgetentitiesResult.AbstractEntity.Deserializer(mapper)
+            ));
+            mapper.registerModule(new SimpleModule().addDeserializer(
+                WbgetclaimsResult.Claim.MainSnak.DataValue.class,
+                new WbgetclaimsResult.Claim.MainSnak.DataValue.Deserializer(mapper)
             ));
         }
     );
@@ -40,9 +47,7 @@ public final class WbgetentitiesResult {
     @JsonCreator
     public WbgetentitiesResult(@JsonProperty("success") final int success, @JsonProperty("entities") final Map<String, AbstractEntity> entities) {
         this.success = success;
-        for (final Map.Entry<String, AbstractEntity> entry : entities.entrySet()) {
-            entry.getValue().addTo(entry.getKey(), this);
-        }
+        Objects.requireNonNull(entities).forEach((key, value) -> value.addTo(key, this));
     }
 
     /**
@@ -136,10 +141,11 @@ public final class WbgetentitiesResult {
     public static final class Entity implements AbstractEntity {
         private final String id;
         private final String type;
-        private final Map<String, Collection<String>> aliases;
+        private final Map<String, Set<String>> aliases;
         private final Map<String, Sitelink> sitelinks = new HashMap<>();
         private final Map<String, String> descriptions;
         private final Map<String, String> labels;
+        private final Optional<Collection<WbgetclaimsResult.Claim>> claims;
 
         @JsonCreator
         public Entity(
@@ -148,7 +154,8 @@ public final class WbgetentitiesResult {
             @JsonProperty("aliases") final Map<String, Collection<Label>> aliases,
             @JsonProperty("descriptions") final Map<String, Label> descriptions,
             @JsonProperty("labels") final Map<String, Label> labels,
-            @JsonProperty("sitelinks") final Map<String, Sitelink> sitelinks
+            @JsonProperty("sitelinks") final Map<String, Sitelink> sitelinks,
+            @JsonProperty("claims") final Map<String, Collection<WbgetclaimsResult.Claim>> claims
         ) {
             this.id = id;
             this.type = type;
@@ -156,19 +163,17 @@ public final class WbgetentitiesResult {
                 this.sitelinks.putAll(sitelinks);
             }
 
-            this.aliases = new HashMap<>(aliases == null ? 0 : aliases.size());
-            this.descriptions = new HashMap<>(descriptions == null ? 0 : descriptions.size());
-            this.labels = new HashMap<>(labels == null ? 0 : labels.size());
+            this.aliases = Optional.ofNullable(aliases)
+                .map(a -> a.entrySet().stream().collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, it -> it.getValue().stream().map(Label::getValue).collect(Collectors.toUnmodifiableSet()))))
+                .orElse(new HashMap<>(0));
+            this.descriptions = Optional.ofNullable(descriptions)
+                .map(d -> d.values().stream().collect(Collectors.toUnmodifiableMap(Label::getLangCode, Label::getValue)))
+                .orElse(new HashMap<>(0));
+            this.labels = Optional.ofNullable(labels)
+                .map(l -> l.values().stream().collect(Collectors.toUnmodifiableMap(Label::getLangCode, Label::getValue)))
+                .orElse(new HashMap<>(0));
 
-            if (aliases != null) {
-                aliases.forEach((lang, alias) -> this.aliases.put(lang, alias.stream().map(Label::getValue).collect(Collectors.toList())));
-            }
-            if (descriptions != null) {
-                descriptions.values().forEach(description -> this.descriptions.put(description.getLangCode(), description.getValue()));
-            }
-            if (labels != null) {
-                labels.values().forEach(label -> this.labels.put(label.getLangCode(), label.getValue()));
-            }
+            this.claims = Optional.ofNullable(claims).map(it -> it.values().stream().flatMap(Collection::stream).collect(Collectors.toUnmodifiableSet()));
         }
 
         public String getId() {
@@ -193,6 +198,10 @@ public final class WbgetentitiesResult {
 
         public Collection<Sitelink> getSitelinks() {
             return Collections.unmodifiableCollection(sitelinks.values());
+        }
+
+        public Optional<Collection<WbgetclaimsResult.Claim>> getClaims() {
+            return claims;
         }
 
         @Override

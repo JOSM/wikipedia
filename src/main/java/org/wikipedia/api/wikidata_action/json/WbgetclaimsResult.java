@@ -2,42 +2,16 @@ package org.wikipedia.api.wikidata_action.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.tools.Logging;
 import org.wikipedia.api.CustomDeserializer;
-import org.wikipedia.api.SerializationSchema;
-import org.wikipedia.tools.RegexUtil;
 
 public final class WbgetclaimsResult {
-
-    public static final SerializationSchema<WbgetclaimsResult> SCHEMA = new SerializationSchema<>(
-        WbgetclaimsResult.class,
-        mapper -> {
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            mapper.registerModule(new SimpleModule().addDeserializer(
-                Collection.class,
-                new Claim.Deserializer(mapper)
-            ));
-            mapper.registerModule(new SimpleModule().addDeserializer(
-                Claim.MainSnak.DataValue.class,
-                new Claim.MainSnak.DataValue.Deserializer(mapper)
-            ));
-        }
-    );
 
     private final Collection<Claim> claims;
 
@@ -279,31 +253,6 @@ public final class WbgetclaimsResult {
                 public String toString() {
                     return text + " (" + langCode + ")";
                 }
-            }
-        }
-
-        static class Deserializer extends StdDeserializer<Collection<Claim>> {
-            private final ObjectMapper mapper;
-            Deserializer(final ObjectMapper mapper) {
-                super((Class<?>) null);
-                this.mapper = mapper;
-            }
-
-            @Override
-            public Collection<Claim> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-                final Collection<Claim> result = new ArrayList<>();
-                final JsonNode node = p.getCodec().readTree(p);
-                final Iterator<Map.Entry<String, JsonNode>> fields = node.fields();
-                while (fields.hasNext()) {
-                    final Map.Entry<String, JsonNode> field = fields.next();
-                    if (RegexUtil.isValidPropertyId(field.getKey()) && field.getValue().isArray()) {
-                        final Iterator<JsonNode> arrElements = field.getValue().elements();
-                        while (arrElements.hasNext()) {
-                            result.add(mapper.treeToValue(arrElements.next(), Claim.class));
-                        }
-                    }
-                }
-                return result;
             }
         }
     }
