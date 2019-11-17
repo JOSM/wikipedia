@@ -3,7 +3,6 @@ package org.wikipedia.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.MessageFormat;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Logging;
 

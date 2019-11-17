@@ -164,16 +164,16 @@ public final class WbgetentitiesResult {
             }
 
             this.aliases = Optional.ofNullable(aliases)
-                .map(a -> a.entrySet().stream().collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, it -> it.getValue().stream().map(Label::getValue).collect(Collectors.toUnmodifiableSet()))))
+                .map(a -> a.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, it -> it.getValue().stream().map(Label::getValue).collect(Collectors.toSet()))))
                 .orElse(new HashMap<>(0));
             this.descriptions = Optional.ofNullable(descriptions)
-                .map(d -> d.values().stream().collect(Collectors.toUnmodifiableMap(Label::getLangCode, Label::getValue)))
+                .map(d -> d.values().stream().collect(Collectors.toMap(Label::getLangCode, Label::getValue)))
                 .orElse(new HashMap<>(0));
             this.labels = Optional.ofNullable(labels)
-                .map(l -> l.values().stream().collect(Collectors.toUnmodifiableMap(Label::getLangCode, Label::getValue)))
+                .map(l -> l.values().stream().collect(Collectors.toMap(Label::getLangCode, Label::getValue)))
                 .orElse(new HashMap<>(0));
 
-            this.claims = Optional.ofNullable(claims).map(it -> it.values().stream().flatMap(Collection::stream).collect(Collectors.toUnmodifiableSet()));
+            this.claims = Optional.ofNullable(claims).map(it -> it.values().stream().flatMap(Collection::stream).collect(Collectors.toSet()));
         }
 
         public String getId() {

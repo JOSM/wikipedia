@@ -15,7 +15,6 @@ import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.io.remotecontrol.AddTagsDialog;
 import org.openstreetmap.josm.tools.I18n;
-import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.WikipediaPlugin;

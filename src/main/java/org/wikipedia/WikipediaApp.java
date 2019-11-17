@@ -30,7 +30,6 @@ import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.gui.datatransfer.ClipboardUtils;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.I18n;
-import org.openstreetmap.josm.tools.ImageProvider;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
