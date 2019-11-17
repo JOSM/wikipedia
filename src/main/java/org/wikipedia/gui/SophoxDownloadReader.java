@@ -272,7 +272,7 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
 
         @Override
         public Icon getIcon() {
-            return ImageProvider.get(ACTION_IMG_SUBDIR, "sophox");
+            return new ImageProvider(ACTION_IMG_SUBDIR, "sophox").setMaxHeight(ImageProvider.ImageSizes.SIDEBUTTON.getVirtualHeight()).get();
         }
 
         @Override
@@ -295,7 +295,7 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
              */
             AddSnippetAction() {
                 super();
-                putValue(SMALL_ICON, ImageProvider.get(ACTION_IMG_SUBDIR, "add"));
+                new ImageProvider(ACTION_IMG_SUBDIR, "add").getResource().attachImageIcon(this);
                 putValue(SHORT_DESCRIPTION, tr("Add new snippet"));
             }
 
@@ -315,7 +315,7 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
              */
             RemoveSnippetAction() {
                 super();
-                putValue(SMALL_ICON, ImageProvider.get(ACTION_IMG_SUBDIR, "delete"));
+                new ImageProvider(ACTION_IMG_SUBDIR, "delete").getResource().attachImageIcon(this);
                 putValue(SHORT_DESCRIPTION, tr("Delete selected snippet"));
                 checkEnabled();
             }
@@ -348,7 +348,7 @@ public class SophoxDownloadReader implements DownloadSource<SophoxDownloadReader
              */
             EditSnippetAction() {
                 super();
-                putValue(SMALL_ICON, ImageProvider.get(ACTION_IMG_SUBDIR, "edit"));
+                new ImageProvider(ACTION_IMG_SUBDIR, "edit").getResource().attachImageIcon(this);
                 putValue(SHORT_DESCRIPTION, tr("Edit selected snippet"));
                 checkEnabled();
             }
