@@ -47,21 +47,22 @@ public class WikipediaActionApiQueryTest {
         );
 
         final QueryResult result = ApiQueryClient.query(
-            WikipediaActionApiQuery.query(new WikiSiteMock("en").getSite(), Arrays.asList("US", "USA", "Universe"))
+            WikipediaActionApiQuery.query(new WikiSiteMock("en").getSite(), Arrays.asList("US", "USA", "Universe", "united states"))
         );
 
-        assertEquals("United States", result.getQuery().getRedirects().resolveRedirect("USA"));
-        assertEquals("United States", result.getQuery().getRedirects().resolveRedirect("US"));
-        assertEquals("United States", result.getQuery().getRedirects().resolveRedirect("United States"));
-        assertEquals("Universe", result.getQuery().getRedirects().resolveRedirect("Universe"));
-        assertEquals("non-existent-title", result.getQuery().getRedirects().resolveRedirect("non-existent-title"));
+        assertEquals("United States", result.getQuery().resolveRedirect("USA"));
+        assertEquals("United States", result.getQuery().resolveRedirect("US"));
+        assertEquals("United States", result.getQuery().resolveRedirect("United States"));
+        assertEquals("United States", result.getQuery().resolveRedirect("united states"));
+        assertEquals("Universe", result.getQuery().resolveRedirect("Universe"));
+        assertEquals("non-existent-title", result.getQuery().resolveRedirect("non-existent-title"));
 
         assertEquals(2, result.getQuery().getPages().size());
         assertTrue(result.getQuery().getPages().stream().anyMatch(it -> "Universe".equals(it.getTitle())));
         assertTrue(result.getQuery().getPages().stream().anyMatch(it -> "United States".equals(it.getTitle())));
 
         verify(postRequestedFor(urlEqualTo("/w/api.php"))
-            .withRequestBody(new EqualToPattern("format=json&utf8=1&formatversion=1&action=query&redirects=1&titles=US%7CUSA%7CUniverse")));
+            .withRequestBody(new EqualToPattern("action=query&format=json&formatversion=2&redirects=1&titles=US%7CUSA%7CUniverse%7Cunited+states&utf8=1")));
     }
 
     private class WikiSiteMock implements IWikipediaSite {

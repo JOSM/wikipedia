@@ -317,8 +317,7 @@ public final class WikipediaApp {
      */
     Map<String, String> resolveRedirectsForArticles(Collection<String> articles) {
         try {
-            final QueryResult.Query.Redirects redirects = ApiQueryClient.query(WikipediaActionApiQuery.query(site, articles)).getQuery().getRedirects();
-            return articles.stream().collect(Collectors.toMap(it -> it, redirects::resolveRedirect));
+            return articles.stream().collect(Collectors.toMap(it -> it, ApiQueryClient.query(WikipediaActionApiQuery.query(site, articles)).getQuery()::resolveRedirect));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -326,22 +325,21 @@ public final class WikipediaApp {
 
     public List<String> getCategoriesForPrefix(final String prefix) {
         try {
-            final String url = getSiteUrl() + "/w/api.php"
-                    + "?action=query"
-                    + "&list=prefixsearch"
-                    + "&format=xml"
-                    + "&psnamespace=14"
-                    + "&pslimit=50"
-                    + "&pssearch=" + Utils.encodeUrl(prefix);
-            // parse XML document
-            try (InputStream in = connect(url).getContent()) {
-                final Document doc = newDocumentBuilder().parse(in);
-                return X_PATH.evaluateNodes("//ps/@title", doc).stream()
-                        .map(Node::getNodeValue)
-                        .map(value -> value.contains(":") ? value.split(":", 2)[1] : value)
-                        .collect(Collectors.toList());
-            }
-        } catch (Exception ex) {
+            return ApiQueryClient.query(WikipediaActionApiQuery.categoryPrefixsearch(site, prefix))
+                .map(pages ->
+                    pages.stream()
+                        .map(page -> {
+                            final int colonIndex = page.getTitle().indexOf(':') + 1;
+                            if (colonIndex > 0 && colonIndex < page.getTitle().length()) {
+                                return page.getTitle().substring(colonIndex);
+                            } else {
+                                return null;
+                            }
+                        })
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList())
+                ).orElse(new ArrayList<>());
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }

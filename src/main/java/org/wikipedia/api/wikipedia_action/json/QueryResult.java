@@ -18,7 +18,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 import org.openstreetmap.josm.tools.Logging;
 import org.wikipedia.api.SerializationSchema;
 
@@ -27,14 +32,6 @@ public final class QueryResult {
         QueryResult.class,
         mapper -> {
             mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            mapper.registerModule(new SimpleModule().addDeserializer(
-               QueryResult.Query.Redirects.class,
-               new Query.Redirects.Deserializer()
-            ));
-            mapper.registerModule(new SimpleModule().addDeserializer(
-               QueryResult.Query.Pages.class,
-               new Query.Pages.Deserializer(mapper)
-            ));
         }
     );
 
@@ -51,117 +48,101 @@ public final class QueryResult {
 
     public static final class Query {
 
-        private final Redirects redirects;
-        private final Pages pages;
+        private final Set<Redirect> normalized;
+        private final Set<Redirect> redirects;
+        private final List<Page> pages;
+        private final Optional<Set<Page>> prefixResults;
 
         @JsonCreator
-        public Query(@JsonProperty("redirects") final Redirects redirects, @JsonProperty("pages") final Pages pages) {
-            this.redirects = redirects == null ? new Redirects() : redirects;
-            this.pages = pages == null ? new Pages() : pages;
+        public Query(
+            @JsonProperty("normalized") final Set<Redirect> normalized,
+            @JsonProperty("redirects") final Set<Redirect> redirects,
+            @JsonProperty("pages") final List<Page> pages,
+            @JsonProperty("prefixsearch") final Set<Page> prefixResults
+        ) {
+            this.normalized = Optional.ofNullable(normalized).orElse(new HashSet<>());
+            this.redirects = Optional.ofNullable(redirects).orElse(new HashSet<>());
+            this.pages = pages == null ? Collections.unmodifiableList(new ArrayList<>()) : pages;
+            this.prefixResults = Optional.ofNullable(prefixResults).map(Collections::unmodifiableSet);
         }
 
-        public Collection<Pages.Page> getPages() {
-            return Collections.unmodifiableCollection(pages.pages);
+        public Collection<Page> getPages() {
+            return Collections.unmodifiableCollection(pages);
         }
 
-        public Redirects getRedirects() {
+        public Optional<Set<Page>> getPrefixResults() {
+            return prefixResults;
+        }
+
+        public Set<Redirect> getRedirects() {
             return redirects;
         }
 
-        public static final class Redirects {
-            private final Map<String, String> redirectMap = new HashMap<>();
+        public String resolveRedirect(final String from) {
+            return resolveRedirect(from, from, 0);
+        }
 
-            private Redirects() { }
+        private String resolveRedirect(final String from, final String current, int depth) {
+            if (depth > 10) {
+                Logging.warn("Wikipedia page '{0}' redirects more than 10 times, probably a circular redirect. I'm not going to resolve this redirect.", from);
+                return from;
+            }
+            if (depth > 0 && from.equals(current)) {
+                Logging.warn("Wikipedia page " + from + " is part of a circular redirect of size " + depth + " (redirects back onto itself)!");
+            }
+            final Optional<Redirect> redirect = Stream.concat(normalized.stream(), redirects.stream()).filter(it -> current.equals(it.from)).findFirst();
+            if (redirect.isPresent()) {
+                return resolveRedirect(from, redirect.get().getTo(), depth + 1);
+            }
+            return current;
+        }
 
-            public String resolveRedirect(final String from) {
-                if (!redirectMap.containsKey(from)) {
-                    return from;
-                } else if (redirectMap.containsKey(from) && !redirectMap.containsKey(redirectMap.get(from))) {
-                    return redirectMap.get(from);
-                } else {
-                    final Deque<String> redirectChain = new ArrayDeque<>();
-                    redirectChain.add(from);
-                    while (redirectMap.containsKey(redirectChain.getLast())) {
-                        final String newVal = redirectMap.get(redirectChain.getLast());
-                        if (redirectChain.contains(newVal)) {
-                            Logging.warn("Circular redirect in Wikipedia detected: " + String.join(" → ", redirectChain));
-                            return from;
-                        } else {
-                            redirectChain.add(newVal);
-                        }
-                    }
-                    // Shortcut for future requests: Redirect all elements in the redirect chain to the last element.
-                    while (redirectChain.size() >= 2) {
-                        redirectMap.put(redirectChain.pollFirst(), redirectChain.getLast());
-                    }
-                    return redirectChain.getLast();
-                }
+        public static final class Redirect {
+            private final String from;
+            private final String to;
 
+            @JsonCreator
+            public Redirect(
+                @JsonProperty("from") final String from,
+                @JsonProperty("to") final String to
+            ) {
+                this.from = from;
+                this.to = to;
             }
 
-            static class Deserializer extends StdDeserializer<Redirects> {
-                Deserializer() {
-                    super((Class<?>) null);
-                }
-
-                @Override
-                public Redirects deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-                    final JsonNode node = p.getCodec().readTree(p);
-                    final Redirects result = new Redirects();
-                    node.elements().forEachRemaining(e -> {
-                        final JsonNode from = e.get("from");
-                        final JsonNode to = e.get("to");
-                        if (from.isTextual() && to.isTextual()) {
-                            result.redirectMap.put(from.textValue(), to.textValue());
-                        }
-                    });
-                    return result;
-                }
+            public String getTo() {
+                return to;
             }
         }
 
-        public static class Pages {
-            private final Collection<Page> pages = new ArrayList<>();
+        public static class Page {
+            public static final int CATEGORY_NAMESPACE = 14;
 
-            public static class Page {
-                private final String title;
+            private final String title;
+            private final int pageId;
+            private final int namespace;
 
-                @JsonCreator
-                public Page(@JsonProperty("title") final String title) {
-                    this.title = title;
-                }
-
-                public String getTitle() {
-                    return title;
-                }
+            @JsonCreator
+            public Page(
+                @JsonProperty("ns") final int namespace,
+                @JsonProperty("title") final String title,
+                @JsonProperty("pageid") final int pageId
+            ) {
+                this.title = title;
+                this.namespace = namespace;
+                this.pageId = pageId;
             }
 
-            static class Deserializer extends StdDeserializer<Pages> {
+            public int getNamespace() {
+                return namespace;
+            }
 
-                private final ObjectMapper mapper;
+            public int getPageId() {
+                return pageId;
+            }
 
-                Deserializer(final ObjectMapper mapper) {
-                    super((Class<?>) null);
-                    this.mapper = mapper;
-                }
-
-                @Override
-                public Pages deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException, JsonProcessingException {
-                    final JsonNode node = p.getCodec().readTree(p);
-                    final Collection<JsonProcessingException> exception = new ArrayList<>();
-                    final Pages pages = new Pages();
-                    node.fields().forEachRemaining(entry -> {
-                        try {
-                            pages.pages.add(mapper.treeToValue(entry.getValue(), Page.class));
-                        } catch (JsonProcessingException e) {
-                            exception.add(e);
-                        }
-                    });
-                    if (exception.size() >= 1) {
-                        throw exception.iterator().next();
-                    }
-                    return pages;
-                }
+            public String getTitle() {
+                return title;
             }
         }
     }
