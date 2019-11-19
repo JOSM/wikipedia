@@ -56,7 +56,7 @@ public final class WikipediaApp {
         this.wikipediaLang = wikipediaLang;
 
         final SitematrixResult.Sitematrix sitematrix = ApiQueryClient.query(WikidataActionApiQuery.sitematrix());
-        final SitematrixResult.Sitematrix.Language language = sitematrix.getLanguages().stream().filter(it -> wikipediaLang.equals(it.getCode())).findFirst().orElse(null);
+        final SitematrixResult.Sitematrix.Language language = sitematrix.getLanguages().stream().filter(it -> wikipediaLang.equalsIgnoreCase(it.getCode())).findFirst().orElse(null);
         final SitematrixResult.Sitematrix.Site site;
         if (language != null) {
             site = language.getSites().stream().filter(it -> "wiki".equals(it.getCode())).findFirst().orElseThrow(() -> new IllegalArgumentException("No Wikipedia for language " +  language.getName() + " (" + language.getCode() + ") found!"));
@@ -69,7 +69,7 @@ public final class WikipediaApp {
     public static WikipediaApp forLanguage(final String wikipediaLang) {
         try {
             return new WikipediaApp(wikipediaLang);
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException e) {
             Logging.log(Level.WARNING, "Could not initialize Wikipedia app for language '" + wikipediaLang + "'!", e);
             return null;
         }
@@ -81,6 +81,10 @@ public final class WikipediaApp {
         } else {
             return locale.getLanguage();
         }
+    }
+
+    public String getLanguage() {
+        return wikipediaLang;
     }
 
     public String getSiteUrl() {

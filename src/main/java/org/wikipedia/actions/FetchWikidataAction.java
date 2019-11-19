@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import org.openstreetmap.josm.actions.JosmAction;
@@ -24,10 +26,12 @@ import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.gui.PleaseWaitRunnable;
 import org.openstreetmap.josm.gui.progress.ProgressMonitor;
+import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.MultiMap;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
+import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.gui.GuiUtils;
 
@@ -86,10 +90,15 @@ public class FetchWikidataAction extends JosmAction {
             for (final OsmPrimitive i : selection) {
                 final WikipediaEntry tag = WikipediaEntry.parseTag("wikipedia", i.get("wikipedia"));
                 if (tag != null) {
-                    if (!r.containsKey(tag.lang)) {
-                        r.put(tag.lang, new PrimitivesWithWikipedia(tag.lang));
+                    final WikipediaApp app = WikipediaApp.forLanguage(tag.lang);
+                    if (app == null) {
+                      new Notification(I18n.tr("Language code ''{0}'' is not recognized! Can''t download Wikidata ID for tag ''{1}''!", tag.lang, tag.lang + ":" + tag.article))
+                          .setIcon(WikipediaPlugin.NOTIFICATION_ICON)
+                          .show();
+                    } else if (!r.containsKey(tag.lang)) {
+                        r.put(tag.lang, new PrimitivesWithWikipedia(app));
                     }
-                    r.get(tag.lang).put(i, tag.article);
+                    Optional.ofNullable(r.get(tag.lang)).ifPresent(it -> it.put(i, tag.article));
                 }
             }
             return r;
@@ -110,13 +119,13 @@ public class FetchWikidataAction extends JosmAction {
     }
 
     private static class PrimitivesWithWikipedia {
-        final String lang;
+        final WikipediaApp wikipediaApp;
         final MultiMap<String, OsmPrimitive> byArticle = new MultiMap<>();
         final List<Command> commands = new ArrayList<>();
         final List<WikipediaEntry> notFound = new ArrayList<>();
 
-        PrimitivesWithWikipedia(String lang) {
-            this.lang = lang;
+        PrimitivesWithWikipedia(final WikipediaApp wikipediaApp) {
+            this.wikipediaApp = Objects.requireNonNull(wikipediaApp);
         }
 
         public void put(OsmPrimitive key, String wikipedia) {
@@ -127,8 +136,8 @@ public class FetchWikidataAction extends JosmAction {
             final int size = byArticle.keySet().size();
             monitor.beginTask(trn(
                     "Fetching {0} Wikidata ID for language ''{1}''",
-                    "Fetching {0} Wikidata IDs for language ''{1}''", size, size, lang));
-            final Map<String, String> wikidataByWikipedia = WikipediaApp.forLanguage(lang).getWikidataForArticles(byArticle.keySet());
+                    "Fetching {0} Wikidata IDs for language ''{1}''", size, size, wikipediaApp.getLanguage()));
+            final Map<String, String> wikidataByWikipedia = wikipediaApp.getWikidataForArticles(byArticle.keySet());
             ConditionalOptionPaneUtil.startBulkOperation(GuiUtils.PREF_OVERWRITE);
             for (Map.Entry<String, Set<OsmPrimitive>> i : byArticle.entrySet()) {
                 final String wikipedia = i.getKey();
@@ -138,7 +147,7 @@ public class FetchWikidataAction extends JosmAction {
                         commands.add(new ChangePropertyCommand(i.getValue(), "wikidata", wikidata));
                     }
                 } else {
-                    final WikipediaEntry article = new WikipediaEntry(lang, wikipedia);
+                    final WikipediaEntry article = new WikipediaEntry(wikipediaApp.getLanguage(), wikipedia);
                     Logging.warn(tr("No Wikidata ID found for: {0}", article));
                     notFound.add(article);
                 }
@@ -150,7 +159,7 @@ public class FetchWikidataAction extends JosmAction {
         public Command getCommand() {
             return commands.isEmpty()
                     ? null
-                    : new SequenceCommand(tr("Add Wikidata for language ''{0}''", lang), commands);
+                    : new SequenceCommand(tr("Add Wikidata for language ''{0}''", wikipediaApp.getLanguage()), commands);
         }
 
         List<WikipediaEntry> getNotFound() {
