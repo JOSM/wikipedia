@@ -9,6 +9,7 @@ import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.SerializationSchema;
+import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikipedia_action.json.QueryResult;
 import org.wikipedia.data.IWikipediaSite;
 
@@ -19,8 +20,8 @@ public class WikipediaActionApiQuery<T> extends ApiQuery<T> {
 
     private final String queryString;
 
-    private WikipediaActionApiQuery(final IWikipediaSite site, final String queryString, SerializationSchema<T> schema) {
-        super(ApiUrl.url(site.getSite().getUrl() + "/w/api.php"), schema);
+    private WikipediaActionApiQuery(final SitematrixResult.Sitematrix.Site site, final String queryString, SerializationSchema<T> schema) {
+        super(ApiUrl.url(site.getUrl() + "/w/api.php"), schema);
         this.queryString = Objects.requireNonNull(queryString);
     }
 
@@ -43,7 +44,7 @@ public class WikipediaActionApiQuery<T> extends ApiQuery<T> {
             .setRequestBody(getQueryString().getBytes(StandardCharsets.UTF_8));
     }
 
-    public static WikipediaActionApiQuery<QueryResult> query(final IWikipediaSite site, final Collection<String> titles) {
+    public static WikipediaActionApiQuery<QueryResult> query(final SitematrixResult.Sitematrix.Site site, final Collection<String> titles) {
         Objects.requireNonNull(site);
         Objects.requireNonNull(titles);
         return new WikipediaActionApiQuery<>(

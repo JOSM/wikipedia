@@ -75,7 +75,7 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
         return new WikidataActionApiQuery<>(
             FORMAT_PARAMS + "&action=sitematrix",
             SitematrixResult.SCHEMA,
-            TimeUnit.DAYS.toMillis(30),
+            TimeUnit.DAYS.toMillis(90),
             SitematrixResult::getSitematrix
         );
     }

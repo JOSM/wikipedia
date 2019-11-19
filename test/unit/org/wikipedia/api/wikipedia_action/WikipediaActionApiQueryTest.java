@@ -47,7 +47,7 @@ public class WikipediaActionApiQueryTest {
         );
 
         final QueryResult result = ApiQueryClient.query(
-            WikipediaActionApiQuery.query(new WikiSiteMock("en"), Arrays.asList("US", "USA", "Universe"))
+            WikipediaActionApiQuery.query(new WikiSiteMock("en").getSite(), Arrays.asList("US", "USA", "Universe"))
         );
 
         assertEquals("United States", result.getQuery().getRedirects().resolveRedirect("USA"));

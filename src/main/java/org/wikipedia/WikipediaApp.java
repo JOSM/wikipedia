@@ -16,9 +16,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
+import java.util.logging.Level;
 import java.util.regex.Pattern;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.xml.parsers.DocumentBuilder;
@@ -37,7 +36,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
+import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
+import org.wikipedia.api.wikipedia_action.WikipediaActionApiQuery;
+import org.wikipedia.api.wikipedia_action.json.QueryResult;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
@@ -48,26 +50,29 @@ public final class WikipediaApp {
 
     private static final XPath X_PATH = XPath.getInstance();
     private final String wikipediaLang;
-    private final String siteId;
+    private final SitematrixResult.Sitematrix.Site site;
 
-    private WikipediaApp(final String wikipediaLang) {
-
-        // FIXME: the proper way to get any wiki's site id is through an API call:
-        // https://zh-yue.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=general
-        // use "wikiid" value. The value may be cached as it will never change
-        String siteId = wikipediaLang.replace('-', '_');
-        switch (siteId) {
-            case "be_tarask":
-                siteId = "be_x_old";
-                break;
-        }
-
+    private WikipediaApp(final String wikipediaLang) throws IOException {
         this.wikipediaLang = wikipediaLang;
-        this.siteId = siteId + "wiki";
+
+        final SitematrixResult.Sitematrix sitematrix = ApiQueryClient.query(WikidataActionApiQuery.sitematrix());
+        final SitematrixResult.Sitematrix.Language language = sitematrix.getLanguages().stream().filter(it -> wikipediaLang.equals(it.getCode())).findFirst().orElse(null);
+        final SitematrixResult.Sitematrix.Site site;
+        if (language != null) {
+            site = language.getSites().stream().filter(it -> "wiki".equals(it.getCode())).findFirst().orElseThrow(() -> new IllegalArgumentException("No Wikipedia for language " +  language.getName() + " (" + language.getCode() + ") found!"));
+        } else {
+            site = sitematrix.getSpecialSites().stream().filter(it -> wikipediaLang.equals(it.getCode())).findFirst().orElseThrow(() -> new IllegalArgumentException("No wiki site for code '" + wikipediaLang + "' found!"));
+        }
+        this.site = site;
     }
 
     public static WikipediaApp forLanguage(final String wikipediaLang) {
-        return new WikipediaApp(wikipediaLang);
+        try {
+            return new WikipediaApp(wikipediaLang);
+        } catch (IOException e) {
+            Logging.log(Level.WARNING, "Could not initialize Wikipedia app for language '" + wikipediaLang + "'!", e);
+            return null;
+        }
     }
 
     static String getMediawikiLocale(Locale locale) {
@@ -79,11 +84,7 @@ public final class WikipediaApp {
     }
 
     public String getSiteUrl() {
-        if ("wikidata".equals(wikipediaLang)) {
-            return "https://www.wikidata.org";
-        } else {
-            return "https://" + wikipediaLang + ".wikipedia.org";
-        }
+        return site.getUrl();
     }
 
     private static HttpClient.Response connect(String url) throws IOException {
@@ -183,7 +184,7 @@ public final class WikipediaApp {
 
     public void updateWIWOSMStatus(List<WikipediaEntry> entries) {
         if (entries.size() > 20) {
-            partitionList(entries, 20).forEach(chunk -> updateWIWOSMStatus(chunk));
+            partitionList(entries, 20).forEach(this::updateWIWOSMStatus);
             return;
         }
         Map<String, Boolean> status = new HashMap<>();
@@ -294,7 +295,7 @@ public final class WikipediaApp {
             return Collections.emptyMap();
         }
         try {
-            return ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(siteId, articles))
+            return ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(site.getDbName(), articles))
                 .getEntities().values()
                 .stream()
                 .filter(it -> RegexUtil.isValidQId(it.getId()) && it.getSitelinks().size() >= 1)
@@ -310,35 +311,10 @@ public final class WikipediaApp {
      * @param articles wikipedia articles
      * @return article / wikidata id map
      */
-    private Map<String, String> resolveRedirectsForArticles(Collection<String> articles) {
+    Map<String, String> resolveRedirectsForArticles(Collection<String> articles) {
         try {
-            final String url = getSiteUrl() + "/w/api.php" +
-                    "?action=query" +
-                    "&redirects" +
-                    "&format=xml" +
-                    "&titles=" + articles.stream().map(Utils::encodeUrl).collect(Collectors.joining("|"));
-            try (InputStream in = connect(url).getContent()) {
-                final Document xml = newDocumentBuilder().parse(in);
-
-                // Add both redirects and normalization results to the same map
-                final Collector<Node, ?, Map<String, String>> fromToCollector = Collectors.toMap(
-                        node -> X_PATH.evaluateString("./@from", node),
-                        node -> X_PATH.evaluateString("./@to", node)
-                );
-                final Map<String, String> normalized = X_PATH.evaluateNodes("//normalized/n", xml)
-                        .stream()
-                        .collect(fromToCollector);
-                final Map<String, String> redirects = X_PATH.evaluateNodes("//redirects/r", xml)
-                        .stream()
-                        .collect(fromToCollector);
-                // We should only return those keys that were originally requested, excluding titles that are both normalized and redirected
-                return articles.stream()
-                        .collect(Collectors.toMap(Function.identity(), title -> {
-                                    final String normalizedTitle = normalized.getOrDefault(title, title);
-                                    return redirects.getOrDefault(normalizedTitle, normalizedTitle);
-                                }
-                        ));
-            }
+            final QueryResult.Query.Redirects redirects = ApiQueryClient.query(WikipediaActionApiQuery.query(site, articles)).getQuery().getRedirects();
+            return articles.stream().collect(Collectors.toMap(it -> it, redirects::resolveRedirect));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
