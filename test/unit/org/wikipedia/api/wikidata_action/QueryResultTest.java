@@ -15,15 +15,15 @@ public class QueryResultTest extends WikidataActionApiTestAbstract {
     public void test() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/query/languages.json"));
         final Map<String, String> languages = ApiQueryClient.query(WikidataActionApiQuery.queryLanguages());
-        assertEquals(445, languages.size());
+        assertEquals(456, languages.size());
         assertEquals("Deutsch", languages.get("de"));
         assertEquals("English", languages.get("en"));
         assertEquals("français", languages.get("fr"));
         assertEquals("فارسی", languages.get("fa"));
         assertEquals("עברית", languages.get("he"));
         assertEquals("адыгабзэ", languages.get("ady-cyrl"));
-        assertEquals("中文（中国大陆）\u200E", languages.get("zh-cn"));
+        assertEquals("中文（中国大陆）‎", languages.get("zh-cn"));
         assertFalse(languages.containsKey("xyz"));
-        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=query&meta=siteinfo&siprop=languages");
+        simpleRequestVerify("action=query&format=json&formatversion=2&meta=siteinfo&siprop=languages&utf8=1");
     }
 }

@@ -3,26 +3,27 @@ package org.wikipedia.api.wikipedia_action;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.openstreetmap.josm.tools.HttpClient;
-import org.openstreetmap.josm.tools.Utils;
+import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.QueryString;
 import org.wikipedia.api.SerializationSchema;
-import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikipedia_action.json.QueryResult;
-import org.wikipedia.data.IWikipediaSite;
 
 public class WikipediaActionApiQuery<S, T> extends ApiQuery<T> {
 
-    private static final QueryString FMT_PARAMS = new QueryString().plus("format", "json").plus("utf8", "1").plus("formatversion", "2");
+    private static final QueryString FORMAT_PARAMS = new QueryString().plus(
+        Pair.create("format", "json"),
+        Pair.create("utf8", "1"),
+        Pair.create("formatversion", "2")
+    );
     private static final String[] TICKET_KEYWORDS = {"wikipedia", "ActionAPI"};
 
     private final String queryString;
@@ -62,10 +63,11 @@ public class WikipediaActionApiQuery<S, T> extends ApiQuery<T> {
         Objects.requireNonNull(titles);
         return new WikipediaActionApiQuery<>(
             site,
-            FMT_PARAMS
-                .plus("action", "query")
-                .plus("redirects", 1)
-                .plus("titles", String.join("|", titles)),
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "query"),
+                Pair.create("redirects", 1),
+                Pair.create("titles", String.join("|", titles))
+            ),
             QueryResult.SCHEMA,
             -1,
             it -> it
@@ -75,12 +77,13 @@ public class WikipediaActionApiQuery<S, T> extends ApiQuery<T> {
     public static WikipediaActionApiQuery<QueryResult, Optional<Set<QueryResult.Query.Page>>> categoryPrefixsearch(final SitematrixResult.Sitematrix.Site site, final String categoryPrefix) {
         return new WikipediaActionApiQuery<>(
             Objects.requireNonNull(site),
-            FMT_PARAMS
-                .plus("action", "query")
-                .plus("list", "prefixsearch")
-                .plus("psnamespace", QueryResult.Query.Page.CATEGORY_NAMESPACE)
-                .plus("pslimit", 50)
-                .plus("pssearch", categoryPrefix),
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "query"),
+                Pair.create("list", "prefixsearch"),
+                Pair.create("psnamespace", QueryResult.Query.Page.CATEGORY_NAMESPACE),
+                Pair.create("pslimit", 50),
+                Pair.create("pssearch", categoryPrefix)
+            ),
             QueryResult.SCHEMA,
             TimeUnit.DAYS.toMillis(3),
             it -> it.getQuery().getPrefixResults()

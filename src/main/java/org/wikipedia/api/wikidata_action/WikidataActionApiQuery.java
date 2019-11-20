@@ -9,9 +9,11 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.openstreetmap.josm.tools.HttpClient;
+import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
+import org.wikipedia.api.QueryString;
 import org.wikipedia.api.SerializationSchema;
 import org.wikipedia.api.wikidata_action.json.QueryResult;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
@@ -26,7 +28,11 @@ import org.wikipedia.tools.RegexUtil;
 public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     static URL defaultUrl = ApiUrl.url("https://www.wikidata.org/w/api.php");
     private static final String FORMAT_PARAMS = "format=json&utf8=1&formatversion=1";
-    private static final String FORMAT_V2_PARAMS = "format=json&utf8=1&formatversion=2";
+    private static final QueryString FORMAT_V2_PARAMS = new QueryString().plus(
+        Pair.create("format", "json"),
+        Pair.create("utf8", 1),
+        Pair.create("formatversion", 2)
+    );
     private static final String[] TICKET_KEYWORDS = {"wikidata", "ActionAPI"};
 
     private final String queryString;
@@ -74,7 +80,7 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
      */
     public static WikidataActionApiQuery<SitematrixResult.Sitematrix> sitematrix() {
         return new WikidataActionApiQuery<>(
-            FORMAT_V2_PARAMS + "&action=sitematrix",
+            FORMAT_V2_PARAMS.plus(Pair.create("action", "sitematrix")).toString(),
             SitematrixResult.SCHEMA,
             TimeUnit.DAYS.toMillis(90),
             SitematrixResult::getSitematrix
@@ -86,9 +92,13 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
      */
     public static WikidataActionApiQuery<Map<String, String>> queryLanguages() {
         return new WikidataActionApiQuery<>(
-          FORMAT_PARAMS + "&action=query&meta=siteinfo&siprop=languages",
+          FORMAT_V2_PARAMS.plus(
+              Pair.create("action", "query"),
+              Pair.create("meta", "siteinfo"),
+              Pair.create("siprop", "languages")
+          ).toString(),
           QueryResult.SCHEMA,
-          TimeUnit.DAYS.toMillis(30),
+          TimeUnit.DAYS.toMillis(90),
           QueryResult::getLangMap
         );
     }

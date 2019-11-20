@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.wikipedia.api.SerializationSchema;
 
@@ -36,9 +37,9 @@ public final class QueryResult {
             private final String name;
 
             @JsonCreator
-            Language(@JsonProperty("code") final String code, @JsonProperty("*") final String name) {
-                this.code = code;
-                this.name = name;
+            Language(@JsonProperty("code") final String code, @JsonProperty("name") final String name) {
+                this.code = Objects.requireNonNull(code);
+                this.name = Objects.requireNonNull(name);
             }
 
             @Override

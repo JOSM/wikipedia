@@ -1,11 +1,13 @@
 package org.wikipedia.api;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
 
 public class QueryString {
@@ -19,9 +21,10 @@ public class QueryString {
         this.parameters = Collections.unmodifiableMap(parameters);
     }
 
-    public QueryString plus(final Object key, final Object value) {
+    @SafeVarargs
+    public final QueryString plus(final Pair<Object, Object>... params) {
         final Map<String, String> result = new HashMap<>(parameters);
-        result.put(Objects.requireNonNull(key).toString(), Objects.requireNonNull(value).toString());
+        Arrays.stream(Objects.requireNonNull(params)).forEach(it -> result.put(Objects.requireNonNull(it.a).toString(), Objects.requireNonNull(it.b).toString()));
         return new QueryString(result);
     }
 

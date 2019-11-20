@@ -39,7 +39,6 @@ import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.api.wikipedia_action.WikipediaActionApiQuery;
-import org.wikipedia.api.wikipedia_action.json.QueryResult;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 import org.wikipedia.tools.ListUtil;
