@@ -45,7 +45,7 @@ public final class ApiQueryClient {
                     final String remoteResponse = new String(IOUtils.toByteArray(getInputStreamForQuery(query)), StandardCharsets.UTF_8);
                     Caches.API_RESPONSES.put(query.getCacheKey(), remoteResponse);
                     Logging.info("Successfully updated API cache for " + query.getCacheKey());
-                    return query.deserialize(new ByteArrayInputStream(remoteResponse.getBytes(StandardCharsets.UTF_8)));
+                    return query.deserializeFunc.apply(new ByteArrayInputStream(remoteResponse.getBytes(StandardCharsets.UTF_8)));
                 } catch (IOException e) {
                     if (cachedValue == null) {
                         throw wrapReadDecodeJsonExceptions(e, query.getApiName());
@@ -61,7 +61,7 @@ public final class ApiQueryClient {
         }
 
         try {
-            return query.deserialize(stream);
+            return query.deserializeFunc.apply(stream);
         } catch (IOException e) {
             throw wrapReadDecodeJsonExceptions(e, query.getApiName());
         }
@@ -103,7 +103,7 @@ public final class ApiQueryClient {
             Logging.error(wrapperEx.getMessage());
 
             if (!GraphicsEnvironment.isHeadless()) {
-                final ReportedException re = BugReport.intercept(wrapperEx).put("component", "Plugin wikipedia").put("keywords", "API");
+                final ReportedException re = BugReport.intercept(wrapperEx).put("component", "Plugin wikipedia").put("keywords", "API " + String.join(" ", query.getTicketKeywords()));
                 final BugReportDialog dialog = new BugReportDialog(new BugReport(re));
                 dialog.setVisible(true);
             }

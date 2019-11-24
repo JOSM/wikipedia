@@ -31,6 +31,6 @@ public class WbgetentitiesClaimsTest extends WikidataActionApiTestAbstract {
         final Map<String, List<WbgetclaimsResult.Claim>> claimMap = result.get().stream().collect(Collectors.groupingBy(it -> it.getMainSnak().getProperty()));
         assertEquals(119, claimMap.keySet().size()); // Number of different properties for which claims exist
 
-        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=claims&ids=Q2");
+        simpleRequestVerify("action=wbgetentities&format=json&formatversion=2&ids=Q2&props=claims&utf8=1");
     }
 }

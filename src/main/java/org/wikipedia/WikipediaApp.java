@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -298,7 +299,7 @@ public final class WikipediaApp {
             return Collections.emptyMap();
         }
         try {
-            return ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(site.getDbName(), articles))
+            return ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(site, articles))
                 .getEntities().values()
                 .stream()
                 .filter(it -> RegexUtil.isValidQId(it.getId()) && it.getSitelinks().size() >= 1)
@@ -353,6 +354,11 @@ public final class WikipediaApp {
     }
 
     static List<WikidataEntry> getLabelForWikidata(final List<? extends WikipediaEntry> entries, final Locale locale, final String... preferredLanguage) {
+        final List<WikidataEntry> wdEntries = entries.stream().map(it -> it instanceof WikidataEntry ? (WikidataEntry) it : null).filter(Objects::nonNull).collect(Collectors.toList());
+        if (wdEntries.size() != entries.size()) {
+            throw new IllegalArgumentException("The entries given to method `getLabelForWikidata` must all be of type WikidataEntry!");
+        }
+
         final Collection<String> languages = new ArrayList<>();
         if (locale != null) {
             languages.add(getMediawikiLocale(locale));
@@ -360,29 +366,21 @@ public final class WikipediaApp {
         }
         languages.addAll(Arrays.asList(preferredLanguage));
         languages.add("en");
-        languages.add(null);
 
-        final List<WikidataEntry> result = new ArrayList<>(entries.size());
-        ListUtil.processInBatches(entries, 50, batch -> {
+        final List<WikidataEntry> result = new ArrayList<>(wdEntries.size());
+        ListUtil.processInBatches(wdEntries, 50, batch -> {
             try {
-                final String url = "https://www.wikidata.org/w/api.php" +
-                    "?action=wbgetentities" +
-                    "&props=labels|descriptions" +
-                    "&ids=" + batch.stream().map(x -> x.article).collect(Collectors.joining("|")) +
-                    "&format=xml";
-                try (InputStream in = connect(url).getContent()) {
-                    final Document xml = newDocumentBuilder().parse(in);
-                    for (final WikipediaEntry batchEntry : batch) {
-                        final Node entity = X_PATH.evaluateNode("//entity[@id='" + batchEntry.article + "']", xml);
-                        if (entity == null) {
-                            continue;
-                        }
-                        result.add(new WikidataEntry(
-                            batchEntry.article,
-                            getFirstField(languages, "label", entity),
-                            batchEntry.coordinate,
-                            getFirstField(languages, "description", entity)
-                        ));
+                final Map<String, Optional<WbgetentitiesResult.Entity>> entities = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels(batch.stream().map(it -> it.article).collect(Collectors.toList())));
+                if (entities != null) {
+                    for (final WikidataEntry batchEntry : batch) {
+                        Optional.ofNullable(entities.get(batchEntry.article)).flatMap(it -> it).ifPresent(entity -> {
+                            result.add(new WikidataEntry(
+                                batchEntry.article,
+                                getFirstLabel(languages, entity.getLabels()),
+                                batchEntry.coordinate,
+                                getFirstLabel(languages, entity.getDescriptions())
+                            ));
+                        });
                     }
                 }
             } catch (Exception ex) {
@@ -392,14 +390,12 @@ public final class WikipediaApp {
         return result;
     }
 
-    private static String getFirstField(Collection<String> languages, String field, Node entity) {
-        return languages.stream()
-                .map(language -> X_PATH.evaluateString(language != null
-                        ? ".//" + field + "[@language='" + language + "']/@value"
-                        : ".//" + field + "/@value", entity))
-                .filter(label -> label != null && !label.isEmpty())
-                .findFirst()
-                .orElse(null);
+    private static String getFirstLabel(final Collection<String> languages, final Map<String, String> labelMap) {
+        return labelMap.entrySet().stream()
+            .filter(it -> languages.contains(it.getKey()))
+            .map(Map.Entry::getValue)
+            .findFirst()
+            .orElse(labelMap.values().stream().findFirst().orElse(null)); // fallback to first label
     }
 
     public Collection<WikipediaEntry> getInterwikiArticles(String article) {

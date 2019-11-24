@@ -14,6 +14,7 @@ import java.util.Optional;
 import org.junit.Test;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
+import org.wikipedia.data.WikipediaSite;
 import org.wikipedia.testutils.ResourceFileLoader;
 
 public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
@@ -57,20 +58,21 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
     @Test
     public void testWbgetentitiesQuery() {
         assertEquals(
-            "format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1",
-            WikidataActionApiQuery.wbgetentities(Collections.singletonList("Q1")).getQueryString()
+            "action=wbgetentities&format=json&formatversion=2&ids=Q1&props=&sites=&utf8=1",
+            WikidataActionApiQuery.wbgetentities(Collections.singletonList("Q1")).getQueryString().toString()
         );
         assertEquals(
-            "format=json&utf8=1&formatversion=1&action=wbgetentities&sites=&props=&ids=Q1%7CQ13%7CQ24%7CQ20150617%7CQ42%7CQ12345",
-            WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q13", "Q24", "Q20150617", "Q42", "Q12345")).getQueryString()
+            "action=wbgetentities&format=json&formatversion=2&ids=%1FQ1%1FQ12345%1FQ13%1FQ20150617%1FQ24%1FQ42&props=&sites=&utf8=1",
+            WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q13", "Q24", "Q20150617", "Q42", "Q12345")).getQueryString().toString()
         );
     }
 
     @Test
     public void testWikidataForArticles1() throws IOException, URISyntaxException {
+        final WikipediaSite site = siteFromStub("de");
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/dewiki_Berlin.json"));
 
-        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("dewiki", Collections.singletonList("Berlin")));
+        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(site.getSite(), Collections.singletonList("Berlin")));
 
         assertEquals(1, result.getSuccess());
         assertEquals(0, result.getMissingEntities().size());
@@ -84,14 +86,15 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
         assertEquals("dewiki", sitelinks.iterator().next().getSite());
         assertEquals("Berlin", sitelinks.iterator().next().getTitle());
 
-        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=dewiki&sitefilter=dewiki&titles=Berlin");
+        simpleRequestVerify("action=wbgetentities&format=json&formatversion=2&props=sitelinks&sitefilter=dewiki&sites=dewiki&titles=Berlin&utf8=1");
     }
 
     @Test
     public void testWikidataForArticles2() throws IOException, URISyntaxException {
+        final WikipediaSite site = siteFromStub("en");
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/enwiki_2entities2missing.json"));
 
-        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities("enwiki", Arrays.asList("United States", "missing-article", "Great Britain", "Another missing article")));
+        final WbgetentitiesResult result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(site.getSite(), Arrays.asList("United States", "missing-article", "Great Britain", "Another missing article")));
 
         assertEquals(2, result.getEntities().size());
         assertEquals(2, result.getMissingEntities().size());
@@ -115,7 +118,7 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
         assertNull(missing2.getId());
         assertEquals("enwiki", missing2.getSite());
 
-        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=sitelinks&sites=enwiki&sitefilter=enwiki&titles=United+States%7Cmissing-article%7CGreat+Britain%7CAnother+missing+article");
+        simpleRequestVerify("action=wbgetentities&format=json&formatversion=2&props=sitelinks&sitefilter=enwiki&sites=enwiki&titles=%1FAnother+missing+article%1FGreat+Britain%1FUnited+States%1Fmissing-article&utf8=1");
     }
 
     @Test
@@ -130,7 +133,7 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
         assertEquals("더글러스 애덤스", result.get().getLabels().get("ko"));
         assertEquals("ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್", result.get().getLabels().get("tcy"));
 
-        simpleRequestVerify("format=json&utf8=1&formatversion=1&action=wbgetentities&props=labels|descriptions|aliases&ids=Q42");
+        simpleRequestVerify("action=wbgetentities&format=json&formatversion=2&ids=Q42&props=aliases%7Cdescriptions%7Clabels&utf8=1");
     }
 
 }

@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.Pair;
-import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.api.ApiQuery;
 import org.wikipedia.api.ApiUrl;
 import org.wikipedia.api.QueryString;
@@ -27,35 +27,23 @@ import org.wikipedia.tools.RegexUtil;
  */
 public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     static URL defaultUrl = ApiUrl.url("https://www.wikidata.org/w/api.php");
-    private static final String FORMAT_PARAMS = "format=json&utf8=1&formatversion=1";
-    private static final QueryString FORMAT_V2_PARAMS = new QueryString().plus(
+    private static final QueryString FORMAT_PARAMS = new QueryString().plus(
         Pair.create("format", "json"),
         Pair.create("utf8", 1),
         Pair.create("formatversion", 2)
     );
-    private static final String[] TICKET_KEYWORDS = {"wikidata", "ActionAPI"};
+    private static final String[] TICKET_KEYWORDS = {"wikidata", "MediawikiActionAPI"};
 
-    private final String queryString;
+    private final QueryString queryString;
 
     /**
      * Convenience constructor
      * @param queryString the query string containing the arguments of this query
      * @param schema the {@link SerializationSchema} that defines how deserialization of the response is handled
-     * @see #WikidataActionApiQuery(String, SerializationSchema, long, Function)
+     * @see #WikidataActionApiQuery(QueryString, SerializationSchema, long, Function)
      */
-    private WikidataActionApiQuery(final String queryString, final SerializationSchema<T> schema) {
+    private WikidataActionApiQuery(final QueryString queryString, final SerializationSchema<T> schema) {
         this(queryString, schema, -1, it -> it);
-    }
-
-    /**
-     * Convenience constructor
-     * @param queryString the query string containing the arguments of this query
-     * @param schema the {@link SerializationSchema} that defines how deserialization of the response is handled
-     * @param converter a function that maps the
-     * @see #WikidataActionApiQuery(String, SerializationSchema, long, Function)
-     */
-    private <S> WikidataActionApiQuery(final String queryString, final SerializationSchema<S> schema, final Function<S, T> converter) {
-        this(queryString, schema, -1, converter);
     }
 
     /**
@@ -66,12 +54,12 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
      * @param converter a function that maps the
      * @param <S> the type to which the {@link SerializationSchema} deserializes
      */
-    private <S> WikidataActionApiQuery(final String queryString, final SerializationSchema<S> schema, final long cacheExpiryTime, final Function<S, T> converter) {
+    private <S> WikidataActionApiQuery(final QueryString queryString, final SerializationSchema<S> schema, final long cacheExpiryTime, final Function<S, T> converter) {
         super(defaultUrl, schema, cacheExpiryTime, converter);
         this.queryString = queryString;
     }
 
-    String getQueryString() {
+    QueryString getQueryString() {
         return queryString;
     }
 
@@ -80,7 +68,7 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
      */
     public static WikidataActionApiQuery<SitematrixResult.Sitematrix> sitematrix() {
         return new WikidataActionApiQuery<>(
-            FORMAT_V2_PARAMS.plus(Pair.create("action", "sitematrix")).toString(),
+            FORMAT_PARAMS.plus(Pair.create("action", "sitematrix")),
             SitematrixResult.SCHEMA,
             TimeUnit.DAYS.toMillis(90),
             SitematrixResult::getSitematrix
@@ -92,11 +80,11 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
      */
     public static WikidataActionApiQuery<Map<String, String>> queryLanguages() {
         return new WikidataActionApiQuery<>(
-          FORMAT_V2_PARAMS.plus(
+          FORMAT_PARAMS.plus(
               Pair.create("action", "query"),
               Pair.create("meta", "siteinfo"),
               Pair.create("siprop", "languages")
-          ).toString(),
+          ),
           QueryResult.SCHEMA,
           TimeUnit.DAYS.toMillis(90),
           QueryResult::getLangMap
@@ -111,33 +99,57 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
             throw new IllegalArgumentException("You must supply only Q-IDs as argument to construct a checkEntityExists URL.");
         }
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetentities&sites=&props=&ids=" + Utils.encodeUrl(String.join("|", qIds)),
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "wbgetentities"),
+                Pair.create("sites", ""),
+                Pair.create("props", ""),
+                Pair.create("ids", qIds)
+            ),
             WbgetentitiesResult.SCHEMA
         );
     }
 
-    public static WikidataActionApiQuery<WbgetentitiesResult> wbgetentities(final String siteId, final Collection<String> titles) {
-        if (siteId == null || titles == null || titles.size() <= 0) {
-            throw new IllegalArgumentException("The site ID and titles must be present!");
-        }
-        final String lowercaseSiteId = siteId.toLowerCase();
-        if (!RegexUtil.isValidSiteId(lowercaseSiteId)) {
-            throw new IllegalArgumentException("The site ID is not given in the expected format!");
+    public static WikidataActionApiQuery<WbgetentitiesResult> wbgetentities(final SitematrixResult.Sitematrix.Site site, final Collection<String> titles) {
+        if (site == null || titles == null || titles.size() <= 0) {
+            throw new IllegalArgumentException("The site and titles must be present!");
         }
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetentities&props=sitelinks&sites=" + lowercaseSiteId + // defines the language of the titles
-            "&sitefilter=" + lowercaseSiteId + // defines for which languages sitelinks should be returned
-            "&titles=" + Utils.encodeUrl(String.join("|", titles)),
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "wbgetentities"),
+                Pair.create("props", "sitelinks"),
+                Pair.create("sites", site.getDbName()), // defines the language of the titles
+                Pair.create("sitefilter", site.getDbName()), // defines for which languages sitelinks should be returned
+                Pair.create("titles", titles)
+            ),
             WbgetentitiesResult.SCHEMA
+        );
+    }
+
+
+    public static WikidataActionApiQuery<Map<String, Optional<WbgetentitiesResult.Entity>>> wbgetentitiesLabels(final Collection<String> qId) {
+        if (qId == null || !qId.stream().allMatch(RegexUtil::isValidQId)) {
+            throw new IllegalArgumentException("Invalid Q-IDs: " + Optional.ofNullable(qId).map(it -> String.join(", ", it)).orElse("null"));
+        }
+        return new WikidataActionApiQuery<>(
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "wbgetentities"),
+                Pair.create("props", "aliases|descriptions|labels"),
+                Pair.create("ids", qId)
+            ),
+            WbgetentitiesResult.SCHEMA,
+            TimeUnit.MINUTES.toMillis(10),
+            result -> result.getSuccess() <= 0 ? null : qId.stream().collect(Collectors.toMap(it -> it, it -> result.getEntities().values().stream().filter(e -> it.equals(e.getId())).findFirst()))
         );
     }
 
     public static WikidataActionApiQuery<Optional<WbgetentitiesResult.Entity>> wbgetentitiesLabels(final String qId) {
-        if (!RegexUtil.isValidQId(qId)) {
-            throw new IllegalArgumentException("Invalid Q-ID: " + qId);
-        }
+        RegexUtil.requireValidQId(qId);
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetentities&props=labels|descriptions|aliases&ids=" + qId,
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "wbgetentities"),
+                Pair.create("props", "aliases|descriptions|labels"),
+                Pair.create("ids", qId)
+            ),
             WbgetentitiesResult.SCHEMA,
             TimeUnit.MINUTES.toMillis(10),
             result -> result.getEntities().values().stream().findFirst()
@@ -147,7 +159,11 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     public static WikidataActionApiQuery<Collection<WbgetentitiesResult.Entity.Sitelink>> wbgetentitiesSitelinks(final String qId) {
         RegexUtil.requireValidQId(qId);
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetentities&props=sitelinks&ids=" + qId,
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "wbgetentities"),
+                Pair.create("props", "sitelinks"),
+                Pair.create("ids", qId)
+            ),
             WbgetentitiesResult.SCHEMA,
             TimeUnit.MINUTES.toMillis(10),
             result -> result.getEntities().values().stream()
@@ -158,11 +174,13 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
     }
 
     public static WikidataActionApiQuery<Optional<Collection<WbgetclaimsResult.Claim>>> wbgetentitiesClaims(final String qId) {
-        if (!RegexUtil.isValidQId(qId)) {
-            throw new IllegalArgumentException("Invalid Q-ID: " + qId);
-        }
+        RegexUtil.requireValidQId(qId);
         return new WikidataActionApiQuery<>(
-            FORMAT_PARAMS + "&action=wbgetentities&props=claims&ids=" + qId,
+            FORMAT_PARAMS.plus(
+                Pair.create("action", "wbgetentities"),
+                Pair.create("props", "claims"),
+                Pair.create("ids", qId)
+            ),
             WbgetentitiesResult.SCHEMA,
             TimeUnit.MINUTES.toMillis(10),
             it -> Optional.ofNullable(it.getEntities().get(qId)).flatMap(WbgetentitiesResult.Entity::getClaims)
@@ -185,7 +203,12 @@ public final class WikidataActionApiQuery<T> extends ApiQuery<T> {
             .setAccept("application/json")
             .setHeader("Content-Type", "application/x-www-form-urlencoded")
             .setHeader("User-Agent", getUserAgent(TICKET_KEYWORDS))
-            .setReasonForRequest(getQueryString().replace('&', ' '))
-            .setRequestBody(getQueryString().getBytes(StandardCharsets.UTF_8));
+            .setReasonForRequest(getQueryString().toString().replace('&', ' '))
+            .setRequestBody(getQueryString().toString().getBytes(StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public String[] getTicketKeywords() {
+        return TICKET_KEYWORDS;
     }
 }

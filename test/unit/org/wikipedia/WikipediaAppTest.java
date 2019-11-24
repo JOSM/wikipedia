@@ -144,7 +144,7 @@ public class WikipediaAppTest {
         // fallback to any label
         assertThat(WikipediaApp.getLabelForWikidata("Q21849466", new Locale("aa")), is("Leoben - Straßennamen mit Geschichte"));
         // not found -> null
-        assertThat(WikipediaApp.getLabelForWikidata("Q" + Long.MAX_VALUE, Locale.ENGLISH), nullValue());
+        assertThat(WikipediaApp.getLabelForWikidata("Q" + Integer.MAX_VALUE, Locale.ENGLISH), nullValue());
         final WikidataEntry q84 = new WikidataEntry("Q84", null, null, null);
         final WikidataEntry q1741 = new WikidataEntry("Q1741", null, null, null);
         final List<WikidataEntry> twoLabels = WikipediaApp.getLabelForWikidata(Arrays.asList(q84, q1741), Locale.GERMAN);

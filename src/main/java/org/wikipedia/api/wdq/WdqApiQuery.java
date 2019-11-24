@@ -15,7 +15,7 @@ import org.wikipedia.tools.RegexUtil;
 import org.wikipedia.tools.WikiProperties;
 
 public class WdqApiQuery<T> extends ApiQuery<T> {
-    private static final String[] TICKET_KEYWORDS = {"wikidata", "QueryService"};
+    private static final String[] TICKET_KEYWORDS = {"wikidata", "WDQ-API"};
     private static URL baseUrl = ApiUrl.url("https://query.wikidata.org/sparql");
     private final String queryString;
 
@@ -37,6 +37,11 @@ public class WdqApiQuery<T> extends ApiQuery<T> {
             .setHeader("User-Agent", getUserAgent(TICKET_KEYWORDS))
             .setReasonForRequest(queryString.replace('&', ' '))
             .setRequestBody(queryString.getBytes(StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public String[] getTicketKeywords() {
+        return TICKET_KEYWORDS;
     }
 
     static void setBaseUrl(final URL baseUrl) {

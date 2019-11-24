@@ -21,10 +21,10 @@ public class WikipediaActionApiQuery<S, T> extends ApiQuery<T> {
 
     private static final QueryString FORMAT_PARAMS = new QueryString().plus(
         Pair.create("format", "json"),
-        Pair.create("utf8", "1"),
-        Pair.create("formatversion", "2")
+        Pair.create("utf8", 1),
+        Pair.create("formatversion", 2)
     );
-    private static final String[] TICKET_KEYWORDS = {"wikipedia", "ActionAPI"};
+    private static final String[] TICKET_KEYWORDS = {"wikipedia", "MediawikiActionAPI"};
 
     private final String queryString;
 
@@ -56,6 +56,11 @@ public class WikipediaActionApiQuery<S, T> extends ApiQuery<T> {
             .setHeader("User-Agent", getUserAgent(TICKET_KEYWORDS))
             .setReasonForRequest(getQueryString().replace('&', ' '))
             .setRequestBody(getQueryString().getBytes(StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public String[] getTicketKeywords() {
+        return TICKET_KEYWORDS;
     }
 
     public static WikipediaActionApiQuery<QueryResult, QueryResult> query(final SitematrixResult.Sitematrix.Site site, final Collection<String> titles) {

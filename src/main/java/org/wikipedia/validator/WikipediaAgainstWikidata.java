@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
@@ -17,7 +18,9 @@ import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.WikipediaPlugin;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
+import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
+import org.wikipedia.data.WikipediaSite;
 import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.RegexUtil;
 
@@ -35,14 +38,28 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
         );
     }
 
+    private static final Pattern WIKIPEDIA_TAG_VALUE_PATTERN = Pattern.compile("([a-z-]+):(.+)");
+
     @Override
     protected TestCompanion prepareTestCompanion(OsmPrimitive primitive) {
         final String wikipediaValue = primitive.get("wikipedia");
         final String wikidataValue = primitive.get("wikidata");
         if (wikipediaValue != null && RegexUtil.isValidQId(wikidataValue)) {
-            final Matcher wpMatcher = RegexUtil.WIKIPEDIA_TAG_VALUE_PATTERN.matcher(wikipediaValue);
+            final Matcher wpMatcher = WIKIPEDIA_TAG_VALUE_PATTERN.matcher(wikipediaValue);
             if (wpMatcher.matches()) {
-                return new TestCompanion(primitive, wpMatcher.group(1), wpMatcher.group(2), wikidataValue);
+                try {
+                    final WikipediaSite site = new WikipediaSite(wpMatcher.group(1));
+                    return new TestCompanion(primitive, site, wpMatcher.group(2), wikidataValue);
+                } catch (final IOException e) {
+                    errors.add(
+                        AllValidationTests.API_REQUEST_FAILED.getBuilder(this)
+                            .primitives(primitive)
+                            .message(VALIDATOR_MESSAGE_MARKER + e.getMessage())
+                            .build()
+                    );
+                } catch (final IllegalArgumentException e) {
+                    // Don't care here for these not found wiki sites, handle these elsewhere.
+                }
             }
         }
         return null;
@@ -51,24 +68,26 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
     @Override
     protected void check(List<TestCompanion> allPrimitives) {
         allPrimitives.stream()
-            .collect(Collectors.groupingBy(it -> it.language)) // Group by wiki-language
-            .forEach((language, primitiveList) -> {
+            .collect(Collectors.groupingBy(it -> it.site.getSite().getDbName())) // Group by wiki-language
+            .forEach((dbname, primitiveList) -> {
                 ListUtil.processInBatches(
                     primitiveList,
                     50,
                     primitiveBatch -> {
-                        checkBatch(language, primitiveBatch);
+                        if (!primitiveBatch.isEmpty()) {
+                            checkBatch(primitiveBatch.get(0).site.getSite(), primitiveBatch);
+                        }
                     },
                     this::updateBatchProgress
                 );
             });
     }
 
-    private void checkBatch(final String language, final List<TestCompanion> primitiveBatch) {
+    private void checkBatch(final SitematrixResult.Sitematrix.Site site, final List<TestCompanion> primitiveBatch) {
         try {
             final Map<String, WbgetentitiesResult.Entity.Sitelink> sitelinks = ApiQueryClient
                 .query(WikidataActionApiQuery.wbgetentities(
-                    language + "wiki",
+                    site,
                     primitiveBatch.stream().map(it -> it.title).collect(Collectors.toList())
                 ))
                 .getEntities().values().stream()
@@ -82,7 +101,7 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
                             VALIDATOR_MESSAGE_MARKER + I18n.tr("Wikidata item and Wikipedia article do not match!"),
                             I18n.marktr("Wikidata item {0} is not associated with Wikipedia article {1} ({2})"),
                             tc.qId,
-                            tc.language + ':' + tc.title,
+                            tc.site.getLanguageCode() + ':' + tc.title,
                             sitelinks.entrySet().stream()
                                 .filter(it -> tc.title.equals(it.getValue().getTitle()))
                                 .findAny()
@@ -104,12 +123,12 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
     }
 
     static class TestCompanion extends BatchProcessedTagTest.TestCompanion {
-        final String language; // TODO: Use WikipediaSite here to verify a wiki in that language actually exists
+        final WikipediaSite site;
         final String title;
         final String qId;
-        private TestCompanion(final OsmPrimitive primitive, String language, String title, final String qId) {
+        private TestCompanion(final OsmPrimitive primitive, final WikipediaSite site, String title, final String qId) {
             super(primitive);
-            this.language = Objects.requireNonNull(language);
+            this.site = Objects.requireNonNull(site);
             this.title = Objects.requireNonNull(title);
             this.qId = Objects.requireNonNull(qId);
         }

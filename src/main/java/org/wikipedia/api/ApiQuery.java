@@ -3,15 +3,18 @@ package org.wikipedia.api;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.openstreetmap.josm.tools.HttpClient;
-import org.openstreetmap.josm.tools.Utils;
+import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.WikipediaPlugin;
 
 public abstract class ApiQuery<T> {
     private final URL url;
     private final long cacheExpiryTime;
-    private final IOExceptionFunction<InputStream, T> deserializeFunc;
+    protected final IOExceptionFunction<InputStream, T> deserializeFunc;
 
     protected <S> ApiQuery(final URL url, final SerializationSchema<S> schema, final long cacheExpiryTime, final Function<S, T> resultConverter) {
         this.url = url;
@@ -23,12 +26,8 @@ public abstract class ApiQuery<T> {
         }
     }
 
-    protected ApiQuery(final URL url, final SerializationSchema<T> schema, final long cacheExpiryTime) {
-        this(url, schema, cacheExpiryTime, it -> it);
-    }
-
     protected ApiQuery(final URL url, final SerializationSchema<T> schema) {
-        this(url, schema, -1);
+        this(url, schema, -1, it -> it);
     }
 
     /**
@@ -58,9 +57,7 @@ public abstract class ApiQuery<T> {
      */
     public abstract HttpClient getHttpClient();
 
-    public final T deserialize(final InputStream stream) throws IOException {
-        return deserializeFunc.apply(stream);
-    }
+    public abstract String[] getTicketKeywords();
 
     /**
      * @return the URL that is queried (might not contain the whole query, e.g. when a POST request is made)
@@ -69,20 +66,19 @@ public abstract class ApiQuery<T> {
         return url;
     }
 
+    private final QueryString tracQueryString = new QueryString().plus(Pair.create("component", "Plugin wikipedia"), Pair.create("priority", "major"));
     protected final String getUserAgent(final String[] keywords) {
-        final String result = String.format(
-            "JOSM-wikipedia (%s). Report issues at %s.",
+        final Stream<String> keywordStream = Optional.ofNullable(keywords).filter(it -> it.length > 0).map(it -> Stream.of(keywords)).orElse(Stream.empty());
+        final String url = "https://josm.openstreetmap.de/newticket?" + tracQueryString.plus(Pair.create("keywords", Stream.concat(keywordStream, Stream.of("api")).collect(Collectors.joining(" "))));
+        return String.format(
+            "JOSM-wikipedia (%s). Report issues at %s .",
             WikipediaPlugin.getVersionInfo(),
-            "https://josm.openstreetmap.de/newticket?component=Plugin%20wikipedia&priority=major&keywords=api"
+            url
         );
-        if (keywords == null || keywords.length <= 0) {
-            return result;
-        }
-        return result + Utils.encodeUrl(" " + String.join(" ", keywords));
     }
 
     @FunctionalInterface
-    private interface IOExceptionFunction<T, R> {
+    protected interface IOExceptionFunction<T, R> {
         R apply(T t) throws IOException;
     }
 }
