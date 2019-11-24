@@ -149,7 +149,7 @@ push GitLab.com pages branch:
     url: https://gitlab.com/JOSM/plugin/wikipedia/tree/pages/dist
   script:
     - |
-      base64 --decode "$SSH_PRIVATE_DEPLOY_KEY" > ~/.ssh/id_rsa
+      base64 -d "$SSH_PRIVATE_DEPLOY_KEY" > ~/.ssh/id_rsa
       chmod 600 ~/.ssh/id_rsa
       git clone --depth 1 --branch pages git@gitlab.com:JOSM/plugin/wikipedia.git pages
     - |

@@ -50,9 +50,9 @@ public class WikipediaValueFormat extends Test.TagTest {
 
     @Override
     public void check(OsmPrimitive p) {
-        Optional.ofNullable(p.get(OsmTagConstants.Key.WIKIDATA)).ifPresent(value -> {
-            checkFullUrl(p, OsmTagConstants.Key.WIKIDATA, value);
-            checkLanguageArticleFormat(p, OsmTagConstants.Key.WIKIDATA, value);
+        Optional.of(OsmTagConstants.Key.WIKIPEDIA).flatMap(k -> Optional.ofNullable(p.get(k)).map(v -> new Tag(k, v))).ifPresent(tag -> {
+            checkFullUrl(p, tag.getKey(), tag.getValue());
+            checkLanguageArticleFormat(p, tag.getKey(), tag.getValue());
             // checkUrlDecode() is tested by core
         });
         p.keySet().stream().filter(Objects::nonNull).filter(it -> it.endsWith(":wikipedia")).collect(Collectors.toMap(it -> it, p::get)).forEach((key, value) -> {

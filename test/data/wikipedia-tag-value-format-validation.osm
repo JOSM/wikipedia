@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-1' action='modify' visible='true' lat='0.00000' lon='0.00000'>
+    <tag k='wikipedia' v='http://be-x-old.wikipedia.org/wiki/A' />
+    <tag k='name' v='A' />
+  </node>
+  <node id='-2' action='modify' visible='true' lat='0.00000' lon='0.00001'>
+    <tag k='wikipedia' v='https://be-x-old.wikipedia.org/wiki/B' />
+    <tag k='name' v='B' />
+  </node>
+  <node id='-3' action='modify' visible='true' lat='0.00000' lon='0.00002'>
+    <tag k='wikipedia' v='//be-x-old.wikipedia.org/wiki/C' />
+    <tag k='name' v='C' />
+  </node>
+  <node id='-4' action='modify' visible='true' lat='0.00000' lon='0.00003'>
+    <tag k='wikipedia' v='http://be-x-old.m.wikipedia.org/wiki/D' />
+    <tag k='name' v='D' />
+  </node>
+  <node id='-5' action='modify' visible='true' lat='0.00000' lon='0.00004'>
+    <tag k='wikipedia' v='https://be-x-old.m.wikipedia.org/wiki/E' />
+    <tag k='name' v='E' />
+  </node>
+  <node id='-6' action='modify' visible='true' lat='0.00000' lon='0.00005'>
+    <tag k='wikipedia' v='//be-x-old.m.wikipedia.org/wiki/F' />
+    <tag k='name' v='F' />
+  </node>
+</osm>
