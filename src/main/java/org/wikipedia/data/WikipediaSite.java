@@ -31,7 +31,7 @@ public class WikipediaSite implements IWikipediaSite {
             .orElseThrow(() -> new IllegalArgumentException(I18n.tr("''{0}'' is an illegal language code!", langCode)));
         this.site = language
             .getSites().stream()
-                .filter(it -> "wiki".equals(it.getCode()))
+                .filter(it -> "wiki".equals(it.getCode()) && !it.isClosed())
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
                     I18n.tr("There is no Wikipedia site for language ''{0}''!", language.getCode())

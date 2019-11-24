@@ -124,7 +124,8 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
                         .primitives(primitive)
                         .message(
                             VALIDATOR_MESSAGE_MARKER + I18n.tr("Invalid Q-ID! Cannot exist on Wikidata."),
-                            I18n.marktr("{0} is not a valid Wikidata-ID")
+                            I18n.marktr("{0} is not a valid Wikidata-ID"),
+                            wikidataValue
                         )
                         .build()
                 );

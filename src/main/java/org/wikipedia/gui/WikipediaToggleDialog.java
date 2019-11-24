@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -295,10 +296,10 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (list.getSelectedValue() != null) {
-                final String url = list.getSelectedValue().getBrowserUrl();
-                Logging.info("Wikipedia: opening " + url);
-                OpenBrowser.displayUrl(url);
+            final Optional<String> url = Optional.ofNullable(list.getSelectedValue()).flatMap(WikipediaEntry::getBrowserUrl);
+            if (url.isPresent()) {
+                Logging.info("Wikipedia: opening " + url.get());
+                OpenBrowser.displayUrl(url.get());
             }
         }
     }

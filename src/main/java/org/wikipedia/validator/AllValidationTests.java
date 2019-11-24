@@ -15,9 +15,11 @@ class AllValidationTests {
     static final ValidationTest<WikidataItemExists> WIKIDATA_ITEM_IS_REDIRECT = new ValidationTest<>(Severity.WARNING, 30_003);
     static final ValidationTest<WikipediaAgainstWikidata> WIKIDATA_ITEM_NOT_MATCHING_WIKIPEDIA = new ValidationTest<>(Severity.WARNING, 30_004);
     static final ValidationTest<WikipediaRedirect> WIKIPEDIA_ARTICLE_REDIRECTS = new ValidationTest<>(Severity.WARNING, 30_005);
-    static final ValidationTest<WikipediaRedirect> WIKIPEDIA_TAG_INVALID = new ValidationTest<>(Severity.ERROR, 30_006);
+    static final ValidationTest<WikipediaValueFormat> WIKIPEDIA_TAG_INVALID = new ValidationTest<>(Severity.ERROR, 30_006);
     static final ValidationTest<UnusualWikidataClasses> WIKIDATA_TAG_HAS_UNUSUAL_TYPE = new ValidationTest<>(Severity.WARNING, 30_007);
     static final ValidationTest<UnusualWikidataClasses> INVALID_BRAND_WIKIDATA_TAG_FORMAT = new ValidationTest<>(Severity.ERROR, 30_008);
+    static final ValidationTest<WikipediaValueFormat> WIKIPEDIA_TAG_VALUE_IS_FULL_URL = new ValidationTest<>(Severity.ERROR, 30_009);
+    static final ValidationTest<WikipediaValueFormat> WIKIPEDIA_TAG_URL_ENCODED = new ValidationTest<>(Severity.ERROR, 30_010);
 
     // i18n: Prefix for the validator messages. Note the space at the end!
     static final String VALIDATOR_MESSAGE_MARKER = I18n.tr("[Wiki] ");

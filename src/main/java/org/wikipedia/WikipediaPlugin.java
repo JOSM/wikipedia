@@ -26,6 +26,7 @@ import org.wikipedia.validator.UnusualWikidataClasses;
 import org.wikipedia.validator.WikidataItemExists;
 import org.wikipedia.validator.WikipediaAgainstWikidata;
 import org.wikipedia.validator.WikipediaRedirect;
+import org.wikipedia.validator.WikipediaValueFormat;
 
 public final class WikipediaPlugin extends Plugin {
     public static final ImageIcon LOGO = ImageProvider.get("dialogs/wikipedia");
@@ -54,6 +55,7 @@ public final class WikipediaPlugin extends Plugin {
         OsmValidator.addTest(WikipediaAgainstWikidata.class);
         OsmValidator.addTest(WikipediaRedirect.class);
         OsmValidator.addTest(UnusualWikidataClasses.class);
+        OsmValidator.addTest(WikipediaValueFormat.class);
     }
 
     public static String getVersionInfo() {

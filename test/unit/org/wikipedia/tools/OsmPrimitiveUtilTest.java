@@ -16,7 +16,6 @@ import org.openstreetmap.josm.testutils.JOSMTestRules;
 import org.openstreetmap.josm.tools.Pair;
 import org.wikipedia.data.IWikipediaSite;
 import org.wikipedia.data.WikipediaSite;
-import org.wikipedia.tools.OsmPrimitiveUtil;
 
 public class OsmPrimitiveUtilTest {
 

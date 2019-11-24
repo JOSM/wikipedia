@@ -42,21 +42,7 @@ public class WikipediaRedirect extends BatchProcessedTagTest<WikipediaRedirect.T
 
     @Override
     protected TestCompanion prepareTestCompanion(OsmPrimitive primitive) {
-        final String plainWikipediaValue = primitive.get(OsmTagConstants.Key.WIKIPEDIA);
         final Optional<Pair<IWikipediaSite, String>> companion = OsmPrimitiveUtil.getWikipediaValue(primitive);
-        if (plainWikipediaValue != null && !companion.isPresent()) {
-            errors.add(
-                AllValidationTests.WIKIPEDIA_TAG_INVALID.getBuilder(this)
-                    .message(
-                        VALIDATOR_MESSAGE_MARKER + I18n.tr("Wikipedia tag has invalid format!"),
-                        I18n.marktr("The value ''{0}'' is not allowed for the wikipedia=* tag"),
-                        plainWikipediaValue
-                    )
-                    .primitives(primitive)
-                    .build()
-            );
-        }
-
         return companion
             .map(it -> new TestCompanion(primitive, it.a, it.b))
             .orElse(null);

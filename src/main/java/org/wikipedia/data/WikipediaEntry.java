@@ -2,6 +2,7 @@
 package org.wikipedia.data;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.openstreetmap.josm.data.coor.LatLon;
@@ -11,6 +12,8 @@ import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
 
 public class WikipediaEntry implements Comparable<WikipediaEntry> {
+
+    private static final Pattern WIKIPEDIA_FULL_URL_PATTERN = Pattern.compile("((https?:)?//)?([a-z-]+)(\\.m)?\\.wikipedia\\.org/wiki/(.+)");
 
     public final String lang;
     public final String article;
@@ -27,26 +30,20 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
         this.coordinate = coordinate;
     }
 
-    static WikipediaEntry parseFromUrl(String url) {
-        if (url == null) {
-            return null;
-        }
-        // decode URL for nicer value
-        url = Utils.decodeUrl(url);
-        // extract Wikipedia language and
-        final Matcher m = Pattern.compile("(https?:)?//(\\w*)\\.wikipedia\\.org/wiki/(.*)").matcher(url);
-        if (!m.matches()) {
-            return null;
-        }
-        return new WikipediaEntry(m.group(2), m.group(3));
+    public static  Optional<WikipediaEntry> fromUrl(final String value) {
+        return Optional.ofNullable(value)
+            .map(WIKIPEDIA_FULL_URL_PATTERN::matcher)
+            .filter(Matcher::matches)
+            .map(it -> new WikipediaEntry(it.group(3), Utils.decodeUrl(it.group(5)).replace('_', ' ')));
     }
 
     public static WikipediaEntry parseTag(String key, String value) {
+        final Optional<WikipediaEntry> fromUrl = fromUrl(value);
         if (value == null) {
             return null;
-        } else if (value.startsWith("http")) {
+        } else if (fromUrl.isPresent()) {
             //wikipedia=http...
-            return WikipediaEntry.parseFromUrl(value);
+            return fromUrl.get();
         } else if (value.contains(":")) {
             //wikipedia=[lang]:[article]
             //wikipedia:[lang]=[lang]:[article]
@@ -66,7 +63,7 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
     }
 
     public Tag createWikipediaTag() {
-        return new Tag("wikipedia", lang + ":" + article);
+        return new Tag("wikipedia", toOsmTagValue());
     }
 
     public void setWiwosmStatus(Boolean wiwosmStatus) {
@@ -77,8 +74,8 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
         return wiwosmStatus;
     }
 
-    public String getBrowserUrl() {
-        return WikipediaApp.forLanguage(lang).getSiteUrl() + "/wiki/" + Utils.encodeUrl(article.replace(" ", "_"));
+    public Optional<String> getBrowserUrl() {
+        return Optional.ofNullable(WikipediaApp.forLanguage(lang)).map(it -> it.getSiteUrl() + "/wiki/" + Utils.encodeUrl(article.replace(' ', '_')));
     }
 
     public String getLabelText() {
@@ -87,6 +84,10 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
 
     public String getSearchText() {
         return article;
+    }
+
+    public String toOsmTagValue() {
+        return lang + ':' + article;
     }
 
     @Override
