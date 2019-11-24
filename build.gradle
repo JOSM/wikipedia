@@ -7,7 +7,7 @@ plugins {
   id "jacoco"
   id "maven-publish"
   id "pmd"
-  id "com.github.ben-manes.versions" version "0.25.0"
+  id "com.github.ben-manes.versions" version "0.27.0"
   id "com.github.spotbugs" version "2.0.1"
   id "org.openstreetmap.josm" version "0.6.5"
   id "net.ltgt.errorprone" version "1.1.1"
@@ -53,8 +53,12 @@ dependencies {
   testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
   testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation("com.github.tomakehurst:wiremock:2.25.1")
+  testImplementation("com.github.tomakehurst:wiremock-jre8:2.25.1")
   testImplementation("org.awaitility:awaitility:4.0.1")
+}
+
+dependencyUpdates.rejectVersionIf { version ->
+  !["release", "final", "ga"].any { version.candidate.version.toLowerCase().contains(it) } && !(version.candidate.version ==~ /^[0-9,.v-]+(-r)?$/)
 }
 
 // Add dependencies from ivy.xml
