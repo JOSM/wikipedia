@@ -10,14 +10,16 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.verify;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
-import com.github.jknack.handlebars.internal.Files;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.github.tomakehurst.wiremock.matching.EqualToPattern;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -62,7 +64,7 @@ public abstract class WikidataActionApiTestAbstract {
                 aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody(Files.read(WikidataActionApiQueryTest.class.getResourceAsStream("response/sitematrix/sitematrix.json"), StandardCharsets.UTF_8))
+                    .withBody(new BufferedReader(new InputStreamReader(WikidataActionApiQueryTest.class.getResourceAsStream("response/sitematrix/sitematrix.json"), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n")))
             );
         stubFor(mapping);
         final WikipediaSite site = new WikipediaSite(code);
