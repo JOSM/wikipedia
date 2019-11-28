@@ -20,6 +20,7 @@ class AllValidationTests {
     static final ValidationTest<UnusualWikidataClasses> INVALID_BRAND_WIKIDATA_TAG_FORMAT = new ValidationTest<>(Severity.ERROR, 30_008);
     static final ValidationTest<WikipediaValueFormat> WIKIPEDIA_TAG_VALUE_IS_FULL_URL = new ValidationTest<>(Severity.ERROR, 30_009);
     static final ValidationTest<WikipediaValueFormat> WIKIPEDIA_TAG_URL_ENCODED = new ValidationTest<>(Severity.ERROR, 30_010);
+    static final ValidationTest<WikipediaValueFormat> WIKIPEDIA_TAG_VALUE_CONTAINS_URL = new ValidationTest<>(Severity.WARNING, 30_011);
 
     // i18n: Prefix for the validator messages. Note the space at the end!
     static final String VALIDATOR_MESSAGE_MARKER = I18n.tr("[Wiki] ");

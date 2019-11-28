@@ -33,6 +33,7 @@ public class WikipediaAgainstWikidata extends BatchProcessedTagTest<WikipediaAga
 
     public WikipediaAgainstWikidata() {
         super(
+            VALIDATOR_MESSAGE_MARKER +
             I18n.tr("Check wikipedia=* is interwiki link of wikidata=*"),
             I18n.tr("Makes sure that the wikipedia=* article is connected to the wikidata=* item")
         );

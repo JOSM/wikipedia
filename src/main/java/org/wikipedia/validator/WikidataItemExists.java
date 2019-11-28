@@ -34,6 +34,7 @@ public class WikidataItemExists extends BatchProcessedTagTest<WikidataItemExists
 
     public WikidataItemExists() {
         super(
+            VALIDATOR_MESSAGE_MARKER +
             I18n.tr("wikidata=* item exists"),
             I18n.tr("Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually exists")
         );

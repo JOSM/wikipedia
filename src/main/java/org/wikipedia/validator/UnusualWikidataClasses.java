@@ -38,6 +38,7 @@ public class UnusualWikidataClasses extends BatchProcessedTagTest<UnusualWikidat
 
     public UnusualWikidataClasses() {
         super(
+            VALIDATOR_MESSAGE_MARKER +
             I18n.tr("Find OSM objects linked with wikidata items of a class that is untypical for OSM"),
             I18n.tr("This check queries Wikidata to find those OSM objects that are linked to wikidata items of a type, which should not occur in OSM data (at least not as the main wikidata tag)")
         );

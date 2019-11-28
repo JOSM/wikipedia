@@ -29,14 +29,15 @@ import org.wikipedia.tools.OsmTagConstants;
 public class WikipediaRedirect extends BatchProcessedTagTest<WikipediaRedirect.TestCompanion> {
 
     private static final Notification NETWORK_FAILED_NOTIFICATION = new Notification(
-        I18n.tr("Could not check for all wikipedia=* tags if they redirect to another lemma.") +
+        I18n.tr("Could not check for all wikipedia=* tags if they redirect to another article.") +
             "\n" + SEE_OTHER_CATEGORY_VALIDATOR_ERRORS
     ).setIcon(WikipediaPlugin.LOGO);
 
     public WikipediaRedirect() {
         super(
+            VALIDATOR_MESSAGE_MARKER +
             I18n.tr("Check wikipedia=* is not a redirect"),
-            I18n.tr("Make sure that the wikipedia=* article is not redirecting to another lemma")
+            I18n.tr("Make sure that the wikipedia=* article is not redirecting to another article")
         );
     }
 

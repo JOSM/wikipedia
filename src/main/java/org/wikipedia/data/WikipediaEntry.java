@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.data;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -10,10 +11,12 @@ import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.tools.AlphanumComparator;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
+import org.wikipedia.tools.FunctionalUtil;
 
 public class WikipediaEntry implements Comparable<WikipediaEntry> {
 
     private static final Pattern WIKIPEDIA_FULL_URL_PATTERN = Pattern.compile("((https?:)?//)?([a-z-]+)(\\.m)?\\.wikipedia\\.org/wiki/(.+)");
+    private static final Pattern WIKIPEDIA_ALTERNATIVE_URL_PATTERN = Pattern.compile("((https?:)?//)?([a-z-]+)(\\.m)?\\.wikipedia\\.org/w/index.php\\?(.+)");
 
     public final String lang;
     public final String article;
@@ -31,10 +34,23 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
     }
 
     public static  Optional<WikipediaEntry> fromUrl(final String value) {
-        return Optional.ofNullable(value)
-            .map(WIKIPEDIA_FULL_URL_PATTERN::matcher)
-            .filter(Matcher::matches)
-            .map(it -> new WikipediaEntry(it.group(3), Utils.decodeUrl(it.group(5)).replace('_', ' ')));
+        return FunctionalUtil.or(
+            Optional.ofNullable(value)
+                .map(WIKIPEDIA_FULL_URL_PATTERN::matcher)
+                .filter(Matcher::matches)
+                .map(it -> new WikipediaEntry(it.group(3), Utils.decodeUrl(it.group(5)).replace('_', ' '))),
+            () -> Optional.ofNullable(value)
+                .map(WIKIPEDIA_ALTERNATIVE_URL_PATTERN::matcher)
+                .filter(Matcher::matches)
+                .flatMap(it -> {
+                    final String titlePrefix = "title=";
+                    return Arrays.stream(it.group(5).split("&"))
+                        .filter(param -> param != null && param.startsWith(titlePrefix))
+                        .map(param -> param.substring(titlePrefix.length()))
+                        .map(title -> new WikipediaEntry(it.group(3), Utils.decodeUrl(title).replace('_', ' ')))
+                        .findFirst();
+                })
+        );
     }
 
     public static WikipediaEntry parseTag(String key, String value) {
