@@ -1,13 +1,13 @@
 # Translations for the JOSM plugin 'wikipedia' (ru)
-# Copyright (C) 2018
+# Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Russian (https://www.transifex.com/josm/teams/2544/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -58,6 +58,9 @@ msgstr "Отменить"
 msgid "Change wikipedia tag?"
 msgstr "Изменить тег wikipedia?"
 
+msgid "Change {0}={1} to {2}"
+msgstr "Поменять {0}={1} на {2}"
+
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr ""
 "Проверка того, что wikipedia=* является интервики-ссылкой на wikidata=*"
@@ -82,12 +85,6 @@ msgid ""
 "Could not check for all wikipedia=* tags if they match the wikidata=* tag."
 msgstr ""
 "Не удалось проверить, все ли теги wikipedia=* соответствуют тегу wikidata=*."
-
-msgid ""
-"Could not check for all wikipedia=* tags if they redirect to another lemma."
-msgstr ""
-"Не удалось проверить, все ли теги wikipedia=* перенаправляют на другую "
-"лемму."
 
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "Не удалось проверить на наличие необычных классов в тегах wikidata=*."
@@ -202,10 +199,6 @@ msgstr "Ссылки"
 
 msgid "Load category"
 msgstr "Загрузка категории"
-
-msgid ""
-"Make sure that the wikipedia=* article is not redirecting to another lemma"
-msgstr "Убедитесь, что статья wikipedia=* не перенаправляет на другую лемму"
 
 msgid ""
 "Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "

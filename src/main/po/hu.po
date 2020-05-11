@@ -2,12 +2,12 @@
 # Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 1.1.1-15-g7d371af\n"
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 22:49+0000\n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Hungarian (https://www.transifex.com/josm/teams/2544/hu/)\n"
 "MIME-Version: 1.0\n"

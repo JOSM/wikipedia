@@ -2,12 +2,12 @@
 # Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 1.1.1-15-g7d371af\n"
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 22:49+0000\n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/josm/teams/2544/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -57,6 +57,12 @@ msgstr "取消"
 msgid "Change wikipedia tag?"
 msgstr "是否變更維基百科標籤？"
 
+msgid "Change {0}={1} to {2}"
+msgstr "改變 {0}={1} 變成 {2}"
+
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "檢查 wikipedia=* 標籤和次標籤格式"
+
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr "檢查 wikipedia=* 是 wikidata=* 提供的跨 wiki 連結"
 
@@ -82,8 +88,9 @@ msgid ""
 msgstr "無法檢查所有 wikipedia=* 標籤是否符合 wikidata=* 標籤。"
 
 msgid ""
-"Could not check for all wikipedia=* tags if they redirect to another lemma."
-msgstr "無法檢查所有 wikipedia=* 標籤是否重定向到其他地方。"
+"Could not check for all wikipedia=* tags if they redirect to another "
+"article."
+msgstr "無法檢查所有 wikipedia=* 標籤是否為其他條目的重定向。"
 
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "無法檢查 wikidata=* 標籤不尋常類型。"
@@ -92,6 +99,9 @@ msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
 msgstr "無法連線到 {0}，也許是網路問題或是網站斷線了（{1}：{2}）"
+
+msgid "Could not get all possible wikipedia sites over the internet."
+msgstr "無法透過網路取得所有可能的維基百科網站。"
 
 msgid "Could not validate all wikidata=* tags over the internet."
 msgstr "無法於線上驗證所有 wikidata=* 標籤。"
@@ -136,6 +146,9 @@ msgstr "編輯選擇的文字片段"
 
 msgid "Error"
 msgstr "錯誤"
+
+msgid "Error getting claims for entity!"
+msgstr "無法為輸入取得聲稱！"
 
 msgid "Failed to download labels for {0}!"
 msgstr "下載 {0} 的名稱失敗！"
@@ -188,6 +201,11 @@ msgstr "從選擇區域的中心，最近 2 公里，最遠 3 公里的教育機
 msgid "Invalid Q-ID! Cannot exist on Wikidata."
 msgstr "無效 Q-ID！在維基數據並不存在。"
 
+msgid ""
+"It looks like a wikipedia tag contains a URL. Use the format "
+"''‹language›:‹article title› instead!''"
+msgstr "看起來維基百科標籤含有 URL，請使用\"<語言>:<文章標籤>\"的格式來代替！"
+
 msgid "Item {0} does not exist!"
 msgstr "物件 {0} 並不存在！"
 
@@ -197,8 +215,18 @@ msgstr "缺少物件 {0}"
 msgid "Item {0} redirects to {1}"
 msgstr "物件 {0} 重定向至 {1}"
 
+msgid ""
+"Just checks the format of the Wikipedia tag (no validation if articles "
+"exist), with autofixes for when tag value is a URL"
+msgstr "只檢查維基百科標籤 (沒有檢查條目是否存在)，自動修正標籤是否是有效網址"
+
 msgid "Labels"
 msgstr "名稱"
+
+msgid ""
+"Language code ''{0}'' is not recognized! Can''t download Wikidata ID for tag"
+" ''{1}''!"
+msgstr "語言代碼 ''{0}'' 並不被認可！無法為  ''{1}'' 下載 Wikidata ID！"
 
 msgid "Links"
 msgstr "連結"
@@ -207,8 +235,8 @@ msgid "Load category"
 msgstr "載入分類"
 
 msgid ""
-"Make sure that the wikipedia=* article is not redirecting to another lemma"
-msgstr "確認 wikipedia=* 條目並沒有重定向至其他論點"
+"Make sure that the wikipedia=* article is not redirecting to another article"
+msgstr "確定 wikipedia=* 條目沒有重定向到其他條目"
 
 msgid ""
 "Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
@@ -324,11 +352,22 @@ msgstr "維基數據項目是重定向"
 msgid "The Wikipedia/Wikidata layer"
 msgstr "維基百科/維基數據圖層"
 
+msgid "The language prefix of wikipedia tags should be lowercase!"
+msgstr "維基百科標籤的語言前綴應該要小寫！"
+
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "數值「{0}」不是被允許的 wikipedia=* 標籤"
 
+msgid ""
+"The value of a wikipedia tag should be given as ‹language›:‹Article title› "
+"instead of the full URL"
+msgstr "維基百科標籤的數值，應當是 <語言>:<條目名>，而不是完整的網址"
+
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "brand:wikidata=* 標籤數值並不是有效的格式！"
+
+msgid "The wikipedia plugin tries to construct a malformed URL!: {0}"
+msgstr "維基百科外掛嘗試建構沒有作用的網址！: {0}"
 
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
@@ -355,8 +394,15 @@ msgid ""
 " more details."
 msgstr "在設定選開啟資訊（information）級的驗證器訊息以檢視更多細節。"
 
+msgid "Unknown Wikipedia language prefix ''{0}''!"
+msgstr "不知名的維基百科語言前綴 ''{0}''！"
+
 msgid "Unknown datatype!"
 msgstr "未知資料型態！"
+
+msgid ""
+"Use only the article title instead of a URL for wikipedia:‹language› tags"
+msgstr "wikipedia:<語言> 標籤，應只採用條目名稱，而不是整個網址"
 
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
@@ -411,6 +457,9 @@ msgstr "縮放至選擇區域"
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
+msgid "a new value (manual intervention needed due to language conflict)"
+msgstr "新數值 (因為語言衝突需要手動調整)"
+
 msgid "aliases"
 msgstr "別名"
 
@@ -452,6 +501,9 @@ msgstr "{0} 是 {1}（或其任何子類）的實例"
 
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} 不是有效的 Wikidata-ID"
+
+msgid "{0}=* tag should not have URL-encoded values."
+msgstr "{0}=* 標籤應該沒有網址型式的數值。"
 
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"

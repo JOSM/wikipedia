@@ -1,13 +1,13 @@
 # Translations for the JOSM plugin 'wikipedia' (de)
-# Copyright (C) 2018
+# Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: German (https://www.transifex.com/josm/teams/2544/de/)\n"
 "MIME-Version: 1.0\n"
@@ -60,6 +60,12 @@ msgstr "Abbrechen"
 msgid "Change wikipedia tag?"
 msgstr "Wikipedia-Tag ändern?"
 
+msgid "Change {0}={1} to {2}"
+msgstr "Ändere {0}={1} zu {2}"
+
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "Prüfe das Format von wikipedia=* Merkmalen und Unter-Merkmalen"
+
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr "Überprüfen, dass wikipedia=* ein Interwiki-Link von wikidata=* ist"
 
@@ -90,10 +96,11 @@ msgstr ""
 " Tag passen."
 
 msgid ""
-"Could not check for all wikipedia=* tags if they redirect to another lemma."
+"Could not check for all wikipedia=* tags if they redirect to another "
+"article."
 msgstr ""
-"Die Überprüfung, ob wikipedia=* Tags zu anderen Lemmata weiterleiten, ist "
-"fehlgeschlagen."
+"Konnte nicht für alle Wikipedia-Merkmale prüfen, ob sie zu einem anderen "
+"Lemma weiterleiten."
 
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr ""
@@ -105,6 +112,10 @@ msgid ""
 msgstr ""
 "Konnte nicht mit {0} verbinden, wahrscheinlich ein Netzwerkfehler oder die "
 "Website ist momentan offline ({1}: {2})"
+
+msgid "Could not get all possible wikipedia sites over the internet."
+msgstr ""
+"Konnte nicht alle verfügbaren Wikipedia-Seiten über das Internet abrufen."
 
 msgid "Could not validate all wikidata=* tags over the internet."
 msgstr ""
@@ -153,6 +164,9 @@ msgstr "Ausgewähltes Schnipsel bearbeiten"
 
 msgid "Error"
 msgstr "Fehler"
+
+msgid "Error getting claims for entity!"
+msgstr "Fehler beim Abrufen der Aussagen für das Wikdata-Objekt!"
 
 msgid "Failed to download labels for {0}!"
 msgstr "Fehler beim Herunterladen der Bezeichnungen für {0}!"
@@ -214,6 +228,13 @@ msgstr ""
 msgid "Invalid Q-ID! Cannot exist on Wikidata."
 msgstr "Ungültige Q-ID! Kann nicht auf Wikidata existieren."
 
+msgid ""
+"It looks like a wikipedia tag contains a URL. Use the format "
+"''‹language›:‹article title› instead!''"
+msgstr ""
+"Es sieht so aus, als beinhalte ein Wikipedia-Merkmal einen URL. Nutze "
+"stattdessen das Format ''‹Sprachkürzel›:‹Artikellemma›''!"
+
 msgid "Item {0} does not exist!"
 msgstr "Eintrag {0} existiert nicht!"
 
@@ -223,8 +244,22 @@ msgstr "Eintrag {0} fehlt"
 msgid "Item {0} redirects to {1}"
 msgstr "Eintrag {0} leitet auf {1} weiter"
 
+msgid ""
+"Just checks the format of the Wikipedia tag (no validation if articles "
+"exist), with autofixes for when tag value is a URL"
+msgstr ""
+"Prüft nur das Format der Wikipedia-Merkmale (keine Validierung, ob Artikel "
+"existieren), mit automatischer Auflösung falls ein Merkmalswert ein URL ist"
+
 msgid "Labels"
 msgstr "Bezeichnungen"
+
+msgid ""
+"Language code ''{0}'' is not recognized! Can''t download Wikidata ID for tag"
+" ''{1}''!"
+msgstr ""
+"Sprachkürzel ''{0}'' wird nicht erkannt! Kann die Wikidata-ID für Merkmal "
+"''{1}'' nicht herunterladen!"
 
 msgid "Links"
 msgstr "Links"
@@ -233,10 +268,10 @@ msgid "Load category"
 msgstr "Kategorie laden"
 
 msgid ""
-"Make sure that the wikipedia=* article is not redirecting to another lemma"
+"Make sure that the wikipedia=* article is not redirecting to another article"
 msgstr ""
-"Stelle sicher, dass der Artikel im wikipedia=* Tag nicht zu einem anderen "
-"Lemma weiterleitet"
+"Stelle sicher, dass das Lemma in wikipedia=* nicht zu einem anderen Lemma "
+"weiterleitet"
 
 msgid ""
 "Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
@@ -367,11 +402,25 @@ msgstr "Der Wikidata-Eintrag ist eine Weiterleitung"
 msgid "The Wikipedia/Wikidata layer"
 msgstr "Die Wikipedia/Wikidata-Ebene"
 
+msgid "The language prefix of wikipedia tags should be lowercase!"
+msgstr "Der Sprach-Präfix von wikipedia-Tags sollte kleingeschrieben werden!"
+
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "Der Wert ''{0}'' ist für das Tag wikipedia=* nicht erlaubt"
 
+msgid ""
+"The value of a wikipedia tag should be given as ‹language›:‹Article title› "
+"instead of the full URL"
+msgstr ""
+"Der Wert eines Wikipedia-Merkmals sollte statt als komplette URL im Format "
+"''‹Sprachkürzel›:‹Artikellemma›'' angegeben werden"
+
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "Der Wert des Merkmals brand:wikidata=* hat ein ungültiges Format!"
+
+msgid "The wikipedia plugin tries to construct a malformed URL!: {0}"
+msgstr ""
+"Die Wikipedia-Erweiterung versucht, einen ungültigen URL zu erstellen!: {0}"
 
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
@@ -407,8 +456,17 @@ msgstr ""
 "Schalte in den Einstellungen die unwichtigen Prüfergebnisse ein, um nähere "
 "Details zu sehen."
 
+msgid "Unknown Wikipedia language prefix ''{0}''!"
+msgstr "Unbekannter WIkipedia Sprachpräfix ''{0}''!"
+
 msgid "Unknown datatype!"
 msgstr "Unbekannter Datentyp"
+
+msgid ""
+"Use only the article title instead of a URL for wikipedia:‹language› tags"
+msgstr ""
+"Nutze für wikipedia:‹Sprache›-Merkmale nur das Artikel-Lemma statt eines "
+"URLs"
 
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
@@ -468,6 +526,10 @@ msgstr "Auf Auswahl zoomen"
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
+msgid "a new value (manual intervention needed due to language conflict)"
+msgstr ""
+"einem anderen Wert (manuelle Auflösung nötig, wegen eines Sprachkonflikts)"
+
 msgid "aliases"
 msgstr "auch bekannt als"
 
@@ -509,6 +571,9 @@ msgstr "{0} ist ein Exemplar von {1} (oder einer Unterklasse davon)"
 
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} ist keine gültige Wikidata-ID"
+
+msgid "{0}=* tag should not have URL-encoded values."
+msgstr "Merkmal {0}=* sollte keine URL-kodierten Werte enthalten."
 
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"

@@ -1,13 +1,13 @@
 # Translations for the JOSM plugin 'wikipedia' (pt_BR)
-# Copyright (C) 2018
+# Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia v1.1.1-12-gaf4f04c\n"
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 19:40+0000\n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/josm/teams/2544/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -133,6 +133,13 @@ msgstr "Item {0} não existe!"
 
 msgid "Item {0} is missing"
 msgstr "Item {0} ausente"
+
+msgid ""
+"Just checks the format of the Wikipedia tag (no validation if articles "
+"exist), with autofixes for when tag value is a URL"
+msgstr ""
+"Apenas verifica o formato da tag da Wikipedia (sem validação se houver "
+"artigos), com correções automáticas para quando o valor da tag for um URL"
 
 msgid "Labels"
 msgstr "Rótulos"

@@ -1,0 +1,352 @@
+# Translations for the JOSM plugin 'wikipedia' (nl)
+# Copyright (C) 2019
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
+"Language-Team: Dutch (https://www.transifex.com/josm/teams/2544/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' is een illegale taalcode!"
+
+msgid "Add Tag"
+msgstr "Tag toevoegen"
+
+msgid "Add Wikidata"
+msgstr "Wikigegevens toevoegen"
+
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Wikigegevens toevoegen voor taal ''{0}''"
+
+msgid "Add names from Wikipedia"
+msgstr "Voeg namen vanaf Wikipedia toe"
+
+msgid "Add new snippet"
+msgstr "Nieuwe snipper toevoegen"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Voegt aan de geselecteerde objecten een tag ''wikipedia'' toe die "
+"overeenkomt met dit artikel"
+
+msgid "Available in local dataset"
+msgstr "beschikbaar in lokale gegevensset"
+
+msgid "Available via WIWOSM server"
+msgstr "Beschikbaar via server WIWOSM"
+
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr "Kan website niet openen {0} in de browser! Foutbericht: {1}"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Change wikipedia tag?"
+msgstr "Verander Wiki-tag"
+
+msgid "Check wikipedia=* is interwiki link of wikidata=*"
+msgstr "Controleer wikipedia=* is interwiki link van wikidata=*"
+
+msgid "Check wikipedia=* is not a redirect"
+msgstr "Controleer wikipedia=* is niet een redirect"
+
+msgid "Contacting Server..."
+msgstr "Met server verbinden..."
+
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Kopieert de sjabloon {0} naar het klembord van het systeem, geïnstantieerd "
+"met de coördinaten van de eerste geselecteerde knoop"
+
+msgid "Copy {0} template"
+msgstr "Kopieer sjabloon {0}"
+
+msgid "Delete selected snippet"
+msgstr "Geselecteerde snipper verwijderen"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Dubbelklik op een item om te zoeken naar het object met de artikelnaam (en "
+"centreer coördinaat)"
+
+msgid "Download from Sophox API"
+msgstr "Downloaden van Sophox API"
+
+msgid "Download referrers (parent relations)"
+msgstr "Download verwijzers (ouderrelaties)"
+
+msgid "Download relation members"
+msgstr "Downloaden van leden van relatie"
+
+msgid "Edit selected snippet"
+msgstr "Geselecteerde snipper bewerken"
+
+msgid "Error"
+msgstr "Fout"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Ophalen Wikigegevens-ID''s"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Ophalen Wikigegevens-ID''s met behulp van de tag ''wikipedia''"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "Haal artikelen van Wikipedia op met coördinaten"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Haalt een lijst op van alle artikelen op Wikipedia van een categorie"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Haalt alle coördinaten van Wikidata in de huidige weergave op"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "Haalt alle coördinaten van Wikipedia op voor de huidige weergave"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Haalt interwiki-koppelingen op vanaf Wikipedia om diverse tags voor namen "
+"toe te voegen"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Ophalen Wikigegevens-ID''s"
+
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Ophalen {0} Wikigegevens-ID voor taal ''{1}''"
+msgstr[1] "Ophalen {0} Wikigegevens-ID''s voor taal ''{1}''"
+
+msgid ""
+"Find OSM objects linked with wikidata items of a class that is untypical for"
+" OSM"
+msgstr ""
+"Vind OSM objecten gelinkt met wikidata van een klasse dat atypisch is voor "
+"OSM"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Zoek naar plaatsen voor onderwijs op ten minste 2 km afstand en ten hoogste "
+"3 km van het centrum van de selectie"
+
+msgid "Invalid Q-ID! Cannot exist on Wikidata."
+msgstr "Ongeldige Q-ID! Kan niet bestaan op wikidata"
+
+msgid ""
+"It looks like a wikipedia tag contains a URL. Use the format "
+"''‹language›:‹article title› instead!''"
+msgstr ""
+"Het lijkt er op dat een wikipedia-tag een URL bevat. Gebruik daarvan het "
+"formaat ''‹taal›:‹artikel titel›!''"
+
+msgid "Item {0} does not exist!"
+msgstr "Item {0} bestaat niet!"
+
+msgid "Item {0} is missing"
+msgstr "Item {0} ontbreekt"
+
+msgid "Load category"
+msgstr "Categorie laden"
+
+msgid "No Wikidata ID found for: {0}"
+msgstr "Geen Wikigegevens-ID gevonden voor: {0}"
+
+msgid "Not linked yet"
+msgstr "Nog niet gekoppeld"
+
+msgid "Open Article"
+msgstr "Open artikel"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr ""
+"Opent het artikel van Wikipedia van het geselecteerde item in een browser"
+
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "Overschrijf ''{0}'' tag {1} van {2} met nieuwe waarde ''{3}''?"
+msgstr[1] "Overschrijf ''{0}'' tags {1} van {2} met nieuwe waarde ''{3}''?"
+
+msgid "Overwrite key"
+msgstr "Sleutel overschrijven"
+
+msgid "Paste Wikipedia articles"
+msgstr "Plak Wikipedia-artikels"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Plakt artikelen van Wikipedia vanaf het Klembord van het systeem"
+
+msgid "Please select a download area first."
+msgstr "Selecteer eerst een gebied waarvan u gegevens wilt downloaden"
+
+msgid "Search Wikidata items"
+msgstr "Zoeken in items van Wikidata"
+
+msgid "Search Wikipedia category"
+msgstr "Zoeken in categorie van Wikipedia"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr ""
+"Selecteer dit als de leden van een relatie ook moeten worden gedownload"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Selecteer dit als de objecten die naar het object verwijzen ook moeten "
+"worden gedownload, dat zijn ouderrelaties en voor knopen ook nog ouderwegen"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Stelt de standaardtaal in voor de artikelen van Wikipedia"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Sophox snipperlijst tonen/verbergen"
+
+msgid "Sophox server"
+msgstr "Sophox server"
+
+msgid "Target key: "
+msgstr "Doel sleutel: "
+
+msgid "The Wikipedia/Wikidata layer"
+msgstr "De Wikipedia/Wikidata laag"
+
+msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
+msgstr "De waarde ''{0}'' is niet toegestaan voor de wikipedia=* tag"
+
+msgid "Unknown datatype!"
+msgstr "Onbekend datatype"
+
+msgid ""
+"Use only the article title instead of a URL for wikipedia:‹language› tags"
+msgstr ""
+"Gebruik enkel het artikeltitel in de plaats van een URL voor "
+"wikipedia:‹taal› tags"
+
+msgid ""
+"When reading the JSON response from the {0}, an error occured! ({1}: {2})"
+msgstr ""
+"Bij het lezen van het JSON-antwoord van de {0}, een fout is opgetreden! "
+"({1}: {2})"
+
+msgid "Wiki layer"
+msgstr "Wiki-laag"
+
+msgid "Wikidata Info"
+msgstr "Wikidata-info"
+
+msgid "Wikidata Info: {0}"
+msgstr "Wikidata-info: {0}"
+
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "Wikidata-item en Wikipedia-artikel komen niet overeen!"
+
+msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
+msgstr ""
+"Wikidata item {0} is niet geassocieerd met Wikipedia artikel {1} ({2})"
+
+msgid "Wikidata items in viewport"
+msgstr "Wikidata items in viewport"
+
+msgid ""
+"Wikidata value is of unusual type for the wikidata=* tag on OSM objects"
+msgstr ""
+"Wikidata-waarde is een ongebruikelijk type voor de wikidata=* tag op OSM-"
+"objecten"
+
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
+msgstr "Wikipedia-artikel ''{0}'' omgeleid naar ''{1}''"
+
+msgid "Wikipedia article is a redirect"
+msgstr "Wikipedia-artikel is een omleiding"
+
+msgid "Wikipedia articles in viewport (for language {0})"
+msgstr "Wikipedia-artikelen in viewport (voor taal {0})"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia-taal"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "Wikipedia-tag heeft ongeldige indeling!"
+
+msgid "Your saved queries:"
+msgstr "uw opgeslagen query''s:"
+
+msgid "Zoom to selection"
+msgstr "Op selectie inzoomen"
+
+msgid "[Wiki] "
+msgstr "[Wiki]"
+
+msgid "a new value (manual intervention needed due to language conflict)"
+msgstr "een nieuwe waarde (handmatige interventie nodig vanwege taalconflict)"
+
+msgid "aliases"
+msgstr "aliassen"
+
+msgid "all Wikipedia articles in Category"
+msgstr "alle Wikipedia-artikelen in categorie"
+
+msgid "clipboard"
+msgstr "klembord"
+
+msgid "coordinates"
+msgstr "coördinaten"
+
+msgid "description"
+msgstr "beschrijving"
+
+msgid "has no Q-ID"
+msgstr "heeft geen Q-ID"
+
+msgid "help"
+msgstr "help"
+
+msgid "label"
+msgstr "label"
+
+msgid "language"
+msgstr "taal"
+
+msgid "language code"
+msgstr "taalcode"
+
+msgid "wikidata=* item exists"
+msgstr "wikidata=* item bestaat"
+
+msgid "{0} (malformed site URL)"
+msgstr "{0} (onjuiste site-URL)"
+
+msgid "{0} is an instance of {1} (or any subclass thereof)"
+msgstr "{0} is een instantie van {1} (of een subklasse daarvan)"
+
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} is geen geldige Wikidata-ID"
+
+msgid "{0}=* tag should not have URL-encoded values."
+msgstr "{0}=* tag zou geen URL-gecodeerde waarden hebben"
+
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr ""
+"Vereenvoudigt het koppelen van objecten van OSM aan artikelen van Wikipedia "
+"en items van Wikidata"

@@ -1,0 +1,209 @@
+# Translations for the JOSM plugin 'wikipedia' (tr)
+# Copyright (C) 2019
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
+"Language-Team: Turkish (https://www.transifex.com/josm/teams/2544/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Add Tag"
+msgstr "Etiket Ekle"
+
+msgid "Add Wikidata"
+msgstr "Viki verisi ekle"
+
+msgid "Add names from Wikipedia"
+msgstr "Vikipedi'den isimler ekle"
+
+msgid "Add new snippet"
+msgstr "Yeni kod parçacığı ekle"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Seçilen nesnelere bu makaleye karşılık gelen bir ''vikipedi'' etiketi ekler"
+
+msgid "Available in local dataset"
+msgstr "Yerel veri kümesinde mevcuttur"
+
+msgid "Available via WIWOSM server"
+msgstr "WIWOSM sunucusu aracılığıyla kullanılabilir"
+
+msgid "Cancel"
+msgstr "İptal et"
+
+msgid "Change wikipedia tag?"
+msgstr "Vikipedi etiketini değiştir?"
+
+msgid "Contacting Server..."
+msgstr "Sunucuyla Temas Kuruluyor..."
+
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr "İsimler eklenemedi. Vikipedi etiketi tanınmıyor!"
+
+msgid "Could not get all possible wikipedia sites over the internet."
+msgstr "Tüm olası wikipedia siteleri internet üzerinden alınamadı."
+
+msgid "Delete selected snippet"
+msgstr "Seçili kod parçacığını sil"
+
+msgid "Download elements"
+msgstr "Öğeler indiriliyor"
+
+msgid "Download from Sophox API"
+msgstr "Sophox API'sinden indir"
+
+msgid "Download referrers (parent relations)"
+msgstr "Yönlendirenleri indir (üst ilişkiler)"
+
+msgid "Download relation members"
+msgstr "İlişkili üyeleri indir"
+
+msgid "Edit selected snippet"
+msgstr "Seçili kod parçacığını düzenle"
+
+msgid "Error"
+msgstr "Hata"
+
+msgid "Error getting claims for entity!"
+msgstr "Varlık için talepleri almada hata!"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Birkaç ad etiketi eklemek için Vikipedi'den interwiki bağlantılarını getirir"
+
+msgid "Labels"
+msgstr "Etiketler"
+
+msgid "Links"
+msgstr "Bağlantılar"
+
+msgid "Load category"
+msgstr "Sınıf yükle"
+
+msgid "No Wikidata item is selected!"
+msgstr "Hiçbir Viki verisi öğesi seçilmedi!"
+
+msgid "Not linked yet"
+msgstr "Henüz bağlantılı değil"
+
+msgid "Open Article"
+msgstr "Makale Aç"
+
+msgid "Paste Wikipedia articles"
+msgstr "Vikipedi makalelerini yapıştır"
+
+msgid "Please select a download area first."
+msgstr "Lütfen ilkin bir indirme alanı seçiniz"
+
+msgid "Search Wikidata items"
+msgstr "Viki verisi öğelerini ara"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Bir ilişkinin üyelerinin de indirilmesi gerekip gerekmediğini seçin"
+
+msgid "Show properties of the selected Wikidata item"
+msgstr "Seçilen Viki verisi öğesinin özelliklerini göster"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Göster/gizle Sophox kod parçacığı listesini"
+
+msgid "Sophox server"
+msgstr "Sophox sunucusu"
+
+msgid "Statements"
+msgstr "Açıklamalar"
+
+msgid "Target key: "
+msgstr "Hedef anahtar:"
+
+msgid "The Wikidata item is a redirect"
+msgstr "Viki verisi öğesi bir yeniden yönlendirmedir"
+
+msgid "The Wikipedia/Wikidata layer"
+msgstr "Vikipedi/Viki verisi katmanı"
+
+msgid ""
+"Turn on the informational level validator messages in the preferences to see"
+" more details."
+msgstr ""
+"Daha fazla ayrıntıları görmek için tercihlerden bilgilendirme düzeyi "
+"onaylayıcı iletilerini açın."
+
+msgid "Unknown datatype!"
+msgstr "Bilinmeyen veri türü!"
+
+msgid "Wiki layer"
+msgstr "Viki katmanı"
+
+msgid "Wikidata Info"
+msgstr "Viki verisi bilgisi"
+
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "Vikipedi öğesi ve Vikipedi makalesi eşleşmiyor"
+
+msgid "Wikidata items in viewport"
+msgstr "Görüş alanındaki Viki verisi öğeleri"
+
+msgid "Wikipedia"
+msgstr "Vikipedi"
+
+msgid "Wikipedia article is a redirect"
+msgstr "Vikipedi makalesi bir yeniden yönlendirmedir"
+
+msgid "Wikipedia language"
+msgstr "Vikipedi dili"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "Vikipedi etiketi geçersiz biçimde!"
+
+msgid "Your saved queries:"
+msgstr "Kayıtlı sorgularınız:"
+
+msgid "Zoom to selection"
+msgstr "Seçime yakınlaş"
+
+msgid "[Wiki] "
+msgstr "[Viki] "
+
+msgid "a new value (manual intervention needed due to language conflict)"
+msgstr "yeni bir değer (dil çatışması nedeniyle elle müdahale gerekir)"
+
+msgid "aliases"
+msgstr "takma adları"
+
+msgid "all Wikipedia articles in Category"
+msgstr "Kategorideki tüm Vikipedi makaleleri"
+
+msgid "clipboard"
+msgstr "kesme panosu"
+
+msgid "coordinates"
+msgstr "yerlemler"
+
+msgid "description"
+msgstr "tanım"
+
+msgid "help"
+msgstr "yardım"
+
+msgid "label"
+msgstr "etiket"
+
+msgid "language"
+msgstr "dil"
+
+msgid "language code"
+msgstr "dil izgesi"

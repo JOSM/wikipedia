@@ -2,12 +2,12 @@
 # Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 1.1.1-15-g7d371af\n"
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 22:49+0000\n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Italian (https://www.transifex.com/josm/teams/2544/it/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgid "Cancel"
 msgstr "Annulla"
 
 msgid "Change wikipedia tag?"
-msgstr "Cambiare l'etichetta di wikipedia?"
+msgstr "Cambiare l’etichetta di wikipedia?"
 
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr "Controllare che wikipedia=* colleghi internamente a wikidata=*"
@@ -88,12 +88,6 @@ msgid ""
 msgstr ""
 "Impossibile controllare che tutte le etichette wikipedia=* corrispondano a "
 "quelle wikidata=*."
-
-msgid ""
-"Could not check for all wikipedia=* tags if they redirect to another lemma."
-msgstr ""
-"Impossibile controllare che tutte le etichette wikipedia=* puntino ad un "
-"altro lemma."
 
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "Impossibile controllare le classi non usuali nei tags wikidata=* ."
@@ -155,7 +149,7 @@ msgid "Failed to download labels for {0}!"
 msgstr "Fallito lo scaricamento delle etichette per {0}!"
 
 msgid "Failed to download sitelinks for Wikidata item {0}!"
-msgstr "Fallito lo scaricamento dei collegamenti per l'oggetto Wikidata {0}!"
+msgstr "Fallito lo scaricamento dei collegamenti per l’oggetto Wikidata {0}!"
 
 msgid "Failed to download statements for Wikidata item {0}!"
 msgstr ""
@@ -231,10 +225,6 @@ msgstr "Collegamenti"
 
 msgid "Load category"
 msgstr "Carica categoria"
-
-msgid ""
-"Make sure that the wikipedia=* article is not redirecting to another lemma"
-msgstr "Controllare che l’articolo wikipedia=* non punti ad un altro lemma"
 
 msgid ""
 "Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
@@ -333,7 +323,7 @@ msgstr ""
 "Dopo: wikipedia={0}:{2}"
 
 msgid "Show properties of the selected Wikidata item"
-msgstr "Mostra le proprietà dell'oggetto Wikidata selezionato"
+msgstr "Mostra le proprietà dell’oggetto Wikidata selezionato"
 
 msgid "Show/hide Sophox snippet list"
 msgstr "Mostra/nascondi la lista dei programmi Sophox"
@@ -365,7 +355,7 @@ msgstr ""
 "elemento esistente di Wikidata oppure rimuovi l’etichetta Wikidata."
 
 msgid "The Wikidata item is a redirect"
-msgstr "L'elemento Wikidata è un redirect"
+msgstr "L’elemento Wikidata è un redirect"
 
 msgid "The Wikipedia/Wikidata layer"
 msgstr "Il livello Wikipedia/Wikidata"
@@ -387,7 +377,7 @@ msgid "The {0} responded with an unexpected response code: {1} {2}"
 msgstr "{0} ha risposto con un codice di uscita inaspettato: {1} {2}"
 
 msgid "There is no Wikipedia site for language ''{0}''!"
-msgstr "Non c'è alcun sito Wikipedia per la lingua ''{0}''!"
+msgstr "Non c’è alcun sito Wikipedia per la lingua ''{0}''!"
 
 msgid ""
 "This check queries Wikidata to find those OSM objects that are linked to "
@@ -428,11 +418,11 @@ msgid "Wikidata Info: {0}"
 msgstr "Informazioni Wikidata: {0}"
 
 msgid "Wikidata item and Wikipedia article do not match!"
-msgstr "L'oggetto Wikidata e l'articolo di Wikipedia non corrispondono!"
+msgstr "L’oggetto Wikidata e l’articolo di Wikipedia non corrispondono!"
 
 msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
 msgstr ""
-"L'oggetto Wikidata {0} non è associato con l'articolo di Wikipedia {1} ({2})"
+"L’oggetto Wikidata {0} non è associato con l’articolo di Wikipedia {1} ({2})"
 
 msgid "Wikidata items in viewport"
 msgstr "Oggetti Wikidata nell’area di visualizzazione"
@@ -447,10 +437,10 @@ msgid "Wikipedia"
 msgstr "Wikipedia"
 
 msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
-msgstr "L'articolo di Wikipedia ''{0}'' è un redirect a ''{1}''"
+msgstr "L’articolo di Wikipedia ''{0}'' è un redirect a ''{1}''"
 
 msgid "Wikipedia article is a redirect"
-msgstr "L'articolo di Wikipedia è un redirect "
+msgstr "L’articolo di Wikipedia è un redirect "
 
 msgid "Wikipedia articles in viewport (for language {0})"
 msgstr "Articoli Wikipedia nell’area di visualizzazione (per la lingua {0})"
@@ -501,13 +491,13 @@ msgid "language code"
 msgstr "codice lingua"
 
 msgid "wikidata=* item exists"
-msgstr "wikidata= l'elemento * esiste"
+msgstr "L’elemento wikidata=* esiste"
 
 msgid "{0} (malformed site URL)"
 msgstr "{0} (indirizzo web errato)"
 
 msgid "{0} is an instance of {1} (or any subclass thereof)"
-msgstr "{0} è un'istanza di {1} (o di ogni sua sottoclasse)"
+msgstr "{0} è un’istanza di {1} (o di una sua sottoclasse)"
 
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} non è un valido ID di Wikidata"

@@ -2,12 +2,12 @@
 # Copyright (C) 2019
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 1.1.1-15-g7d371af\n"
+"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 22:49+0000\n"
+"POT-Creation-Date: 2019-11-28 12:57+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Asturian (https://www.transifex.com/josm/teams/2544/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -59,6 +59,12 @@ msgstr "Encaboxar"
 msgid "Change wikipedia tag?"
 msgstr "¿Camudar la etiqueta wikipedia?"
 
+msgid "Change {0}={1} to {2}"
+msgstr "Cambiar {0}={1} a {2}"
+
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "Comprobar el formatu d'etiquetes y subetiquetes wikipedia=*"
+
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr "Comprobar que wikipedia=* ye un enllaz interwiki de wikidata=*"
 
@@ -77,6 +83,9 @@ msgstr ""
 
 msgid "Copy {0} template"
 msgstr "Copiar plantía {0}"
+
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr "Nun pudieron añadise nomes. La etiqueta Wikipedia nun se reconoz"
 
 msgid ""
 "Double click on item to search for object with article name (and center "
