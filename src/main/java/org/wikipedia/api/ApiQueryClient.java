@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import org.apache.commons.compress.utils.IOUtils;
-import org.apache.commons.jcs.engine.behavior.ICacheElement;
+import org.apache.commons.jcs3.engine.behavior.ICacheElement;
 import org.openstreetmap.josm.gui.bugreport.BugReportDialog;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.I18n;

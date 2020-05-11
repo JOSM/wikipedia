@@ -2,7 +2,7 @@
 package org.wikipedia;
 
 import java.io.File;
-import org.apache.commons.jcs.access.CacheAccess;
+import org.apache.commons.jcs3.access.CacheAccess;
 import org.openstreetmap.josm.data.cache.JCSCacheManager;
 import org.openstreetmap.josm.spi.preferences.Config;
 
