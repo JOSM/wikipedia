@@ -92,6 +92,7 @@ tasks.processResources {
 archivesBaseName = "wikipedia"
 josm {
   manifest {
+    oldVersionDownloadLink 14149, "v1.1.3", new URL("https://josm.gitlab.io/plugin/wikipedia/dist/v1.1.3/wikipedia.jar")
     oldVersionDownloadLink 13927, "v1.1.0", new URL("https://josm.gitlab.io/plugin/wikipedia/dist/v1.1.0/wikipedia.jar")
     oldVersionDownloadLink 13597, "v1.0.1", new URL("https://github.com/JOSM/wikipedia/releases/download/v1.0.1/wikipedia.jar")
     oldVersionDownloadLink 12900, "34109", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=34113")
