@@ -1,8 +1,8 @@
 <ivy-module version="2.0">
   <info organisation="org.openstreetmap.josm.plugins" module="wikipedia"/>
   <dependencies>
-    <dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.10.1"/>
-    <dependency org="org.wikidata.wdtk" name="wdtk-wikibaseapi" rev="0.11.0"/>
-    <dependency org="org.wikidata.wdtk" name="wdtk-dumpfiles" rev="0.11.0"/>
+    <dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.11.0"/>
+    <dependency org="org.wikidata.wdtk" name="wdtk-wikibaseapi" rev="0.11.1"/>
+    <dependency org="org.wikidata.wdtk" name="wdtk-dumpfiles" rev="0.11.1"/>
   </dependencies>
 </ivy-module>
