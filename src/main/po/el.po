@@ -1,13 +1,18 @@
 # Translations for the JOSM plugin 'wikipedia' (el)
-# Copyright (C) 2019
+# Copyright (C) 2020
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
+# FIRST AUTHOR, YEAR.
+#
+# Translators:
+# Florian Schäfer, 2018
+# Gerasimos Maris, 2018
+# Simon Legner, 2018
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
+"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 12:57+0000\n"
+"POT-Creation-Date: 2020-05-24 18:27+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Greek (https://www.transifex.com/josm/teams/2544/el/)\n"
 "MIME-Version: 1.0\n"

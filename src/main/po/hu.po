@@ -1,13 +1,21 @@
 # Translations for the JOSM plugin 'wikipedia' (hu)
-# Copyright (C) 2019
+# Copyright (C) 2020
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
+# FIRST AUTHOR, YEAR.
+#
+# Translators:
+# Simon Legner, 2018
+# Florian Schäfer, 2018
+# Gábor Babos, 2018
+# Balázs Meskó, 2018
+# misibacsi, 2019
+# Buggi, 2020
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
+"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 12:57+0000\n"
+"POT-Creation-Date: 2020-05-24 18:27+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Hungarian (https://www.transifex.com/josm/teams/2544/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -161,7 +169,7 @@ msgid "Item {0} is missing"
 msgstr "A(z) ''{0}'' tétel hiányzik"
 
 msgid "Item {0} redirects to {1}"
-msgstr "{0} tétel egy átirányítás ide:  {1}"
+msgstr "{0} tétel egy átirányítás ide: {1}"
 
 msgid "Labels"
 msgstr "Feliratok"
@@ -255,8 +263,11 @@ msgstr "''{0}'' érték nincs megengedve a wikipedia=* címke számára"
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "A brand:wikidata=* címke értéke érvénytelen formátumú"
 
+msgid "Unknown Wikipedia language prefix ''{0}''!"
+msgstr "Ismeretlen Wikipédia nyelv prefixum \"{0}\"!"
+
 msgid "Unknown datatype!"
-msgstr "Ismeretlen adattípus"
+msgstr "Ismeretlen adattípus!"
 
 msgid "Wiki layer"
 msgstr "Wiki réteg"
@@ -290,7 +301,7 @@ msgid "Wikipedia language"
 msgstr "Wikipédia nyelve"
 
 msgid "Wikipedia tag has invalid format!"
-msgstr "Wikipédia címke érvénytelen formátummal."
+msgstr "A Wikipédia címke érvénytelen formátumú!"
 
 msgid "Your saved queries:"
 msgstr "Az elmentett lekérdezéseid:"
@@ -302,10 +313,10 @@ msgid "[Wiki] "
 msgstr "[Wiki] "
 
 msgid "all Wikipedia articles in Category"
-msgstr "minden Wikipédia cikk a  kategóriában"
+msgstr "minden Wikipédia cikk a kategóriában"
 
 msgid "clipboard"
-msgstr "Vágólap"
+msgstr "vágólap"
 
 msgid "coordinates"
 msgstr "koordináták"

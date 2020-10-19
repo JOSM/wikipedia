@@ -1,13 +1,18 @@
 # Translations for the JOSM plugin 'wikipedia' (uk)
 # Copyright (C) 2020
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
+# FIRST AUTHOR, YEAR.
+#
+# Translators:
+# fayçal fatihi, 2018
+# Florian Schäfer, 2018
+# Andrey Golovin, 2020
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 54b72dd\n"
+"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-14 13:07+0000\n"
+"POT-Creation-Date: 2020-05-24 18:27+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Ukrainian (https://www.transifex.com/josm/teams/2544/uk/)\n"
 "MIME-Version: 1.0\n"

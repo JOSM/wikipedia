@@ -1,13 +1,21 @@
 # Translations for the JOSM plugin 'wikipedia' (nl)
-# Copyright (C) 2019
+# Copyright (C) 2020
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
+# FIRST AUTHOR, YEAR.
+#
+# Translators:
+# Simon Legner, 2018
+# DiGro, 2018
+# Florian Schäfer, 2018
+# Ruben Himpe, 2020
+# John Falter, 2020
+# K v Hoof, 2020
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 335c76a\n"
+"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 12:57+0000\n"
+"POT-Creation-Date: 2020-05-24 18:27+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Dutch (https://www.transifex.com/josm/teams/2544/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -56,6 +64,12 @@ msgstr "Annuleren"
 msgid "Change wikipedia tag?"
 msgstr "Verander Wiki-tag"
 
+msgid "Change {0}={1} to {2}"
+msgstr "Wijzig {0}={1} naar {2}"
+
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "Controleer opmaak van wikipedia=*-tags en -subtags"
+
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr "Controleer wikipedia=* is interwiki link van wikidata=*"
 
@@ -75,6 +89,38 @@ msgstr ""
 msgid "Copy {0} template"
 msgstr "Kopieer sjabloon {0}"
 
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr "Kan geen namen toevoegen. Wikipedia-tag is niet herkend!"
+
+msgid ""
+"Could not check for all wikipedia=* tags if they match the wikidata=* tag."
+msgstr ""
+"Kan niet alle van wikipedia=*-tags controleren of ze overeenkomen met de "
+"wikidata=*-tag."
+
+msgid ""
+"Could not check for all wikipedia=* tags if they redirect to another "
+"article."
+msgstr ""
+"Kan niet alle van wikipedia=*-tags controleren of ze doorverwijzen naar een "
+"ander artikel."
+
+msgid "Could not check for unusual classes in wikidata=* tags."
+msgstr "Kan niet controleren op ongebruikelijke classes in wikidata=*-tags."
+
+msgid ""
+"Could not connect to the {0}, probably a network issue or the website is "
+"currently offline ({1}: {2})"
+msgstr ""
+"Kan niet verbinden met de {0}, waarschijnlijk een netwerkprobleem of de "
+"website is momenteel offline  ({1}: {2})"
+
+msgid "Could not get all possible wikipedia sites over the internet."
+msgstr "Kan niet alle Wikipedia-sites vinden op internet."
+
+msgid "Could not validate all wikidata=* tags over the internet."
+msgstr "Kan niet alle wikidata=*-tags valideren op internet."
+
 msgid "Delete selected snippet"
 msgstr "Geselecteerde snipper verwijderen"
 
@@ -85,8 +131,17 @@ msgstr ""
 "Dubbelklik op een item om te zoeken naar het object met de artikelnaam (en "
 "centreer coördinaat)"
 
+msgid "Download all elements from one of {0} sources"
+msgstr "Download alle elementen van van één van {0} bronnen."
+
+msgid "Download elements"
+msgstr "Download elementen"
+
 msgid "Download from Sophox API"
 msgstr "Downloaden van Sophox API"
+
+msgid "Download labels for {0}…"
+msgstr "Download labels voor {0}..."
 
 msgid "Download referrers (parent relations)"
 msgstr "Download verwijzers (ouderrelaties)"

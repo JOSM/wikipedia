@@ -1,0 +1,520 @@
+# Translations for the JOSM plugin 'wikipedia' (ja)
+# Copyright (C) 2020
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR, YEAR.
+#
+# Translators:
+# Simon Legner, 2018
+# Kiyoshi Tashiro, 2018
+# Florian Schäfer, 2018
+# jun meguro, 2019
+# Hiroshi Miura, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
+"Language-Team: Japanese (https://www.transifex.com/josm/teams/2544/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' は不正な言語コードです！"
+
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} 個のアイテム,   {2} 中の {1}を処理中)"
+
+msgid "Add Tag"
+msgstr "タグを追加"
+
+msgid "Add Wikidata"
+msgstr "Wikidata を追加"
+
+msgid "Add Wikidata for language ''{0}''"
+msgstr "''{0}'' の Wikideta を追加"
+
+msgid "Add names from Wikipedia"
+msgstr "Wikipediaから名前を追加"
+
+msgid "Add new snippet"
+msgstr "新しいスニペットを追加"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr "この文書に対応する選択されたオブジェクトに''wikipedia''タグを追加します"
+
+msgid "Available in local dataset"
+msgstr "ローカルデータセットで有効"
+
+msgid "Available via WIWOSM server"
+msgstr "WIWOSMサーバーで有効"
+
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr "Webサイト{0}をブラウザで開けません!エラーメッセージ:{1}"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Change wikipedia tag?"
+msgstr "wikipediaのタグを変更しますか？"
+
+msgid "Change {0}={1} to {2}"
+msgstr "{0}={1}を{2}に変更"
+
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "wikipedia=*タグとサブタグの書式をチェック"
+
+msgid "Check wikipedia=* is interwiki link of wikidata=*"
+msgstr "wikipedia=*はwikidata=*のinterwikiリンクです。"
+
+msgid "Check wikipedia=* is not a redirect"
+msgstr "要確認 wikipedia=* はリダイレクトされません。"
+
+msgid "Contacting Server..."
+msgstr "サーバーに接続中..."
+
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr "最初に選択されたノードの座標を例に、{0}のテンプレートをシステムのクリップボードにコピーする"
+
+msgid "Copy {0} template"
+msgstr "{0}のテンプレートをコピー"
+
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr "名前を追加できませんでした。Wikipediaのタグが認識されません!"
+
+msgid ""
+"Could not check for all wikipedia=* tags if they match the wikidata=* tag."
+msgstr "wikidata=* タグとマッチする wikipedia=* タグのチェックを全て行うことができませんでした。"
+
+msgid ""
+"Could not check for all wikipedia=* tags if they redirect to another "
+"article."
+msgstr "別の記事にリダイレクトする場合があり、すべてのwikipedia=*タグをチェックすることはできませんでした。"
+
+msgid "Could not check for unusual classes in wikidata=* tags."
+msgstr "wikidata=*タグで異常なクラスをチェックできませんでした。"
+
+msgid ""
+"Could not connect to the {0}, probably a network issue or the website is "
+"currently offline ({1}: {2})"
+msgstr "{0}に接続できませんでした。ネットワークの問題か、Webサイトが現在オフラインになっている可能性があります({1}: {2})"
+
+msgid "Could not get all possible wikipedia sites over the internet."
+msgstr "インターネット上のWikipediaサイトの一覧を取得できませんでした。"
+
+msgid "Could not validate all wikidata=* tags over the internet."
+msgstr "インターネット上で、wikidata=*タグを検証できませんでした。"
+
+msgid "Delete selected snippet"
+msgstr "選択したスニペットを削除"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr "ダブルクリックで記事名(と中心のノード)でオブジェクトを検索"
+
+msgid "Download all elements from one of {0} sources"
+msgstr "いずれかの{0}ソースからすべての要素をダウンロード"
+
+msgid "Download elements"
+msgstr "要素のダウンロード"
+
+msgid "Download from Sophox API"
+msgstr "Sophox APIからのダウンロード"
+
+msgid "Download labels for {0}…"
+msgstr "{0}のラベルをダウンロード..."
+
+msgid "Download referrers (parent relations)"
+msgstr "参照元(親リレーション)をダウンロード"
+
+msgid "Download relation members"
+msgstr "リレーションメンバーをダウンロード"
+
+msgid "Download sitelinks for {0}…"
+msgstr "{0}のサイトリンクをダウンロード..."
+
+msgid "Download statements for {0}…"
+msgstr "{0}のステートメントをダウンロード..."
+
+msgid "Downloading entries with geo coordinates failed: {0}"
+msgstr "地理座標を含むエントリのダウンロードに失敗しました:{0}"
+
+msgid "Edit selected snippet"
+msgstr "選択されたスニペットを編集"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Error getting claims for entity!"
+msgstr "エンティティの要求の取得中にエラーが発生しました!"
+
+msgid "Failed to download labels for {0}!"
+msgstr "{0}のラベルをダウンロードできませんでした!"
+
+msgid "Failed to download sitelinks for Wikidata item {0}!"
+msgstr "Wikidataアイテム{0}のサイトリンクをダウンロードできませんでした!"
+
+msgid "Failed to download statements for Wikidata item {0}!"
+msgstr "Wikidataアイテム{0}のステートメントをダウンロードできませんでした!"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Wikidata IDを検索"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "''wikipedia'' タグを使用して Wikidata ID を検索"
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "座標からWikipediaの記事を検索"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "カテゴリのWikipediaの全記事を検索"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "現在のビューのすべての座標をWikidataから取得します"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "現在のビューのすべての座標をWikipedia上で取得します"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr "該当するnameタグを追加するためにWikipediaからインターウィキリンクを探す"
+
+msgid "Fetching Wikidata IDs"
+msgstr "Wikidata ID を検索"
+
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "言語 ''{1}'' の {0} 個のWikideta IDを検索しています"
+
+msgid ""
+"Find OSM objects linked with wikidata items of a class that is untypical for"
+" OSM"
+msgstr "OSMでは一般的でないクラスのwikidata項目にリンクされたOSMオブジェクトを検索する"
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr "選択の中心から最小2km最大3km離れた位置の教育機関を見つける"
+
+msgid "Invalid Q-ID! Cannot exist on Wikidata."
+msgstr "Q-IDが無効です!Wikidataには存在できません。"
+
+msgid ""
+"It looks like a wikipedia tag contains a URL. Use the format "
+"''‹language›:‹article title› instead!''"
+msgstr ""
+"ウィキペディアのタグにURLが含まれているようです。かわりに ''‹language›:‹article title›'' "
+"のフォーマットを利用してください!"
+
+msgid "Item {0} does not exist!"
+msgstr "アイテム{0}は存在しません!"
+
+msgid "Item {0} is missing"
+msgstr "アイテム{0}が見つかりません"
+
+msgid "Item {0} redirects to {1}"
+msgstr "アイテム{0}が{1}にリダイレクトされます"
+
+msgid ""
+"Just checks the format of the Wikipedia tag (no validation if articles "
+"exist), with autofixes for when tag value is a URL"
+msgstr "WikipediaがURLである場合のAutofixを使用して、Wikipediaタグの形式をチェックする(記事が存在する場合は検証なし)"
+
+msgid "Labels"
+msgstr "ラベル"
+
+msgid ""
+"Language code ''{0}'' is not recognized! Can''t download Wikidata ID for tag"
+" ''{1}''!"
+msgstr "言語コード''{0}''が認識されません!タグ''{1}'' のWikidata IDをダウンロードできません!"
+
+msgid "Links"
+msgstr "リンク"
+
+msgid "Load category"
+msgstr "カテゴリを読み込む"
+
+msgid ""
+"Make sure that the wikipedia=* article is not redirecting to another article"
+msgstr "wikipedia=*の記事が他の記事にリダイレクトしていないことを確認します。"
+
+msgid ""
+"Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
+"exists"
+msgstr "wikidata=*タグ内のQ-IDのWikidata項目が実際に存在することを確認します。"
+
+msgid ""
+"Makes sure that the wikipedia=* article is connected to the wikidata=* item"
+msgstr "wikipedia=*の記事がwikidata=*の項目に関連付けられていることを確認します。"
+
+msgid "More than one OSM object is selected: {0}"
+msgstr "複数のOSMオブジェクトが選択されています:{0}"
+
+msgid ""
+"Move wikidata=* tags to tag brand:wikidata=*, when the value points to a "
+"brand"
+msgstr "値がブランドを指す場合は、wikidata=* タグを brand:wikidata=* タグに移動します。"
+
+msgid "No Wikidata ID found for: {0}"
+msgstr "{0} の Wikidata ID が見つかりませんでした"
+
+msgid "No Wikidata item is selected!"
+msgstr "Wikidata項目が選択されていません!"
+
+msgid "Not linked yet"
+msgstr "まだリンクされていません"
+
+msgid "Open Article"
+msgstr "記事を開く"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "選択された項目に関するWikipediaの記事をブラウザーで開く"
+
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "{2}のうち、タグ''{0}''の{1}について、新しい値''{3}''で上書きしますか?"
+
+msgid "Overwrite key"
+msgstr "キーを上書き"
+
+msgid "Paste Wikipedia articles"
+msgstr "ウィキペディアの記事を貼り付ける"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "システムのクリップボードからWikipediaの記事を貼り付け"
+
+msgid "Please select a download area first."
+msgstr "最初にダウンロード領域を選択してください。"
+
+msgid "Search Wikidata items"
+msgstr "ウィキデータの項目を検索"
+
+msgid "Search Wikipedia category"
+msgstr "ウィキペディアのカテゴリを検索"
+
+msgid "See the validator messages of the category ''Other'' for more details."
+msgstr "詳細については、カテゴリ「その他」の妥当性検査メッセージを参照してください。"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "リレーションのメンバーを一緒にダウンロードする場合は選択してください"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr "このオブジェクトを参照しているもの(親リレーションや、ノードの場合は親ウェイなど)を一緒にダウンロードする場合は選択してください"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Wikipediaの記事について既定の言語を設定する"
+
+msgid ""
+"Should the wikipedia tag be replaced with the redirect target? Make sure the meaning of the tag remains the same!\n"
+"\n"
+"Before: wikipedia={0}:{1}\n"
+"After: wikipedia={0}:{2}"
+msgstr ""
+"wikipediaのタグをリダイレクト先に置き換えるべきですか?タグの意味が同じであることを確認してください。\n"
+"\n"
+"修正前:wikipedia={0}:{1}\n"
+"修正後:wikipedia={0}:{2}"
+
+msgid "Show properties of the selected Wikidata item"
+msgstr "選択したWikidata項目のプロパティを表示"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Sophoxスニペットリストの表示/非表示"
+
+msgid "Sophox server"
+msgstr "Sophoxサーバー"
+
+msgid "Statements"
+msgstr "ステートメント"
+
+msgid "Target key: "
+msgstr "ターゲットのキー: "
+
+msgid "The JSON response from the {0} can''t be decoded!"
+msgstr "{0}からのJSONレスポンスをデコードできません!"
+
+msgid "The Wikidata Action API did not respond with all requested entities!"
+msgstr "WikidataアクションAPIは、要求されたすべてのエンティティに応答しませんでした。"
+
+msgid "The Wikidata Action API reports a failed query!"
+msgstr "Wikidata Action APIは失敗したクエリーを報告します!"
+
+msgid ""
+"The Wikidata item does not exist! Replace the wikidata=* tag with an "
+"existing Wikidata item or remove the Wikidata tag."
+msgstr ""
+"そのWikidata項目は存在しません!wikidata=*タグを既存のWikidata項目に置き換えるか、Wikidataタグを削除します。"
+
+msgid "The Wikidata item is a redirect"
+msgstr "Wikidata項目はリダイレクトされます。"
+
+msgid "The Wikipedia/Wikidata layer"
+msgstr "Wikipedia/Wikidataレイヤー"
+
+msgid "The language prefix of wikipedia tags should be lowercase!"
+msgstr "wikipediaタグの言語プレフィックスは小文字でなければなりません!"
+
+msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
+msgstr "wikipedia=*タグに値''{0}''は使用できません"
+
+msgid ""
+"The value of a wikipedia tag should be given as ‹language›:‹Article title› "
+"instead of the full URL"
+msgstr "wikipediaタグの値は、完全なURLではなく ''‹language›:‹Article title› ''としてください。"
+
+msgid "The value of tag brand:wikidata=* has an invalid format!"
+msgstr "brand:wikidata=* タグの値のフォーマットは無効です!"
+
+msgid "The wikipedia plugin tries to construct a malformed URL!: {0}"
+msgstr "wikipediaプラグインは、不正な形式のURLを作成しようとしています!: {0}"
+
+msgid ""
+"The {0} reported an invalid query for {1} ({2}). This is a programming "
+"error, please report to the Wikipedia plugin."
+msgstr ""
+" {0}は、 {1} "
+"({2})の無効なクエリを報告しました。これはプログラミングエラーです。Wikipediaプラグインプロジェクトへ報告してください。"
+
+msgid "The {0} responded with an unexpected response code: {1} {2}"
+msgstr "{0}が予期しない応答コードで応答しました:{1}{2}"
+
+msgid "There is no Wikipedia site for language ''{0}''!"
+msgstr "言語\"{0}\"のWikipediaサイトがありません!"
+
+msgid ""
+"This check queries Wikidata to find those OSM objects that are linked to "
+"wikidata items of a type, which should not occur in OSM data (at least not "
+"as the main wikidata tag)"
+msgstr ""
+"このチェックでは、Wikidataに照会して、タイプのwikidata項目にリンクされているOSMオブジェクトを検索します。OSMデータには存在しません(少なくともメインのwikidataタグとしては存在しません)。"
+
+msgid "Toggle the layer displaying Wikipedia articles or Wikidata items"
+msgstr "Wikipediaの記事またはWikidataの項目を表示するレイヤーを切り替える"
+
+msgid ""
+"Turn on the informational level validator messages in the preferences to see"
+" more details."
+msgstr "詳細を表示するには、環境設定で情報レベルの妥当性検査メッセージをオンにします。"
+
+msgid "Unknown Wikipedia language prefix ''{0}''!"
+msgstr "ウィキペディアの言語プレフィックス''{0}''が不明です!"
+
+msgid "Unknown datatype!"
+msgstr "データタイプが不明です!"
+
+msgid ""
+"Use only the article title instead of a URL for wikipedia:‹language› tags"
+msgstr "wikipedia:<language>タグに、URLではなく、記事のタイトルだけを使ってください"
+
+msgid ""
+"When reading the JSON response from the {0}, an error occured! ({1}: {2})"
+msgstr "{0}からJSONレスポンスを読み取り中にエラーが発生しました!({1}: {2})"
+
+msgid "Wiki layer"
+msgstr "Wikiレイヤー"
+
+msgid "Wikidata Info"
+msgstr "Wikidata情報"
+
+msgid "Wikidata Info: {0}"
+msgstr "Wikidata情報: {0}"
+
+msgid "Wikidata item and Wikipedia article do not match!"
+msgstr "Wikidata 項目と Wikipedia 記事が一致しません!"
+
+msgid "Wikidata item {0} is not associated with Wikipedia article {1} ({2})"
+msgstr "Wikidata項目{0}は、 Wikipedia 記事{1} ({2})に関連付けされていません。"
+
+msgid "Wikidata items in viewport"
+msgstr "ビューポートのWikidata項目"
+
+msgid ""
+"Wikidata value is of unusual type for the wikidata=* tag on OSM objects"
+msgstr "Wikidataの値は、通常OSM オブジェクトのwikidata=* tag に対して使われないタイプです。"
+
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+msgid "Wikipedia article ''{0}'' redirects to ''{1}''"
+msgstr "Wikipedia記事 ''{0}''は''{1}''へリダイレクトされます。"
+
+msgid "Wikipedia article is a redirect"
+msgstr "Wikipediaの記事はリダイレクトされます。"
+
+msgid "Wikipedia articles in viewport (for language {0})"
+msgstr "ビューポート(言語{0}用) のWikipedia記事"
+
+msgid "Wikipedia language"
+msgstr "Wikipediaの言語"
+
+msgid "Wikipedia tag has invalid format!"
+msgstr "Wikipedia タグのフォーマットは無効です!"
+
+msgid "Your saved queries:"
+msgstr "保存したクエリ:"
+
+msgid "Zoom to selection"
+msgstr "選択へズーム"
+
+msgid "a new value (manual intervention needed due to language conflict)"
+msgstr "(言語の競合のため手動介入が必要) 新しい値"
+
+msgid "aliases"
+msgstr "別名"
+
+msgid "all Wikipedia articles in Category"
+msgstr "カテゴリの Wikipedia の全記事"
+
+msgid "clipboard"
+msgstr "クリップボード"
+
+msgid "coordinates"
+msgstr "座標"
+
+msgid "description"
+msgstr "説明"
+
+msgid "has no Q-ID"
+msgstr "Q-IDがありません"
+
+msgid "help"
+msgstr "ヘルプ"
+
+msgid "label"
+msgstr "ラベル"
+
+msgid "language"
+msgstr "言語"
+
+msgid "language code"
+msgstr "言語コード"
+
+msgid "wikidata=* item exists"
+msgstr "wikidata=* 項目がすでに存在します"
+
+msgid "{0} (malformed site URL)"
+msgstr "{0}(不正な形式のサイトURL)"
+
+msgid "{0} is an instance of {1} (or any subclass thereof)"
+msgstr "{0}は{1}のインスタンス(またはそのサブクラス)です"
+
+msgid "{0} is not a valid Wikidata-ID"
+msgstr "{0} は有効な Wikidata-IDではありません"
+
+msgid "{0}=* tag should not have URL-encoded values."
+msgstr "{0}=*タグには、URLエンコードされた値を含めることはできません。"
+
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr "OSMオブジェクトをWikipediaの記事やWikidataの項目に簡単にリンクする"
