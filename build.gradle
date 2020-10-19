@@ -7,10 +7,9 @@ plugins {
   id "jacoco"
   id "maven-publish"
   id "pmd"
-  id("com.github.ben-manes.versions").version("0.28.0")
-  id("com.github.spotbugs").version("4.2.0")
-  id("org.openstreetmap.josm").version("0.7.0")
-  id "net.ltgt.errorprone" version "1.1.1"
+  id("com.github.spotbugs").version("4.5.1")
+  id("org.openstreetmap.josm").version("0.7.1")
+  id "net.ltgt.errorprone" version "1.2.1"
 }
 
 // Set up Errorprone
@@ -32,11 +31,11 @@ tasks.withType(JavaCompile).configureEach {
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 def versions = [
-  errorprone: "2.3.4",
-  jacoco: "0.8.5",
-  junit: "5.6.2",
-  pmd: "6.19.0",
-  spotbugs: "4.0.3",
+  errorprone: "2.4.0",
+  jacoco: "0.8.6",
+  junit: "5.7.0",
+  pmd: "6.28.0",
+  spotbugs: "4.1.4",
 ]
 
 repositories {
@@ -53,12 +52,8 @@ dependencies {
   testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
   testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
-  testImplementation("org.awaitility:awaitility:4.0.2")
-}
-
-dependencyUpdates.rejectVersionIf { version ->
-  !["release", "final", "ga"].any { version.candidate.version.toLowerCase().contains(it) } && !(version.candidate.version ==~ /^[0-9,.v-]+(-r)?$/)
+  testImplementation("com.github.tomakehurst:wiremock-jre8:2.27.2")
+  testImplementation("org.awaitility:awaitility:4.0.3")
 }
 
 // Add dependencies from ivy.xml
@@ -99,7 +94,7 @@ josm {
     oldVersionDownloadLink 12878, "33635", new URL("https://svn.openstreetmap.org/applications/editors/josm/dist/wikipedia.jar?p=33636")
   }
   i18n {
-    pathTransformer = getPathTransformer("gitlab.com/JOSM/plugin/wikipedia/blob")
+    pathTransformer = getPathTransformer(projectDir, "gitlab.com/JOSM/plugin/wikipedia/-/blob")
   }
 }
 
