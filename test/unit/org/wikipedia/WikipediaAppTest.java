@@ -56,7 +56,7 @@ public class WikipediaAppTest {
     public void testGetInterwikiArticles1() {
         final Collection<WikipediaEntry> iw = WikipediaApp.forLanguage("de").getInterwikiArticles("Österreich");
         assertThat(iw, hasItem(new WikipediaEntry("en", "Austria")));
-        assertThat(iw, hasItem(new WikipediaEntry("no", "Østerrike")));
+        assertThat(iw, hasItem(new WikipediaEntry("nb", "Østerrike")));
         assertThat(iw, hasItem(new WikipediaEntry("ko", "오스트리아")));
     }
 
