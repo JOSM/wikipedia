@@ -92,7 +92,7 @@ public class WikipediaAppTest {
         assertThat(de.get(0).label, is("Österreich"));
         assertThat(de.get(0).description, is("Staat in Mitteleuropa"));
         assertThat(en.get(0).label, is("Austria"));
-        assertThat(en.get(0).description, is("sovereign state in Central Europe"));
+        assertThat(en.get(0).description, is("country in Central Europe"));
     }
 
     @Test
