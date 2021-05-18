@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class RegexUtil {
     private static final Pattern PROPERTY_ID_PATTERN = Pattern.compile("^P[1-9][0-9]{0,9}$");
-    private static final Pattern Q_ID_PATTERN = Pattern.compile("^Q[1-9][0-9]{0,9}$");
+    public static final Pattern Q_ID_PATTERN = Pattern.compile("Q[1-9][0-9]{0,9}");
 
     public static final Pattern INTEGER_PATTERN = Pattern.compile("^[0-9]+$");
 

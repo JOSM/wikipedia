@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -179,6 +180,16 @@ public final class WikipediaApp {
     }
 
     public static List<WikipediaEntry> getEntriesFromClipboard(final String wikipediaLang, String clipboardStringContent) {
+        if ("wikidata".equals(wikipediaLang)) {
+            List<WikidataEntry> entries = new ArrayList<>();
+            Matcher matcher = RegexUtil.Q_ID_PATTERN.matcher(clipboardStringContent);
+            while (matcher.find()) {
+                if (RegexUtil.isValidQId(matcher.group())) {
+                    entries.add(new WikidataEntry(matcher.group()));
+                }
+            }
+            return new ArrayList<>(getLabelForWikidata(entries, Locale.getDefault()));
+        }
         return Pattern.compile("[\\n\\r]+")
                 .splitAsStream(clipboardStringContent)
                 .map(x -> WikipediaEntry.parseTag("wikipedia:" + wikipediaLang, x))

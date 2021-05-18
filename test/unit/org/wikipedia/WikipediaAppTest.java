@@ -182,4 +182,14 @@ public class WikipediaAppTest {
         assertThat(entries.get(1), is(new WikipediaEntry("de", "bar")));
         assertThat(entries.get(2), is(new WikipediaEntry("en", "baz")));
     }
+
+    @Test
+    public void testEntriesFromClipboardWikidata() {
+        List<WikipediaEntry> entries = WikipediaApp.getEntriesFromClipboard("wikidata", "Q40\nQ151897");
+        assertThat(entries.size(), is(2));
+        assertThat(entries.get(0).article, is("Q40"));
+        assertThat(((WikidataEntry) entries.get(0)).label, is("Austria"));
+        assertThat(entries.get(1).article, is("Q151897"));
+        assertThat(((WikidataEntry) entries.get(1)).label, is("Reichstag building"));
+    }
 }
