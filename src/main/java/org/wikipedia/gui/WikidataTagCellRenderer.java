@@ -13,7 +13,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -79,7 +78,7 @@ public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
             }
             texts.add(WikidataEntry.getLabelText(id, label));
         }
-        component.setText("<html>" + texts.stream().collect(Collectors.joining("; ")));
+        component.setText("<html>" + String.join("; ", texts));
         component.setToolTipText("<html>" + Utils.joinAsHtmlUnorderedList(texts));
         return component;
     }
