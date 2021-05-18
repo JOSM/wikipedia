@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -256,7 +257,7 @@ public class SophoxDownloadReader extends BoundingBoxDownloader {
         Pattern uriPattern = Pattern.compile("^https://www\\.openstreetmap\\.org/(node|way|relation)/(\\d+)");
         List<PrimitiveId> ids = new ArrayList<>();
 
-        JsonArray results = Json.createReader(new InputStreamReader(source, "UTF-8"))
+        JsonArray results = Json.createReader(new InputStreamReader(source, StandardCharsets.UTF_8))
                 .readObject()
                 .getJsonObject("results")
                 .getJsonArray("bindings");
