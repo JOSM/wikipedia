@@ -193,7 +193,7 @@ public final class WikipediaApp {
         }
         Map<String, Boolean> status = new HashMap<>();
         if (!entries.isEmpty()) {
-            final String url = "https://tools.wmflabs.org/wiwosm/osmjson/getGeoJSON.php?action=check&lang=" + wikipediaLang;
+            final String url = "https://wiwosm.toolforge.org/osmjson/getGeoJSON.php?action=check&lang=" + wikipediaLang;
             try {
                 final String articles = entries.stream().map(i -> i.article).collect(Collectors.joining(","));
                 final String requestBody = "articles=" + Utils.encodeUrl(articles);
