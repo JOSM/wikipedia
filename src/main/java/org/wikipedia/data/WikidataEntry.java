@@ -46,13 +46,14 @@ public class WikidataEntry extends WikipediaEntry {
         CheckParameterUtil.ensureThat(RegexUtil.isValidQId(id), "Invalid Wikidata ID given: " + id);
     }
 
+    private static final Comparator<WikidataEntry> WIKIDATA_ENTRY_COMPARATOR = Comparator
+        .<WikidataEntry, String>comparing(x -> x.label, AlphanumComparator.getInstance())
+        .thenComparing(x -> x.article, AlphanumComparator.getInstance());
+
     @Override
     public int compareTo(WikipediaEntry o) {
         if (o instanceof WikidataEntry) {
-            return Comparator
-                    .<WikidataEntry, String>comparing(x -> x.label, AlphanumComparator.getInstance())
-                    .thenComparing(x -> x.article, AlphanumComparator.getInstance())
-                    .compare(this, ((WikidataEntry) o));
+            return WIKIDATA_ENTRY_COMPARATOR.compare(this, ((WikidataEntry) o));
         } else {
             return super.compareTo(o);
         }
