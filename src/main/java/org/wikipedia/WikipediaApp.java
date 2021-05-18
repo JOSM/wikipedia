@@ -164,7 +164,7 @@ public final class WikipediaApp {
 
     public List<WikipediaEntry> getEntriesFromCategory(String category, int depth) {
         try {
-            final String url = "https://tools.wmflabs.org/cats-php/"
+            final String url = "https://cats-php.toolforge.org/"
                     + "?lang=" + wikipediaLang
                     + "&depth=" + depth
                     + "&cat=" + Utils.encodeUrl(category);
