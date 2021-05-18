@@ -41,6 +41,7 @@ import org.openstreetmap.josm.data.osm.visitor.BoundingXYVisitor;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.MapView;
 import org.openstreetmap.josm.gui.SideButton;
+import org.openstreetmap.josm.gui.datatransfer.ClipboardUtils;
 import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeEvent;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeListener;
@@ -280,7 +281,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
 
                 @Override
                 List<WikipediaEntry> getEntries() {
-                    return WikipediaApp.getEntriesFromClipboard(WikiProperties.WIKIPEDIA_LANGUAGE.get());
+                    return WikipediaApp.getEntriesFromClipboard(WikiProperties.WIKIPEDIA_LANGUAGE.get(), ClipboardUtils.getClipboardStringContent());
                 }
             }.execute();
         }

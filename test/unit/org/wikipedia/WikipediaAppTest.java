@@ -173,4 +173,13 @@ public class WikipediaAppTest {
         final List<String> categories = WikipediaApp.forLanguage("de").getCategoriesForPrefix("Gemeinde in Öster");
         assertTrue(categories.contains("Gemeinde in Österreich"));
     }
+
+    @Test
+    public void testEntriesFromClipboard() {
+        List<WikipediaEntry> entries = WikipediaApp.getEntriesFromClipboard("de", "foo\nde:bar\nen:baz\n");
+        assertThat(entries.size(), is(3));
+        assertThat(entries.get(0), is(new WikipediaEntry("de", "foo")));
+        assertThat(entries.get(1), is(new WikipediaEntry("de", "bar")));
+        assertThat(entries.get(2), is(new WikipediaEntry("en", "baz")));
+    }
 }

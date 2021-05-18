@@ -27,7 +27,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
-import org.openstreetmap.josm.gui.datatransfer.ClipboardUtils;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.Logging;
@@ -179,10 +178,10 @@ public final class WikipediaApp {
         }
     }
 
-    public static List<WikipediaEntry> getEntriesFromClipboard(final String wikipediaLang) {
+    public static List<WikipediaEntry> getEntriesFromClipboard(final String wikipediaLang, String clipboardStringContent) {
         return Pattern.compile("[\\n\\r]+")
-                .splitAsStream(ClipboardUtils.getClipboardStringContent())
-                .map(x -> new WikipediaEntry(wikipediaLang, x))
+                .splitAsStream(clipboardStringContent)
+                .map(x -> WikipediaEntry.parseTag("wikipedia:" + wikipediaLang, x))
                 .collect(Collectors.toList());
     }
 
