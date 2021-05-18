@@ -152,7 +152,7 @@ public final class WikipediaApp {
             try (InputStream in = connect(url).getContent()) {
                 final Document xml = newDocumentBuilder().parse(in);
                 final List<WikidataEntry> r = X_PATH.evaluateNodes("//entity", xml).stream()
-                        .map(node -> new WikidataEntry(X_PATH.evaluateString("@id", node), null, null, null))
+                        .map(node -> new WikidataEntry(X_PATH.evaluateString("@id", node)))
                         .collect(Collectors.toList());
                 return getLabelForWikidata(r, localeForLabels);
             }
@@ -345,7 +345,7 @@ public final class WikipediaApp {
 
     public static String getLabelForWikidata(String wikidataId, Locale locale, String... preferredLanguage) {
         try {
-            final List<WikidataEntry> entry = Collections.singletonList(new WikidataEntry(wikidataId, null, null, null));
+            final List<WikidataEntry> entry = Collections.singletonList(new WikidataEntry(wikidataId));
             return getLabelForWikidata(entry, locale, preferredLanguage).get(0).label;
         } catch (IndexOutOfBoundsException ignore) {
             return null;
