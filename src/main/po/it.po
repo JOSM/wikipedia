@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (it)
-# Copyright (C) 2020
+# Copyright (C) 2021
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -8,13 +8,13 @@
 # Florian Schäfer, 2018
 # Lorenzo Beltrami, 2018
 # demetrio, 2018
-# Marco, 2020
+# Marco, 2021
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia df589f8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2021-05-18 23:30+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Italian (https://www.transifex.com/josm/teams/2544/it/)\n"
 "MIME-Version: 1.0\n"
@@ -66,6 +66,12 @@ msgstr "Annulla"
 
 msgid "Change wikipedia tag?"
 msgstr "Cambiare l’etichetta di wikipedia?"
+
+msgid "Change {0}={1} to {2}"
+msgstr "Cambia {0}={1} su {2}"
+
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "Verifica il formato delle tag e subtag wikipedia=*"
 
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr "Controllare che wikipedia=* colleghi internamente a wikidata=*"
@@ -274,11 +280,9 @@ msgstr "Apre l''articolo Wikipedia dell''elemento selezionato in un browser"
 msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
 msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
 msgstr[0] ""
-"Sovrascrivere l’etichetta ''{0}'' {1} avente valore {2} con il nuovo valore "
-"''{3}''?"
+"Sovrascrivere l’etichetta ''{0}'' {1} da {2} con il nuovo valore ''{3}''?"
 msgstr[1] ""
-"Sovrascrivere le etichette ''{0}'' {1} aventi valori {2} con i nuovi valori "
-"''{3}''?"
+"Sovrascrivere le etichette ''{0}'' {1} da {2} con i nuovi valori ''{3}''?"
 
 msgid "Overwrite key"
 msgstr "Sovrascrivi chiave"
@@ -367,11 +371,18 @@ msgstr "L’elemento Wikidata è un redirect"
 msgid "The Wikipedia/Wikidata layer"
 msgstr "Il livello Wikipedia/Wikidata"
 
+msgid "The language prefix of wikipedia tags should be lowercase!"
+msgstr ""
+"Il prefisso della lingua dei tag wikipedia dovrebbe essere in minuscolo!"
+
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "Il valore ''{0}'' non è consentito per il tag wikipedia=* "
 
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "Il valore dell’etichetta brand:wikidata=* ha un formato non valido!"
+
+msgid "The wikipedia plugin tries to construct a malformed URL!: {0}"
+msgstr "L’estensione wikipedia cerca di costruire un URL mal costruito!: {0}"
 
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
@@ -405,6 +416,9 @@ msgid ""
 msgstr ""
 "Per ulteriori dettagli abilitare i messaggi informativi del validatore di "
 "livello nelle preferenze."
+
+msgid "Unknown Wikipedia language prefix ''{0}''!"
+msgstr "Prefisso della lingua di Wikipedia sconosciuto ''{0}''!"
 
 msgid "Unknown datatype!"
 msgstr "Tipo di dati sconosciuto!"

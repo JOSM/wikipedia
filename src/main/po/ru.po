@@ -1,20 +1,20 @@
 # Translations for the JOSM plugin 'wikipedia' (ru)
-# Copyright (C) 2020
+# Copyright (C) 2021
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
 # Translators:
 # Florian Schäfer, 2018
-# Aleksey Kabanov, 2018
 # Alexander Istomin, 2018
 # Nikolay Parukhin, 2018
 # Vlad, 2020
+# Aleksey Kabanov, 2020
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia df589f8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2021-05-18 23:30+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Russian (https://www.transifex.com/josm/teams/2544/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -68,6 +68,9 @@ msgstr "Изменить тег wikipedia?"
 msgid "Change {0}={1} to {2}"
 msgstr "Поменять {0}={1} на {2}"
 
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "Проверьте формат тега wikipedia=* или подтегов"
+
 msgid "Check wikipedia=* is interwiki link of wikidata=*"
 msgstr ""
 "Проверка того, что wikipedia=* является интервики-ссылкой на wikidata=*"
@@ -92,6 +95,13 @@ msgid ""
 "Could not check for all wikipedia=* tags if they match the wikidata=* tag."
 msgstr ""
 "Не удалось проверить, все ли теги wikipedia=* соответствуют тегу wikidata=*."
+
+msgid ""
+"Could not check for all wikipedia=* tags if they redirect to another "
+"article."
+msgstr ""
+"Невозможно проверить все теги wikipedia=*, если они перенаправляют на другую"
+" статью."
 
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "Не удалось проверить на наличие необычных классов в тегах wikidata=*."
@@ -192,6 +202,13 @@ msgstr ""
 msgid "Invalid Q-ID! Cannot exist on Wikidata."
 msgstr "Недоаустимый Q-ID! Не может существовать в Викиданных."
 
+msgid ""
+"It looks like a wikipedia tag contains a URL. Use the format "
+"''‹language›:‹article title› instead!''"
+msgstr ""
+"Похоже, тег wikipedia содержит URL. Используйте взамен формат "
+"''‹язык›:‹заголовок статьи›!''"
+
 msgid "Item {0} does not exist!"
 msgstr "Элемент {0} не существует!"
 
@@ -201,11 +218,22 @@ msgstr "Элемент {0} отсутствует"
 msgid "Item {0} redirects to {1}"
 msgstr "Элемент {0} перенаправляет к {1}"
 
+msgid ""
+"Language code ''{0}'' is not recognized! Can''t download Wikidata ID for tag"
+" ''{1}''!"
+msgstr ""
+"Код языка ''{0}'' не распознан! Невозможно скачать идентификатор Викиданных "
+"для тега ''{1}''!"
+
 msgid "Links"
 msgstr "Ссылки"
 
 msgid "Load category"
 msgstr "Загрузка категории"
+
+msgid ""
+"Make sure that the wikipedia=* article is not redirecting to another article"
+msgstr "Убедитесь, что статья wikipedia=* не перенаправляет на другую статью"
 
 msgid ""
 "Make sure the Wikidata item for the Q-ID in the wikidata=* tag actually "
@@ -322,8 +350,21 @@ msgstr "Элемент Викиданных является перенапра�
 msgid "The Wikipedia/Wikidata layer"
 msgstr "Слой Википедии/Викиданных"
 
+msgid "The language prefix of wikipedia tags should be lowercase!"
+msgstr "Языковой префикс тегов wikipedia должен быть в нижнем регистре!"
+
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "Значение ''{0}'' недопустимо для тега wikipedia=*"
+
+msgid ""
+"The value of a wikipedia tag should be given as ‹language›:‹Article title› "
+"instead of the full URL"
+msgstr ""
+"Значение тега wikipedia должно быть задано как ‹язык›:‹Заголовок статьи› "
+"вместо полного URL"
+
+msgid "The value of tag brand:wikidata=* has an invalid format!"
+msgstr "Неверный формат значения тега brand:wikidata=* !"
 
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
@@ -356,6 +397,9 @@ msgid ""
 msgstr ""
 "Включите сообщения валидатора информационного уровня в настройках, чтобы "
 "увидеть больше подробностей."
+
+msgid "Unknown Wikipedia language prefix ''{0}''!"
+msgstr "Неизвестный префикс языка Википедии ''{0}''!"
 
 msgid "Unknown datatype!"
 msgstr "Неизвестный тип данных!"

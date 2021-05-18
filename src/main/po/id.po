@@ -1,0 +1,230 @@
+# Translations for the JOSM plugin 'wikipedia' (id)
+# Copyright (C) 2021
+# This file is distributed under the same license as the josm-plugin_wikipedia package.
+# FIRST AUTHOR, YEAR.
+#
+# Translators:
+# Simon Legner, 2018
+# Florian Schäfer, 2018
+# Husni Mubarok, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: josm-plugin_wikipedia df589f8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-18 23:30+0000\n"
+"PO-Revision-Date: 2018-05-12 22:55+0000\n"
+"Language-Team: Indonesian (https://www.transifex.com/josm/teams/2544/id/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "''{0}'' is an illegal language code!"
+msgstr "''{0}'' merupakan kode bahasa yang salah!"
+
+msgid "({0} items, processing batch {1} of {2})"
+msgstr "({0} pekerjaan, proses sekaligus {1} dari {2})"
+
+msgid "Add Tag"
+msgstr "Tambahkan Tag (Label)"
+
+msgid "Add Wikidata"
+msgstr "Tambahkan Wikidata"
+
+msgid "Add Wikidata for language ''{0}''"
+msgstr "Tambahkan Wikidata untuk bahasa \"{0}\""
+
+msgid "Add names from Wikipedia"
+msgstr "Menambahkan nama dari Wikipedia"
+
+msgid "Add new snippet"
+msgstr "Tambahkan snippet baru"
+
+msgid ""
+"Adds a ''wikipedia'' tag corresponding to this article to the selected "
+"objects"
+msgstr ""
+"Menambahkan tag \"wikipedia\" terkait dengan artikel ini kepada objek yang "
+"dipilih"
+
+msgid "Available in local dataset"
+msgstr "Tersedia pada dataset lokal"
+
+msgid "Available via WIWOSM server"
+msgstr "Tersedia melalui server WIWOSM"
+
+msgid "Can't open website {0} in browser! Error message: {1}"
+msgstr "Perambah tidak bisa membuka sits web {0}! Pesan kesalahan: {1}"
+
+msgid "Cancel"
+msgstr "Batalkan"
+
+msgid "Change wikipedia tag?"
+msgstr "Ubah tag wikipedia"
+
+msgid "Change {0}={1} to {2}"
+msgstr "Ubah {0}={1} menjadi {2}"
+
+msgid "Check format of wikipedia=* tags and subtags"
+msgstr "Periksa format wikipedia=* tag dan subtag"
+
+msgid "Check wikipedia=* is interwiki link of wikidata=*"
+msgstr "Periksa wikipedia=* yaitu interwiki tautan dari wikidata=*"
+
+msgid "Check wikipedia=* is not a redirect"
+msgstr "Periksa wikipedia=* bukan sebuah pengarah ulang"
+
+msgid "Contacting Server..."
+msgstr "Memanggil Server..."
+
+msgid ""
+"Copies the {0} template to the system clipboard instantiated with the "
+"coordinates of the first selected node"
+msgstr ""
+"Menyalin contoh {0} kedalam clipboard sistem yang sesuai dengan koordinat "
+"dari node yang terpilih pertama kali"
+
+msgid "Copy {0} template"
+msgstr "Salin template {0}"
+
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr "Tidak dapat menambah nama. Tag wikipedia tidak dikenal!"
+
+msgid "Delete selected snippet"
+msgstr "Hapus snippet terpilih"
+
+msgid ""
+"Double click on item to search for object with article name (and center "
+"coordinate)"
+msgstr ""
+"Klik dua kali pada item untuk mencari objek dengan nama(dan koordinat pusat)"
+
+msgid "Download from Sophox API"
+msgstr "Download dari API Sophox"
+
+msgid "Download referrers (parent relations)"
+msgstr "Download acuan (parent relations)"
+
+msgid "Download relation members"
+msgstr "Download anggota relasi"
+
+msgid "Edit selected snippet"
+msgstr "Edit snippet terpilih"
+
+msgid "Error"
+msgstr "Kesalahan"
+
+msgid "Fetch Wikidata IDs"
+msgstr "Ambil ID Wikidata"
+
+msgid "Fetch Wikidata IDs using the ''wikipedia'' tag"
+msgstr "Ambil ID Wikidata menggunakan tag \"wikipedia\""
+
+msgid "Fetch Wikipedia articles with coordinates"
+msgstr "mengambil artikel wikipedia dengan koordinat"
+
+msgid "Fetches a list of all Wikipedia articles of a category"
+msgstr "Mengambil seluruh daftar kategori artikel dari wikipedia"
+
+msgid "Fetches all coordinates from Wikidata in the current view"
+msgstr "Mengambil seluruh koordinat dari Wikidata dalam tampilan saat ini"
+
+msgid "Fetches all coordinates from Wikipedia in the current view"
+msgstr "mengambil semua koordinat dari wikipedia dalam pandangan saat ini"
+
+msgid ""
+"Fetches interwiki links from Wikipedia in order to add several name tags"
+msgstr ""
+"Mengambil tautan didalam wiki dari Wikipedia untuk menambahkan beberapa tag "
+"nama."
+
+msgid "Fetching Wikidata IDs"
+msgstr "Ambil ID Wikidata"
+
+msgid "Fetching {0} Wikidata ID for language ''{1}''"
+msgid_plural "Fetching {0} Wikidata IDs for language ''{1}''"
+msgstr[0] "Ambil ID Wikidata {0} untuk bahasa \"{1}\""
+
+msgid ""
+"Find places of education at least 2km, and at most 3km from the center of "
+"the selection"
+msgstr ""
+"Cari tempat pendidikan paling sedikit 2km, dan paling jauh 3km dari pusat "
+"dari seleksibelu"
+
+msgid "Load category"
+msgstr "Muat kategori"
+
+msgid "No Wikidata ID found for: {0}"
+msgstr "Tidak ada ID Wikidata yang ditemukan untuk: {0}"
+
+msgid "Not linked yet"
+msgstr "Belum tertautan"
+
+msgid "Open Article"
+msgstr "Artikel Terbuka"
+
+msgid "Opens the Wikipedia article of the selected item in a browser"
+msgstr "Membuka artikel Wikipedia dari objek yang dipilih pada browser"
+
+msgid "Overwrite ''{0}'' tag {1} from {2} with new value ''{3}''?"
+msgid_plural "Overwrite ''{0}'' tags {1} from {2} with new value ''{3}''?"
+msgstr[0] "Ganti \"{0}\" tag {1} dari {2} dengan nilai baru \"{3}\"?"
+
+msgid "Overwrite key"
+msgstr "Key mengganti tulisan"
+
+msgid "Pastes Wikipedia articles from the system clipboard"
+msgstr "Menempel artikel Wikipedia dari sistem clipboard"
+
+msgid "Please select a download area first."
+msgstr "Silahkan pilih area untuk didownload terlebih dahulu"
+
+msgid "Search Wikidata items"
+msgstr "Cari item Wikidata"
+
+msgid "Search Wikipedia category"
+msgstr "Cari kategori Wikipedia"
+
+msgid "Select if the members of a relation should be downloaded as well"
+msgstr "Pilih jika anggota dari sebuah relasi seharusnya didownload"
+
+msgid ""
+"Select if the referrers of the object should be downloaded as well, "
+"i.e.,parent relations and for nodes, additionally, parent ways"
+msgstr ""
+"Pilih jika referrensi dari objek harus diunduh contohnya parent relations "
+"dan untuk node/titik, sebagai tambahan, parent ways"
+
+msgid "Sets the default language for the Wikipedia articles"
+msgstr "Menetapkan bahasa standar untuk artikel Wikipedia"
+
+msgid "Show/hide Sophox snippet list"
+msgstr "Munculkan/hilangkan daftar potongan Sophox"
+
+msgid "Target key: "
+msgstr "Target key: "
+
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+msgid "Your saved queries:"
+msgstr "Kueri tersimpan:"
+
+msgid "Zoom to selection"
+msgstr "Perbesar ke pilihan"
+
+msgid "clipboard"
+msgstr "clipboard"
+
+msgid "coordinates"
+msgstr "koordinat"
+
+msgid "help"
+msgstr "Bantuan"
+
+msgid ""
+"Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
+msgstr "Menyederhanakan tautan objek OSM ke artikel Wikipedia dan Wikidata"
