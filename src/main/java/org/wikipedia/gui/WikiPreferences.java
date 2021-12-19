@@ -68,7 +68,7 @@ public class WikiPreferences implements SubPreferenceSetting {
         container.add(Box.createVerticalGlue(), constraints);
 
         languageField.setText(WikiProperties.WIKIPEDIA_LANGUAGE.get());
-        sophoxServerField.setPossibleItems(SophoxDownloadReader.SOPHOX_SERVER_HISTORY.get());
+        sophoxServerField.getModel().addAllElements(SophoxDownloadReader.SOPHOX_SERVER_HISTORY.get());
         sophoxServerField.setText(SophoxDownloadReader.SOPHOX_SERVER.get());
 
         getTabPreferenceSetting(gui).addSubTab(this, "Wikipedia", container);
@@ -87,7 +87,7 @@ public class WikiPreferences implements SubPreferenceSetting {
     @Override
     public boolean ok() {
         WikiProperties.WIKIPEDIA_LANGUAGE.put(languageField.getText());
-        SophoxDownloadReader.SOPHOX_SERVER_HISTORY.put(sophoxServerField.getHistory());
+        SophoxDownloadReader.SOPHOX_SERVER_HISTORY.put(sophoxServerField.getModel().asStringList());
         SophoxDownloadReader.SOPHOX_SERVER.put(sophoxServerField.getText());
         return false;
     }

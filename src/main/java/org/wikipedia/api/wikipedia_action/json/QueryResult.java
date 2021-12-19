@@ -18,9 +18,7 @@ import org.wikipedia.api.SerializationSchema;
 public final class QueryResult {
     public static final SerializationSchema<QueryResult> SCHEMA = new SerializationSchema<>(
         QueryResult.class,
-        mapper -> {
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        }
+        mapper -> mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
     );
 
     private final Query query;

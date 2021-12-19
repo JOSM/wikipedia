@@ -154,7 +154,7 @@ public class SophoxDownloadReader extends BoundingBoxDownloader {
             p = Period.parse(javaDur ? duration.substring(0, idx) : duration);
         }
         if (javaDur) {
-            d = Duration.parse(javaPer ? 'P' + duration.substring(idx, duration.length()) : duration);
+            d = Duration.parse(javaPer ? 'P' + duration.substring(idx) : duration);
         } else if (!javaPer) {
             d = Duration.parse(duration);
         }

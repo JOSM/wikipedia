@@ -33,7 +33,7 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
         this.coordinate = coordinate;
     }
 
-    public static  Optional<WikipediaEntry> fromUrl(final String value) {
+    public static Optional<WikipediaEntry> fromUrl(final String value) {
         return FunctionalUtil.or(
             Optional.ofNullable(value)
                 .map(WIKIPEDIA_FULL_URL_PATTERN::matcher)

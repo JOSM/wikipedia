@@ -172,7 +172,7 @@ public class WikiLayer extends Layer implements ListDataListener {
                     final int labelWidth = g.getFontMetrics().stringWidth(label);
                     g.drawString(
                         label,
-                        (int) Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, x - labelWidth / 2)),
+                        (int) Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, x - labelWidth / 2.0)),
                         (int) Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, y + getMarkerWidth() * .2))
                     );
                 }));

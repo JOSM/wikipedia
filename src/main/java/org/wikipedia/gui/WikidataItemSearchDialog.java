@@ -23,7 +23,7 @@ import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.data.tagging.ac.AutoCompletionItem;
 import org.openstreetmap.josm.gui.ExtendedDialog;
 import org.openstreetmap.josm.gui.MainApplication;
-import org.openstreetmap.josm.gui.tagging.ac.AutoCompletingComboBox;
+import org.openstreetmap.josm.gui.tagging.ac.AutoCompComboBox;
 import org.openstreetmap.josm.gui.tagging.ac.AutoCompletionManager;
 import org.openstreetmap.josm.gui.util.GuiHelper;
 import org.openstreetmap.josm.tools.GBC;
@@ -35,14 +35,14 @@ import org.wikipedia.tools.WikiProperties;
 public final class WikidataItemSearchDialog extends ExtendedDialog {
 
     private final Selector selector;
-    private final AutoCompletingComboBox targetKey;
+    private final AutoCompComboBox<AutoCompletionItem> targetKey;
     private static final WikidataItemSearchDialog INSTANCE = new WikidataItemSearchDialog();
 
     private WikidataItemSearchDialog() {
         super(MainApplication.getMainFrame(), tr("Search Wikidata items"), tr("Add Tag"), tr("Cancel"));
         this.selector = new Selector();
         this.selector.setDblClickListener(e -> buttonAction(0, null));
-        this.targetKey = new AutoCompletingComboBox();
+        this.targetKey = new AutoCompComboBox<>();
         this.targetKey.setEditable(true);
         this.targetKey.setSelectedItem(new AutoCompletionItem("wikidata"));
 
@@ -90,7 +90,7 @@ public final class WikidataItemSearchDialog extends ExtendedDialog {
         AutoCompletionManager.of(editDataSet).getTagKeys().stream()
                 .filter(v -> v.getValue().contains("wikidata"))
                 .forEach(keys::add);
-        targetKey.setPossibleAcItems(keys);
+        targetKey.getModel().addAllElements(keys);
     }
 
     @Override
