@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (id)
-# Copyright (C) 2021
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -10,9 +10,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia df589f8\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-18 23:30+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Indonesian (https://www.transifex.com/josm/teams/2544/id/)\n"
 "MIME-Version: 1.0\n"
@@ -49,9 +49,11 @@ msgstr ""
 "Menambahkan tag \"wikipedia\" terkait dengan artikel ini kepada objek yang "
 "dipilih"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Tersedia pada dataset lokal"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Tersedia melalui server WIWOSM"
 
@@ -219,12 +221,14 @@ msgstr "Perbesar ke pilihan"
 msgid "clipboard"
 msgstr "clipboard"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "koordinat"
 
 msgid "help"
 msgstr "Bantuan"
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr "Menyederhanakan tautan objek OSM ke artikel Wikipedia dan Wikidata"

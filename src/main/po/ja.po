@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (ja)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -12,9 +12,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Japanese (https://www.transifex.com/josm/teams/2544/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -49,9 +49,11 @@ msgid ""
 "objects"
 msgstr "この文書に対応する選択されたオブジェクトに''wikipedia''タグを追加します"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "ローカルデータセットで有効"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "WIWOSMサーバーで有効"
 
@@ -102,6 +104,10 @@ msgstr "別の記事にリダイレクトする場合があり、すべてのwik
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "wikidata=*タグで異常なクラスをチェックできませんでした。"
 
+#. i18n: {0} is the API name, {1} is the name of the exception, {2} is the
+#. message of the exception.
+#. i18n: Typical values would be: {0}="Wikidata Action API"
+#. {1}="UnknownHostException" {2}="www.wikidata.org"
 msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
@@ -145,6 +151,7 @@ msgstr "{0}のサイトリンクをダウンロード..."
 msgid "Download statements for {0}…"
 msgstr "{0}のステートメントをダウンロード..."
 
+#. I18n: {0} is the error message returned by the API
 msgid "Downloading entries with geo coordinates failed: {0}"
 msgstr "地理座標を含むエントリのダウンロードに失敗しました:{0}"
 
@@ -341,6 +348,7 @@ msgstr "ステートメント"
 msgid "Target key: "
 msgstr "ターゲットのキー: "
 
+#. I18n: {0} is the API name
 msgid "The JSON response from the {0} can''t be decoded!"
 msgstr "{0}からのJSONレスポンスをデコードできません!"
 
@@ -376,9 +384,12 @@ msgstr "wikipediaタグの値は、完全なURLではなく ''‹language›:‹
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "brand:wikidata=* タグの値のフォーマットは無効です!"
 
+#. I18n: {0} is the URL that the plugin tries to construct
 msgid "The wikipedia plugin tries to construct a malformed URL!: {0}"
 msgstr "wikipediaプラグインは、不正な形式のURLを作成しようとしています!: {0}"
 
+#. I18n: {0}  is the API name, {1} is the query, normally as URL. {2} is the
+#. error message returned from the API
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
 "error, please report to the Wikipedia plugin."
@@ -386,6 +397,10 @@ msgstr ""
 " {0}は、 {1} "
 "({2})の無効なクエリを報告しました。これはプログラミングエラーです。Wikipediaプラグインプロジェクトへ報告してください。"
 
+#. i18n: {0} is the API name, {1} is the response code, {2} is the response
+#. message.
+#. i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not
+#. Found"
 msgid "The {0} responded with an unexpected response code: {1} {2}"
 msgstr "{0}が予期しない応答コードで応答しました:{1}{2}"
 
@@ -410,6 +425,7 @@ msgstr "詳細を表示するには、環境設定で情報レベルの妥当性
 msgid "Unknown Wikipedia language prefix ''{0}''!"
 msgstr "ウィキペディアの言語プレフィックス''{0}''が不明です!"
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "データタイプが不明です!"
 
@@ -417,6 +433,8 @@ msgid ""
 "Use only the article title instead of a URL for wikipedia:‹language› tags"
 msgstr "wikipedia:<language>タグに、URLではなく、記事のタイトルだけを使ってください"
 
+#. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
+#. the message that exception provides
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
 msgstr "{0}からJSONレスポンスを読み取り中にエラーが発生しました!({1}: {2})"
@@ -479,6 +497,7 @@ msgstr "カテゴリの Wikipedia の全記事"
 msgid "clipboard"
 msgstr "クリップボード"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "座標"
 
@@ -515,6 +534,7 @@ msgstr "{0} は有効な Wikidata-IDではありません"
 msgid "{0}=* tag should not have URL-encoded values."
 msgstr "{0}=*タグには、URLエンコードされた値を含めることはできません。"
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr "OSMオブジェクトをWikipediaの記事やWikidataの項目に簡単にリンクする"

@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (el)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -10,9 +10,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Greek (https://www.transifex.com/josm/teams/2544/el/)\n"
 "MIME-Version: 1.0\n"
@@ -49,9 +49,11 @@ msgstr ""
 "Προσθήκη μιας ετικέτας ''βικιπαίδεια'' που αντιστοιχεί σε αυτό το άρθρο στα "
 "επιλεγμένα αντικείμενα"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Διαθέσιμο σε τοπικό σύνολο δεδομένων"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Διαθέσιμο μέσω του διακομιστή WIWOSM"
 
@@ -291,6 +293,7 @@ msgstr "Τα αποθηκευμένα σας ερωτήματα:"
 msgid "Zoom to selection"
 msgstr "Εστίαση στην επιλογή"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
@@ -303,6 +306,7 @@ msgstr "όλα τα άρθρα της Wikipedia στην Κατηγορία"
 msgid "clipboard"
 msgstr "πρόχειρο"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "συντεταγμένες"
 
@@ -327,6 +331,7 @@ msgstr "wikidata=* το στοιχείο υπάρχει"
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "Το {0} δεν είναι έγκυρο ID του Wikidata"
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

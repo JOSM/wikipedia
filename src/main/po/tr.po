@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (tr)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -9,9 +9,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Turkish (https://www.transifex.com/josm/teams/2544/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -38,9 +38,11 @@ msgid ""
 msgstr ""
 "Seçilen nesnelere bu makaleye karşılık gelen bir ''vikipedi'' etiketi ekler"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Yerel veri kümesinde mevcuttur"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "WIWOSM sunucusu aracılığıyla kullanılabilir"
 
@@ -146,6 +148,7 @@ msgstr ""
 "Daha fazla ayrıntıları görmek için tercihlerden bilgilendirme düzeyi "
 "onaylayıcı iletilerini açın."
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "Bilinmeyen veri türü!"
 
@@ -179,6 +182,7 @@ msgstr "Kayıtlı sorgularınız:"
 msgid "Zoom to selection"
 msgstr "Seçime yakınlaş"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Viki] "
 
@@ -194,6 +198,7 @@ msgstr "Kategorideki tüm Vikipedi makaleleri"
 msgid "clipboard"
 msgstr "kesme panosu"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "yerlemler"
 

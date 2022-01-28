@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (zh_CN)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -10,9 +10,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/josm/teams/2544/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -47,9 +47,11 @@ msgid ""
 "objects"
 msgstr "添加对应本文的“维基百科”标签到所选对象"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "在本地数据中可用"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "在 WIWOSM 服务器中可用"
 
@@ -89,6 +91,10 @@ msgstr "无法检查所有 wikipedia=* 标签是否符合 wikidata=* 标签。"
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "无法检查 wikidata=* 标签不寻常类型。"
 
+#. i18n: {0} is the API name, {1} is the name of the exception, {2} is the
+#. message of the exception.
+#. i18n: Typical values would be: {0}="Wikidata Action API"
+#. {1}="UnknownHostException" {2}="www.wikidata.org"
 msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
@@ -129,6 +135,7 @@ msgstr "下载 {0} 的站点链接…"
 msgid "Download statements for {0}…"
 msgstr "下载 {0} 的陈述…"
 
+#. I18n: {0} is the error message returned by the API
 msgid "Downloading entries with geo coordinates failed: {0}"
 msgstr "下载对象的地理经纬度失败：{0}"
 
@@ -301,6 +308,7 @@ msgstr "陈述"
 msgid "Target key: "
 msgstr "目标键："
 
+#. I18n: {0} is the API name
 msgid "The JSON response from the {0} can''t be decoded!"
 msgstr "从 {0} 回应的 JSON 无法解码！"
 
@@ -327,11 +335,17 @@ msgstr "wikipedia=* 标签不允许使用数值“{0}”"
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "brand:wikidata=* 标签数值的格式无效！"
 
+#. I18n: {0}  is the API name, {1} is the query, normally as URL. {2} is the
+#. error message returned from the API
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
 "error, please report to the Wikipedia plugin."
 msgstr "{0} 报告了无效的检索 {1}（{2}）。这是程序错误，请报告给 Wikipedia 插件作者。"
 
+#. i18n: {0} is the API name, {1} is the response code, {2} is the response
+#. message.
+#. i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not
+#. Found"
 msgid "The {0} responded with an unexpected response code: {1} {2}"
 msgstr "{0} 回复了意外的响应代码：{1} {2}"
 
@@ -352,9 +366,12 @@ msgid ""
 " more details."
 msgstr "在设置选打开信息（information）级的验证器消息以查看更多细节。"
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "未知数据类型！"
 
+#. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
+#. the message that exception provides
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
 msgstr "当读取 {0} 回复的 JSON 时，有错误发生了！（{1}：{2}）"
@@ -405,6 +422,7 @@ msgstr "您已保存的查询："
 msgid "Zoom to selection"
 msgstr "缩放至选择范围"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
@@ -417,6 +435,7 @@ msgstr "分类内所有维基百科条目"
 msgid "clipboard"
 msgstr "剪贴板"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "坐标"
 
@@ -450,6 +469,7 @@ msgstr "{0} 是 {1}（或其任何子类）的实例"
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} 不是有效的 Wikidata-ID"
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr "简化 OSM 对象链接至维基百科条目和维基数据项目的过程"

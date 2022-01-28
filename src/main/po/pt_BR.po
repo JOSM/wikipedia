@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (pt_BR)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -12,9 +12,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/josm/teams/2544/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -45,9 +45,11 @@ msgstr ""
 "Adiciona uma etiqueta ''wikipedia'' correspondente a este artigo aos objetos"
 " selecionados"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Disponível na base local"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Disponível via servidor WIWOSM"
 
@@ -197,6 +199,7 @@ msgstr "Define o idioma padrão para os artigos da Wikipédia"
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "O valor \"{0}\" não é permitido para a tag wikipedia=* "
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "Tipo de dado desconhecido!"
 
@@ -215,6 +218,7 @@ msgstr "Zoom para seleção"
 msgid "clipboard"
 msgstr "área de transferência"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "coordenadas"
 
@@ -233,6 +237,7 @@ msgstr "idioma"
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} não é um Wikidata-ID válido"
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

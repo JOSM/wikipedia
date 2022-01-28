@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (hu)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -9,13 +9,13 @@
 # Gábor Babos, 2018
 # Balázs Meskó, 2018
 # misibacsi, 2019
-# Buggi, 2020
+# Buggi, 2021
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Hungarian (https://www.transifex.com/josm/teams/2544/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -52,9 +52,11 @@ msgstr ""
 "A kijelölt objektumhoz hozzáad egy ennek a cikknek megfelelő <wikipedia> "
 "címkét"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "A helyi adathalmazban elérhető"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Elérhető WIWOSM szerveren keresztül"
 
@@ -80,6 +82,14 @@ msgstr ""
 msgid "Copy {0} template"
 msgstr "{0} sablon másolása"
 
+msgid "Could not add names. Wikipedia tag is not recognized!"
+msgstr "Nem sikerült neveket hozzáadni. A Wikipédia címke nem ismerhető fel!"
+
+msgid "Could not validate all wikidata=* tags over the internet."
+msgstr ""
+"Nem sikerült az összes wikidata=* címkét ellenőrizni az interneten "
+"keresztül."
+
 msgid "Delete selected snippet"
 msgstr "A kijelölt kódtöredék törlése"
 
@@ -91,7 +101,7 @@ msgstr ""
 "kereséshez"
 
 msgid "Download all elements from one of {0} sources"
-msgstr "Minden elem letöltése egy forrásból (összesen  {0} )"
+msgstr "Minden elem letöltése egy forrásból (összesen {0})"
 
 msgid "Download elements"
 msgstr "Elemek letöltése"
@@ -110,6 +120,14 @@ msgstr "Kapcsolat tagjainak letöltése"
 
 msgid "Download sitelinks for {0}…"
 msgstr "Oldalhivatkozások letöltése ehhez: {0}…"
+
+msgid "Download statements for {0}…"
+msgstr "Állítások letöltése ehhez: {0}…"
+
+#. I18n: {0} is the error message returned by the API
+msgid "Downloading entries with geo coordinates failed: {0}"
+msgstr ""
+"Földrajzi koordinátákkal rendelkező bejegyzések letöltése nem sikerült: {0}"
 
 msgid "Edit selected snippet"
 msgstr "A kijelölt kódtöredék szerkesztése"
@@ -161,6 +179,13 @@ msgstr ""
 
 msgid "Invalid Q-ID! Cannot exist on Wikidata."
 msgstr "Érvénytelen Q azonosító! Wikidatában nem található."
+
+msgid ""
+"It looks like a wikipedia tag contains a URL. Use the format "
+"''‹language›:‹article title› instead!''"
+msgstr ""
+"Úgy tűnik a wikipedia címke URL-t tartalmaz. Használd helyette a "
+"''‹nyelv›:‹cikk címe›\" formátumot!"
 
 msgid "Item {0} does not exist!"
 msgstr "A(z) ''{0}'' tétel nem létezik."
@@ -229,15 +254,22 @@ msgstr ""
 msgid "Sets the default language for the Wikipedia articles"
 msgstr "Megadja az alapértelmezett nyelvet a Wikipédia cikkekhez"
 
+msgid "Show properties of the selected Wikidata item"
+msgstr "A kiválasztott Wikidata-elem tulajdonságainak megjelenítése"
+
 msgid "Show/hide Sophox snippet list"
 msgstr "A Sophox-kódtöredéklista megjelenítése/elrejtése"
 
 msgid "Sophox server"
 msgstr "Sophox szerver"
 
+msgid "Statements"
+msgstr "Állítások"
+
 msgid "Target key: "
 msgstr "Cél kulcs: "
 
+#. I18n: {0} is the API name
 msgid "The JSON response from the {0} can''t be decoded!"
 msgstr "A JSON válasz nem dekódolható a következő helyről: {0}"
 
@@ -263,9 +295,20 @@ msgstr "''{0}'' érték nincs megengedve a wikipedia=* címke számára"
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "A brand:wikidata=* címke értéke érvénytelen formátumú"
 
+msgid "There is no Wikipedia site for language ''{0}''!"
+msgstr "A(z) ''{0}'' nyelvhez nem tartozik Wikipédia oldal!"
+
+msgid ""
+"Turn on the informational level validator messages in the preferences to see"
+" more details."
+msgstr ""
+"További részletek megtekintéséhez kapcsolja be az információs szintű "
+"validator üzeneteket a beállításokban."
+
 msgid "Unknown Wikipedia language prefix ''{0}''!"
 msgstr "Ismeretlen Wikipédia nyelv prefixum \"{0}\"!"
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "Ismeretlen adattípus!"
 
@@ -297,6 +340,9 @@ msgstr "A Wikipédia ''{0}''  cikk egy átirányítás ide:  ''{1}''"
 msgid "Wikipedia article is a redirect"
 msgstr "A Wikipédia cikk egy átirányítás"
 
+msgid "Wikipedia articles in viewport (for language {0})"
+msgstr "Wikipédia cikkek a nézetben ({0} nyelvhez)"
+
 msgid "Wikipedia language"
 msgstr "Wikipédia nyelve"
 
@@ -309,8 +355,12 @@ msgstr "Az elmentett lekérdezéseid:"
 msgid "Zoom to selection"
 msgstr "Nagyítás a kijelölésre"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
+
+msgid "a new value (manual intervention needed due to language conflict)"
+msgstr "egy új érték (nyelvi ütközés miatt kézi beavatkozás szükséges)"
 
 msgid "all Wikipedia articles in Category"
 msgstr "minden Wikipédia cikk a kategóriában"
@@ -318,6 +368,7 @@ msgstr "minden Wikipédia cikk a kategóriában"
 msgid "clipboard"
 msgstr "vágólap"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "koordináták"
 
@@ -348,6 +399,10 @@ msgstr "{0} (helytelen alakú webhely URL)"
 msgid "{0} is not a valid Wikidata-ID"
 msgstr "{0} nem egy érvényes Wikidata-ID"
 
+msgid "{0}=* tag should not have URL-encoded values."
+msgstr "{0}=* címke nem tartalmazhat URL-kódolású értéket."
+
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

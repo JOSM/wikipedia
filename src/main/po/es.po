@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (es)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -13,9 +13,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Spanish (https://www.transifex.com/josm/teams/2544/es/)\n"
 "MIME-Version: 1.0\n"
@@ -52,9 +52,11 @@ msgstr ""
 "Añade una etiqueta ''wikipedia'' correspondiente a este artículo para los "
 "objetos seleccionados"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "Disponible en el conjunto de datos local"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Disponibel vía servidor WIWOSM"
 
@@ -114,6 +116,10 @@ msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr ""
 "No se pudo comprobar si hay clases inusuales en las etiquetas wikidata=*."
 
+#. i18n: {0} is the API name, {1} is the name of the exception, {2} is the
+#. message of the exception.
+#. i18n: Typical values would be: {0}="Wikidata Action API"
+#. {1}="UnknownHostException" {2}="www.wikidata.org"
 msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
@@ -163,6 +169,7 @@ msgstr "Descargar enlaces de sitio para {0}…"
 msgid "Download statements for {0}…"
 msgstr "Descargar declaraciones para {0}…"
 
+#. I18n: {0} is the error message returned by the API
 msgid "Downloading entries with geo coordinates failed: {0}"
 msgstr ""
 "No se pudieron descargar las entradas con coordenadas geográficas: {0}"
@@ -392,6 +399,7 @@ msgstr "Declaraciones"
 msgid "Target key: "
 msgstr "Clave objetivo: "
 
+#. I18n: {0} is the API name
 msgid "The JSON response from the {0} can''t be decoded!"
 msgstr "¡No se puede decodificar la respuesta JSON de {0}!"
 
@@ -433,9 +441,12 @@ msgstr ""
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "El valor de la etiqueta brand:wikidata=* tiene un formato inválido!"
 
+#. I18n: {0} is the URL that the plugin tries to construct
 msgid "The wikipedia plugin tries to construct a malformed URL!: {0}"
 msgstr "¡El plugin de wikipedia intenta construir una URL mal formada!: {0} "
 
+#. I18n: {0}  is the API name, {1} is the query, normally as URL. {2} is the
+#. error message returned from the API
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
 "error, please report to the Wikipedia plugin."
@@ -443,6 +454,10 @@ msgstr ""
 "El {0} reportó una consulta inválida para {1} ({2}). Este es un error de "
 "programación, por favor reporte al complemento de Wikipedia."
 
+#. i18n: {0} is the API name, {1} is the response code, {2} is the response
+#. message.
+#. i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not
+#. Found"
 msgid "The {0} responded with an unexpected response code: {1} {2}"
 msgstr "El {0} respondió con un código de respuesta inesperado: {1} {2}"
 
@@ -473,6 +488,7 @@ msgstr ""
 msgid "Unknown Wikipedia language prefix ''{0}''!"
 msgstr "¡Prefijo de idioma de la Wikipedia desconocido \"{0}\"!"
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "¡Tipo de datos desconocido!"
 
@@ -482,6 +498,8 @@ msgstr ""
 "Use solo el título del artículo en vez de una URL para las etiquetas "
 "wikipedia:<idioma>"
 
+#. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
+#. the message that exception provides
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
 msgstr "¡Se produjo un error al leer la respuesta JSON de {0}! ({1}: {2})"
@@ -536,6 +554,7 @@ msgstr "Sus consultas guardadas:"
 msgid "Zoom to selection"
 msgstr "Zoom a la selección"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
@@ -552,6 +571,7 @@ msgstr "Todos los artículos de Wikipedia en la categoría"
 msgid "clipboard"
 msgstr "portapapeles"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "coordenadas"
 
@@ -588,6 +608,7 @@ msgstr "{0} no es un Wikidata-ID valido"
 msgid "{0}=* tag should not have URL-encoded values."
 msgstr "La etiqueta {0}=* no debería tener valores codificados de URL."
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

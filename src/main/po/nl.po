@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (nl)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -13,9 +13,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Dutch (https://www.transifex.com/josm/teams/2544/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -49,9 +49,11 @@ msgstr ""
 "Voegt aan de geselecteerde objecten een tag ''wikipedia'' toe die "
 "overeenkomt met dit artikel"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "beschikbaar in lokale gegevensset"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "Beschikbaar via server WIWOSM"
 
@@ -108,6 +110,10 @@ msgstr ""
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "Kan niet controleren op ongebruikelijke classes in wikidata=*-tags."
 
+#. i18n: {0} is the API name, {1} is the name of the exception, {2} is the
+#. message of the exception.
+#. i18n: Typical values would be: {0}="Wikidata Action API"
+#. {1}="UnknownHostException" {2}="www.wikidata.org"
 msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
@@ -285,6 +291,7 @@ msgstr "De Wikipedia/Wikidata laag"
 msgid "The value ''{0}'' is not allowed for the wikipedia=* tag"
 msgstr "De waarde ''{0}'' is niet toegestaan voor de wikipedia=* tag"
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "Onbekend datatype"
 
@@ -294,6 +301,8 @@ msgstr ""
 "Gebruik enkel het artikeltitel in de plaats van een URL voor "
 "wikipedia:‹taal› tags"
 
+#. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
+#. the message that exception provides
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
 msgstr ""
@@ -349,6 +358,7 @@ msgstr "uw opgeslagen query''s:"
 msgid "Zoom to selection"
 msgstr "Op selectie inzoomen"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki]"
 
@@ -364,6 +374,7 @@ msgstr "alle Wikipedia-artikelen in categorie"
 msgid "clipboard"
 msgstr "klembord"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "coördinaten"
 
@@ -400,6 +411,7 @@ msgstr "{0} is geen geldige Wikidata-ID"
 msgid "{0}=* tag should not have URL-encoded values."
 msgstr "{0}=* tag zou geen URL-gecodeerde waarden hebben"
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr ""

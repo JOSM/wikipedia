@@ -1,5 +1,5 @@
 # Translations for the JOSM plugin 'wikipedia' (zh_TW)
-# Copyright (C) 2020
+# Copyright (C) 2022
 # This file is distributed under the same license as the josm-plugin_wikipedia package.
 # FIRST AUTHOR, YEAR.
 #
@@ -12,9 +12,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: josm-plugin_wikipedia 46a3d84\n"
+"Project-Id-Version: josm-plugin_wikipedia 051825a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 18:27+0000\n"
+"POT-Creation-Date: 2022-01-03 22:15+0000\n"
 "PO-Revision-Date: 2018-05-12 22:55+0000\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/josm/teams/2544/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -49,9 +49,11 @@ msgid ""
 "objects"
 msgstr "添加與本文對應的維基百科「標籤」至已選擇物件"
 
+#. I18n: object/s from dataset contain link to Wikipedia article
 msgid "Available in local dataset"
 msgstr "可供本地數據資料庫利用"
 
+#. I18n: WIWOSM server already links Wikipedia article to object/s
 msgid "Available via WIWOSM server"
 msgstr "可透過 WIWOSM 伺服器利用"
 
@@ -102,6 +104,10 @@ msgstr "無法檢查所有 wikipedia=* 標籤是否為其他條目的重定向�
 msgid "Could not check for unusual classes in wikidata=* tags."
 msgstr "無法檢查 wikidata=* 標籤不尋常類型。"
 
+#. i18n: {0} is the API name, {1} is the name of the exception, {2} is the
+#. message of the exception.
+#. i18n: Typical values would be: {0}="Wikidata Action API"
+#. {1}="UnknownHostException" {2}="www.wikidata.org"
 msgid ""
 "Could not connect to the {0}, probably a network issue or the website is "
 "currently offline ({1}: {2})"
@@ -145,6 +151,7 @@ msgstr "下載 {0} 的網站連結…"
 msgid "Download statements for {0}…"
 msgstr "下載 {0} 的陳述…"
 
+#. I18n: {0} is the error message returned by the API
 msgid "Downloading entries with geo coordinates failed: {0}"
 msgstr "下載物件的地理經緯度失敗：{0}"
 
@@ -339,6 +346,7 @@ msgstr "陳述"
 msgid "Target key: "
 msgstr "目標連結 "
 
+#. I18n: {0} is the API name
 msgid "The JSON response from the {0} can''t be decoded!"
 msgstr "從 {0} 回應的 JSON 無法被解碼！"
 
@@ -373,14 +381,21 @@ msgstr "維基百科標籤的數值，應當是 <語言>:<條目名>，而不是
 msgid "The value of tag brand:wikidata=* has an invalid format!"
 msgstr "brand:wikidata=* 標籤數值並不是有效的格式！"
 
+#. I18n: {0} is the URL that the plugin tries to construct
 msgid "The wikipedia plugin tries to construct a malformed URL!: {0}"
 msgstr "維基百科外掛嘗試建構沒有作用的網址！: {0}"
 
+#. I18n: {0}  is the API name, {1} is the query, normally as URL. {2} is the
+#. error message returned from the API
 msgid ""
 "The {0} reported an invalid query for {1} ({2}). This is a programming "
 "error, please report to the Wikipedia plugin."
 msgstr "{0} 回報無效的檢索 {1}（{2}）。這是程式錯誤，請回報給 Ｗikipedia 套件。"
 
+#. i18n: {0} is the API name, {1} is the response code, {2} is the response
+#. message.
+#. i18n: Typical values would be: {0}="Wikidata Action API" {1}=404 {2}="Not
+#. Found"
 msgid "The {0} responded with an unexpected response code: {1} {2}"
 msgstr "{0} 回應未預期的回應代碼：{1} {2}"
 
@@ -404,6 +419,7 @@ msgstr "在設定選開啟資訊（information）級的驗證器訊息以檢視�
 msgid "Unknown Wikipedia language prefix ''{0}''!"
 msgstr "不知名的維基百科語言前綴 ''{0}''！"
 
+#. nullable
 msgid "Unknown datatype!"
 msgstr "未知資料型態！"
 
@@ -411,6 +427,8 @@ msgid ""
 "Use only the article title instead of a URL for wikipedia:‹language› tags"
 msgstr "wikipedia:<語言> 標籤，應只採用條目名稱，而不是整個網址"
 
+#. i18n: {0} is the name of the API, {1} is the name of the Exception, {2} is
+#. the message that exception provides
 msgid ""
 "When reading the JSON response from the {0}, an error occured! ({1}: {2})"
 msgstr "當讀取從 {0} 回應的 JSON 時，有錯誤發生了！（{1}：{2}）"
@@ -461,6 +479,7 @@ msgstr "你儲存的檢索："
 msgid "Zoom to selection"
 msgstr "縮放至選擇區域"
 
+#. i18n: Prefix for the validator messages. Note the space at the end!
 msgid "[Wiki] "
 msgstr "[Wiki] "
 
@@ -476,6 +495,7 @@ msgstr "分類内所有維基百科條目"
 msgid "clipboard"
 msgstr "剪貼簿"
 
+#. add entries to list model
 msgid "coordinates"
 msgstr "座標"
 
@@ -512,6 +532,7 @@ msgstr "{0} 不是有效的 Wikidata-ID"
 msgid "{0}=* tag should not have URL-encoded values."
 msgstr "{0}=* 標籤應該沒有網址型式的數值。"
 
+#. Plugin description for root project 'wikipedia'.name
 msgid ""
 "Simplifies linking OSM objects to Wikipedia articles and Wikidata items"
 msgstr "簡化連結OSM物件到維基百科條目和維基數據項目的過程"
