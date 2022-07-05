@@ -41,6 +41,13 @@ public class WikidataEntry extends WikipediaEntry {
         return Utils.escapeReservedCharactersHTML(bold) + " <span color='gray'>" + Utils.escapeReservedCharactersHTML(gray) + "</span>";
     }
 
+    public static String getLabelText(String bold, String colored, String color) {
+        return Utils.escapeReservedCharactersHTML(bold) +
+            " <span color='" + color + "'>" +
+            Utils.escapeReservedCharactersHTML(colored) +
+            "</span>";
+    }
+
     @Override
     public String getSearchText() {
         return Optional.ofNullable(label).orElse(article);

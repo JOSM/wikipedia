@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,20 +39,26 @@ public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
             return null;
         }
 
+        // Determine a suitable color between background and foreground to render labels.
+        // That way they will be legible even when selected.
+        final Color background = isSelected ? table.getSelectionBackground() : table.getBackground();
+        final Color foreground = isSelected ? table.getSelectionForeground() : table.getForeground();
+        final String labelColor = blend(background, foreground);
+
         final String id = ((Map<?, ?>) value).keySet().iterator().next().toString();
         final JLabel component = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (RegexUtil.isValidQId(id)) {
-            return renderValues(Collections.singleton(id), table, component);
+            return renderValues(Collections.singleton(id), table, component, labelColor);
         } else if (id.contains(";")) {
             final List<String> ids = Arrays.asList(id.split("\\s*;\\s*"));
             if (ids.stream().allMatch(RegexUtil::isValidQId)) {
-                return renderValues(ids, table, component);
+                return renderValues(ids, table, component, labelColor);
             }
         }
         return null;
     }
 
-    protected JLabel renderValues(Collection<String> ids, JTable table, JLabel component) {
+    protected JLabel renderValues(Collection<String> ids, JTable table, JLabel component, String labelColor) {
 
         ids.forEach(id ->
                 labelCache.computeIfAbsent(id, x ->
@@ -76,10 +83,21 @@ public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
             if (label == null) {
                 return null;
             }
-            texts.add(WikidataEntry.getLabelText(id, label));
+            texts.add(WikidataEntry.getLabelText(id, label, labelColor));
         }
         component.setText("<html>" + String.join("; ", texts));
         component.setToolTipText("<html>" + Utils.joinAsHtmlUnorderedList(texts));
         return component;
+    }
+
+    /**
+     * Blends two RGB colors to mimic a semi-transparent foreground
+     * color and returns a CSS/HTML color string.
+     */
+    private static String blend(Color background, Color foreground) {
+        int red = (background.getRed() + foreground.getRed()) / 2;
+        int green = (background.getGreen() + foreground.getGreen()) / 2;
+        int blue = (background.getBlue() + foreground.getBlue()) / 2;
+        return String.format("#%02x%02x%02x", red, green, blue);
     }
 }
