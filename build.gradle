@@ -7,9 +7,9 @@ plugins {
   id "jacoco"
   id "maven-publish"
   id "pmd"
-  id("com.github.spotbugs").version("4.5.1")
-  id("org.openstreetmap.josm").version("0.8.0")
-  id "net.ltgt.errorprone" version "1.2.1"
+  id("com.github.spotbugs").version("5.0.8")
+  id("org.openstreetmap.josm").version("0.8.2")
+  id("net.ltgt.errorprone").version("2.0.2")
 }
 
 // Set up Errorprone
@@ -32,10 +32,10 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 def versions = [
   errorprone: "2.10.0",
-  jacoco    : "0.8.7",
+  jacoco    : "0.8.8",
   junit     : "5.8.2",
-  pmd       : "6.28.0",
-  spotbugs  : "4.5.3",
+  pmd       : "6.46.0",
+  spotbugs  : "4.7.0",
 ]
 
 repositories {
@@ -52,8 +52,8 @@ dependencies {
   testImplementation("org.junit.vintage:junit-vintage-engine:${versions.junit}")
   testImplementation("com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}")
   testImplementation("org.openstreetmap.josm:josm-unittest:"){changing=true}
-  testImplementation("com.github.tomakehurst:wiremock-jre8:2.32.0")
-  testImplementation("org.awaitility:awaitility:4.1.1")
+  testImplementation('com.github.tomakehurst:wiremock-jre8:2.33.2')
+  testImplementation('org.awaitility:awaitility:4.2.0')
 }
 
 // Add dependencies from ivy.xml
@@ -116,8 +116,8 @@ jacoco {
 jacocoTestReport {
   dependsOn test
   reports {
-    xml.enabled = true
-    html.enabled = true
+    xml.required = true
+    html.required = true
   }
 }
 check.dependsOn jacocoTestReport
@@ -138,6 +138,6 @@ spotbugs {
 }
 tasks.withType(SpotBugsTask) {
   reports {
-    html.enabled = true
+    html.required = true
   }
 }
