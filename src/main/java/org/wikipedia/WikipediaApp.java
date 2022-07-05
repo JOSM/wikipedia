@@ -4,7 +4,9 @@ package org.wikipedia;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -22,9 +24,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
@@ -49,6 +53,9 @@ import org.wikipedia.tools.XPath;
 public final class WikipediaApp {
 
     private static final XPath X_PATH = XPath.getInstance();
+
+    private static final String STRING_URI_PIPE = Utils.encodeUrl("|");
+
     private final String wikipediaLang;
     private final SitematrixResult.Sitematrix.Site site;
 
@@ -102,12 +109,15 @@ public final class WikipediaApp {
     public List<WikipediaEntry> getEntriesFromCoordinates(LatLon min, LatLon max) {
         try {
             // construct url
-            final String url = getSiteUrl() + "/w/api.php"
-                    + "?action=query"
-                    + "&list=geosearch"
-                    + "&format=xml"
-                    + "&gslimit=500"
-                    + "&gsbbox=" + max.lat() + "|" + min.lon() + "|" + min.lat() + "|" + max.lon();
+            final String url = new StringBuilder(getSiteUrl()).append("/w/api.php")
+                .append("?action=query")
+                .append("&list=geosearch")
+                .append("&format=xml")
+                .append("&gslimit=500")
+                .append("&gsbbox=")
+                .append(STRING_URI_PIPE).append(max.lat()).append(STRING_URI_PIPE).append(min.lon())
+                .append(STRING_URI_PIPE).append(min.lat()).append(STRING_URI_PIPE).append(max.lon())
+                .toString();
             // parse XML document
             try (InputStream in = connect(url).getContent()) {
                 final Document doc = newDocumentBuilder().parse(in);
