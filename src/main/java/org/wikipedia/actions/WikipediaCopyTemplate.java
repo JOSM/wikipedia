@@ -84,8 +84,8 @@ public class WikipediaCopyTemplate {
                 return;
             }
             ClipboardUtils.copyString(pattern
-                    .replace("{lat}", Double.toString(node.getCoor().lat()))
-                    .replace("{lon}", Double.toString(node.getCoor().lon())));
+                    .replace("{lat}", Double.toString(node.lat()))
+                    .replace("{lon}", Double.toString(node.lon())));
         }
 
         @Override
