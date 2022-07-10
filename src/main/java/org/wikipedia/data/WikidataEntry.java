@@ -1,8 +1,10 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.data;
 
+import java.awt.Color;
 import java.util.Comparator;
 import java.util.Optional;
+import javax.annotation.Nonnull;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.tools.AlphanumComparator;
@@ -38,12 +40,13 @@ public class WikidataEntry extends WikipediaEntry {
     }
 
     public static String getLabelText(String bold, String gray) {
-        return Utils.escapeReservedCharactersHTML(bold) + " <span color='gray'>" + Utils.escapeReservedCharactersHTML(gray) + "</span>";
+        return getLabelText(bold, gray, Optional.empty());
     }
 
-    public static String getLabelText(String bold, String colored, String color) {
-        return Utils.escapeReservedCharactersHTML(bold) +
-            " <span color='" + color + "'>" +
+    public static String getLabelText(final String bold, final String colored, @Nonnull final Optional<Color> color) {
+        return
+            Utils.escapeReservedCharactersHTML(bold) +
+            " <span color='" + color.map(it -> String.format("#%02x%02x%02x", it.getRed(), it.getGreen(), it.getBlue())).orElse("gray") + "'>" +
             Utils.escapeReservedCharactersHTML(colored) +
             "</span>";
     }

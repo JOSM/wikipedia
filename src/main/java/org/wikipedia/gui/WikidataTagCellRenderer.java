@@ -10,10 +10,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
+import javax.annotation.Nonnull;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -43,22 +45,22 @@ public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
         // That way they will be legible even when selected.
         final Color background = isSelected ? table.getSelectionBackground() : table.getBackground();
         final Color foreground = isSelected ? table.getSelectionForeground() : table.getForeground();
-        final String labelColor = blend(background, foreground);
+        final Color labelColor = blend(background, foreground);
 
         final String id = ((Map<?, ?>) value).keySet().iterator().next().toString();
         final JLabel component = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (RegexUtil.isValidQId(id)) {
-            return renderValues(Collections.singleton(id), table, component, labelColor);
+            return renderValues(Collections.singleton(id), table, component, Optional.of(labelColor));
         } else if (id.contains(";")) {
             final List<String> ids = Arrays.asList(id.split("\\s*;\\s*"));
             if (ids.stream().allMatch(RegexUtil::isValidQId)) {
-                return renderValues(ids, table, component, labelColor);
+                return renderValues(ids, table, component, Optional.of(labelColor));
             }
         }
         return null;
     }
 
-    protected JLabel renderValues(Collection<String> ids, JTable table, JLabel component, String labelColor) {
+    protected JLabel renderValues(Collection<String> ids, JTable table, JLabel component, @Nonnull Optional<Color> labelColor) {
 
         ids.forEach(id ->
                 labelCache.computeIfAbsent(id, x ->
@@ -94,10 +96,11 @@ public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
      * Blends two RGB colors to mimic a semi-transparent foreground
      * color and returns a CSS/HTML color string.
      */
-    private static String blend(Color background, Color foreground) {
-        int red = (background.getRed() + foreground.getRed()) / 2;
-        int green = (background.getGreen() + foreground.getGreen()) / 2;
-        int blue = (background.getBlue() + foreground.getBlue()) / 2;
-        return String.format("#%02x%02x%02x", red, green, blue);
+    private static Color blend(Color background, Color foreground) {
+        return new Color(
+            (background.getRed() + foreground.getRed()) / 2,
+            (background.getGreen() + foreground.getGreen()) / 2,
+            (background.getBlue() + foreground.getBlue()) / 2
+        );
     }
 }
