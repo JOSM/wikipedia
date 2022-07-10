@@ -4,9 +4,7 @@ package org.wikipedia;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -34,6 +32,7 @@ import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.I18n;
+import org.openstreetmap.josm.tools.LanguageInfo;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Utils;
@@ -115,7 +114,7 @@ public final class WikipediaApp {
                 .append("&format=xml")
                 .append("&gslimit=500")
                 .append("&gsbbox=")
-                .append(STRING_URI_PIPE).append(max.lat()).append(STRING_URI_PIPE).append(min.lon())
+                .append(max.lat()).append(STRING_URI_PIPE).append(min.lon())
                 .append(STRING_URI_PIPE).append(min.lat()).append(STRING_URI_PIPE).append(max.lon())
                 .toString();
             // parse XML document
@@ -198,7 +197,7 @@ public final class WikipediaApp {
                     entries.add(new WikidataEntry(matcher.group()));
                 }
             }
-            return new ArrayList<>(getLabelForWikidata(entries, Locale.getDefault()));
+            return new ArrayList<>(getLabelForWikidata(entries, LanguageInfo.getLocale(LanguageInfo.getJOSMLocaleCode())));
         }
         return Pattern.compile("[\\n\\r]+")
                 .splitAsStream(clipboardStringContent)

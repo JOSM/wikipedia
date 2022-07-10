@@ -30,7 +30,7 @@ public class WikipediaAppTest {
      * Setup test.
      */
     @Rule
-    public JOSMTestRules rules = new JOSMTestRules().preferences().timeout(20_000);
+    public JOSMTestRules rules = new JOSMTestRules().preferences().timeout(20_000).i18n("en");
 
     @Test
     public void testMediawikiLocale() throws Exception {
@@ -84,7 +84,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testForQuery() throws Exception {
+    public void testForQuery() {
         final List<WikidataEntry> de = WikipediaApp.getWikidataEntriesForQuery("de", "Österreich", Locale.GERMAN);
         final List<WikidataEntry> en = WikipediaApp.getWikidataEntriesForQuery("de", "Österreich", Locale.ENGLISH);
         assertThat(de.get(0).article, is("Q40"));
@@ -107,7 +107,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testGetWikidataForArticles() throws Exception {
+    public void testGetWikidataForArticles() {
         final Map<String, String> map = WikipediaApp.forLanguage("en")
                 .getWikidataForArticles(Arrays.asList("London", "Vienna", "Völs, Tyrol", "a-non-existing-article"));
         assertThat(map.get("London"), is("Q84"));
