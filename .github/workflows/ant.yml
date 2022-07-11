@@ -1,43 +1,104 @@
 name: Java CI
+env:
+  junit_platform_version: '1.8.2'
+  # ANT_HOME is also our ant version
+  ANT_HOME: 'apache-ant-1.10.12'
 
 on:
   push:
-    branches: [ main, fixup-tests ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   release:
     types: [created]
 
 jobs:
-  build:
+  build-josm:
     runs-on: ubuntu-latest
+    steps:
+    - name: Get JOSM revision
+      id: josm-revision
+      run: |
+        REVISION=$(svn info https://josm.openstreetmap.de/svn/trunk | grep Revision | awk '{print $2}')
+        echo $REVISION
+        echo "::set-output name=josm-revision::${REVISION}"
+      shell: bash
+    - name: Cache JOSM
+      id: cache-josm
+      uses: actions/cache@v3.0.0
+      with:
+        path: |
+          josm/core/dist/josm-custom.jar
+          josm/core/test/build
+        key: josm-r${{ steps.josm-revision.outputs.josm-revision }}
+    - name: Set up JDK 8
+      if: steps.cache-josm.outputs.cache-hit != 'true'
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Clone JOSM
+      if: steps.cache-josm.outputs.cache-hit != 'true'
+      run: |
+        svn co --depth=immediates https://josm.openstreetmap.de/osmsvn/applications/editors/josm $GITHUB_WORKSPACE/josm
+        cd $GITHUB_WORKSPACE/josm
+        svn up --set-depth=infinity --accept=theirs-full core
+        svn propget svn:externals | grep core | xargs -L1 svn co
+    - name: Cache dependencies
+      uses: actions/cache@v3.0.0
+      if: steps.cache-josm.outputs.cache-hit != 'true'
+      with:
+        path: |
+          ~/.ivy2/cache/
+          $GITHUB_WORKSPACE/josm/core/tools/
+        key: ${{ runner.os }}-ivy2-${{ hashFiles('**/ivy.xml') }}
+    - name: build JOSM
+      if: steps.cache-josm.outputs.cache-hit != 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/josm/core
+        ant dist test-compile
+    - uses: actions/upload-artifact@v3
+      with:
+        name: josm-dist
+        path: josm/core/dist/josm-custom.jar
+    - uses: actions/upload-artifact@v3
+      with:
+        name: josm-test
+        path: josm/core/test/build
+  build-plugin:
+    runs-on: ubuntu-latest
+    needs: build-josm
     steps:
     - name: Set up JDK 8
       uses: actions/setup-java@v3
       with:
         java-version: '8'
         distribution: 'temurin'
-    - name: Cache
-      uses: actions/cache@v2.0.0
-      with:
-        path: |
-          ~/.ivy2/cache/
-          $GITHUB_WORKSPACE/josm/core/tools/
-        key: ${{ runner.os }}-ivy2-${{ hashFiles('josm/plugins/${{ github.event.repository.name }}/build.xml', 'josm/plugins/00_core_tools/ivy.xml', 'josm/core/ivy.xml', 'josm/core/tools/ivy.xml') }}
     - name: Clone JOSM
       run: |
         svn co --depth=immediates https://josm.openstreetmap.de/osmsvn/applications/editors/josm $GITHUB_WORKSPACE/josm
         cd $GITHUB_WORKSPACE/josm
-        svn up --set-depth=immediates plugins
-        svn up --set-depth=infinity --accept=theirs-full core i18n plugins/{00_core_test_config,00_core_test_lib,00_core_tools,00_tools}
-        svn propget svn:externals | grep core | xargs -L1 svn co
+        svn up --set-depth=immediates core plugins
+        svn up --set-depth=infinity --accept=theirs-full i18n plugins/{00_core_test_config,00_core_test_lib,00_core_tools,00_tools}
+        svn propget svn:externals | grep core | xargs -L1 svn co --depth=empty
         cd core
-        ant dist
+        svn up ivy.xml ivysettings.xml
         cd ../plugins
         svn propget svn:externals | grep 00_core | xargs -L1 svn co
     - uses: actions/checkout@v3
       with:
         path: josm/plugins/${{ github.event.repository.name }}
+    - name: Cache
+      uses: actions/cache@v3.0.0
+      with:
+        path: |
+          ~/.ivy2/cache/
+          $GITHUB_WORKSPACE/josm/core/tools/
+        key: ${{ runner.os }}-ivy2-${{ hashFiles('**/ivy.xml') }}
+    - uses: actions/download-artifact@v3
+      with:
+        name: josm-dist
+        path: josm/core/dist
     - name: Build with Ant
       run: |
         cd $GITHUB_WORKSPACE/josm/plugins/${{ github.event.repository.name }}
@@ -47,21 +108,97 @@ jobs:
           version="$GITHUB_REF_NAME-$GITHUB_SHA"
         fi
         ant -noinput -buildfile build.xml -Dplugin.version=$version
+    - uses: actions/upload-artifact@v3
+      with:
+        name: josm-plugin-dist
+        path: |
+          josm/dist/${{ github.event.repository.name }}.jar
+          josm/dist/${{ github.event.repository.name }}-javadoc.jar
+          josm/dist/${{ github.event.repository.name }}-sources.jar
+  test-plugin:
+    runs-on: ubuntu-latest
+    needs: build-josm
+    steps:
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Clone JOSM
+      run: |
+        svn co --depth=immediates https://josm.openstreetmap.de/osmsvn/applications/editors/josm $GITHUB_WORKSPACE/josm
+        cd $GITHUB_WORKSPACE/josm
+        svn up --set-depth=immediates core plugins
+        svn up --set-depth=infinity --accept=theirs-full i18n plugins/{00_core_test_config,00_core_test_lib,00_core_tools,00_tools}
+        svn propget svn:externals | grep core | xargs -L1 svn co --depth=empty
+        cd core
+        svn up ivy.xml ivysettings.xml
+        cd ../plugins
+        svn propget svn:externals | grep 00_core | xargs -L1 svn co
+    - uses: actions/checkout@v3
+      with:
+        path: josm/plugins/${{ github.event.repository.name }}
+    - name: Cache
+      uses: actions/cache@v3.0.0
+      with:
+        path: |
+          ~/.ivy2/cache/
+          $GITHUB_WORKSPACE/josm/core/tools/
+        key: ${{ runner.os }}-ivy2-${{ hashFiles('**/ivy.xml') }}-test-plugin
+
+    - name: Install Ant ${{ env.ANT_HOME }}
+      run: |
+        if [ ! -d tools ]; then mkdir tools; fi
+        if [ ! -f tools/${{ env.ANT_HOME }}-bin.tar.gz ]; then
+          curl -o tools/${{ env.ANT_HOME }}-bin.tar.gz https://downloads.apache.org/ant/binaries/${{ env.ANT_HOME }}-bin.tar.gz
+        fi
+        tar zxf tools/${{ env.ANT_HOME }}-bin.tar.gz
+    - name: Ant diagnostics
+      run: ${{ env.ANT_HOME }}/bin/ant -diagnostics
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: josm-dist
+        path: josm/core/dist
+    - uses: actions/download-artifact@v3
+      with:
+        name: josm-test
+        path: josm/core/test/build
+    - name: Build with Ant
+      run: |
+        cd $GITHUB_WORKSPACE/josm/plugins/${{ github.event.repository.name }}
+        if [ $GITHUB_REF_TYPE == "tag" ]; then
+          version=$GITHUB_REF_NAME
+        else
+          version="$GITHUB_REF_NAME-$GITHUB_SHA"
+        fi
+        "$GITHUB_WORKSPACE/${{ env.ANT_HOME }}"/bin/ant -noinput -buildfile build.xml -Dplugin.version=$version
     - name: Test with Ant
       run: |
         cd $GITHUB_WORKSPACE/josm/plugins/${{ github.event.repository.name }}
-        ant -noinput -buildfile build.xml -Dplugin.version=$version -Dtest.headless test
+        "$GITHUB_WORKSPACE/${{ env.ANT_HOME }}"/bin/ant -noinput -buildfile build.xml -Dplugin.version=$version -Dtest.headless=true test
+        exit $(grep -L ', Failures: 0, Skipped: ' test/report/*.txt | wc -l)
     - name: Dump errors if failed
       if: ${{ failure() }}
-      run: "grep -L ', Failures: 0, Skipped: ' test/report/*.txt | xargs cat"
+      run: |
+        cd $GITHUB_WORKSPACE/josm/plugins/${{ github.event.repository.name }}
+        grep -L ', Failures: 0, Skipped: ' test/report/*.txt | xargs cat
     - name: Upload Ant reports
       if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
         name: Ant reports for JOSM plugin ${{ github.event.repository.name }}
         path: |
-          $GITHUB_WORKSPACE/josm/plugins/${{ github.event.repository.name }}/test/report/*.txt
-          $GITHUB_WORKSPACE/josm/plugins/${{ github.event.repository.name }}/test/report/TEST*.xml
+          josm/plugins/${{ github.event.repository.name }}/test/report/*.txt
+          josm/plugins/${{ github.event.repository.name }}/test/report/TEST*.xml
+  release:
+    runs-on: ubuntu-latest
+    needs: [build-plugin, test-plugin]
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: josm-plugin-dist
+        path: josm/dist
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
