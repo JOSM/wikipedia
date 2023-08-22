@@ -6,6 +6,7 @@ import static org.openstreetmap.josm.tools.I18n.tr;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -20,10 +21,11 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonValue;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
+import jakarta.json.JsonValue;
 import org.openstreetmap.josm.actions.DownloadPrimitiveAction;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.data.DataSource;
@@ -174,7 +176,7 @@ public class SophoxDownloadReader extends BoundingBoxDownloader {
 
     private static SearchResult searchName(String area) throws IOException {
         return NameFinder.queryNominatim(area).stream().filter(
-                x -> !OsmPrimitiveType.NODE.equals(x.getOsmId().getType())).iterator().next();
+                x -> OsmPrimitiveType.NODE != x.getOsmId().getType()).iterator().next();
     }
 
     static String geocodeArea(String area) throws IOException {
@@ -257,22 +259,26 @@ public class SophoxDownloadReader extends BoundingBoxDownloader {
         Pattern uriPattern = Pattern.compile("^https://www\\.openstreetmap\\.org/(node|way|relation)/(\\d+)");
         List<PrimitiveId> ids = new ArrayList<>();
 
-        JsonArray results = Json.createReader(new InputStreamReader(source, StandardCharsets.UTF_8))
-                .readObject()
-                .getJsonObject("results")
-                .getJsonArray("bindings");
+        try (InputStreamReader inputStreamReader = new InputStreamReader(source, StandardCharsets.UTF_8);
+             JsonReader reader = Json.createReader(inputStreamReader)) {
+            JsonArray results = reader.readObject()
+                    .getJsonObject("results")
+                    .getJsonArray("bindings");
 
-        for (JsonObject row : results.getValuesAs(JsonObject.class)) {
-            for (JsonValue column : row.values()) {
-                JsonObject columnObj = (JsonObject) column;
-                if (columnObj.getString("type").equals("uri"))  {
-                    Matcher matcher = uriPattern.matcher(columnObj.getString("value"));
-                    if (matcher.matches()) {
-                        ids.add(new SimplePrimitiveId(Long.parseLong(matcher.group(2)),
-                                OsmPrimitiveType.from(matcher.group(1))));
+            for (JsonObject row : results.getValuesAs(JsonObject.class)) {
+                for (JsonValue column : row.values()) {
+                    JsonObject columnObj = (JsonObject) column;
+                    if ("uri".equals(columnObj.getString("type"))) {
+                        Matcher matcher = uriPattern.matcher(columnObj.getString("value"));
+                        if (matcher.matches()) {
+                            ids.add(new SimplePrimitiveId(Long.parseLong(matcher.group(2)),
+                                    OsmPrimitiveType.from(matcher.group(1))));
+                        }
                     }
                 }
             }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
 
         return ids;
