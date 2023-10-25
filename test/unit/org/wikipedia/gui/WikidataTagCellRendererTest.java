@@ -3,27 +3,22 @@ package org.wikipedia.gui;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import org.junit.Rule;
-import org.junit.Test;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
 
-public class WikidataTagCellRendererTest {
+import org.junit.jupiter.api.Test;
+import org.openstreetmap.josm.testutils.annotations.I18n;
 
-    /**
-     * Setup test.
-     */
-    @Rule
-    public JOSMTestRules rules = new JOSMTestRules().preferences().i18n("en");
-
+@I18n
+class WikidataTagCellRendererTest {
     @Test
-    public void testRenderLabel() throws Exception {
+    void testRenderLabel() throws Exception {
         final List<String> ids = Arrays.asList("Q84", "Q1741", "Q278250");
         final WikidataTagCellRenderer renderer = new WikidataTagCellRenderer();
         renderer.renderValues(ids, new JTable(), new JLabel(), Optional.empty());

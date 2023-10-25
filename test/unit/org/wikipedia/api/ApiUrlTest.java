@@ -1,21 +1,23 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.api;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.junit.Test;
 
-public class ApiUrlTest {
+import org.junit.jupiter.api.Test;
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testMalformedUrl() {
-        ApiUrl.url("malformedURL");
+class ApiUrlTest {
+
+    @Test
+    void testMalformedUrl() {
+        assertThrows(IllegalArgumentException.class, () -> ApiUrl.url("malformedURL"));
     }
 
     @Test
-    public void testUrl() throws MalformedURLException {
+    void testUrl() throws MalformedURLException {
         assertEquals(new URL("https://example.org"), ApiUrl.url("https://example.org"));
         assertEquals(new URL("https://example.org/abc"), ApiUrl.url("https://example.org/abc"));
         assertEquals(new URL("https://example.org/abc/def/ghi/jkl/mno"), ApiUrl.url("https://example.org/abc/def/ghi/jkl/mno"));

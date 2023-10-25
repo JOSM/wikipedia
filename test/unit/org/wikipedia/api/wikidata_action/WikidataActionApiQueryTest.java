@@ -1,17 +1,24 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.api.wikidata_action;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.junit.Test;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.WbgetentitiesResult;
 import org.wikipedia.data.WikipediaSite;
@@ -19,44 +26,38 @@ import org.wikipedia.testutils.ResourceFileLoader;
 
 public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testWbgetentities_nonQId() {
-        WikidataActionApiQuery.wbgetentities(Collections.singletonList("X1"));
-    }
-    @Test(expected = IllegalArgumentException.class)
-
-    public void testCheckEntityExists_nonQId2() {
-        WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", "Q2", "X1"));
+    static Stream<Arguments> testWbgetentitiesErrorIds() {
+        return Stream.of(Arguments.of((Object) new String[] {"X1"}),
+            Arguments.of((Object) new String[] {"Q1", "Q2", "X1"}),
+            Arguments.of((Object) new String[] {"Q1", null, "Q3"}),
+            Arguments.of((Object) new String[0]));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testWbgetentities_nullId() {
-        WikidataActionApiQuery.wbgetentities(Arrays.asList("Q1", null, "Q3"));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testWbgetentities_emptyIdList() {
-        WikidataActionApiQuery.wbgetentities(Collections.emptyList());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testWbgetentitiesLabels_invalidQid() {
-        WikidataActionApiQuery.wbgetentitiesLabels("X1");
+    @ParameterizedTest
+    @MethodSource
+    void testWbgetentitiesErrorIds(String[] entities) {
+        final List<String> list = Arrays.asList(entities);
+        assertThrows(IllegalArgumentException.class, () -> WikidataActionApiQuery.wbgetentities(list));
     }
 
     @Test
-    public void testApiName() {
+    void testWbgetentitiesLabelsInvalidQid() {
+        assertThrows(IllegalArgumentException.class, () -> WikidataActionApiQuery.wbgetentitiesLabels("X1"));
+    }
+
+    @Test
+    void testApiName() {
         assertEquals("Wikidata Action API", WikidataActionApiQuery.wbgetentitiesClaims("Q1").getApiName());
         assertEquals("Wikidata Action API", WikidataActionApiQuery.sitematrix().getApiName());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testWbgetclaims_invalidQid() {
-        WikidataActionApiQuery.wbgetentitiesClaims("123");
+    @Test
+    void testWbgetclaimsInvalidQid() {
+        assertThrows(IllegalArgumentException.class, () -> WikidataActionApiQuery.wbgetentitiesClaims("123"));
     }
 
     @Test
-    public void testWbgetentitiesQuery() {
+    void testWbgetentitiesQuery() {
         assertEquals(
             "action=wbgetentities&format=json&formatversion=2&ids=Q1&props=&sites=&utf8=1",
             WikidataActionApiQuery.wbgetentities(Collections.singletonList("Q1")).getQueryString().toString()
@@ -68,7 +69,7 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
     }
 
     @Test
-    public void testWikidataForArticles1() throws IOException, URISyntaxException {
+    void testWikidataForArticles1() throws IOException, URISyntaxException {
         final WikipediaSite site = siteFromStub("de");
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/dewiki_Berlin.json"));
 
@@ -90,7 +91,7 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
     }
 
     @Test
-    public void testWikidataForArticles2() throws IOException, URISyntaxException {
+    void testWikidataForArticles2() throws IOException, URISyntaxException {
         final WikipediaSite site = siteFromStub("en");
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/enwiki_2entities2missing.json"));
 
@@ -122,7 +123,7 @@ public class WikidataActionApiQueryTest extends WikidataActionApiTestAbstract {
     }
 
     @Test
-    public void testWikidataItemLabelQuery() throws IOException, URISyntaxException {
+    void testWikidataItemLabelQuery() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/labels_Q42.json"));
 
         final Optional<WbgetentitiesResult.Entity> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels("Q42"));

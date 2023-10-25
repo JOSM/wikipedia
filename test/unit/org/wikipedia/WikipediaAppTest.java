@@ -5,8 +5,9 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,23 +18,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import org.junit.Rule;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.openstreetmap.josm.data.coor.LatLon;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
+import org.openstreetmap.josm.testutils.annotations.I18n;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 
-public class WikipediaAppTest {
-
-    /**
-     * Setup test.
-     */
-    @Rule
-    public JOSMTestRules rules = new JOSMTestRules().preferences().timeout(20_000).i18n("en");
-
+@Timeout(20)
+@I18n
+class WikipediaAppTest {
     @Test
-    public void testMediawikiLocale() throws Exception {
+    void testMediawikiLocale() {
         assertThat(WikipediaApp.getMediawikiLocale(Locale.GERMANY), is("de-de"));
         assertThat(WikipediaApp.getMediawikiLocale(Locale.GERMAN), is("de"));
         assertThat(WikipediaApp.getMediawikiLocale(Locale.UK), is("en-gb"));
@@ -41,19 +38,19 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testPartitionList() {
+    void testPartitionList() {
         assertThat(
                 WikipediaApp.partitionList(Arrays.asList(1, 2, 3, 4, 5), 2),
                 is(Arrays.asList(
                         Arrays.asList(1, 2),
                         Arrays.asList(3, 4),
-                        Arrays.asList(5)
+                        Collections.singletonList(5)
                 ))
         );
     }
 
     @Test
-    public void testGetInterwikiArticles1() {
+    void testGetInterwikiArticles1() {
         final Collection<WikipediaEntry> iw = WikipediaApp.forLanguage("de").getInterwikiArticles("Österreich");
         assertThat(iw, hasItem(new WikipediaEntry("en", "Austria")));
         assertThat(iw, hasItem(new WikipediaEntry("nb", "Østerrike")));
@@ -61,20 +58,20 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testGetInterwikiArticles2() {
+    void testGetInterwikiArticles2() {
         final Collection<WikipediaEntry> iw = WikipediaApp.forLanguage("en").getInterwikiArticles("Ampersand");
         assertThat(iw, hasItem(new WikipediaEntry("fi", "&")));
     }
 
     @Test
-    public void testGetCoordinates() throws Exception {
+    void testGetCoordinates() {
         assertThat(WikipediaApp.forLanguage("de").getCoordinateForArticle("Marchreisenspitze"), is(new LatLon(47.1725, 11.30833333)));
         assertThat(WikipediaApp.forLanguage("en").getCoordinateForArticle("Austria"), is(new LatLon(47.33333333, 13.33333333)));
         assertThat(WikipediaApp.forLanguage("en").getCoordinateForArticle("Foobar2000"), nullValue());
     }
 
     @Test
-    public void testFromCoordinates() throws Exception {
+    void testFromCoordinates() {
         final List<WikipediaEntry> entries = WikipediaApp.forLanguage("de")
                 .getEntriesFromCoordinates(new LatLon(52.5179786, 13.3753321), new LatLon(52.5192215, 13.3768705));
         final long c = entries.stream()
@@ -84,7 +81,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testForQuery() {
+    void testForQuery() {
         final List<WikidataEntry> de = WikipediaApp.getWikidataEntriesForQuery("de", "Österreich", Locale.GERMAN);
         final List<WikidataEntry> en = WikipediaApp.getWikidataEntriesForQuery("de", "Österreich", Locale.ENGLISH);
         assertThat(de.get(0).article, is("Q40"));
@@ -96,7 +93,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testFromCoordinatesWikidata() throws Exception {
+    void testFromCoordinatesWikidata() {
         final List<WikipediaEntry> entries = WikipediaApp.forLanguage("wikidata")
                 .getEntriesFromCoordinates(new LatLon(47.20, 11.30), new LatLon(47.22, 11.32));
         final long c = entries.stream()
@@ -107,7 +104,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testGetWikidataForArticles() {
+    void testGetWikidataForArticles() {
         final Map<String, String> map = WikipediaApp.forLanguage("en")
                 .getWikidataForArticles(Arrays.asList("London", "Vienna", "Völs, Tyrol", "a-non-existing-article"));
         assertThat(map.get("London"), is("Q84"));
@@ -118,7 +115,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testGetWikidataForArticlesResolveRedirects() throws Exception {
+    void testGetWikidataForArticlesResolveRedirects() {
         final Map<String, String> map = WikipediaApp.forLanguage("en")
                 .getWikidataForArticles(Arrays.asList("einstein", "USA"));
         assertThat(map.get("einstein"), is("Q937"));
@@ -127,7 +124,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testTicket13991() {
+    void testTicket13991() {
         final Map<String, String> map = WikipediaApp.forLanguage("en")
                 .getWikidataForArticles(Stream.iterate("London", x -> x).limit(100).collect(Collectors.toList()));
         assertThat(map, is(Collections.singletonMap("London", "Q84")));
@@ -138,7 +135,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testGetLabelForWikidata() throws Exception {
+    void testGetLabelForWikidata() {
         assertThat(WikipediaApp.getLabelForWikidata("Q1741", Locale.GERMAN), is("Wien"));
         assertThat(WikipediaApp.getLabelForWikidata("Q1741", Locale.ENGLISH), is("Vienna"));
         // fallback to any label
@@ -152,13 +149,13 @@ public class WikipediaAppTest {
         assertThat(twoLabels.get(1).label, is("Wien"));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testGetLabelForWikidataInvalidId() throws Exception {
-        WikipediaApp.getLabelForWikidata("Qxyz", Locale.ENGLISH);
+    @Test
+    void testGetLabelForWikidataInvalidId() {
+        assertThrows(RuntimeException.class, () -> WikipediaApp.getLabelForWikidata("Qxyz", Locale.ENGLISH));
     }
 
     @Test
-    public void testWIWOSMStatus() throws Exception {
+    void testWIWOSMStatus() {
         final WikipediaEntry entry1 = new WikipediaEntry("en", "Vienna");
         final WikipediaEntry entry2 = new WikipediaEntry("en", "London");
         final WikipediaEntry entry3 = new WikipediaEntry("en", "a-non-existing-article");
@@ -169,13 +166,13 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testCategoriesForPrefix() throws Exception {
+    void testCategoriesForPrefix() {
         final List<String> categories = WikipediaApp.forLanguage("de").getCategoriesForPrefix("Gemeinde in Öster");
         assertTrue(categories.contains("Gemeinde in Österreich"));
     }
 
     @Test
-    public void testEntriesFromClipboard() {
+    void testEntriesFromClipboard() {
         List<WikipediaEntry> entries = WikipediaApp.getEntriesFromClipboard("de", "foo\nde:bar\nen:baz\n");
         assertThat(entries.size(), is(3));
         assertThat(entries.get(0), is(new WikipediaEntry("de", "foo")));
@@ -184,7 +181,7 @@ public class WikipediaAppTest {
     }
 
     @Test
-    public void testEntriesFromClipboardWikidata() {
+    void testEntriesFromClipboardWikidata() {
         List<WikipediaEntry> entries = WikipediaApp.getEntriesFromClipboard("wikidata", "Q40\nQ151897");
         assertThat(entries.size(), is(2));
         assertThat(entries.get(0).article, is("Q40"));

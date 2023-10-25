@@ -1,18 +1,20 @@
 package org.wikipedia.api.wikidata_action;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Map;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class QueryResultTest extends WikidataActionApiTestAbstract {
+class QueryResultTest extends WikidataActionApiTestAbstract {
     @Test
-    public void test() throws IOException, URISyntaxException {
+    void test() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/query/languages.json"));
         final Map<String, String> languages = ApiQueryClient.query(WikidataActionApiQuery.queryLanguages());
         assertEquals(456, languages.size());

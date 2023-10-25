@@ -1,20 +1,14 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.gui;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openstreetmap.josm.gui.preferences.PreferenceTabbedPane;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
 
-public class WikiPreferencesTest {
-
-    @Rule
-    public JOSMTestRules test = new JOSMTestRules();
-
+class WikiPreferencesTest {
     @Test
-    public void testAddGui() {
+    void testAddGui() {
         final WikiPreferences setting = new WikiPreferences();
         final PreferenceTabbedPane tabPane = new PreferenceTabbedPane();
         tabPane.buildGui();

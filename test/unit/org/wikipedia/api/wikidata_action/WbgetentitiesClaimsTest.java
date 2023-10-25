@@ -1,7 +1,7 @@
 package org.wikipedia.api.wikidata_action;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,15 +10,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.WbgetclaimsResult;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class WbgetentitiesClaimsTest extends WikidataActionApiTestAbstract {
+class WbgetentitiesClaimsTest extends WikidataActionApiTestAbstract {
 
     @Test
-    public void test() throws IOException, URISyntaxException {
+    void test() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/wbgetentities/claims_Q2.json"));
 
         final Optional<Collection<WbgetclaimsResult.Claim>> result = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesClaims("Q2"));

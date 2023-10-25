@@ -4,37 +4,27 @@ package org.wikipedia.io;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Rule;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.openstreetmap.josm.data.osm.OsmPrimitiveType;
 import org.openstreetmap.josm.data.osm.PrimitiveId;
 import org.openstreetmap.josm.data.osm.SimplePrimitiveId;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
 
 /**
  * Unit tests of {@link SophoxDownloadReader} class.
  */
-public class SophoxDownloadReaderTest {
-
-    /**
-     * Base test environment is enough
-     */
-    @Rule
-    @SuppressFBWarnings(value = "URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD")
-    public JOSMTestRules test = new JOSMTestRules().preferences();
-
+class SophoxDownloadReaderTest {
     /**
      * Tests point generation
      */
     @Test
-    public void testPoint() {
+    void testPoint() {
         assertThat(SophoxDownloadReader.point(9.5, 47.16),
                 is("\"Point(9.5 47.16)\"^^geo:wktLiteral"));
         assertThat(SophoxDownloadReader.boxParams(1.1, 2.2, 3.3, 4.4),
@@ -47,7 +37,7 @@ public class SophoxDownloadReaderTest {
      * @throws UnsupportedEncodingException if an error occurs
      */
     @Test
-    public void testIdParsing() throws UnsupportedEncodingException {
+    void testIdParsing() throws UnsupportedEncodingException {
         String json = String.join("\n",
                 "{\"results\":{\"bindings\":[",
                 "{\"a\":{\"type\": \"uri\", \"value\": \"https://www.openstreetmap.org/node/12345\"}},",

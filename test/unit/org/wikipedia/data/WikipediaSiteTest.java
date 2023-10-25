@@ -1,19 +1,22 @@
 // License: GPL. For details, see LICENSE file.
 package org.wikipedia.data;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQueryTest;
 import org.wikipedia.api.wikidata_action.WikidataActionApiTestAbstract;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class WikipediaSiteTest extends WikidataActionApiTestAbstract {
+class WikipediaSiteTest extends WikidataActionApiTestAbstract {
 
     @Test
-    public void testSites() throws IOException, URISyntaxException {
+    void testSites() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/sitematrix/sitematrix.json"));
 
         assertEquals("https://de.wikipedia.org", new WikipediaSite("de").getSite().getUrl());
@@ -23,9 +26,9 @@ public class WikipediaSiteTest extends WikidataActionApiTestAbstract {
         assertEquals("https://zh-min-nan.wikipedia.org", new WikipediaSite("zh-min-nan").getSite().getUrl());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testUnknownSite() throws IOException, URISyntaxException {
+    @Test
+    void testUnknownSite() throws IOException, URISyntaxException {
         simpleJsonStub(ResourceFileLoader.getResourceBytes(WikidataActionApiQueryTest.class, "response/sitematrix/sitematrix.json"));
-        new WikipediaSite("xy");
+        assertThrows(IllegalArgumentException.class, () -> new WikipediaSite("xy"));
     }
 }

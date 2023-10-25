@@ -8,34 +8,29 @@ import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.verify;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import org.junit.Rule;
-import org.junit.Test;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
+
+import org.junit.jupiter.api.Test;
 import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.api.wikipedia_action.json.QueryResult;
 import org.wikipedia.data.IWikipediaSite;
 import org.wikipedia.testutils.ResourceFileLoader;
 
-public class WikipediaActionApiQueryTest {
+import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 
-    @Rule
-    public WireMockRule wmRule = new WireMockRule(wireMockConfig().dynamicPort());
-
-    @Rule
-    public JOSMTestRules josmRule = new JOSMTestRules().preferences();
+@WireMockTest
+class WikipediaActionApiQueryTest {
 
     @Test
-    public void test() throws IOException, URISyntaxException {
+    void test(WireMockRuntimeInfo wmRuntimeInfo) throws IOException, URISyntaxException {
         stubFor(post("/w/api.php")
             .withHeader("Accept", equalTo("application/json"))
             .willReturn(
@@ -47,7 +42,7 @@ public class WikipediaActionApiQueryTest {
         );
 
         final QueryResult result = ApiQueryClient.query(
-            WikipediaActionApiQuery.query(new WikiSiteMock("en").getSite(), Arrays.asList("US", "USA", "Universe", "united states"))
+            WikipediaActionApiQuery.query(new WikiSiteMock(wmRuntimeInfo, "en").getSite(), Arrays.asList("US", "USA", "Universe", "united states"))
         );
 
         assertEquals("United States", result.getQuery().resolveRedirect("USA"));
@@ -65,16 +60,18 @@ public class WikipediaActionApiQueryTest {
             .withRequestBody(new EqualToPattern("action=query&format=json&formatversion=2&redirects=1&titles=US%7CUSA%7CUniverse%7Cunited+states&utf8=1")));
     }
 
-    private class WikiSiteMock implements IWikipediaSite {
+    private static class WikiSiteMock implements IWikipediaSite {
         private final String langCode;
+        private final String url;
 
-        private WikiSiteMock(final String langCode) {
+        private WikiSiteMock(WireMockRuntimeInfo wmRuntimeInfo, final String langCode) {
             this.langCode = langCode;
+            this.url = wmRuntimeInfo.getHttpBaseUrl();
         }
 
         @Override
         public SitematrixResult.Sitematrix.Site getSite() {
-            return new SitematrixResult.Sitematrix.Site("http://localhost:" + wmRule.port(), "dbname", "code", "false", "Wikipedia");
+            return new SitematrixResult.Sitematrix.Site(this.url, "dbname", "code", "false", "Wikipedia");
         }
 
         @Override

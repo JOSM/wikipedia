@@ -8,11 +8,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.removeStub;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.verify;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
-import com.github.tomakehurst.wiremock.client.MappingBuilder;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,28 +16,27 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.openstreetmap.josm.testutils.JOSMTestRules;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.wikipedia.data.WikipediaSite;
 
+import com.github.tomakehurst.wiremock.client.MappingBuilder;
+import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import com.github.tomakehurst.wiremock.matching.EqualToPattern;
+
 // Name must not end in "Test", so "Abstract" put at the end.
+@WireMockTest
 public abstract class WikidataActionApiTestAbstract {
-    @Rule
-    public WireMockRule wmRule = new WireMockRule(wireMockConfig().dynamicPort());
-
-    @Rule
-    public JOSMTestRules josmRule = new JOSMTestRules().preferences();
-
     private URL oldDefaultUrl = null;
 
-    @Before
-    public void before() throws MalformedURLException {
-        oldDefaultUrl = setApiUrl(new URL("http://localhost:" + wmRule.port()));
+    @BeforeEach
+    public void before(WireMockRuntimeInfo wmRuntimeInfo) throws MalformedURLException {
+        oldDefaultUrl = setApiUrl(new URL(wmRuntimeInfo.getHttpBaseUrl()));
     }
 
-    @After
+    @AfterEach
     public void after() {
         setApiUrl(oldDefaultUrl);
     }
