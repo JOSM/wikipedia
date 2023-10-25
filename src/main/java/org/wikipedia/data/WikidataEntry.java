@@ -4,13 +4,15 @@ package org.wikipedia.data;
 import java.awt.Color;
 import java.util.Comparator;
 import java.util.Optional;
-import javax.annotation.Nonnull;
+
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.tools.AlphanumComparator;
 import org.openstreetmap.josm.tools.CheckParameterUtil;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.tools.RegexUtil;
+
+import jakarta.annotation.Nonnull;
 
 public class WikidataEntry extends WikipediaEntry {
 

@@ -15,16 +15,19 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
-import javax.annotation.Nonnull;
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+
 import org.openstreetmap.josm.gui.util.GuiHelper;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.tools.RegexUtil;
+
+import jakarta.annotation.Nonnull;
 
 public class WikidataTagCellRenderer extends DefaultTableCellRenderer {
 
