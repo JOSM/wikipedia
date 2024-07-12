@@ -187,6 +187,6 @@ class WikipediaAppTest {
         assertThat(entries.get(0).article, is("Q40"));
         assertThat(((WikidataEntry) entries.get(0)).label, is("Austria"));
         assertThat(entries.get(1).article, is("Q151897"));
-        assertThat(((WikidataEntry) entries.get(1)).label, is("Reichstag building"));
+        assertThat(((WikidataEntry) entries.get(1)).label, is("Reichstag"));
     }
 }
