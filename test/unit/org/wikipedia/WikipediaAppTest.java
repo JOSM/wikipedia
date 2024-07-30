@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,14 +24,36 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.condition.DisabledIf;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.testutils.annotations.I18n;
+import org.openstreetmap.josm.tools.HttpClient;
+import org.openstreetmap.josm.tools.Logging;
 import org.wikipedia.data.WikidataEntry;
 import org.wikipedia.data.WikipediaEntry;
 
 @Timeout(20)
 @I18n
 class WikipediaAppTest {
+    private static Boolean wiwosmup;
+
+    static synchronized boolean isWiwosmDown() throws MalformedURLException {
+        if (wiwosmup == null) {
+            final HttpClient client = HttpClient.create(URI.create(WikipediaApp.WIWOSM_APP).toURL());
+            try {
+                final HttpClient.Response response = client.connect();
+                // We only care if there are server error responses, as far as whether the server is up.
+                wiwosmup = (response.getResponseCode() < 500);
+            } catch (IOException e) {
+                Logging.trace(e);
+                wiwosmup = false;
+            } finally {
+                client.disconnect();
+            }
+        }
+        return !wiwosmup;
+    }
+
     @Test
     void testMediawikiLocale() {
         assertThat(WikipediaApp.getMediawikiLocale(Locale.GERMANY), is("de-de"));
@@ -154,6 +179,7 @@ class WikipediaAppTest {
         assertThrows(RuntimeException.class, () -> WikipediaApp.getLabelForWikidata("Qxyz", Locale.ENGLISH));
     }
 
+    @DisabledIf(value = "isWiwosmDown", disabledReason = "The WIWOSM server is down")
     @Test
     void testWIWOSMStatus() {
         final WikipediaEntry entry1 = new WikipediaEntry("en", "Vienna");

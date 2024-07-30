@@ -54,6 +54,9 @@ import org.wikipedia.tools.XPath;
 
 public final class WikipediaApp {
 
+    /** The base URL for <a href="https://wiki.openstreetmap.org/wiki/WIWOSM">WIWOSM</a> **/
+    public static final String WIWOSM_APP = "https://wiwosm.toolforge.org";
+
     private static final XPath X_PATH = XPath.getInstance();
 
     private static final String STRING_URI_PIPE = Utils.encodeUrl("|");
@@ -222,7 +225,7 @@ public final class WikipediaApp {
         }
         Map<String, Boolean> status = new HashMap<>();
         if (!entries.isEmpty()) {
-            final String url = "https://wiwosm.toolforge.org/osmjson/getGeoJSON.php?action=check&lang=" + wikipediaLang;
+            final String url = WIWOSM_APP + "/osmjson/getGeoJSON.php?action=check&lang=" + wikipediaLang;
             try {
                 final String articles = entries.stream().map(i -> i.article).collect(Collectors.joining(","));
                 final String requestBody = "articles=" + Utils.encodeUrl(articles);
