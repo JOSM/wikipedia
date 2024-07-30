@@ -11,11 +11,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
@@ -33,9 +38,11 @@ import org.openstreetmap.josm.data.osm.OsmPrimitive;
 import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.data.osm.event.AbstractDatasetChangedEvent;
 import org.openstreetmap.josm.data.osm.event.AbstractDatasetChangedEvent.DatasetEventType;
+import org.openstreetmap.josm.data.osm.event.DataChangedEvent;
 import org.openstreetmap.josm.data.osm.event.DataSetListenerAdapter;
 import org.openstreetmap.josm.data.osm.event.DatasetEventManager;
 import org.openstreetmap.josm.data.osm.event.DatasetEventManager.FireMode;
+import org.openstreetmap.josm.data.osm.event.TagsChangedEvent;
 import org.openstreetmap.josm.data.osm.search.SearchMode;
 import org.openstreetmap.josm.data.osm.visitor.BoundingXYVisitor;
 import org.openstreetmap.josm.gui.MainApplication;
@@ -47,8 +54,10 @@ import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeEvent;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeListener;
 import org.openstreetmap.josm.tools.I18n;
 import org.openstreetmap.josm.tools.ImageProvider;
+import org.openstreetmap.josm.tools.JosmRuntimeException;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.OpenBrowser;
+import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.actions.FetchWikidataAction;
 import org.wikipedia.actions.MultiAction;
@@ -58,6 +67,12 @@ import org.wikipedia.tools.ListUtil;
 import org.wikipedia.tools.WikiProperties;
 
 public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerChangeListener, DataSetListenerAdapter.Listener {
+
+    /** A string describing the context (use-case) for determining the dialog title */
+    String titleContext;
+    final Set<String> articles = new HashSet<>();
+    final DefaultListModel<WikipediaEntry> model = new DefaultListModel<>();
+    final JList<WikipediaEntry> list = new JList<>(model);
 
     public WikipediaToggleDialog() {
         super(
@@ -75,6 +90,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
             new WikipediaLoadCoordinatesAction(true),
             new WikipediaLoadCategoryAction()
         };
+        listSetup(list);
         createLayout(list, true, Arrays.asList(
                 new SideButton(new ToggleWikiLayerAction(this)),
                 MultiAction.createButton(
@@ -89,57 +105,50 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
         updateTitle();
     }
 
-    /** A string describing the context (use-case) for determining the dialog title */
-    String titleContext = null;
-    final Set<String> articles = new HashSet<>();
-    final DefaultListModel<WikipediaEntry> model = new DefaultListModel<>();
-    final JList<WikipediaEntry> list = new JList<WikipediaEntry>(model) {
+    private void listSetup(JList<WikipediaEntry> list) {
+        list.setToolTipText(tr("Double click on item to search for object with article name (and center coordinate)"));
+        list.addMouseListener(new MouseAdapter() {
 
-        {
-            setToolTipText(tr("Double click on item to search for object with article name (and center coordinate)"));
-            addMouseListener(new MouseAdapter() {
-
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    if (e.getClickCount() == 2 && getSelectedValue() != null && MainApplication.getLayerManager().getEditDataSet() != null) {
-                        final WikipediaEntry entry = getSelectedValue();
-                        if (entry.coordinate != null) {
-                            BoundingXYVisitor bbox = new BoundingXYVisitor();
-                            bbox.visit(entry.coordinate);
-                            MainApplication.getMap().mapView.zoomTo(bbox);
-                        }
-                        final String search = entry.getSearchText().replaceAll("\\(.*\\)", "");
-                        SearchAction.search(search, SearchMode.replace);
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && list.getSelectedValue() != null && MainApplication.getLayerManager().getEditDataSet() != null) {
+                    final WikipediaEntry entry = list.getSelectedValue();
+                    if (entry.coordinate != null) {
+                        BoundingXYVisitor bbox = new BoundingXYVisitor();
+                        bbox.visit(entry.coordinate);
+                        MainApplication.getMap().mapView.zoomTo(bbox);
                     }
+                    final String search = entry.getSearchText().replaceAll("\\(.*\\)", "");
+                    SearchAction.search(search, SearchMode.replace);
                 }
-            });
+            }
+        });
 
-            setCellRenderer(new DefaultListCellRenderer() {
+        list.setCellRenderer(new DefaultListCellRenderer() {
 
-                @Override
-                public JLabel getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                    final WikipediaEntry entry = (WikipediaEntry) value;
-                    final String labelText = "<html>" + entry.getLabelText();
-                    final JLabel label = (JLabel) super.getListCellRendererComponent(list, labelText, index, isSelected, cellHasFocus);
-                    if (entry.getWiwosmStatus() != null && entry.getWiwosmStatus()) {
-                        label.setIcon(ImageProvider.getIfAvailable("misc", "grey_check"));
-                        label.setToolTipText(/* I18n: WIWOSM server already links Wikipedia article to object/s */ tr("Available via WIWOSM server"));
-                    } else if (articles.contains(entry.article)) {
-                        label.setIcon(ImageProvider.getIfAvailable("misc", "green_check"));
-                        label.setToolTipText(/* I18n: object/s from dataset contain link to Wikipedia article */ tr("Available in local dataset"));
-                    } else {
-                        label.setToolTipText(tr("Not linked yet"));
-                    }
-                    return label;
+            @Override
+            public JLabel getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                final WikipediaEntry entry = (WikipediaEntry) value;
+                final String labelText = "<html>" + entry.getLabelText();
+                final JLabel label = (JLabel) super.getListCellRendererComponent(list, labelText, index, isSelected, cellHasFocus);
+                if (entry.getWiwosmStatus() != null && entry.getWiwosmStatus()) {
+                    label.setIcon(ImageProvider.getIfAvailable("misc", "grey_check"));
+                    label.setToolTipText(/* I18n: WIWOSM server already links Wikipedia article to object/s */ tr("Available via WIWOSM server"));
+                } else if (articles.contains(entry.article)) {
+                    label.setIcon(ImageProvider.getIfAvailable("misc", "green_check"));
+                    label.setToolTipText(/* I18n: object/s from dataset contain link to Wikipedia article */ tr("Available in local dataset"));
+                } else {
+                    label.setToolTipText(tr("Not linked yet"));
                 }
-            });
+                return label;
+            }
+        });
 
-            final JPopupMenu popupMenu = new JPopupMenu();
-            popupMenu.add(new OpenWikipediaArticleAction());
-            popupMenu.add(new ZoomToWikipediaArticleAction());
-            setComponentPopupMenu(popupMenu);
-        }
-    };
+        final JPopupMenu popupMenu = new JPopupMenu();
+        popupMenu.add(new OpenWikipediaArticleAction());
+        popupMenu.add(new ZoomToWikipediaArticleAction());
+        list.setComponentPopupMenu(popupMenu);
+    }
 
     private void updateTitle() {
         final WikipediaApp app = newWikipediaApp();
@@ -159,7 +168,8 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     private WikipediaApp newWikipediaApp() {
         try {
             return WikipediaApp.forLanguage(list.getModel().getElementAt(0).lang);
-        } catch (ArrayIndexOutOfBoundsException ignore) {
+        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+            Logging.trace(arrayIndexOutOfBoundsException);
             return WikipediaApp.forLanguage(WikiProperties.WIKIPEDIA_LANGUAGE.get());
         }
     }
@@ -200,7 +210,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
                     }
                 }.execute();
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                throw new JosmRuntimeException(ex);
             }
         }
     }
@@ -213,7 +223,7 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
         protected Void doInBackground() throws Exception {
             final List<WikipediaEntry> entries = getEntries();
             entries.sort(null);
-            publish(entries.toArray(new WikipediaEntry[entries.size()]));
+            publish(entries.toArray(new WikipediaEntry[0]));
             ListUtil.processInBatches(entries, 20, batch -> {
                 WikipediaApp.forLanguage(batch.get(0).lang).updateWIWOSMStatus(batch);
                 list.repaint();
@@ -410,18 +420,53 @@ public class WikipediaToggleDialog extends ToggleDialog implements ActiveLayerCh
     @Override
     public void processDatasetEvent(AbstractDatasetChangedEvent event) {
         final Set<DatasetEventType> typesToProcess = EnumSet.of(
-            DatasetEventType.DATA_CHANGED,
             DatasetEventType.PRIMITIVES_ADDED,
             DatasetEventType.PRIMITIVES_REMOVED,
+            DatasetEventType.PRIMITIVE_FLAGS_CHANGED, // Most "delete" commands actually hide the primitive in the dataset.
             DatasetEventType.TAGS_CHANGED);
-        if (!typesToProcess.contains(event.getType())) {
+        final Map<DatasetEventType, List<AbstractDatasetChangedEvent>> events;
+        if (event.getType() == DatasetEventType.DATA_CHANGED && event instanceof DataChangedEvent) {
+            final Map<DatasetEventType, List<AbstractDatasetChangedEvent>> temporaryEvents =
+                getRootEvents((DataChangedEvent) event).collect(Collectors.groupingBy(AbstractDatasetChangedEvent::getType));
+            if (temporaryEvents.isEmpty()) {
+                events = Collections.singletonMap(event.getType(), Collections.singletonList(event));
+            } else {
+                events = temporaryEvents;
+            }
+        } else if (typesToProcess.contains(event.getType())) {
+            events = Collections.singletonMap(event.getType(), Collections.singletonList(event));
+        } else {
+            events = Collections.emptyMap();
+        }
+        if (events.isEmpty()) {
             return;
         }
         final WikipediaApp app = newWikipediaApp();
-        if (event.getPrimitives().stream().noneMatch(app::hasWikipediaTag)) {
+        final boolean tagChange = events.getOrDefault(DatasetEventType.TAGS_CHANGED, Collections.emptyList()).stream()
+            .filter(TagsChangedEvent.class::isInstance).map(TagsChangedEvent.class::cast)
+            .anyMatch(e -> app.tagChangeWikipedia(e.getPrimitive(), e.getOriginalKeys()));
+        final boolean primitiveAdded = events.getOrDefault(DatasetEventType.PRIMITIVES_ADDED, Collections.emptyList()).stream()
+            .map(AbstractDatasetChangedEvent::getPrimitives).flatMap(Collection::stream).anyMatch(app::hasWikipediaTag);
+        final boolean primitiveRemoved = events.getOrDefault(DatasetEventType.PRIMITIVES_REMOVED, Collections.emptyList()).stream()
+            .map(AbstractDatasetChangedEvent::getPrimitives).flatMap(Collection::stream).anyMatch(app::hasWikipediaTag);
+        final boolean primitiveMaybeRemoved = events.getOrDefault(DatasetEventType.PRIMITIVE_FLAGS_CHANGED, Collections.emptyList()).stream()
+            .map(AbstractDatasetChangedEvent::getPrimitives).flatMap(Collection::stream).anyMatch(app::hasWikipediaTag);
+        if (!tagChange && !primitiveAdded && !primitiveRemoved && !primitiveMaybeRemoved && !events.containsKey(DatasetEventType.DATA_CHANGED)) {
             return;
         }
         updateWikipediaArticles();
         list.repaint();
+    }
+
+    private static Stream<AbstractDatasetChangedEvent> getRootEvents(DataChangedEvent event) {
+        if (Utils.isEmpty(event.getEvents())) {
+            return Stream.empty();
+        }
+        return event.getEvents().stream().flatMap(e -> {
+            if (e instanceof DataChangedEvent) {
+                return getRootEvents(event);
+            }
+            return Stream.of(e);
+        });
     }
 }

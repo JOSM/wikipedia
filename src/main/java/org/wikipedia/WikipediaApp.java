@@ -4,6 +4,7 @@ package org.wikipedia;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.AbstractList;
@@ -29,9 +30,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
+import org.openstreetmap.josm.data.osm.Tagged;
 import org.openstreetmap.josm.gui.Notification;
 import org.openstreetmap.josm.tools.HttpClient;
 import org.openstreetmap.josm.tools.I18n;
+import org.openstreetmap.josm.tools.JosmRuntimeException;
 import org.openstreetmap.josm.tools.LanguageInfo;
 import org.openstreetmap.josm.tools.Logging;
 import org.openstreetmap.josm.tools.Pair;
@@ -55,21 +58,28 @@ public final class WikipediaApp {
 
     private static final String STRING_URI_PIPE = Utils.encodeUrl("|");
 
+    private static final String WIKIDATA = "wikidata";
+    private static final String WIKIPEDIA = "wikipedia";
+
+    private final String[] wikipediaKeys;
     private final String wikipediaLang;
     private final SitematrixResult.Sitematrix.Site site;
 
     private WikipediaApp(final String wikipediaLang) throws IOException {
         this.wikipediaLang = wikipediaLang;
+        this.wikipediaKeys = new String[] {WIKIDATA, WIKIPEDIA, WIKIPEDIA + ':' + wikipediaLang};
 
         final SitematrixResult.Sitematrix sitematrix = ApiQueryClient.query(WikidataActionApiQuery.sitematrix());
-        final SitematrixResult.Sitematrix.Language language = sitematrix.getLanguages().stream().filter(it -> wikipediaLang.equalsIgnoreCase(it.getCode())).findFirst().orElse(null);
-        final SitematrixResult.Sitematrix.Site site;
+        final SitematrixResult.Sitematrix.Language language = sitematrix.getLanguages().stream()
+            .filter(it -> wikipediaLang.equalsIgnoreCase(it.getCode())).findFirst().orElse(null);
         if (language != null) {
-            site = language.getSites().stream().filter(it -> "wiki".equals(it.getCode())).findFirst().orElseThrow(() -> new IllegalArgumentException("No Wikipedia for language " +  language.getName() + " (" + language.getCode() + ") found!"));
+            this.site = language.getSites().stream().filter(it -> "wiki".equals(it.getCode())).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No Wikipedia for language " +  language.getName()
+                    + " (" + language.getCode() + ") found!"));
         } else {
-            site = sitematrix.getSpecialSites().stream().filter(it -> wikipediaLang.equals(it.getCode())).findFirst().orElseThrow(() -> new IllegalArgumentException("No wiki site for code '" + wikipediaLang + "' found!"));
+            this.site = sitematrix.getSpecialSites().stream().filter(it -> wikipediaLang.equals(it.getCode())).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No wiki site for code '" + wikipediaLang + "' found!"));
         }
-        this.site = site;
     }
 
     public static WikipediaApp forLanguage(final String wikipediaLang) {
@@ -108,20 +118,19 @@ public final class WikipediaApp {
     public List<WikipediaEntry> getEntriesFromCoordinates(LatLon min, LatLon max) {
         try {
             // construct url
-            final String url = new StringBuilder(getSiteUrl()).append("/w/api.php")
-                .append("?action=query")
-                .append("&list=geosearch")
-                .append("&format=xml")
-                .append("&gslimit=500")
-                .append("&gsbbox=")
-                .append(max.lat()).append(STRING_URI_PIPE).append(min.lon())
-                .append(STRING_URI_PIPE).append(min.lat()).append(STRING_URI_PIPE).append(max.lon())
-                .toString();
+            final String url = getSiteUrl() + "/w/api.php" +
+                "?action=query" +
+                "&list=geosearch" +
+                "&format=xml" +
+                "&gslimit=500" +
+                "&gsbbox=" +
+                max.lat() + STRING_URI_PIPE + min.lon() +
+                STRING_URI_PIPE + min.lat() + STRING_URI_PIPE + max.lon();
             // parse XML document
             try (InputStream in = connect(url).getContent()) {
                 final Document doc = newDocumentBuilder().parse(in);
                 final String errorInfo = X_PATH.evaluateString("//error/@info", doc);
-                if (errorInfo != null && errorInfo.length() >= 1) {
+                if (errorInfo != null && !errorInfo.isEmpty()) {
                     // I18n: {0} is the error message returned by the API
                     new Notification(I18n.tr("Downloading entries with geo coordinates failed: {0}", errorInfo))
                         .setIcon(WikipediaPlugin.NOTIFICATION_ICON)
@@ -133,24 +142,25 @@ public final class WikipediaApp {
                             final LatLon latLon = new LatLon(
                                     X_PATH.evaluateDouble("@lat", node),
                                     X_PATH.evaluateDouble("@lon", node));
-                            if ("wikidata".equals(wikipediaLang)) {
+                            if (WIKIDATA.equals(wikipediaLang)) {
                                 return new WikidataEntry(name, null, latLon, null);
                             } else {
                                 return new WikipediaEntry(wikipediaLang, name, latLon);
                             }
                         }).collect(Collectors.toList());
-                if ("wikidata".equals(wikipediaLang)) {
+                if (WIKIDATA.equals(wikipediaLang)) {
                     return new ArrayList<>(getLabelForWikidata(entries, Locale.getDefault()));
                 } else {
                     return entries;
                 }
             }
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new JosmRuntimeException(ex);
         }
     }
 
-    public static List<WikidataEntry> getWikidataEntriesForQuery(final String languageForQuery, final String query, final Locale localeForLabels) {
+    public static List<WikidataEntry> getWikidataEntriesForQuery(final String languageForQuery, final String query,
+                                                                 final Locale localeForLabels) {
         try {
             final String url = "https://www.wikidata.org/w/api.php" +
                     "?action=wbsearchentities" +
@@ -167,7 +177,7 @@ public final class WikipediaApp {
                 return getLabelForWikidata(r, localeForLabels);
             }
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new JosmRuntimeException(ex);
         }
     }
 
@@ -184,12 +194,12 @@ public final class WikipediaApp {
                         .collect(Collectors.toList());
             }
         } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            throw new UncheckedIOException(ex);
         }
     }
 
     public static List<WikipediaEntry> getEntriesFromClipboard(final String wikipediaLang, String clipboardStringContent) {
-        if ("wikidata".equals(wikipediaLang)) {
+        if (WIKIDATA.equals(wikipediaLang)) {
             List<WikidataEntry> entries = new ArrayList<>();
             Matcher matcher = RegexUtil.Q_ID_PATTERN.matcher(clipboardStringContent);
             while (matcher.find()) {
@@ -231,7 +241,7 @@ public final class WikipediaApp {
                     });
                 }
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                throw new JosmRuntimeException(ex);
             }
         }
         for (WikipediaEntry i : entries) {
@@ -240,15 +250,33 @@ public final class WikipediaApp {
     }
 
     public boolean hasWikipediaTag(final OsmPrimitive p) {
-        return p.hasKey("wikidata", "wikipedia", "wikipedia:" + wikipediaLang);
+        return p.hasKey(wikipediaKeys);
+    }
+
+    /**
+     * Check to see if a tagged object has had its wikipedia tag change
+     * @param primitive The tagged object to check
+     * @param originalKeys The original keys
+     * @return {@code true} if the tagged object has had a change in wikipedia keys
+     */
+    public boolean tagChangeWikipedia(Tagged primitive, Map<String, String> originalKeys) {
+        for (String key : wikipediaKeys) {
+            // If the key has been added or removed, it has been changed.
+            if (primitive.hasKey(key) != originalKeys.containsKey(key) ||
+                // If the original key doesn't equal the new key, then it has been changed
+                (primitive.hasKey(key) && originalKeys.containsKey(key) && !originalKeys.get(key).equals(primitive.get(key)))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Stream<String> getWikipediaArticles(final OsmPrimitive p) {
-        if ("wikidata".equals(wikipediaLang)) {
-            return Stream.of(p.get("wikidata")).filter(Objects::nonNull);
+        if (WIKIDATA.equals(wikipediaLang)) {
+            return Stream.of(p.get(WIKIDATA)).filter(Objects::nonNull);
         }
         return Stream
-                .of("wikipedia", "wikipedia:" + wikipediaLang)
+                .of(WIKIPEDIA, WIKIPEDIA + ':' + wikipediaLang)
                 .map(key -> WikipediaEntry.parseTag(key, p.get(key)))
                 .filter(Objects::nonNull)
                 .filter(wp -> wikipediaLang.equals(wp.lang))
@@ -263,9 +291,7 @@ public final class WikipediaApp {
     public Map<String, String> getWikidataForArticles(Collection<String> articles) {
         final Map<String, String> result = new HashMap<>();
         // maximum of 50 titles
-        ListUtil.processInBatches(new ArrayList<>(articles), 50, batch -> {
-            result.putAll(resolveWikidataItems(batch));
-        });
+        ListUtil.processInBatches(new ArrayList<>(articles), 50, batch -> result.putAll(resolveWikidataItems(batch)));
         return result;
     }
 
@@ -321,10 +347,10 @@ public final class WikipediaApp {
             return ApiQueryClient.query(WikidataActionApiQuery.wbgetentities(site, articles))
                 .getEntities().values()
                 .stream()
-                .filter(it -> RegexUtil.isValidQId(it.getId()) && it.getSitelinks().size() >= 1)
+                .filter(it -> RegexUtil.isValidQId(it.getId()) && !it.getSitelinks().isEmpty())
                 .collect(Collectors.toMap(it -> it.getSitelinks().iterator().next().getTitle(), WbgetentitiesResult.Entity::getId));
         } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            throw new UncheckedIOException(ex);
         }
     }
 
@@ -336,9 +362,10 @@ public final class WikipediaApp {
      */
     Map<String, String> resolveRedirectsForArticles(Collection<String> articles) {
         try {
-            return articles.stream().collect(Collectors.toMap(it -> it, ApiQueryClient.query(WikipediaActionApiQuery.query(site, articles)).getQuery()::resolveRedirect));
+            return articles.stream().collect(Collectors.toMap(it -> it,
+                ApiQueryClient.query(WikipediaActionApiQuery.query(site, articles)).getQuery()::resolveRedirect));
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new JosmRuntimeException(ex);
         }
     }
 
@@ -359,7 +386,7 @@ public final class WikipediaApp {
                         .collect(Collectors.toList())
                 ).orElse(new ArrayList<>());
         } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            throw new UncheckedIOException(ex);
         }
     }
 
@@ -367,13 +394,16 @@ public final class WikipediaApp {
         try {
             final List<WikidataEntry> entry = Collections.singletonList(new WikidataEntry(wikidataId));
             return getLabelForWikidata(entry, locale, preferredLanguage).get(0).label;
-        } catch (IndexOutOfBoundsException ignore) {
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            Logging.trace(indexOutOfBoundsException);
             return null;
         }
     }
 
-    static List<WikidataEntry> getLabelForWikidata(final List<? extends WikipediaEntry> entries, final Locale locale, final String... preferredLanguage) {
-        final List<WikidataEntry> wdEntries = entries.stream().map(it -> it instanceof WikidataEntry ? (WikidataEntry) it : null).filter(Objects::nonNull).collect(Collectors.toList());
+    static List<WikidataEntry> getLabelForWikidata(final List<? extends WikipediaEntry> entries, final Locale locale,
+                                                   final String... preferredLanguage) {
+        final List<WikidataEntry> wdEntries = entries.stream()
+            .map(it -> it instanceof WikidataEntry ? (WikidataEntry) it : null).filter(Objects::nonNull).collect(Collectors.toList());
         if (wdEntries.size() != entries.size()) {
             throw new IllegalArgumentException("The entries given to method `getLabelForWikidata` must all be of type WikidataEntry!");
         }
@@ -389,7 +419,9 @@ public final class WikipediaApp {
         final List<WikidataEntry> result = new ArrayList<>(wdEntries.size());
         ListUtil.processInBatches(wdEntries, 50, batch -> {
             try {
-                final Map<String, Optional<WbgetentitiesResult.Entity>> entities = ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels(batch.stream().map(it -> it.article).collect(Collectors.toList())));
+                final Map<String, Optional<WbgetentitiesResult.Entity>> entities =
+                    ApiQueryClient.query(WikidataActionApiQuery.wbgetentitiesLabels(batch.stream().map(it -> it.article)
+                        .collect(Collectors.toList())));
                 if (entities != null) {
                     for (final WikidataEntry batchEntry : batch) {
                         Optional.ofNullable(entities.get(batchEntry.article)).flatMap(it -> it).ifPresent(entity -> {
@@ -403,7 +435,7 @@ public final class WikipediaApp {
                     }
                 }
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                throw new JosmRuntimeException(ex);
             }
         });
         return result;
@@ -435,7 +467,7 @@ public final class WikipediaApp {
                         }).collect(Collectors.toList());
             }
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new JosmRuntimeException(ex);
         }
     }
 
@@ -456,7 +488,7 @@ public final class WikipediaApp {
                 }
             }
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new JosmRuntimeException(ex);
         }
     }
 
@@ -482,7 +514,7 @@ public final class WikipediaApp {
         } catch (ParserConfigurationException e) {
             Logging.warn("Cannot create DocumentBuilder");
             Logging.warn(e);
-            throw new RuntimeException(e);
+            throw new JosmRuntimeException(e);
         }
     }
 }
