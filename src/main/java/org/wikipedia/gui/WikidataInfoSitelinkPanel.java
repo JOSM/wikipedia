@@ -62,7 +62,7 @@ public class WikidataInfoSitelinkPanel extends ProgressJPanel {
                                             final String uri = s.getUrl() + "/w/index.php?title=" + Utils.encodeUrl(sitelink.getTitle());
                                             final String error = OpenBrowser.displayUrl(uri);
                                             if (error != null) {
-                                                new Notification(I18n.tr("Can't open website {0} in browser! Error message: {1}", uri, error))
+                                                new Notification(I18n.tr("Can''t open website {0} in browser! Error message: {1}", uri, error))
                                                     .setIcon(WikipediaPlugin.NOTIFICATION_ICON)
                                                     .show();
                                             }
