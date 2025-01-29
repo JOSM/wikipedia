@@ -2,19 +2,16 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="wikipedia" default="dist" basedir=".">
   <property name="plugin.src.dir" value="src/main/java"/>
   <property name="plugin.resources.dir" value="src/main/resources"/>
-
   <!-- edit the properties of this plugin in the file `gradle.properties` -->
-  <property name="plugin.main.version " value=" 18877"/>
-  <property name="plugin.canloadatruntime " value=" true"/>
-  <property name="plugin.author " value=" floscher &lt;incoming+josm-plugin-wikipedia-6702380-issue-@incoming.gitlab.com&gt;, simon04"/>
-  <property name="plugin.class " value=" org.wikipedia.WikipediaPlugin"/>
-  <property name="plugin.icon " value=" images/dialogs/wikipedia.png"/>
-  <property name="plugin.link " value=" https://josm.openstreetmap.de/wiki/Help/Plugin/Wikipedia"/>
-  <property name="plugin.description " value=" Simplifies linking OSM objects to Wikipedia articles and Wikidata items"/>
-
+  <property name="plugin.main.version" value="18877"/>
+  <property name="plugin.canloadatruntime" value="true"/>
+  <property name="plugin.author" value="floscher &lt;incoming+josm-plugin-wikipedia-6702380-issue-@incoming.gitlab.com&gt;, simon04"/>
+  <property name="plugin.class" value="org.wikipedia.WikipediaPlugin"/>
+  <property name="plugin.icon" value="images/dialogs/wikipedia.png"/>
+  <property name="plugin.link" value="https://josm.openstreetmap.de/wiki/Help/Plugin/Wikipedia"/>
+  <property name="plugin.description" value="Simplifies linking OSM objects to Wikipedia articles and Wikidata items"/>
   <!-- ** include targets that all plugins have in common ** -->
   <import file="../build-common.xml"/>
-
   <!-- Override the `setup-dist-default` task from build-common.xml -->
   <target name="setup-dist-default">
     <copy todir="${plugin.build.dir}" failonerror="no" includeemptydirs="no">
@@ -29,9 +26,7 @@
       </fileset>
     </copy>
   </target>
-
   <target name="pre-compile" depends="fetch_dependencies">
-      <!-- include fetch_dependencies task -->
+    <!-- include fetch_dependencies task -->
   </target>
-
 </project>
