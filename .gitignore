@@ -4,6 +4,9 @@
 /build/
 /javadoc/
 /lib/
+/target/
+/test/config/
 /out/
 /checkstyle-josm-wikipedia.xml
 /findbugs-josm-wikipedia.xml
+/dependency-reduced-pom.xml
