@@ -11,7 +11,6 @@ import org.openstreetmap.josm.data.osm.Tag;
 import org.openstreetmap.josm.tools.AlphanumComparator;
 import org.openstreetmap.josm.tools.Utils;
 import org.wikipedia.WikipediaApp;
-import org.wikipedia.tools.FunctionalUtil;
 
 public class WikipediaEntry implements Comparable<WikipediaEntry> {
 
@@ -34,11 +33,10 @@ public class WikipediaEntry implements Comparable<WikipediaEntry> {
     }
 
     public static Optional<WikipediaEntry> fromUrl(final String value) {
-        return FunctionalUtil.or(
-            Optional.ofNullable(value)
+        return Optional.ofNullable(value)
                 .map(WIKIPEDIA_FULL_URL_PATTERN::matcher)
                 .filter(Matcher::matches)
-                .map(it -> new WikipediaEntry(it.group(3), Utils.decodeUrl(it.group(5)).replace('_', ' '))),
+                .map(it -> new WikipediaEntry(it.group(3), Utils.decodeUrl(it.group(5)).replace('_', ' '))).or(
             () -> Optional.ofNullable(value)
                 .map(WIKIPEDIA_ALTERNATIVE_URL_PATTERN::matcher)
                 .filter(Matcher::matches)

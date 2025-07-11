@@ -15,7 +15,10 @@ public class RegexUtil {
     }
 
     /**
-     * Note: For values > {@link Integer#MAX_VALUE}, the Mediawiki API will return with an error instead of reporting an entity as missing.
+     * Check if value is a valid property Id
+     * Note: For values &gt; {@link Integer#MAX_VALUE}, the Mediawiki API will return with an error instead of reporting an entity as missing.
+     * @param value id to check
+     * @return {@code true} or {@code false}
      */
     public static boolean isValidPropertyId(final String value) {
         return isValidId(PROPERTY_ID_PATTERN, value);

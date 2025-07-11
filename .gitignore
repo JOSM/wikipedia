@@ -7,3 +7,6 @@
 /out/
 /checkstyle-josm-wikipedia.xml
 /findbugs-josm-wikipedia.xml
+/dependency-reduced-pom.xml
+/target/
+/test/config/

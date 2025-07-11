@@ -26,7 +26,6 @@ import org.wikipedia.api.ApiQueryClient;
 import org.wikipedia.api.wikidata_action.WikidataActionApiQuery;
 import org.wikipedia.api.wikidata_action.json.SitematrixResult;
 import org.wikipedia.data.WikipediaEntry;
-import org.wikipedia.tools.FunctionalUtil;
 import org.wikipedia.tools.OsmTagConstants;
 
 public class WikipediaValueFormat extends Test.TagTest {
@@ -59,15 +58,13 @@ public class WikipediaValueFormat extends Test.TagTest {
     @Override
     public void check(OsmPrimitive p) {
         Optional.of(OsmTagConstants.Key.WIKIPEDIA).flatMap(k -> Optional.ofNullable(p.get(k)).map(v -> new Tag(k, v))).flatMap(tag ->
-            FunctionalUtil.or(
-                getFullUrlCheckError(p, tag.getKey(), tag.getValue()),
+            getFullUrlCheckError(p, tag.getKey(), tag.getValue()).or(
                 () -> getLanguageArticleFormatError(p, tag.getKey(), tag.getValue())
             )
             // checkUrlDecode() is tested by core
         ).ifPresent(it -> errors.add(it.build()));
         p.keySet().stream().filter(Objects::nonNull).filter(it -> it.endsWith(":wikipedia")).collect(Collectors.toMap(it -> it, p::get)).forEach((key, value) -> {
-            FunctionalUtil.or(
-                getFullUrlCheckError(p, key, value),
+            getFullUrlCheckError(p, key, value).or(
                 () -> getLanguageArticleFormatError(p, key, value)
             ).ifPresent(it -> errors.add(it.build()));
             checkUrlDecode(p, key, value);
@@ -130,8 +127,7 @@ public class WikipediaValueFormat extends Test.TagTest {
     }
 
     private Optional<TestError.Builder> getFullUrlCheckError(final OsmPrimitive p, final String key, final String value, final String message, final Function<WikipediaEntry, Optional<Tag>> newTagGetter) {
-        return FunctionalUtil.or(
-            WikipediaEntry.fromUrl(value).map(newTagGetter).flatMap(newTag ->
+        return WikipediaEntry.fromUrl(value).map(newTagGetter).flatMap(newTag ->
                 Optional.of(
                     AllValidationTests.WIKIPEDIA_TAG_VALUE_IS_FULL_URL.getBuilder(this)
                         .primitives(p)
@@ -144,7 +140,7 @@ public class WikipediaValueFormat extends Test.TagTest {
                             newTag.map(it -> it.getKey() + "=" + it.getValue()).orElse(I18n.tr("a new value (manual intervention needed due to language conflict)"))
                         )
                 )
-            ),
+            ).or(
             () -> Optional.ofNullable(
                 CONTAINS_URL_PATTERN.matcher(value).matches()
                     ? AllValidationTests.WIKIPEDIA_TAG_VALUE_CONTAINS_URL.getBuilder(this)
