@@ -100,7 +100,7 @@ class WikipediaAppTest {
         final List<WikipediaEntry> entries = WikipediaApp.forLanguage("de")
                 .getEntriesFromCoordinates(new LatLon(52.5179786, 13.3753321), new LatLon(52.5192215, 13.3768705));
         final long c = entries.stream()
-                .filter(entry -> "Reichstagsgebäude".equals(entry.article) && "de".equals(entry.lang))
+                .filter(entry -> "Verhüllter Reichstag".equals(entry.article) && "de".equals(entry.lang))
                 .count();
         assertEquals(1, c);
     }
